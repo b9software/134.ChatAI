@@ -3,7 +3,7 @@
  */
 
 /// 账号系统 ID 的类型
-typealias AccountID = String
+typealias AccountID = Int64
 
 /* 🔰 例如
 

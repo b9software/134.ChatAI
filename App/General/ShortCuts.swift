@@ -68,13 +68,3 @@ func AppRootViewController() -> RootViewController? {
 func AppUserDefaultsShared() -> UserDefaults {
     UserDefaults.standard
 }
-
-/// 当前登录用户的配置项
-func AppUserDefaultsPrivate() -> AccountDefaults? {
-    AppUser()?.profile
-}
-
-/// 当前登录用户的账户信息
-func AppUserInformation() -> AccountEntity? {
-    AppUser()?.information
-}

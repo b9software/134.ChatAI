@@ -1,7 +1,6 @@
 
 #import "MBLayoutButton.h"
 #import "Common.h"
-#import "MBNavigationController.h"
 
 @interface MBLayoutButton ()
 @property BOOL touchDownEffectApplied;
@@ -28,17 +27,6 @@
     if (!self.releaseDuration) {
         self.releaseDuration = 0.3;
     }
-}
-
-- (void)afterInit {
-    [super afterInit];
-    if (self.touchUpInsideCallback) return;
-    self.touchUpInsideCallback = ^(MBLayoutButton * _Nonnull sender) {
-        if (!sender.jumpURL.length) return;
-        NSURL *url = [NSURL.alloc initWithString:sender.jumpURL];
-        if (!url) return;
-        [NavigationController jumpWithUrl:url context:nil];
-    };
 }
 
 - (void)setEnabled:(BOOL)enabled {

@@ -1,24 +1,17 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-      - master
-      - develop
-      - release
-      - hotfix/*
   pull_request:
     branches-ignore:
       - demo
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -47,12 +40,7 @@ jobs:
             echo "Podfile unchanged, skip pod install."
           fi
 
-      - name: Build maccatalyst target
+      - name: Build
         run: |
           set -o pipefail
-          xcodebuild -workspace "App.xcworkspace" -scheme "App"  -destination 'platform=macOS,arch=x86_64' | xcpretty
-
-      - name: Build iOS target
-        run: |
-          set -o pipefail
-          xcodebuild -workspace "App.xcworkspace" -scheme "App"  -destination 'platform=iOS Simulator,name=iPhone 13' | xcpretty
+          xcodebuild -workspace "B9ChatAI.xcworkspace" -scheme "App" -destination 'platform=macOS,arch=x86_64' | xcpretty

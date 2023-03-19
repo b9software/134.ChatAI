@@ -54,8 +54,6 @@ target 'B9ChatAI' do
     pod 'MBAppKit', :git => 'https://github.com/RFUI/MBAppKit.git', :subspecs => [
         'Button',
         'Input',
-        'Navigation',
-        'UserIDIsString', # 🔰 如果 user ID 是整型的，请删除这条
         'Worker',
     ]
 end

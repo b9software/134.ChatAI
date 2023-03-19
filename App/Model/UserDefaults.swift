@@ -44,63 +44,6 @@ extension UserDefaults {
         get { integer(forKey: "_" + #function) }
         set { set(newValue, forKey: "_" + #function) }
     }
-
-    // MARK: - 用户信息
-
-    /// 用户 ID，用作是否登入的判定
-    var lastUserID: AccountID? {
-        get { string(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
-    }
-
-    var accountEntity: AccountEntity? {
-        get { model(forKey: "_" + #function) }
-        set { set(model: newValue, forKey: "_" + #function) }
-    }
-
-    var userToken: String? {
-        get { string(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
-    }
-}
-
-// MARK: - 用户存储
-
-/**
- 专用于存需要跟用户账号绑定的状态
-
- 区别于 UserDefaults.standard 存应用全局的状态
- */
-class AccountDefaults: UserDefaults {
-    override init?(suiteName suitename: String?) {
-        super.init(suiteName: suitename)
-        migrateIfNeeded()
-    }
-
-    // 🔰 注意非 UserDefaults.standard 外，其他实例需要显式保存
-//    var something: String? {
-//        get { string(forKey: "_" + #function) }
-//        set {
-//            set(newValue, forKey: "_" + #function)
-//            synchronize()
-//        }
-//    }
-
-    private func migrateIfNeeded() {
-        let currentVersion = MBApp.global.version
-        guard let lastVersion = self.lastVersion else {
-            self.lastVersion = currentVersion
-            return
-        }
-        if lastVersion == currentVersion { return }
-        // 具体迁移过程，比如移除新版不会在用的旧版 key，旧版 key 内容重新组装写入新版 key 中
-        // 前面的版本写当前/新的版本
-//        if <#"x.x.x"#>.compare(lastVersion, options: [.numeric]) == .orderedDescending {
-//            removeObject(forKey: <#old-key-needs-removed-in-new-version#>)
-//        }
-        self.lastVersion = currentVersion
-        synchronize()
-    }
 }
 
 // MARK: - 存储类型支持

@@ -67,7 +67,7 @@ class MBApp: NSObject {
     @objc var rootViewController: RootViewController?
 
     /// 全局导航
-    @objc var globalNavigationController: NavigationController?
+    @objc var globalNavigationController: UINavigationController?
 
 //    @objc lazy var workerQueue = MBWorkerQueue()
 //    @objc lazy var backgroundWorkerQueue: MBWorkerQueue = {

@@ -97,14 +97,4 @@ class Button: MBButton {
             titleLabel?.font = UIFont.systemFont(ofSize: size, weight: isSelected ? .semibold : .regular)
         }
     }
-
-    @IBInspectable var jumpURL: String?
-
-    override func onButtonTapped() {
-        super.onButtonTapped()
-        if let jumpURL = jumpURL,
-           let url = URL(string: jumpURL) {
-            NavigationController.jump(url: url, context: nil)
-        }
-    }
 }

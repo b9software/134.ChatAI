@@ -21,14 +21,6 @@ PODS:
     - RFInitializing
     - RFKit/Category/UIResponder
     - RFKit/RFGeometry
-  - MBAppKit/Navigation (0.13.0):
-    - MBAppKit/Core
-    - RFAlpha/RFNavigationController
-    - RFAlpha/RFSynthesize
-    - RFKit/Category/NSArray
-    - RFKit/Category/UIResponder
-  - MBAppKit/UserIDIsString (0.13.0):
-    - MBAppKit/Core
   - MBAppKit/Worker (0.13.0):
     - MBAppKit/Core
     - RFInitializing
@@ -65,8 +57,6 @@ PODS:
   - RFAlpha/RFRefreshControl (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFSwizzle (0.7.2):
-    - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFSynthesize (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFTabController (0.7.2):
     - RFAlpha/RFDataSourceArray
@@ -240,8 +230,6 @@ PODS:
 DEPENDENCIES:
   - MBAppKit/Button (from `https://github.com/RFUI/MBAppKit.git`)
   - MBAppKit/Input (from `https://github.com/RFUI/MBAppKit.git`)
-  - MBAppKit/Navigation (from `https://github.com/RFUI/MBAppKit.git`)
-  - MBAppKit/UserIDIsString (from `https://github.com/RFUI/MBAppKit.git`)
   - MBAppKit/Worker (from `https://github.com/RFUI/MBAppKit.git`)
   - RFAlpha/RFBlockSelectorPerform
   - RFAlpha/RFButton
@@ -306,6 +294,6 @@ SPEC CHECKSUMS:
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: bc0746db3e3db5ef730aba9405521fd220f237fd
+PODFILE CHECKSUM: 1fa4918de5c3bc49f4bb104376de333f1179aeed
 
 COCOAPODS: 1.11.3

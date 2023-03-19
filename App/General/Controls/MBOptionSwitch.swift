@@ -18,9 +18,6 @@ final class MBOptionSwitch: UISwitch {
     /// 设定为 key 值，不是属性名
     @IBInspectable var optionKey: String?
 
-    /// 选项是从应用共享配置还是用户个人配置读取，默认是用户配置
-    @IBInspectable var sharedPreferences: Bool = false
-
     /// 显示与存储值是相反的
     @IBInspectable var reversed: Bool = false
 
@@ -49,10 +46,7 @@ final class MBOptionSwitch: UISwitch {
         guard let optionKey = optionKey else {
             return
         }
-        guard let defaults = sharedPreferences ? AppUserDefaultsShared() : AppUserDefaultsPrivate() else {
-            AppLog().warning("Cannot read value as specified UserDefaults is nil.")
-            return
-        }
+        let defaults = AppUserDefaultsShared()
         var value = defaults.value(forKey: optionKey)
         if value != nil, !(value is NSNumber) {
             AppLog().error("Except \(optionKey) to be a NSNumber, got \(value as Any).")
@@ -63,10 +57,7 @@ final class MBOptionSwitch: UISwitch {
     }
 
     @objc private func onValueChanged() {
-        guard let defaults = sharedPreferences ? AppUserDefaultsShared() : AppUserDefaultsPrivate() else {
-            AppLog().warning("Cannot save changes as specified UserDefaults is nil.")
-            return
-        }
+        let defaults = AppUserDefaultsShared()
         if let key = optionKey {
             defaults.setValue((reversed ? !isOn : isOn), forKey: key)
             defaults.synchronize()

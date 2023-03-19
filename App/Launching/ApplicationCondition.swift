@@ -33,20 +33,6 @@ enum ApplicationCondition {
 
     /// 使用 Wi-Fi 联网
     case wifi
-
-    // - 用户状态
-    /// 用户已登入
-    case userHasLogged
-
-    /// 本次启动当前用户的用户信息已成功获取过
-    case userInfoFetched
-
-    // - 模块生命周期
-    /// 导航已加载
-    case navigationLoaded
-
-    /// 主页已载入
-    case homeLoaded
 }
 
 #endif

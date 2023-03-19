@@ -15,6 +15,12 @@ import UIKit
  */
 @main
 class ApplicationDelegate: MBApplicationDelegate {
+    let debug = DebugManager()
+
+    override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        return true
+    }
+
     override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
@@ -22,9 +28,11 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     override func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//            if UIApplication.shared.connectedScenes.isEmpty {
+//                exit(0)
+//            }
+//        }
     }
 
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -37,9 +45,8 @@ class ApplicationDelegate: MBApplicationDelegate {
         #if PREVIEW
         #elseif DEBUG
         // https://github.com/BB9z/iOS-Project-Template/wiki/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B#tools-implement-faster
-        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
+        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle")?.load()
         #endif
-        Account.setup()
 //        MBEnvironment.registerWorkers()
         RFKeyboard.autoDisimssKeyboardWhenTouch = true
         setupUIAppearance()
@@ -48,15 +55,11 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     private func setupDebugger() {
-        Debugger.installTriggerButton()
         Debugger.globalActionItems = [
             DebugActionItem("FLEX") {
                 MBFlexInterface.showFlexExplorer()
             }
         ]
-        Debugger.urlJumpHandler = {
-            NavigationController.jump(url: $0, context: nil)
-        }
 //        Debugger.vauleInspector = { value in
 //            if let vc = MBFlexInterface.explorerViewController(for: value) {
 //                AppNavigationController()?.pushViewController(vc, animated: true)
@@ -101,6 +104,7 @@ class ApplicationDelegate: MBApplicationDelegate {
 
     override func applicationDidEnterBackground(_ application: UIApplication) {
         AppCondition().set(off: [.appInForeground])
+        debugPrint(#function)
         super.applicationDidEnterBackground(application)
     }
 
@@ -115,10 +119,43 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        if url.scheme == NavigationController.appScheme {
-            NavigationController.jump(url: url, context: nil)
-            return true
-        }
         return super.application(app, open: url, options: options)
+    }
+}
+
+// MARK: - Responder Chain
+extension ApplicationDelegate {
+    override func validate(_ command: UICommand) {
+        super.validate(command)
+        debugPrint(command)
+    }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        let result = super.canPerformAction(action, withSender: sender)
+        if debug.debugResponder {
+            AppLog().debug("Responder> Can perform \(action) = \(result)")
+        }
+        return result
+    }
+
+    override func target(forAction action: Selector, withSender sender: Any?) -> Any? {
+        let target = super.target(forAction: action, withSender: sender)
+        if debug.debugResponder {
+            AppLog().debug("Responder> action: \(action), sender: \(sender.debugDescription), target: \(target.debugDescription)")
+        }
+        return target
+    }
+}
+
+// MARK: - Menu
+extension ApplicationDelegate {
+    override func buildMenu(with builder: UIMenuBuilder) {
+        if builder.system == .main {
+            ApplicationMenu.build(builder)
+        }
+    }
+
+    @IBAction func showHelp(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://github.com/b9software")!)
     }
 }
