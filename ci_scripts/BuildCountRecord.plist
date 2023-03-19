@@ -11,6 +11,8 @@
 		</dict>
 		<key>bb9z</key>
 		<dict>
+			<key>main</key>
+			<integer>7</integer>
 			<key>xcode-cloud</key>
 			<integer>5</integer>
 		</dict>

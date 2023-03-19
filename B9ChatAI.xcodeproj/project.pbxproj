@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		674FCCB03EFF1B157024C64B /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6E6A83F7E71FC340A5AE68 /* libPods-App.a */; };
+		674FCCB03EFF1B157024C64B /* libPods-B9ChatAI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6E6A83F7E71FC340A5AE68 /* libPods-B9ChatAI.a */; };
 		D501844E20F865D3009481D4 /* Number+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501844C20F865D2009481D4 /* Number+App.swift */; };
 		D501844F20F865D3009481D4 /* UITableView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501844D20F865D3009481D4 /* UITableView+App.swift */; };
 		D501845620F86D75009481D4 /* MBValueMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D501845420F86D75009481D4 /* MBValueMapPickerViewController.m */; };
@@ -204,11 +204,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		27E8F4B8C4098FB174EF971E /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
-		3668E59D390585E40FF179B2 /* Pods-App.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.alpha.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.alpha.xcconfig"; sourceTree = "<group>"; };
-		6476B7525EFF7B313A27A298 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
-		AF6E6A83F7E71FC340A5AE68 /* libPods-App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C82EBFD45F6FC21C9D0D92C9 /* Pods-App.preview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.preview.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.preview.xcconfig"; sourceTree = "<group>"; };
+		27E8F4B8C4098FB174EF971E /* Pods-B9ChatAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B9ChatAI.debug.xcconfig"; path = "Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI.debug.xcconfig"; sourceTree = "<group>"; };
+		3668E59D390585E40FF179B2 /* Pods-B9ChatAI.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B9ChatAI.alpha.xcconfig"; path = "Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI.alpha.xcconfig"; sourceTree = "<group>"; };
+		6476B7525EFF7B313A27A298 /* Pods-B9ChatAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B9ChatAI.release.xcconfig"; path = "Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI.release.xcconfig"; sourceTree = "<group>"; };
+		AF6E6A83F7E71FC340A5AE68 /* libPods-B9ChatAI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-B9ChatAI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C82EBFD45F6FC21C9D0D92C9 /* Pods-B9ChatAI.preview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B9ChatAI.preview.xcconfig"; path = "Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI.preview.xcconfig"; sourceTree = "<group>"; };
 		D501844C20F865D2009481D4 /* Number+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Number+App.swift"; sourceTree = "<group>"; };
 		D501844D20F865D3009481D4 /* UITableView+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+App.swift"; sourceTree = "<group>"; };
 		D501845220F86D74009481D4 /* MBValueMapPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueMapPickerViewController.h; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 		D50B3E6228255A5800D0974E /* MBOptionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBOptionSwitch.swift; sourceTree = "<group>"; };
 		D50CFA6425C90F22003329EE /* ObjectPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectPool.swift; sourceTree = "<group>"; };
 		D50CFA6A25C912CB003329EE /* DetailFetchControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailFetchControl.swift; sourceTree = "<group>"; };
-		D5197A3A17EECAAF00CA387C /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5197A3A17EECAAF00CA387C /* B9ChatAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B9ChatAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5197A4517EECAAF00CA387C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		D5197D3317F027B400CA387C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5197D3617F027BB00CA387C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -523,7 +523,7 @@
 				D527917D27B557A800522240 /* B9MulticastDelegate in Frameworks */,
 				D53BB60027FC4EE600F60168 /* Debugger in Frameworks */,
 				D5F036C327FBC80500C60A72 /* HasItem in Frameworks */,
-				674FCCB03EFF1B157024C64B /* libPods-App.a in Frameworks */,
+				674FCCB03EFF1B157024C64B /* libPods-B9ChatAI.a in Frameworks */,
 				D57FBB71279D51BA003A0533 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,10 +534,10 @@
 		BAEA70A9D9A18BBDBBC1B323 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3668E59D390585E40FF179B2 /* Pods-App.alpha.xcconfig */,
-				27E8F4B8C4098FB174EF971E /* Pods-App.debug.xcconfig */,
-				C82EBFD45F6FC21C9D0D92C9 /* Pods-App.preview.xcconfig */,
-				6476B7525EFF7B313A27A298 /* Pods-App.release.xcconfig */,
+				3668E59D390585E40FF179B2 /* Pods-B9ChatAI.alpha.xcconfig */,
+				27E8F4B8C4098FB174EF971E /* Pods-B9ChatAI.debug.xcconfig */,
+				C82EBFD45F6FC21C9D0D92C9 /* Pods-B9ChatAI.preview.xcconfig */,
+				6476B7525EFF7B313A27A298 /* Pods-B9ChatAI.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -604,7 +604,7 @@
 		D5197A3B17EECAAF00CA387C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D5197A3A17EECAAF00CA387C /* App.app */,
+				D5197A3A17EECAAF00CA387C /* B9ChatAI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -612,7 +612,7 @@
 		D5197A3C17EECAAF00CA387C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF6E6A83F7E71FC340A5AE68 /* libPods-App.a */,
+				AF6E6A83F7E71FC340A5AE68 /* libPods-B9ChatAI.a */,
 				D5353D1524B7E1EF00BED8C7 /* README.md */,
 			);
 			path = Frameworks;
@@ -1405,9 +1405,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D5197A3917EECAAF00CA387C /* App */ = {
+		D5197A3917EECAAF00CA387C /* B9ChatAI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5197A6F17EECAAF00CA387C /* Build configuration list for PBXNativeTarget "App" */;
+			buildConfigurationList = D5197A6F17EECAAF00CA387C /* Build configuration list for PBXNativeTarget "B9ChatAI" */;
 			buildPhases = (
 				09D177FF8CEC0EA630D3BCE2 /* [CP] Check Pods Manifest.lock */,
 				D5163B2A2892B6EA00FD6132 /* [App] BuildSystem */,
@@ -1421,7 +1421,7 @@
 			);
 			dependencies = (
 			);
-			name = App;
+			name = B9ChatAI;
 			packageProductDependencies = (
 				D57FBB6A279BB727003A0533 /* B9AssociatedObject */,
 				D57FBB6D279BB770003A0533 /* B9Action */,
@@ -1433,8 +1433,8 @@
 				D53BB5FF27FC4EE600F60168 /* Debugger */,
 				D5D1859B280D7331009B5476 /* B9Condition */,
 			);
-			productName = App;
-			productReference = D5197A3A17EECAAF00CA387C /* App.app */;
+			productName = B9ChatAI;
+			productReference = D5197A3A17EECAAF00CA387C /* B9ChatAI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1445,7 +1445,7 @@
 			attributes = {
 				LastUpgradeCheck = 1220;
 			};
-			buildConfigurationList = D5197A3517EECAAF00CA387C /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = D5197A3517EECAAF00CA387C /* Build configuration list for PBXProject "B9ChatAI" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
@@ -1466,7 +1466,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D5197A3917EECAAF00CA387C /* App */,
+				D5197A3917EECAAF00CA387C /* B9ChatAI */,
 			);
 		};
 /* End PBXProject section */
@@ -1509,7 +1509,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-App-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-B9ChatAI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1522,15 +1522,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-B9ChatAI/Pods-B9ChatAI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D5163B2A2892B6EA00FD6132 /* [App] BuildSystem */ = {
@@ -1909,12 +1909,13 @@
 		};
 		D5197A7017EECAAF00CA387C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27E8F4B8C4098FB174EF971E /* Pods-App.debug.xcconfig */;
+			baseConfigurationReference = 27E8F4B8C4098FB174EF971E /* Pods-B9ChatAI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "App/Supporting Files/debug.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_ASSET_PATHS = "App/Development\\ Content";
+				DEVELOPMENT_TEAM = Y85RFN6NXZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1925,9 +1926,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_OBJC_BRIDGING_HEADER = "App/Supporting Files/OCBridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "App-Swift.h";
@@ -1938,12 +1941,13 @@
 		};
 		D5197A7117EECAAF00CA387C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6476B7525EFF7B313A27A298 /* Pods-App.release.xcconfig */;
+			baseConfigurationReference = 6476B7525EFF7B313A27A298 /* Pods-B9ChatAI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "App/Supporting Files/release.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_ASSET_PATHS = "App/Development\\ Content";
+				DEVELOPMENT_TEAM = Y85RFN6NXZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1954,9 +1958,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_OBJC_BRIDGING_HEADER = "App/Supporting Files/OCBridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "App-Swift.h";
@@ -2032,12 +2038,13 @@
 		};
 		D564D5D51970EF290032FEC3 /* Alpha */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3668E59D390585E40FF179B2 /* Pods-App.alpha.xcconfig */;
+			baseConfigurationReference = 3668E59D390585E40FF179B2 /* Pods-B9ChatAI.alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "App/Supporting Files/alpha.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_ASSET_PATHS = "App/Development\\ Content";
+				DEVELOPMENT_TEAM = Y85RFN6NXZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -2048,9 +2055,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ALPHA";
 				SWIFT_OBJC_BRIDGING_HEADER = "App/Supporting Files/OCBridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "App-Swift.h";
@@ -2062,7 +2071,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D5197A3517EECAAF00CA387C /* Build configuration list for PBXProject "App" */ = {
+		D5197A3517EECAAF00CA387C /* Build configuration list for PBXProject "B9ChatAI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5197A6D17EECAAF00CA387C /* Debug */,
@@ -2072,7 +2081,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5197A6F17EECAAF00CA387C /* Build configuration list for PBXNativeTarget "App" */ = {
+		D5197A6F17EECAAF00CA387C /* Build configuration list for PBXNativeTarget "B9ChatAI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5197A7017EECAAF00CA387C /* Debug */,

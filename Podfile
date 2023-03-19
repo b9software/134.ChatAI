@@ -7,7 +7,7 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 # 部分不支持 macCatalyst 的 pod，可用以下方案处理
 # https://github.com/fermoya/CatalystPodSupport
 
-target 'App' do
+target 'B9ChatAI' do
     platform :ios, '13.0'
 
 #    pod 'AMap3DMap-NO-IDFA'             # 高德地图

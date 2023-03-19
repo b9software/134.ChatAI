@@ -1,6 +1,6 @@
-# *修改为项目名称*
+# B9ChatAI
 
-仓库地址 *https://example.com/change-to-repo.git*
+仓库地址 https://github.com/b9software/134-ChatClient
 
 ## 需求
 
@@ -28,14 +28,10 @@ pod install
 fastlane setup_project
 ```
 
-## 关于项目模版
-
-强烈推荐阅读[项目模版 wiki](https://github.com/BB9z/iOS-Project-Template/wiki)内的相关文档。
+## License
 
 ```text
-Copyright © 2018-2022 BB9z.
-Copyright © 2014-2016 Beijing ZhiYun ZhiYuan Information Technology Co., Ltd.
-Copyright © 2013-2014 Chinamobo Co., Ltd.
+Copyright © 2023 BB9z.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
