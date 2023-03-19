@@ -5,6 +5,7 @@
 
 import B9Condition
 import Debugger
+import UIKit
 
 /**
  注意是基于 MBApplicationDelegate 的，大部分 UIApplicationDelegate 方法需要调用 super
@@ -12,8 +13,20 @@ import Debugger
  外部推荐尽可能通过 addAppEventListener() 来监听事件；
  MBApplicationDelegate 默认未分发的方法可以自定义，通过 enumerateEventListeners() 方法进行分发。
  */
-@UIApplicationMain
+@main
 class ApplicationDelegate: MBApplicationDelegate {
+    override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
+    override func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         AppUserDefaultsShared().applicationLastLaunchTime = Date()
         _ = MBApp.status()
