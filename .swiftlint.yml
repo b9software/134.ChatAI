@@ -1,0 +1,195 @@
+# https://github.com/realm/SwiftLint 配置
+#
+# lint 工具通常我都比较喜欢用，但对 swiftlint 不感冒，主因是不认同它的部分规则，尤其在可读性方面有不同的理念。
+#
+# swiftlint 很多人用，有必要包含进来。
+
+disabled_rules:
+  # 国外这政治正确哦，像 black、master、slave 这种都是禁用词
+  - inclusive_language
+
+  # 限制行长度过时了，老式文本编辑器才需要，Xcode 换行的渲染不错，没必要。
+  # 另一种观点是一行一个参数看着更清楚，有必要换行的情形要么是参数多了，要么传参位置有长表达式。极端的例子，没人会把所有两个参数的都另起一行吧？
+  # 参数过多是接口设计问题，长表达式赋值到一个变量就完了，参数换行更清楚是伪命题。
+  # 我讨厌参数换行的理由是它影响了编辑器原本的自动换行，尤其当窗口比较窄时，手动加的换行很容易一团糟。
+  - line_length
+
+  # 声明多个协议喜欢这种写法
+  #
+  # struct Some: P1,
+  #     P2,
+  #     P3
+  # {
+  # }
+  - opening_brace
+
+  # 脚本体系里也有 todo 提示功能，按需选用吧
+  - todo
+
+  # 只支持必须带或不能带，实际应该区分情况更佳。
+  # 同行不应带，多行应该带：
+  # [1, 2] // 不应有逗号
+  # [
+  #   1,
+  #   2, // 应该有逗号
+  # ]
+  - trailing_comma
+
+  # 有时要用、有时只判空，这样切换方便一些
+  - unused_optional_binding
+
+# 筛选后开了很多可选规则
+# 几乎用不到、不合理的规则删去了，注释的是看情况可以开的
+opt_in_rules:
+  - array_init
+  # - attributes
+  - closure_body_length
+  # - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  # - conditional_returns_on_newline
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - convenience_type
+  - empty_collection_literal
+  - empty_string
+  - empty_xctest_method
+  - enum_case_associated_values_count
+  # - expiring_todo
+  # - explicit_enum_raw_value
+  - explicit_init
+  - explicit_self
+  # - explicit_type_interface
+  - extension_access_modifier
+  # - fallthrough
+  - file_name_no_space
+  # - file_name
+  - first_where
+  # - force_unwrapping
+  # - function_default_parameter_at_end
+  - identical_operands
+  - implicit_return
+  # - implicitly_unwrapped_optional
+  - legacy_multiple
+  - legacy_random
+  # - let_var_whitespace
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  # - multiline_arguments_brackets
+  # - multiline_arguments
+  # - multiline_function_chains
+  - multiline_literal_brackets
+  # - multiline_parameters_brackets
+  # - multiline_parameters
+  # - no_extension_access_modifier
+  # - no_grouping_extension
+  - nslocalizedstring_key
+  # - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  # - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  # - private_action
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  # - required_enum_case
+  - single_test_class
+  - sorted_imports
+  - static_operator
+  - switch_case_on_newline
+  - toggle_bool
+  # - trailing_closure
+  # - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  # - untyped_error_in_catch
+  - unused_import
+  - vertical_parameter_alignment_on_call
+  # - vertical_whitespace_between_cases
+  - vertical_whitespace_closing_braces
+  # - vertical_whitespace_opening_braces
+  - xct_specific_matcher
+  # - yoda_condition
+
+  # 开发三方库有用
+  # - explicit_acl
+  # - explicit_top_level_acl
+  # - fatal_error_message
+  # - file_header
+  - missing_docs
+  # - nslocalizedstring_require_bundle
+
+excluded:
+  - "App/Development Content/*.playground"
+  - "**/.build"
+  - "**/Build"
+  - B9Doc
+  - Carthage
+  - Frameworks
+  - Packages
+  - Pods
+
+# 针对每条规则的配置（请按字母顺序排序）
+# https://realm.github.io/SwiftLint/rule-directory.html
+
+file_length:
+  ignore_comment_only_lines: true
+
+identifier_name:
+  # 变量名长度我推荐的原则是作用域越大，命名应该越长、越详细；
+  # 反之在一个代码块内，上下没几行就声明了一个变量，不应该起长名字，
+  # 这种情况我习惯用类型的缩写，省事，不用花心思想名字，也不影响可读性。
+  excluded:
+    - i       # loop
+    - j       # loop
+    - k       # loop
+    - as      # cast
+    - e       # error
+    - id      # identifier
+    - c       # RFAPI, context
+    - sf      # guard self
+    - x
+    - y
+    - z
+    - x1
+    - x2
+    - y1
+    - y2
+    - vc      # view controller
+    - v       # view
+    - tv      # table view
+    - lv      # list view
+    - sv      # scroll view
+    - cb      # callback
+    - ds      # dataSource
+    - ip      # indexPath
+    - db      # database
+    - on      # on/off
+    - to      # from/to
+
+implicit_return:
+  # 默认 closure, function, getter，仅 getter 就可以了，闭包和方法里用不合适
+  included:
+    - getter
+
+large_tuple:
+  # 默认数量有点太少了，允许三个成员比较合适
+  warning: 3
+  error: 4
+
+# line_length:
+#   ignores_urls: true
+#   ignores_function_declarations: true
+#   ignores_comments: true
+#   ignores_interpolated_strings: true
+
+type_name:
+  excluded:
+    - ID      # identifier
+
+vertical_whitespace:
+  # 默认1，有时为了分区代码块隔两行
+  max_empty_lines: 2

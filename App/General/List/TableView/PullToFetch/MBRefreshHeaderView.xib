@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="iN0-l3-epB" customClass="MBRefreshHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldh-iV-JBW" userLabel="Content">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqo-Gw-i52">
+                            <rect key="frame" x="50" y="14" width="220" height="16"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <color key="textColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table_refresh_indicator" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-dT-IXF">
+                            <rect key="frame" x="30" y="11" width="22" height="22"/>
+                            <color key="tintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        </imageView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="CTQ-9u-7GT">
+                            <rect key="frame" x="30" y="12" width="20" height="20"/>
+                            <color key="color" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="CTQ-9u-7GT" secondAttribute="centerY" id="4Nn-fz-9td"/>
+                        <constraint firstItem="dqo-Gw-i52" firstAttribute="leading" secondItem="Ldh-iV-JBW" secondAttribute="leading" priority="999" constant="50" id="9xX-H6-JdT"/>
+                        <constraint firstAttribute="centerX" secondItem="dqo-Gw-i52" secondAttribute="centerX" id="C1s-f3-hRN"/>
+                        <constraint firstAttribute="centerY" secondItem="xpr-dT-IXF" secondAttribute="centerY" id="dQw-xg-3cW"/>
+                        <constraint firstAttribute="centerY" secondItem="dqo-Gw-i52" secondAttribute="centerY" id="mOl-pZ-rd9"/>
+                        <constraint firstItem="xpr-dT-IXF" firstAttribute="leading" secondItem="Ldh-iV-JBW" secondAttribute="leading" constant="30" id="qtb-fk-m54"/>
+                        <constraint firstItem="CTQ-9u-7GT" firstAttribute="leading" secondItem="Ldh-iV-JBW" secondAttribute="leading" constant="30" id="svV-Ce-Tzr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ldh-iV-JBW" secondAttribute="trailing" placeholder="YES" id="Fpf-s8-6Gh" userLabel="Placeholder"/>
+                <constraint firstItem="Ldh-iV-JBW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" placeholder="YES" id="TJp-pe-eTL" userLabel="Placeholder"/>
+                <constraint firstItem="Ldh-iV-JBW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" placeholder="YES" id="fK6-eL-iOk" userLabel="Placeholder"/>
+                <constraint firstAttribute="bottom" secondItem="Ldh-iV-JBW" secondAttribute="bottom" placeholder="YES" id="m5v-d5-Shq" userLabel="Placeholder"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityIndicatorView" destination="CTQ-9u-7GT" id="OC1-ab-Fg6"/>
+                <outlet property="contentView" destination="Ldh-iV-JBW" id="7SQ-eL-GOJ"/>
+                <outlet property="indicatorImageView" destination="xpr-dT-IXF" id="680-0p-MbC"/>
+                <outlet property="statusLabel" destination="dqo-Gw-i52" id="2iV-dI-azn"/>
+            </connections>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="table_refresh_indicator" width="22" height="22"/>
+    </resources>
+</document>

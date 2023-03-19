@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "B9MulticastDelegate",
+        "repositoryURL": "https://github.com/b9swift/MulticastDelegate",
+        "state": {
+          "branch": null,
+          "revision": "db7366999a931637c9240cf2103f0f946d1ba664",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

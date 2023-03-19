@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DEFAULT</key>
+	<dict>
+		<key>Base</key>
+		<string>https://bb9z.github.io</string>
+		<key>Path Prefix</key>
+		<string>API-Documentation-Sample/demo/</string>
+		<key>Method</key>
+		<string>GET</string>
+		<key>Authorization</key>
+		<true/>
+	</dict>
+	<key>@ Account</key>
+	<dict>
+		<key>SignInUpSend</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/signinup/code</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>SignInUp</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/signinup</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Class</key>
+			<string>LoginResponseEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>LoginPassword</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/login/password</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Class</key>
+			<string>LoginResponseEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>RegisterCode</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/register/code</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>Register</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/register</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Class</key>
+			<string>LoginResponseEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>LoginToken</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/login/token</string>
+			<key>Response Class</key>
+			<string>AccountEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>AcoountInfo</key>
+		<dict>
+			<key>Path</key>
+			<string>account/info</string>
+			<key>Response Class</key>
+			<string>AccountEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>AccountEdit</key>
+		<dict>
+			<key>Method</key>
+			<string>PATCH</string>
+			<key>Path</key>
+			<string>account/info</string>
+			<key>Response Class</key>
+			<string>AccountEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>OTACSend</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/otac/send</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>OTACVerify</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>account/otac/verify</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Type</key>
+			<integer>0</integer>
+		</dict>
+		<key>PasswordReset</key>
+		<dict>
+			<key>Method</key>
+			<string>PUT</string>
+			<key>Path</key>
+			<string>account/password/reset</string>
+			<key>Authorization</key>
+			<false/>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>PasswordChange</key>
+		<dict>
+			<key>Method</key>
+			<string>PUT</string>
+			<key>Path</key>
+			<string>account/password</string>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>@ Topic</key>
+	<dict>
+		<key>TopicListRecommended</key>
+		<dict>
+			<key>Path</key>
+			<string>topics/recommended</string>
+			<key>Response Class</key>
+			<string>TopicEntity</string>
+			<key>Response Type</key>
+			<integer>3</integer>
+		</dict>
+		<key>TopicListMine</key>
+		<dict>
+			<key>Path</key>
+			<string>account/topics</string>
+			<key>Response Class</key>
+			<string>TopicEntity</string>
+			<key>Response Type</key>
+			<integer>3</integer>
+		</dict>
+		<key>TopicListUser</key>
+		<dict>
+			<key>Path</key>
+			<string>users/{uid}/topics</string>
+			<key>Response Class</key>
+			<string>TopicEntity</string>
+			<key>Response Type</key>
+			<integer>3</integer>
+		</dict>
+		<key>TopicDetail</key>
+		<dict>
+			<key>Path</key>
+			<string>topics/{tid}</string>
+			<key>Response Class</key>
+			<string>TopicEntity</string>
+			<key>Response Type</key>
+			<integer>2</integer>
+		</dict>
+		<key>TopicLikedAdd</key>
+		<dict>
+			<key>Method</key>
+			<string>POST</string>
+			<key>Path</key>
+			<string>topics/{tid}/like</string>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>TopicLikedRemove</key>
+		<dict>
+			<key>Method</key>
+			<string>DELETE</string>
+			<key>Path</key>
+			<string>topics/{tid}/like</string>
+			<key>Response Type</key>
+			<integer>1</integer>
+		</dict>
+		<key>CommentListTopic</key>
+		<dict>
+			<key>Path</key>
+			<string>topics/{tid}/comments</string>
+			<key>Response Class</key>
+			<string>CommentEntity</string>
+			<key>Response Type</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>
