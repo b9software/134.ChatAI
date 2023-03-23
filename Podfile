@@ -10,19 +10,6 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 target 'B9ChatAI' do
     platform :ios, '13.0'
 
-#    pod 'AMap3DMap-NO-IDFA'             # 高德地图
-#    pod 'AXRatingView'                  # 打星评分控件
-#    pod 'AliyunOSSiOS'                  # 阿里云文件存储
-#    pod 'Bugly'                         # 腾讯崩溃收集
-#    pod 'CollectionViewCenteredFlowLayout' # CollectionView 居中对齐
-#    pod 'FLEX', :configurations => 'Debug' # 开发辅助工具集
-#    pod 'GRDB.swift'                    # SQLite 数据库
-#    pod 'GTSDK'                         # 推送: 个推
-#    pod 'QingNiuSDK'                    # 七牛云存储
-    pod 'SDWebImage'                    # 网络图片加载
-#    pod 'UICollectionViewLeftAlignedLayout' # CollectionView 左对齐
-#    pod 'WechatOpenSDK'                 # 微信 SDK
-
     pod 'RFKit', :subspecs => [
         'Category/NSFileManager',
         'Category/UIScrollView+RFScrolling',
@@ -36,7 +23,6 @@ target 'B9ChatAI' do
         'RFImageCropper',
         'RFNavigationController',
         'RFRefreshControl',
-        'RFTabController',
         'RFTableViewPullToFetchPlugin',
         'RFTimer',
         'RFViewApperance/RFLine',

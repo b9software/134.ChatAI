@@ -15,56 +15,53 @@ import UIKit
  As the application global root view controller.
 
  Embed the main navigation view controller. Any pop-ups that need to cover the main navigation can be added here. Eg: splash, tutorial pop-ups.
-
- It should forward the style or control method of the view controller to the first child.
  */
-class RootViewController: UIViewController {
+class RootViewController: B9RootViewController {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        MBApp.status().rootViewController = self
-    }
+    private(set) var navigator: NavigationController!
+    private(set) var split: SplitViewController!
+    private(set) lazy var toolbar = Toolbar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-}
-
-// MARK: - Style/Control forward
-extension RootViewController {
-    private var _keyViewController: UIViewController? {
-        children.first
+        split = children.first { $0 is SplitViewController } as? SplitViewController
+        navigator = split.children.first { $0 is NavigationController } as? NavigationController
     }
 
-    override var shouldAutorotate: Bool {
-        _keyViewController?.shouldAutorotate ?? true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        _keyViewController?.supportedInterfaceOrientations ?? .all
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        if let titlebar = view.window?.windowScene?.titlebar {
+//            titlebar.toolbarStyle = .unified
+//            titlebar.toolbar = Toolbar()
+//        }
     }
 
-    override var childForStatusBarStyle: UIViewController? {
-        _keyViewController
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
     }
 
-    override var childForStatusBarHidden: UIViewController? {
-        _keyViewController
+    override func responds(to aSelector: Selector!) -> Bool {
+        if aSelector == #selector(toolbarBack) {
+            return navigator.viewControllers.count > 1
+        }
+        return super.responds(to: aSelector)
     }
 
-    override var childForHomeIndicatorAutoHidden: UIViewController? {
-        _keyViewController
+    @IBAction func toolbarBack(_ sender: Any) {
+        navigator.popViewController(animated: true)
     }
 
-    override var childViewControllerForPointerLock: UIViewController? {
-        _keyViewController
+    @IBAction private func gotoGuide(_ sender: Any) {
+        navigator.pushViewController(GuideViewController.newFromStoryboard(), animated: false)
     }
 
-    override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
-        _keyViewController
-    }
-
-    override func childContaining(_ source: UIStoryboardUnwindSegueSource) -> UIViewController? {
-        _keyViewController
+    @IBAction private func gotoSetting(_ sender: Any) {
+        navigator.pushViewController(SettingViewController.newFromStoryboard(), animated: false)
     }
 }

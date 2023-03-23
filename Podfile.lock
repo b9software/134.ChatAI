@@ -36,7 +36,6 @@ PODS:
     - RFKit/Category/UIView
     - RFKit/Category/UIViewController
     - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFDataSourceArray (0.7.2)
   - RFAlpha/RFDrawImage (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFImageCropper (0.7.2):
@@ -57,12 +56,6 @@ PODS:
   - RFAlpha/RFRefreshControl (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFSwizzle (0.7.2):
-    - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFTabController (0.7.2):
-    - RFAlpha/RFDataSourceArray
-    - RFInitializing (>= 1.1)
-    - RFKit/Category/NSArray
-    - RFKit/Category/UIView
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFTableViewPullToFetchPlugin (0.7.2):
     - RFAlpha/RFKVOWrapper
@@ -222,9 +215,6 @@ PODS:
     - RFKit/Category/UIDevice
     - RFKit/Category/UINavigationController
     - RFKit/Runtime (>= 1.7)
-  - SDWebImage (5.12.5):
-    - SDWebImage/Core (= 5.12.5)
-  - SDWebImage/Core (5.12.5)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -239,7 +229,6 @@ DEPENDENCIES:
   - RFAlpha/RFImageCropper
   - RFAlpha/RFNavigationController
   - RFAlpha/RFRefreshControl
-  - RFAlpha/RFTabController
   - RFAlpha/RFTableViewPullToFetchPlugin
   - RFAlpha/RFTimer
   - RFAlpha/RFViewApperance/RFLine
@@ -253,7 +242,6 @@ DEPENDENCIES:
   - "RFKit/Category/UIScrollView+RFScrolling"
   - RFMessageManager/SVProgressHUD
   - RFSegue/Async
-  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -267,7 +255,6 @@ SPEC REPOS:
     - RFKit
     - RFMessageManager
     - RFSegue
-    - SDWebImage
     - SVProgressHUD
 
 EXTERNAL SOURCES:
@@ -291,9 +278,8 @@ SPEC CHECKSUMS:
   RFKit: 046ed8a61c874fbb93dce7a694cfc059e8bf5d7a
   RFMessageManager: e261b12146e083989df83106304fbface62705b5
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
-  SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 1fa4918de5c3bc49f4bb104376de333f1179aeed
+PODFILE CHECKSUM: 5d439cc30d21149cde1d7a21fdb94d48bc64fd27
 
 COCOAPODS: 1.11.3

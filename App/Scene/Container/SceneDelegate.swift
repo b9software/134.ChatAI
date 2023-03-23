@@ -9,27 +9,18 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
-    private(set) lazy var toolbar = Toolbar()
 
     var rootViewController: RootViewController! {
         window?.rootViewController as? RootViewController
     }
 
-    var navigator: NavigationController! {
-        let split = window?.rootViewController?.children.first as? UISplitViewController
-        return split?.viewController(for: .secondary) as? NavigationController
-    }
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         if let titlebar = windowScene.titlebar {
-            titlebar.titleVisibility = .hidden
-            titlebar.toolbarStyle = .unified
-            titlebar.separatorStyle = .line
-            titlebar.toolbar = toolbar
+            titlebar.toolbar = Toolbar()
         }
+        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 200)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

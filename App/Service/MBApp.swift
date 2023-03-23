@@ -63,9 +63,6 @@ class MBApp: NSObject {
     /// UI 提示管理器
     @objc lazy var hud = MessageManager()
 
-    /// 
-    @objc var rootViewController: RootViewController?
-
     /// 全局导航
     @objc var globalNavigationController: UINavigationController?
 

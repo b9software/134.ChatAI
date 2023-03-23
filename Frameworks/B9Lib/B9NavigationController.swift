@@ -1,10 +1,12 @@
-//
-//  B9NavigationController.swift
-//  B9ChatAI
-//
-//  Created by BB9z on 2023/3/20.
-//  Copyright © 2023 B9Software. All rights reserved.
-//
+/*
+ B9NavigationController.swift
+
+ Copyright © 2023 BB9z.
+ https://github.com/BB9z/iOS-Project-Template
+
+ The MIT License
+ https://opensource.org/licenses/MIT
+ */
 
 import UIKit
 

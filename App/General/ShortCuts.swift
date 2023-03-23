@@ -59,11 +59,6 @@ func AppInBackground() -> Bool {
     UIApplication.shared.applicationState == .background
 }
 
-/// 全局根视图
-func AppRootViewController() -> RootViewController? {
-    MBApp.global.rootViewController
-}
-
 /// 应用级别的配置项
 func AppUserDefaultsShared() -> UserDefaults {
     UserDefaults.standard

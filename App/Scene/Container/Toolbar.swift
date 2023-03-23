@@ -20,8 +20,8 @@ class Toolbar: NSToolbar, NSToolbarDelegate {
 
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         [
-            .toggleSidebar,
-            .back, .flexibleSpace, .test]
+            .toggleSidebar, .back, .flexibleSpace
+        ]
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -32,7 +32,7 @@ class Toolbar: NSToolbar, NSToolbarDelegate {
     }
 
     func toolbarImmovableItemIdentifiers(_ toolbar: NSToolbar) -> Set<NSToolbarItem.Identifier> {
-        []
+        [.toggleSidebar, .back]
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -68,11 +68,15 @@ class Toolbar: NSToolbar, NSToolbarDelegate {
             insertItem(withItemIdentifier: $0.itemIdentifier, at: items.count)
         }
     }
+
+    @IBAction func toolBarTest(_ sender: Any) {
+        debugPrint("test")
+    }
 }
 
 extension NSToolbarItem {
     static func back() -> NSToolbarItem {
-        let button = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: nil, action: #selector(_fixWarning.newWindowForTab(_:)))
+        let button = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: nil, action: #selector(RootViewController.toolbarBack))
         let item = NSToolbarItem(itemIdentifier: .back, barButtonItem: button)
         item.label = "Back"
         item.isNavigational = true
