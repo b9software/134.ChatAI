@@ -44,6 +44,10 @@ target 'B9ChatAI' do
     ]
 end
 
+target 'UnitTests' do
+  inherit! :search_paths
+end
+
 post_install do |pi|
     # 临时修正 deployment target 不支持的问题，并且让 Pod 跟随 App 支持的版本进行编译
     # https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-422283045

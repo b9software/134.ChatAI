@@ -26,6 +26,9 @@ class RootViewController: B9RootViewController {
         super.viewDidLoad()
         split = children.first { $0 is SplitViewController } as? SplitViewController
         navigator = split.children.first { $0 is NavigationController } as? NavigationController
+        #if targetEnvironment(macCatalyst)
+        navigator.setNavigationBarHidden(true, animated: false)
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +46,31 @@ class RootViewController: B9RootViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        adjustTraitCollection()
+    }
 
+    func adjustTraitCollection() {
+        guard let vc = children.first else { return }
+        let size = view.bounds.size
+
+        if let titleBar = view.window?.windowScene?.titlebar {
+            let style: UITitlebarToolbarStyle = size.height > 500 ? .unified : .unifiedCompact
+            if titleBar.toolbarStyle != style {
+                titleBar.toolbarStyle = style
+            }
+        }
+
+        let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
+        let hClass = size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact
+        let vClass = size.height > 500 ? UIUserInterfaceSizeClass.regular : .compact
+        if currentCollection.horizontalSizeClass == hClass,
+           currentCollection.verticalSizeClass == vClass {
+            return
+        }
+        let horizontal = UITraitCollection(horizontalSizeClass: hClass)
+        let vertical = UITraitCollection(verticalSizeClass: vClass)
+        let collection = UITraitCollection(traitsFrom: [currentCollection, horizontal, vertical])
+        setOverrideTraitCollection(collection, forChild: vc)
     }
 
     override func responds(to aSelector: Selector!) -> Bool {
@@ -58,10 +85,10 @@ class RootViewController: B9RootViewController {
     }
 
     @IBAction private func gotoGuide(_ sender: Any) {
-        navigator.pushViewController(GuideViewController.newFromStoryboard(), animated: false)
+        navigator.setViewControllers([GuideViewController.newFromStoryboard()], animated: false)
     }
 
     @IBAction private func gotoSetting(_ sender: Any) {
-        navigator.pushViewController(SettingViewController.newFromStoryboard(), animated: false)
+        navigator.setViewControllers([SettingViewController.newFromStoryboard()], animated: false)
     }
 }

@@ -55,15 +55,17 @@ final class ObjectPool<Key: Hashable, Value: AnyObject> {
     /**
      返回 key 对应的对象，如果未在对象池中不存在，则用 creator 创建，存储后返回
      */
-    func object(key: Key, creator: @autoclosure () -> Value) -> Value {
+    func object(key: Key, creator: @autoclosure () -> Value?) -> Value? {
         lock.lock()
         defer { lock.unlock() }
         if let obj = store[key]?.object {
             return obj
         }
-        let obj = creator()
-        store[key] = Weak(object: obj)
-        return obj
+        if let obj = creator() {
+            store[key] = Weak(object: obj)
+            return obj
+        }
+        return nil
     }
 
     func removeAll() {

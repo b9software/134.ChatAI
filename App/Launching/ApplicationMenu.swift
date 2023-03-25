@@ -11,7 +11,7 @@ import UIKit
 enum ApplicationMenu {
     static func build(_ builder: UIMenuBuilder) {
         builder.remove(menu: .format)
-        builder.replace(menu: .newScene, with: UIMenu(title: "New", children: [
+        builder.replace(menu: .newScene, with: UIMenu(title: L.Menu.new, children: [
             UIKeyCommand(title: "Conversation", action: #selector(ApplicationDelegate.newConversation), input: "N", modifierFlags: .command, discoverabilityTitle: "New Conversation"),
             UIKeyCommand(title: "Window", action: #selector(ApplicationDelegate.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
         ]))

@@ -115,6 +115,7 @@ extension NSToolbar.Identifier {
     }
 }
 
+// swiftlint:disable:next type_name
 private final class _fixWarning {
     @IBAction func newWindowForTab(_ sender: Any?) {}
 }

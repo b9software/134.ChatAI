@@ -17,6 +17,12 @@ import UIKit
 class ApplicationDelegate: MBApplicationDelegate {
     let debug = DebugManager()
 
+    #if DEBUG
+    lazy var isTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    #else
+    let isTesting = false
+    #endif
+
     override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         return true
     }
@@ -38,6 +44,7 @@ class ApplicationDelegate: MBApplicationDelegate {
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         AppUserDefaultsShared().applicationLastLaunchTime = Date()
         _ = MBApp.status()
+        DBManager.setup(test: isTesting)
         return true
     }
 
@@ -71,11 +78,6 @@ class ApplicationDelegate: MBApplicationDelegate {
         // 统一全局色，storyboard 的全局色只对部分 UI 生效，比如无法对 UIAlertController 应用
         window.tintColor = UIColor(named: "primary")!
 
-        #if DEBUG
-        // 强制修改窗口的最小尺寸，用以调试小屏幕适配
-        window.windowScene?.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 300)
-        #endif
-
         // 列表 data source 全局调整
         MBListDataSource<AnyObject>.defualtPageStartZero = false
         MBListDataSource<AnyObject>.defaultPageSizeParameterName = "size"
@@ -90,22 +92,6 @@ class ApplicationDelegate: MBApplicationDelegate {
             }
             return false
         }
-    }
-
-    override func applicationDidBecomeActive(_ application: UIApplication) {
-        if !AppCondition().meets([.appHasEnterForegroundOnce]) {
-            AppCondition().set(on: [.appHasEnterForegroundOnce])
-            AppUserDefaultsShared().launchCount += 1
-            AppUserDefaultsShared().launchCountCurrentVersion += 1
-        }
-        AppCondition().set(on: [.appInForeground])
-        super.applicationDidBecomeActive(application)
-    }
-
-    override func applicationDidEnterBackground(_ application: UIApplication) {
-        AppCondition().set(off: [.appInForeground])
-        debugPrint(#function)
-        super.applicationDidEnterBackground(application)
     }
 
     override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {

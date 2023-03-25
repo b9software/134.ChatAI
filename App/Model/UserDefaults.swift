@@ -44,6 +44,11 @@ extension UserDefaults {
         get { integer(forKey: "_" + #function) }
         set { set(newValue, forKey: "_" + #function) }
     }
+
+    var iCloudEnable: Bool {
+        get { bool(forKey: #function) }
+        set { set(newValue, forKey: #function) }
+    }
 }
 
 // MARK: - 存储类型支持

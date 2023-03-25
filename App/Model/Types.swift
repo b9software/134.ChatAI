@@ -5,6 +5,10 @@
 /// 账号系统 ID 的类型
 typealias AccountID = Int64
 
+typealias StringID = String
+
+typealias L = L10n.Localizable
+
 /* 🔰 例如
 
 /// 服务器时长用的是整型

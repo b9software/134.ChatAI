@@ -9,18 +9,17 @@
 import UIKit
 
 final class DebugManager {
-
+#if DEBUG
     func setupMenu(builder: UIMenuBuilder) {
-        #if DEBUG
         let menu = UIMenu(title: "Developer", children: [
             UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu(_:))),
             UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
+            UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
             UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
             UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch(_:)), state: debugSystemUI ? .on : .off),
             UICommand(title: "Debug Responder", action: #selector(ApplicationDelegate.debugResponderSwitch(_:)), state: debugResponder ? .on : .off),
         ])
         builder.insertSibling(menu, afterMenu: .window)
-        #endif
     }
 
     var debugSystemUI: Bool {
@@ -32,6 +31,9 @@ final class DebugManager {
         get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
+#else
+    func setupMenu(builder: UIMenuBuilder) {}
+#endif
 }
 
 #if DEBUG
@@ -62,6 +64,10 @@ private extension ApplicationDelegate {
     @IBAction func debugResponderSwitch(_ sender: Any) {
         debug.debugResponder.toggle()
         ApplicationMenu.setNeedsRebuild()
+    }
+
+    @IBAction func debugDumpDatabase(_ sender: Any) {
+        AppDatabase().dump()
     }
 }
 #endif

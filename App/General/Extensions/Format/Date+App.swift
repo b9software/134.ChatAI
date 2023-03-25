@@ -26,24 +26,6 @@ extension Date {
         DateFormatter.dayIdentifier.string(from: self) as MBDateDayIdentifier
     }
 
-    // @MBDependency:3
-    /**
-     按当前历法判断两个可选日期在某一时间维度上是否一致
-     
-     都为 nil 会返回 true；2000-01-01 和 2000-05-01 在 .day，包括时分秒的维度上都是不一致的
-     
-     - parameter granularity: 比较的维度；比较的方式是纬度从大到小，指定维度以上都一样就算是一致；所以不会有传多个维度的场景
-     */
-    static func isSame(granularity: Calendar.Component, _ date1: Date?, _ date2: Date?) -> Bool {
-        if date1 == nil && date2 == nil {
-            return true
-        }
-        guard let date1 = date1, let date2 = date2 else {
-            return false
-        }
-        return Calendar.current.compare(date1, to: date2, toGranularity: granularity) == .orderedSame
-    }
-
     // @MBDependency:2 范例性质，请根据项目需求修改
     /**
      今天，则“今天”
