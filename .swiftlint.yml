@@ -99,7 +99,7 @@ opt_in_rules:
   - single_test_class
   - sorted_imports
   - static_operator
-  - switch_case_on_newline
+  # - switch_case_on_newline
   - toggle_bool
   # - trailing_closure
   # - unavailable_function

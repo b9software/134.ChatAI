@@ -2,18 +2,16 @@
  对特殊约定的数据类型进行定义以示区分
  */
 
-/// 账号系统 ID 的类型
-typealias AccountID = Int64
+// swiftlint:disable type_name
 
+/// 标识符
 typealias StringID = String
+
+/// 时间戳，相对于 1970，非毫秒
+typealias Timestamp = Int
 
 typealias L = L10n.Localizable
 
-/* 🔰 例如
-
-/// 服务器时长用的是整型
-typealias Duration = Int32
-
-/// 从 1 开始的序号
-typealias NIdx = Int
- */
+protocol ModelValidate {
+    func validate() throws
+}

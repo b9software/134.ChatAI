@@ -3,8 +3,8 @@
 ## In case your config entries all use a common input/output parent directory, you can specify those here.
 ##   Every input/output paths in the rest of the config will then be expressed relative to these.
 ##   Those two top-level keys are optional and default to "." (the directory of the config file).
-# input_dir: MyLib/Sources/
-# output_dir: MyLib/Generated/
+input_dir: App/Assets/
+output_dir: App/Assets/Generated/
 
 
 ## Generate constants for your localized strings.
@@ -12,10 +12,11 @@
 ##   SwiftGen will parse all `.strings` files found in that folder.
 strings:
   inputs:
-    - App/Assets/Base.lproj
+    - Base.lproj
   outputs:
+    # https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/strings/structured-swift5.md
     - templateName: structured-swift5
-      output: App/Assets/Generated/L10n.swift
+      output: L10n.swift
       params:
         bundle: Bundle.main
 
@@ -24,15 +25,15 @@ strings:
 ##   This example also shows how to provide additional parameters to your template to customize the output.
 ##   - Especially the `forceProvidesNamespaces: true` param forces to create sub-namespace for each folder/group used in your Asset Catalogs, even the ones without "Provides Namespace". Without this param, SwiftGen only generates sub-namespaces for folders/groups which have the "Provides Namespace" box checked in the Inspector pane.
 ##   - To know which params are supported for a template, use `swiftgen template doc xcassets swift5` to open the template documentation on GitHub.
-# xcassets:
-#   inputs:
-#     - Main.xcassets
-#     - ProFeatures.xcassets
-#   outputs:
-#     - templateName: swift5
-#       params:
-#         forceProvidesNamespaces: true
-#       output: XCAssets+Generated.swift
+xcassets:
+  inputs:
+    - Assets.xcassets
+  outputs:
+    # https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/xcassets/swift5.md
+    - templateName: swift5
+      params:
+        forceProvidesNamespaces: true
+      output: XCAssets+.swift
 
 
 ## Generate constants for your storyboards and XIBs.

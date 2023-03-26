@@ -12,32 +12,31 @@ class Button: MBButton {
      一般在 Interface Builder 中通过 styleName 设置
      */
     enum Style: String {
-        /// 默认按钮
+        /// 默认按钮，灰色，高亮 tintColor
         case std
 
         /// 圆弧线框，颜色随 tintColor 改变
         case round
-
-        /// 仿列表样式，给点击时增加一个效果
-        case row
     }
+
+    var style: Style?
 
     override func setupAppearance() {
         guard let style = Style(rawValue: styleName ?? "") else { return }
+        self.style = style
         switch style {
         case .std:
-            // todo 设置样式
-            break
+            if configuration == nil {
+                configuration = UIButton.Configuration.filled()
+            }
+            configuration?.buttonSize = .large
+            configuration?.baseForegroundColor = Asset.Text.first.color
+            isHoverEnabled = true
 
         case .round:
             setTitleColor(.white, for: .selected)
             setTitleColor(.white, for: .disabled)
-            adjustsImageWhenHighlighted = false
             updateRoundStyleIfNeeded()
-
-        case .row:
-            setBackgroundImage(#imageLiteral(resourceName: "row_highlight"), for: .highlighted)
-            adjustsImageWhenHighlighted = false
         }
     }
 
@@ -51,7 +50,7 @@ class Button: MBButton {
     }
 
     func updateRoundStyleIfNeeded() {
-        guard styleName == Style.round.rawValue else { return }
+        guard style == .round else { return }
         let size = height
         guard size > 0 else { return }
         let roundInset = UIEdgeInsetsMakeWithSameMargin(size / 2)
@@ -72,6 +71,29 @@ class Button: MBButton {
         let disableBG = RFDrawImage.image(withRoundingCorners: roundInset, size: bgSize, fill: UIColor(named: "button_disabled")!, stroke: nil, strokeWidth: 0, boxMargin: .zero, resizableCapInsets: resizeInset, scaleFactor: 0)
         setBackgroundImage(disableBG, for: .disabled)
     }
+
+    override func updateConfiguration() {
+        super.updateConfiguration()
+        if state == .disabled {
+            setBackground(color: Asset.Button.stdBase.color.withAlphaComponent(0.5))
+            return
+        }
+        if state == .highlighted {
+            setBackground(color: tintColor)
+            return
+        }
+        if isHover {
+            setBackground(color: Asset.Button.stdHover.color)
+            return
+        }
+        setBackground(color: Asset.Button.stdBase.color)
+    }
+
+    func setBackground(color: UIColor?) {
+        configuration?.background.backgroundColor = color
+    }
+
+    // MARK: -
 
     /// 按钮选中时加粗
     @IBInspectable var boldWhenSelected: Bool = false
@@ -96,5 +118,32 @@ class Button: MBButton {
             }
             titleLabel?.font = UIFont.systemFont(ofSize: size, weight: isSelected ? .semibold : .regular)
         }
+    }
+
+    // MARK: - Hover
+    var isHover = false
+    var isHoverEnabled = false {
+        didSet {
+            if oldValue == isHoverEnabled { return }
+            if isHoverEnabled {
+                if hoverGesture == nil {
+                    let gesture = UIHoverGestureRecognizer(target: self, action: #selector(onHoverGesture))
+                    addGestureRecognizer(gesture)
+                    hoverGesture = gesture
+                }
+            }
+            hoverGesture?.isEnabled = isHoverEnabled
+        }
+    }
+    private var hoverGesture: UIGestureRecognizer?
+
+    @objc private func onHoverGesture(_ sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            isHover = true
+        default:
+            isHover = false
+        }
+        setNeedsUpdateConfiguration()
     }
 }

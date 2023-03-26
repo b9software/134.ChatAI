@@ -8,11 +8,13 @@
 
 import UIKit
 
+#if targetEnvironment(macCatalyst)
 extension NSToolbar {
     static func of(_ view: UIView) -> NSToolbar? {
         view.window?.windowScene?.titlebar?.toolbar
     }
 }
+#endif
 
 extension SceneDelegate {
     static func of(_ view: UIView) -> Self? {

@@ -40,7 +40,17 @@ extension JSONEncoder {
     }
 }
 
+extension Decodable {
+    static func decode(_ data: Data) throws -> Self {
+        try JSONDecoder().decode(Self.self, from: data)
+    }
+}
+
 extension Encodable {
+    func encode(_ encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+        try encoder.encode(self)
+    }
+
     /// 转为 JSON 对象
     func asJSONObject(encoder: JSONEncoder = JSONEncoder()) throws -> Any {
         let data = try encoder.encode(self)

@@ -1,14 +1,15 @@
 /*
  MBDesignView
- 
- Copyright © 2018 RFUI.
+
+ Copyright © 2018, 2023 BB9z.
  Copyright © 2015 Beijing ZhiYun ZhiYuan Technology Co., Ltd.
  https://github.com/BB9z/iOS-Project-Template
- 
+
  The MIT License
  https://opensource.org/licenses/MIT
  */
-#import <UIKit/UIKit.h>
+
+import UIKit
 
 // @MBDependency:1
 /**
@@ -16,5 +17,9 @@
 
  这个 view 会在 awakeFromNib 时自动清空背景色
  */
-@interface MBDesignView : UIView
-@end
+class MBDesignView: UIView {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = nil
+    }
+}

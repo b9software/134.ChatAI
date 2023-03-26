@@ -87,7 +87,7 @@ actor CDContext {
     }
 
     /// Return `nil` when failed.
-    func fetch<T>(_ request: NSFetchRequest<T>) -> [T]? where T : NSFetchRequestResult {
+    func fetch<T>(_ request: NSFetchRequest<T>) -> [T]? where T: NSFetchRequestResult {
         ctx.performAndWait {
             do {
                 return try ctx.fetch(request)

@@ -28,6 +28,19 @@ pod install
 fastlane setup_project
 ```
 
+接口
+
+* https://github.com/MacPaw/OpenAI 不支持流
+* https://github.com/dylanshine/openai-kit
+* https://github.com/FuturraGroup/OpenAI
+* https://console.anthropic.com/docs/api/reference
+
+应用
+
+* https://github.com/chenxi92/ChatGPT
+* https://github.com/Yoddikko/yoddChatGPT
+
+
 ## License
 
 ```text

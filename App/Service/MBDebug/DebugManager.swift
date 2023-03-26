@@ -6,6 +6,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import Security
 import UIKit
 
 final class DebugManager {
@@ -43,7 +44,7 @@ private extension ApplicationDelegate {
     }
 
     @IBAction func onTest2(_ sender: Any) {
-        debugPrint(UIApplication.shared.connectedScenes)
+//        debugPrint(UIApplication.shared.connectedScenes)
     }
 
     @IBAction func debugWindow(_ sender: Any) {

@@ -20,7 +20,9 @@ class RootViewController: B9RootViewController {
 
     private(set) var navigator: NavigationController!
     private(set) var split: SplitViewController!
+    #if targetEnvironment(macCatalyst)
     private(set) lazy var toolbar = Toolbar()
+    #endif
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,12 +55,14 @@ class RootViewController: B9RootViewController {
         guard let vc = children.first else { return }
         let size = view.bounds.size
 
+        #if targetEnvironment(macCatalyst)
         if let titleBar = view.window?.windowScene?.titlebar {
             let style: UITitlebarToolbarStyle = size.height > 500 ? .unified : .unifiedCompact
             if titleBar.toolbarStyle != style {
                 titleBar.toolbarStyle = style
             }
         }
+        #endif
 
         let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
         let hClass = size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact
