@@ -1,11 +1,37 @@
+/* 取消 */
+"Cancel" = "取消";
 
+/* (No Comment) */
+"engine.create.fail.exist-key" = "这个 API Key 已经添加过了";
+
+/* (No Comment) */
+"engine.create.fail.hash-key" = "无法生成密钥数据";
+
+/* (No Comment) */
+"engine.create.step-done" = "[OK]";
+
+/* (No Comment) */
+"engine.create.step-list-gpt" = "可用的 GPT 模型：%@";
+
+/* (No Comment) */
+"engine.create.step-models" = "检查模型...";
+
+/* (No Comment) */
+"engine.create.step-save-data" = "保存数据中";
+
+/* (No Comment) */
+"engine.create.step-verify" = "检查中....";
+
+/* (No Comment) */
+"engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
+
+/* (No Comment) */
+"menu.delete" = "删除";
+
+/* (No Comment) */
 "menu.new" = "新建";
 
-"NSURLErrorCannotConnectToHost"         = "无法连接到服务器";
-"NSURLErrorCannotFindHost"              = "找不到到服务器，请稍后再试";
-"NSURLErrorDataNotAllowed"              = "没有联网，请连接 Wi-Fi 或允许移动数据的使用";
-"NSURLErrorDNSLookupFailed"             = "服务器地址查询失败，请检查你的 DNS 设置";
-"NSURLErrorNetworkConnectionLost"       = "网络连接可能已断开，请重试";
-"NSURLErrorNotConnectedToInternet"      = "没有联网，请连接 Wi-Fi 或打开移动数据";
-"NSURLErrorSecureConnectionFailed"      = "不能建立与服务器的安全连接。请检查设备的时钟是否正确；如果你在使用公共 Wi-Fi，请打开系统浏览器获取网络访问权限";
-"NSURLErrorTimedOut"                    = "网络连接不畅";
+"menu.new.conversation" = "会话";
+"menu.new.tab" = "标签页";
+"menu.new.window" = "窗口";
+

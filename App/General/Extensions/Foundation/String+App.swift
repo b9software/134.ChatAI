@@ -58,6 +58,21 @@ extension String {
         str.replaceSubrange(rangeStart...rangeEnd, with: maskString)
         return str
     }
+
+    func keyMasked(_ mask: Character = Character("*")) -> String {
+        guard !isEmpty else { return self }
+        // 用系数算可以支持任意长度的输入
+        // 系数是可以计算的，但这里写死的可读性好
+        let length = Double(count)
+        let maskCount = Int((length * 0.7).rounded())
+        guard maskCount > 0 else { return self }
+        let maskString = String(repeating: mask, count: maskCount)
+        let rangeStart = index(startIndex, offsetBy: Int((length * 0.1).rounded()))
+        let rangeEnd = index(rangeStart, offsetBy: maskCount - 1)
+        var str = self
+        str.replaceSubrange(rangeStart...rangeEnd, with: maskString)
+        return str
+    }
 }
 
 /*

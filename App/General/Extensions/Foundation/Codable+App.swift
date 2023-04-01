@@ -40,19 +40,33 @@ extension JSONEncoder {
     }
 }
 
+enum JSON {
+    static var defaultDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+
+    static var defaultEncoder = {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        return encoder
+    }()
+}
+
 extension Decodable {
     static func decode(_ data: Data) throws -> Self {
-        try JSONDecoder().decode(Self.self, from: data)
+        try JSON.defaultDecoder.decode(Self.self, from: data)
     }
 }
 
 extension Encodable {
-    func encode(_ encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+    func encode(_ encoder: JSONEncoder = JSON.defaultEncoder) throws -> Data {
         try encoder.encode(self)
     }
 
     /// 转为 JSON 对象
-    func asJSONObject(encoder: JSONEncoder = JSONEncoder()) throws -> Any {
+    func asJSONObject(encoder: JSONEncoder = JSON.defaultEncoder) throws -> Any {
         let data = try encoder.encode(self)
         return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }

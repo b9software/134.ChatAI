@@ -34,7 +34,7 @@ class DBManager {
             container = CDContainer(name: "CD")
         }
         let useCloud = UserDefaults.standard.iCloudEnable
-        let description = NSPersistentStoreDescription()
+        let description = NSPersistentStoreDescription(url: FileURL.database)
         if test {
             description.type = NSInMemoryStoreType
         }
@@ -56,13 +56,14 @@ class DBManager {
                 fatalError(err.localizedDescription)
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
         let instance = DBManager(container: container)
         shared = instance
         loadedModel = container.managedObjectModel
         return instance
     }
 
-    let dbQueue = DispatchQueue(label: "app.database", qos: .userInitiated)
+//    let dbQueue = DispatchQueue(label: "app.database", qos: .userInitiated)
     let container: CDContainer
     let context: CDContext
 
@@ -72,7 +73,7 @@ class DBManager {
     }
 }
 
-actor CDContext {
+class CDContext {
     let ctx: NSManagedObjectContext
     private(set) var lastError: Error? {
         didSet {
@@ -88,7 +89,8 @@ actor CDContext {
 
     /// Return `nil` when failed.
     func fetch<T>(_ request: NSFetchRequest<T>) -> [T]? where T: NSFetchRequestResult {
-        ctx.performAndWait {
+        assertDispatch(.notOnQueue(.main))
+        return ctx.performAndWait {
             do {
                 return try ctx.fetch(request)
             } catch {
@@ -99,6 +101,7 @@ actor CDContext {
     }
 
     func save() {
+        assertDispatch(.notOnQueue(.main))
         ctx.performAndWait {
             guard ctx.hasChanges else { return }
             do {
@@ -107,6 +110,17 @@ actor CDContext {
                 lastError = error
             }
         }
+    }
+
+    func perform<T>(save: Bool = true, _ operation: (NSManagedObjectContext) throws -> T) rethrows -> T {
+        assertDispatch(.notOnQueue(.main))
+        let result = try ctx.performAndWait {
+            try operation(ctx)
+        }
+        if save {
+            self.save()
+        }
+        return result
     }
 }
 
@@ -125,14 +139,17 @@ extension NSManagedObjectContext {
 extension DBManager {
     func dump() {
         Task {
-            var items: [NSManagedObject]!
-            items = await AppDatabase().context.fetch(CDEngine.fetchRequest())
-            print("Engine:")
-            print((items as NSArray).description)
+            let context = AppDatabase().context
+            context.perform(save: false) { _ in
+                var items: [NSManagedObject]!
+                items = context.fetch(CDEngine.fetchRequest())
+                print("Engine:")
+                print((items as NSArray).description)
 
-            items = await AppDatabase().context.fetch(CDConversation.fetchRequest())
-            print("Conversation:")
-            print((items as NSArray).description)
+                items = context.fetch(CDConversation.fetchRequest())
+                print("Conversation:")
+                print((items as NSArray).description)
+            }
         }
     }
 }

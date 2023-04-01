@@ -14,7 +14,7 @@ struct OAModel: Codable, ModelValidate {
     private(set) var object: String = "model"
     private(set) var created: Timestamp?
     private(set) var owned_by: String?
-    private(set) var root: String?
+    private(set) var root: StringID?
     private(set) var parent: StringID?
 
     func validate() throws {

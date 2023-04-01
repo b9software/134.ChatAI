@@ -34,6 +34,8 @@ fastlane setup_project
 * https://github.com/dylanshine/openai-kit
 * https://github.com/FuturraGroup/OpenAI
 * https://console.anthropic.com/docs/api/reference
+* https://platform.openai.com/docs/models/model-endpoint-compatibility 模型支持列表
+* https://github.com/openai/tiktoken token 数量计算
 
 应用
 

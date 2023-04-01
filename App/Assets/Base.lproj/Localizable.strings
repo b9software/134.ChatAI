@@ -1,2 +1,15 @@
 
+"menu.delete" = "Delete";
+"menu.new.conversation" = "Conversation";
+"menu.new.tab" = "Window Tab";
+"menu.new.window" = "Window";
 "menu.new" = "New";
+
+"engine.create.step-verify" = "Verifying....";
+"engine.create.step-models" = "Checking models...";
+"engine.create.step-list-gpt" = "Available GPT models: %@";
+"engine.create.step-save-data" = "Save data.";
+"engine.create.step-done" = "[OK]";
+"engine.create.unrecognized-chat-warning" = "It seems that the chat content is not read properly, please check if there is a new version of B9ChatAI.";
+"engine.create.fail.hash-key" = "Unable to generate secure data for key.";
+"engine.create.fail.exist-key" = "Engine with the given key already exist.";

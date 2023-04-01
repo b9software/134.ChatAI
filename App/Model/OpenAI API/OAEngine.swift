@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// App only model
 class OAEngine: Codable {
     private enum CodingKeys: String, CodingKey {
         case keyHash = "k"
@@ -17,10 +18,12 @@ class OAEngine: Codable {
     var apiKey: String?
     private var keyHash: String?
     var models: [OAModel]?
+}
 
-    func create() -> Task<Void, Error> {
-        Task {
-
-        }
+extension OAEngine {
+    convenience init(id: StringID, models: [OAModel]) {
+        self.init()
+        self.keyHash = id
+        self.models = models
     }
 }

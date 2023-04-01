@@ -49,22 +49,17 @@ class TextField: MBTextField {
         }
     }
 
-    override var formContentType: String? {
+    override var textContentType: UITextContentType! {
         didSet {
-            guard let type = TextFieldContentType(rawValue: formContentType ?? "") else {
-                return
-            }
-            if textContentType == nil {
-                textContentType = textContentType(for: type)
-            }
+            guard let type = textContentType else { return }
             switch type {
-            case .mobile:
+            case .telephoneNumber:
                 keyboardType = .phonePad
-            case .code:
+            case .oneTimeCode:
                 keyboardType = .numberPad
-            case .userName:
+            case .username:
                 keyboardType = .namePhonePad
-            case .email:
+            case .emailAddress:
                 keyboardType = .emailAddress
             case .name:
                 keyboardType = .default
@@ -74,53 +69,18 @@ class TextField: MBTextField {
         }
     }
 
-    // swiftlint:disable:next cyclomatic_complexity
-    private func textContentType(for type: TextFieldContentType) -> UITextContentType? {
-        switch type {
-        case .mobile:
-            return .telephoneNumber
-        case .password:
-           if #available(iOS 12.0, *) {
-               if (nextField as? TextField)?.formContentType == TextFieldContentType.password2.rawValue {
-                   return .newPassword
-               }
-           } else {
-               return .password
-           }
-        case .password2:
-            if #available(iOS 12.0, *) {
-                return .newPassword
-            } else {
-                return .password
-            }
-        case .code:
-            if #available(iOS 12.0, *) {
-                return .oneTimeCode
-            }
-        case .userName:
-            return .username
-        case .email:
-            return .emailAddress
-        case .name:
-            return .name
-        case .required:
-            break
-        }
-        return nil
-    }
-
     override var isFieldVaild: Bool {
-        let vtext = _vaildFieldText().0
+        let vtext = _validFieldText().0
         return vtext?.isNotEmpty == true
     }
 
     // swiftlint:disable:next cyclomatic_complexity function_body_length
-    private func _vaildFieldText() -> (String?, String?) {
-        guard let type = TextFieldContentType(rawValue: formContentType ?? "") else {
+    private func _validFieldText() -> (String?, String?) {
+        guard let type = textContentType else {
             return (text, nil)
         }
         switch type {
-        case .mobile:
+        case .telephoneNumber:
             guard let str = text?.trimmed() else {
                 return (nil, emptyPromoteText ?? "请输入手机号")
             }
@@ -128,7 +88,7 @@ class TextField: MBTextField {
                 return (nil, "手机号格式错误")
             }
             return (str, nil)
-        case .code:
+        case .oneTimeCode:
             guard let str = text?.trimmed() else {
                 return (nil, emptyPromoteText ?? "请输入验证码")
             }
@@ -137,8 +97,8 @@ class TextField: MBTextField {
             guard let str = text, str.isNotEmpty else {
                 return (nil, emptyPromoteText ?? "请输入密码")
             }
-            if let nextInput = nextField as? MBTextField,
-                nextInput.formContentType == TextFieldContentType.password2.rawValue {
+            if let nextInput = nextField as? UITextField,
+               nextInput.textContentType == .newPassword {
                 // 下个输入框是密码验证
                 if nextInput.text?.isNotEmpty == true
                     && nextInput.text != str {
@@ -146,7 +106,7 @@ class TextField: MBTextField {
                 }
             }
             return (str, nil)
-        case .password2:
+        case .newPassword:
             guard let str = text, str.isNotEmpty else {
                 return (nil, emptyPromoteText ?? "请输入确认密码")
             }
@@ -157,12 +117,12 @@ class TextField: MBTextField {
                 return (nil, "密码长度不能超过30位")
             }
             return (str, nil)
-        case .userName:
+        case .username:
             guard let str = text, str.isNotEmpty else {
                 return (nil, emptyPromoteText ?? "请输入用户名")
             }
             return (str, nil)
-        case .email:
+        case .emailAddress:
             guard let str = text?.trimmed() else {
                 return (nil, emptyPromoteText ?? "请输入邮箱")
             }
@@ -175,11 +135,13 @@ class TextField: MBTextField {
                 return (nil, emptyPromoteText ?? "请输入姓名")
             }
             return (str, nil)
-        case .required:
-            guard let str = text?.trimmed(), str.isNotEmpty else {
-                return (nil, emptyPromoteText ?? placeholder)
-            }
-            return (str, nil)
+        // todo: required
+//            guard let str = text?.trimmed(), str.isNotEmpty else {
+//                return (nil, emptyPromoteText ?? placeholder)
+//            }
+//            return (str, nil)
+        default:
+            return (text, nil)
         } // END: switch
     }
     /// 输入为空时验证弹窗的提醒文本
@@ -191,8 +153,8 @@ class TextField: MBTextField {
     ///   - noticeWhenInvalid: 内容非法时弹出报错提示
     ///   - becomeFirstResponderWhenInvalid: 内容非法时获取键盘焦点
     /// - Returns: 合法值
-    func vaildFieldText(noticeWhenInvalid: Bool = true, becomeFirstResponderWhenInvalid: Bool = true) -> String? {
-        let (vaildText, errorMessage) = _vaildFieldText()
+    func validFieldText(noticeWhenInvalid: Bool = true, becomeFirstResponderWhenInvalid: Bool = true) -> String? {
+        let (validText, errorMessage) = _validFieldText()
         if let e = errorMessage {
             if noticeWhenInvalid {
                 AppHUD().showErrorStatus(e)
@@ -201,7 +163,7 @@ class TextField: MBTextField {
                 becomeFirstResponder()
             }
         }
-        return vaildText
+        return validText
     }
 
     override var iconImageView: UIImageView? {

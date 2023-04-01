@@ -1,0 +1,54 @@
+/* Class = "UIViewController"; title = "About"; ObjectID = "about-vc"; */
+"about-vc.title" = "关于";
+
+/* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "engine-create-cancel"; */
+"engine-create-cancel.configuration.title" = "取消";
+
+/* Class = "UICommand"; discoverabilityTitle = "Use offical OpenAI API"; ObjectID = "engine-create-type-1"; */
+"engine-create-type-1.discoverabilityTitle" = "使用 OpenAI 官方的 API";
+
+/* Class = "UICommand"; discoverabilityTitle = "Use a proxy server foward requests to OpenAI API"; ObjectID = "engine-create-type-2"; */
+"engine-create-type-2.discoverabilityTitle" = "使用第三方中转代理服务器访问 OpenAI 的接口";
+
+/* Class = "UILabel"; text = "Comming Soon"; ObjectID = "engine-create-type-proxy-comming"; */
+"engine-create-type-proxy-comming.text" = "";
+
+/* Class = "UIButton"; configuration.title = "Add new"; ObjectID = "engine-manage-add-button"; */
+"engine-manage-add-button.configuration.title" = "添加新引擎";
+
+/* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-manage-api-key-field"; */
+"engine-manage-api-key-field.placeholder" = "请输入你的 API Key";
+
+/* Class = "UILabel"; text = "⬆️ Choose a type first"; ObjectID = "engine-manage-choose-type-first"; */
+"engine-manage-choose-type-first.text" = "⬆️ 请先选择引擎类型";
+
+/* Class = "UIButton"; configuration.title = "Choose Type"; ObjectID = "engine-manage-type-no-selection"; */
+"engine-manage-type-no-selection.configuration.title" = "引擎类型";
+
+/* Class = "UIViewController"; title = "Engine Manage"; ObjectID = "engine-manage-vc"; */
+"engine-manage-vc.title" = "引擎管理";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "H8F-pB-bDg"; */
+"H8F-pB-bDg.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "About"; ObjectID = "setting-about-button"; */
+"setting-about-button.configuration.title" = "关于";
+
+/* Class = "UIButton"; configuration.title = "Configuration"; ObjectID = "setting-engine-config-button"; */
+"setting-engine-config-button.configuration.title" = "配置引擎";
+
+/* Class = "UIButton"; normalTitle = "Configuration"; ObjectID = "setting-engine-config-button"; */
+"setting-engine-config-button.normalTitle" = "配置引擎";
+
+/* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
+"setting-engine-section.text" = "AI 引擎";
+
+/* Class = "UIViewController"; title = "Setting"; ObjectID = "setting-vc"; */
+"setting-vc.title" = "设置";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ud4-ke-FZX"; */
+"ud4-ke-FZX.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vfU-GV-jZc"; */
+"vfU-GV-jZc.text" = "Label";
+

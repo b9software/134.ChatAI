@@ -119,7 +119,9 @@ extension ApplicationDelegate {
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         let result = super.canPerformAction(action, withSender: sender)
         if debug.debugResponder {
-            AppLog().debug("Responder> Can perform \(action) = \(result)")
+            if !["toolbarBack:"].contains(action.description) {
+                AppLog().debug("Responder> Can perform \(action) = \(result)")
+            }
         }
         return result
     }

@@ -10,38 +10,91 @@ import UIKit
 
 class EngineManageViewController: UIViewController {
 
-    @IBOutlet private weak var typeButton: UIButton!
-
+    @IBOutlet private weak var createView: EngineCreateView!
+    @IBOutlet private weak var listView: EngineListView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createContentView.setCollapsed(true, animated: false)
+        createView.setupViews()
+        listView.fetchRequest = CDEngine.listRequest
+    }
+}
+
+class EngineCreateView: UIView {
+    func setupViews() {
+        contentView.setCollapsed(true, animated: false)
+        typeScene.scenes = [
+            [defaultTypeContainer],
+            [apiContainer, logLabel],
+            [proxyContainer],
+        ]
+        typeScene.setActiveScene(at: 0, animated: false)
     }
 
-    @IBAction private func onTypeSelection(_ sender: Any) {
-        debugPrint(sender)
-    }
-
-    // MARK: - Create
-    @IBOutlet private weak var createHeaderView: MBCollapsibleView!
-    @IBOutlet private weak var createContentView: MBCollapsibleView!
+    @IBOutlet private weak var headerView: MBCollapsibleView!
+    @IBOutlet private weak var contentView: MBCollapsibleView!
 
     @IBAction private func onBeginCreate(_ sender: Any) {
         UIView.animate(withDuration: 0.3) { [self] in
-            createHeaderView.setCollapsed(true, animated: false)
-            createContentView.setCollapsed(false, animated: false)
-            view.layoutIfNeeded()
-        }
-        dispatch_after_seconds(1) { [self] in
-            debugPrint(createHeaderView.isCollapsed)
-            debugPrint(createHeaderView.intrinsicContentSize)
+            headerView.setCollapsed(true, animated: false)
+            contentView.setCollapsed(false, animated: false)
+            layoutIfNeeded()
         }
     }
     @IBAction private func onCancelCreate(_ sender: Any) {
         UIView.animate(withDuration: 0.3) { [self] in
-            createHeaderView.setCollapsed(false, animated: false)
-            createContentView.setCollapsed(true, animated: false)
-            view.layoutIfNeeded()
+            headerView.setCollapsed(false, animated: false)
+            contentView.setCollapsed(true, animated: false)
+            layoutIfNeeded()
         }
+//        logLabel.clear()
+        createTask?.cancel()
     }
+
+    @IBOutlet private weak var typeScene: MBSceneStackView!
+    @IBOutlet private weak var defaultTypeContainer: UIView!
+    @IBOutlet private weak var apiContainer: UIView!
+    @IBOutlet private weak var proxyContainer: UIView!
+    @IBOutlet private weak var typeButton: UIButton!
+    @IBOutlet private weak var logLabel: LogLabel!
+
+    @IBAction private func onTypeApi(_ sender: Any) {
+        typeButton.changesSelectionAsPrimaryAction = true
+        typeScene.setActiveScene(at: 1, animated: true, layoutView: superview ?? self)
+        logLabel.text = nil
+    }
+    @IBAction private func onTypeProxy(_ sender: Any) {
+        typeButton.changesSelectionAsPrimaryAction = true
+        typeScene.setActiveScene(at: 2, animated: true, layoutView: superview ?? self)
+    }
+
+    @IBOutlet private weak var apiKeyField: UITextField!
+    @IBOutlet private weak var apiKeySubmitButton: UIButton!
+    @IBAction private func onCreateApi(_ sender: UIButton) {
+        guard let key = apiKeyField.text else {
+            logLabel.text = "Please input a valid API key."
+            return
+        }
+        logLabel.clear()
+        apiKeyField.isEnabled = false
+        sender.isEnabled = false
+        sender.configuration?.showsActivityIndicator = true
+        let item = OAEngine()
+        item.apiKey = key
+        createTask = Engine.create(engine: item, logHandler: logLabel, completion: { [weak self] result in
+            self?.createDone(result: result)
+        })
+    }
+
+    private func createDone(result: Result<Engine, Error>) {
+        if result.isSuccess {
+            apiKeyField.text = nil
+            AppDatabase().container.viewContext.refreshAllObjects()
+        }
+        apiKeyField.isEnabled = true
+        apiKeySubmitButton.configuration?.showsActivityIndicator = false
+        apiKeySubmitButton.isEnabled = true
+    }
+
+    private var createTask: Task<Void, Never>?
 }

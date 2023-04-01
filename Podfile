@@ -10,6 +10,7 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 target 'B9ChatAI' do
     platform :ios, '13.0'
 
+    pod 'Alamofire'
     pod 'RFKit', :subspecs => [
         'Category/NSFileManager',
         'Category/UIScrollView+RFScrolling',

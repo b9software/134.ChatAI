@@ -12,6 +12,12 @@ extension URL {
     }
 }
 
+extension URL: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        self.init(string: value)!
+    }
+}
+
 /*
  沙箱内 URL 每次启动变化解决，参考
  https://github.com/BB9z/iOS-Project-Template/blob/4.1/App/General/Extensions/Foundation/NSURL%2BApp.h#L17-L41

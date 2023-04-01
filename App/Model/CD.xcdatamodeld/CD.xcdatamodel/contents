@@ -19,7 +19,9 @@
         </fetchIndex>
     </entity>
     <entity name="Engine" representedClassName="CDEngine" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="raw" optional="YES" attributeType="Binary"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="usedTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

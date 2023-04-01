@@ -77,4 +77,10 @@ private struct AppLogHandler: LogHandler {
     }()
 }
 
+extension LogHandler {
+    func x(_ level: Logger.Level, _ string: String) {
+        log(level: level, message: "\(string)", metadata: nil, source: #filePath, file: #fileID, function: #function, line: #line)
+    }
+}
+
 #endif

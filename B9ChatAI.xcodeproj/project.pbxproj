@@ -119,9 +119,7 @@
 		D5B49F0C1C41133A00847925 /* MBCollectionRefreshFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B49EE01C41133900847925 /* MBCollectionRefreshFooterView.xib */; };
 		D5B49F0E1C41133A00847925 /* MBListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EE41C41133A00847925 /* MBListDataSource.m */; };
 		D5B49F0F1C41133A00847925 /* MBListDateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EE61C41133A00847925 /* MBListDateItem.m */; };
-		D5B49F101C41133A00847925 /* MBTableViewArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EEA1C41133A00847925 /* MBTableViewArrayDataSource.m */; };
 		D5B49F111C41133A00847925 /* MBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EEC1C41133A00847925 /* MBTableViewDataSource.m */; };
-		D5B49F121C41133A00847925 /* MBTableHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EEE1C41133A00847925 /* MBTableHeaderFooterView.m */; };
 		D5B49F131C41133A00847925 /* MBTableListDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EF01C41133A00847925 /* MBTableListDisplayer.m */; };
 		D5B49F141C41133A00847925 /* MBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EF21C41133A00847925 /* MBTableView.m */; };
 		D5B49F161C41133A00847925 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EF61C41133A00847925 /* MBTableViewController.m */; };
@@ -133,7 +131,6 @@
 		D5B4C7B229C9D946005D4C3E /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B129C9D946005D4C3E /* SettingVC.swift */; };
 		D5B4C7B429C9D9E3005D4C3E /* GuideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B329C9D9E3005D4C3E /* GuideVC.swift */; };
 		D5B4C7B629C9DA1A005D4C3E /* ConversationListDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B529C9DA1A005D4C3E /* ConversationListDisplayer.swift */; };
-		D5B4C7B829C9DA6A005D4C3E /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B4C7B729C9DA6A005D4C3E /* Setting.storyboard */; };
 		D5B4C7BA29C9E2AF005D4C3E /* Guide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B4C7B929C9E2AF005D4C3E /* Guide.storyboard */; };
 		D5B4C7BC29C9E60D005D4C3E /* SidebarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7BB29C9E60D005D4C3E /* SidebarVC.swift */; };
 		D5B884B6250EEC53001CDBCF /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B884B5250EEC53001CDBCF /* TagView.swift */; };
@@ -198,6 +195,15 @@
 		D5F9F47F208D921200427201 /* Date+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9F47D208D921200427201 /* Date+App.swift */; };
 		D5F9F480208D921200427201 /* String+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F9F47E208D921200427201 /* String+App.swift */; };
 		D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F9F485208DC26600427201 /* MBFormFieldVerifyControl.m */; };
+		D5FA7D5529D80CDE0011DA4E /* LogLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5429D80CDE0011DA4E /* LogLabel.swift */; };
+		D5FA7D5729D813B30011DA4E /* OANetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5629D813B30011DA4E /* OANetwork.swift */; };
+		D5FA7D5929D8140E0011DA4E /* Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5829D8140E0011DA4E /* Current.swift */; };
+		D5FA7D5B29D827380011DA4E /* OAChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5A29D827380011DA4E /* OAChatResponse.swift */; };
+		D5FA7D5D29D86A9D0011DA4E /* MBTableHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5C29D86A9D0011DA4E /* MBTableHeaderFooterView.swift */; };
+		D5FA7D5F29D8716A0011DA4E /* MBTableViewArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D5E29D8716A0011DA4E /* MBTableViewArrayDataSource.swift */; };
+		D5FA7D6229D87BD90011DA4E /* EngineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D6129D87BD90011DA4E /* EngineListView.swift */; };
+		D5FA7D6429D881400011DA4E /* EngineCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA7D6329D881400011DA4E /* EngineCellView.swift */; };
+		D5FA7D6529D955550011DA4E /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5FA7D6729D955550011DA4E /* Setting.storyboard */; };
 		D5FCB68E23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FCB68D23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift */; };
 /* End PBXBuildFile section */
 
@@ -379,12 +385,8 @@
 		D5B49EE41C41133A00847925 /* MBListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBListDataSource.m; sourceTree = "<group>"; };
 		D5B49EE51C41133A00847925 /* MBListDateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBListDateItem.h; sourceTree = "<group>"; };
 		D5B49EE61C41133A00847925 /* MBListDateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBListDateItem.m; sourceTree = "<group>"; };
-		D5B49EE91C41133A00847925 /* MBTableViewArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewArrayDataSource.h; sourceTree = "<group>"; };
-		D5B49EEA1C41133A00847925 /* MBTableViewArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewArrayDataSource.m; sourceTree = "<group>"; };
 		D5B49EEB1C41133A00847925 /* MBTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewDataSource.h; sourceTree = "<group>"; };
 		D5B49EEC1C41133A00847925 /* MBTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewDataSource.m; sourceTree = "<group>"; };
-		D5B49EED1C41133A00847925 /* MBTableHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableHeaderFooterView.h; sourceTree = "<group>"; };
-		D5B49EEE1C41133A00847925 /* MBTableHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableHeaderFooterView.m; sourceTree = "<group>"; };
 		D5B49EEF1C41133A00847925 /* MBTableListDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableListDisplayer.h; sourceTree = "<group>"; };
 		D5B49EF01C41133A00847925 /* MBTableListDisplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableListDisplayer.m; sourceTree = "<group>"; };
 		D5B49EF11C41133A00847925 /* MBTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableView.h; sourceTree = "<group>"; };
@@ -402,7 +404,6 @@
 		D5B4C7B129C9D946005D4C3E /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		D5B4C7B329C9D9E3005D4C3E /* GuideVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideVC.swift; sourceTree = "<group>"; };
 		D5B4C7B529C9DA1A005D4C3E /* ConversationListDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListDisplayer.swift; sourceTree = "<group>"; };
-		D5B4C7B729C9DA6A005D4C3E /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		D5B4C7B929C9E2AF005D4C3E /* Guide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guide.storyboard; sourceTree = "<group>"; };
 		D5B4C7BB29C9E60D005D4C3E /* SidebarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarVC.swift; sourceTree = "<group>"; };
 		D5B884B2250E5363001CDBCF /* UI Gallery.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "UI Gallery.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -500,6 +501,16 @@
 		D5F9F47E208D921200427201 /* String+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+App.swift"; sourceTree = "<group>"; };
 		D5F9F484208DC26500427201 /* MBFormFieldVerifyControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFormFieldVerifyControl.h; sourceTree = "<group>"; };
 		D5F9F485208DC26600427201 /* MBFormFieldVerifyControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFormFieldVerifyControl.m; sourceTree = "<group>"; };
+		D5FA7D5429D80CDE0011DA4E /* LogLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLabel.swift; sourceTree = "<group>"; };
+		D5FA7D5629D813B30011DA4E /* OANetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OANetwork.swift; sourceTree = "<group>"; };
+		D5FA7D5829D8140E0011DA4E /* Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Current.swift; sourceTree = "<group>"; };
+		D5FA7D5A29D827380011DA4E /* OAChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAChatResponse.swift; sourceTree = "<group>"; };
+		D5FA7D5C29D86A9D0011DA4E /* MBTableHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTableHeaderFooterView.swift; sourceTree = "<group>"; };
+		D5FA7D5E29D8716A0011DA4E /* MBTableViewArrayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTableViewArrayDataSource.swift; sourceTree = "<group>"; };
+		D5FA7D6129D87BD90011DA4E /* EngineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineListView.swift; sourceTree = "<group>"; };
+		D5FA7D6329D881400011DA4E /* EngineCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineCellView.swift; sourceTree = "<group>"; };
+		D5FA7D6629D955550011DA4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setting.storyboard; sourceTree = "<group>"; };
+		D5FA7D6929D955590011DA4E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Setting.strings"; sourceTree = "<group>"; };
 		D5FCB68D23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MBFormFieldVerifyControl+App.swift"; sourceTree = "<group>"; };
 		F33DAC683EB1B2B2C8A33EEE /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -791,8 +802,10 @@
 		D531420029D702FA004EDCCA /* OpenAI API */ = {
 			isa = PBXGroup;
 			children = (
+				D5FA7D5A29D827380011DA4E /* OAChatResponse.swift */,
 				D531420329D72422004EDCCA /* OAEngine.swift */,
 				D531420129D70327004EDCCA /* OAModel.swift */,
+				D5FA7D5629D813B30011DA4E /* OANetwork.swift */,
 			);
 			path = "OpenAI API";
 			sourceTree = "<group>";
@@ -920,6 +933,7 @@
 				D55959D120AB9F930019D733 /* MessageManager */,
 				D533D1462743D0C2008B923F /* Networking */,
 				D5170CE8191B327A000C7D45 /* PushManager */,
+				D5FA7D5829D8140E0011DA4E /* Current.swift */,
 				D5542F151918B83400831016 /* MBApp.swift */,
 				D569C9E521AE906900211E36 /* README.md */,
 			);
@@ -1127,8 +1141,7 @@
 				D5B49EF71C41133A00847925 /* PullToFetch */,
 				D5DB4C17241DD71300832A0A /* MBEntitiesTableView.h */,
 				D5DB4C18241DD71300832A0A /* MBEntitiesTableView.m */,
-				D5B49EED1C41133A00847925 /* MBTableHeaderFooterView.h */,
-				D5B49EEE1C41133A00847925 /* MBTableHeaderFooterView.m */,
+				D5FA7D5C29D86A9D0011DA4E /* MBTableHeaderFooterView.swift */,
 				D5B49EEF1C41133A00847925 /* MBTableListDisplayer.h */,
 				D5B49EF01C41133A00847925 /* MBTableListDisplayer.m */,
 				D5B49EF11C41133A00847925 /* MBTableView.h */,
@@ -1142,10 +1155,9 @@
 		D5B49EE81C41133A00847925 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				D5B49EE91C41133A00847925 /* MBTableViewArrayDataSource.h */,
-				D5B49EEA1C41133A00847925 /* MBTableViewArrayDataSource.m */,
 				D5B49EEB1C41133A00847925 /* MBTableViewDataSource.h */,
 				D5B49EEC1C41133A00847925 /* MBTableViewDataSource.m */,
+				D5FA7D5E29D8716A0011DA4E /* MBTableViewArrayDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -1177,9 +1189,10 @@
 		D5B4C7AF29C9D8EE005D4C3E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D5FA7D6029D87BC30011DA4E /* Engine */,
 				D51B7FE929CFD49200DD825C /* AboutVC.swift */,
 				D5D006D129D273F50063B366 /* EngineManageVC.swift */,
-				D5B4C7B729C9DA6A005D4C3E /* Setting.storyboard */,
+				D5FA7D6729D955550011DA4E /* Setting.storyboard */,
 				D5B4C7B129C9D946005D4C3E /* SettingVC.swift */,
 			);
 			path = Settings;
@@ -1314,6 +1327,7 @@
 		D5EE51C72043F613009148B3 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				D5FA7D5429D80CDE0011DA4E /* LogLabel.swift */,
 				D5C3CBF1217EEEA20097CCD9 /* MBBadgeLabel.h */,
 				D5C3CBF2217EEEA20097CCD9 /* MBBadgeLabel.m */,
 				D5C3CBF7217EF0A10097CCD9 /* MBTextCountLabel.h */,
@@ -1403,6 +1417,15 @@
 				D546F50F2932D2EC00EB5F04 /* swift-log */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		D5FA7D6029D87BC30011DA4E /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				D5FA7D6129D87BD90011DA4E /* EngineListView.swift */,
+				D5FA7D6329D881400011DA4E /* EngineCellView.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1520,7 +1543,7 @@
 				D5B49F181C41133A00847925 /* MBRefreshFooterView.xib in Resources */,
 				D5B49F1A1C41133A00847925 /* MBRefreshHeaderView.xib in Resources */,
 				D5031A2625BEBB7700C2849E /* Picker.storyboard in Resources */,
-				D5B4C7B829C9DA6A005D4C3E /* Setting.storyboard in Resources */,
+				D5FA7D6529D955550011DA4E /* Setting.storyboard in Resources */,
 				D5EEE5DD29C8A66B006759DE /* Toolbar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1695,6 +1718,7 @@
 				D5B4C7B629C9DA1A005D4C3E /* ConversationListDisplayer.swift in Sources */,
 				D584C78526F03768004E434B /* CoreAnimation+App.swift in Sources */,
 				D50319D425BE518C00C2849E /* CornerRadius.swift in Sources */,
+				D5FA7D5929D8140E0011DA4E /* Current.swift in Sources */,
 				D5F9F47F208D921200427201 /* Date+App.swift in Sources */,
 				D53446032592481400F5FD80 /* Date+Server.swift in Sources */,
 				D54F0E4F2199A56E003370F4 /* DateFormatter+App.swift in Sources */,
@@ -1716,8 +1740,10 @@
 				D5B8A39E251221A300C84CB1 /* IdentifierEquatable.swift in Sources */,
 				D544A39E197D1E8600C65604 /* JSONValueTransformer+App.m in Sources */,
 				D51B800229D06D6A00DD825C /* L10n.swift in Sources */,
+				D5FA7D6229D87BD90011DA4E /* EngineListView.swift in Sources */,
 				D5031C3C25C04C9200C2849E /* ListStateView.swift in Sources */,
 				D533C4F42592370800590FBA /* Logger.swift in Sources */,
+				D5FA7D5529D80CDE0011DA4E /* LogLabel.swift in Sources */,
 				D5031C2625C0445500C2849E /* MBAdaptiveStackView.swift in Sources */,
 				D5542F161918B83400831016 /* MBApp.swift in Sources */,
 				D569C9EB21AE906900211E36 /* MBAudioRecorder.m in Sources */,
@@ -1774,10 +1800,10 @@
 				D5EE521A2043F693009148B3 /* MBSingleSectionCollectionView.m in Sources */,
 				D53141FD29D6DB14004EDCCA /* MBStateMachineView.swift in Sources */,
 				D588308F20CACB33002030C4 /* MBSwift.swift in Sources */,
-				D5B49F121C41133A00847925 /* MBTableHeaderFooterView.m in Sources */,
+				D5FA7D5D29D86A9D0011DA4E /* MBTableHeaderFooterView.swift in Sources */,
+				D5FA7D5F29D8716A0011DA4E /* MBTableViewArrayDataSource.swift in Sources */,
 				D5B49F131C41133A00847925 /* MBTableListDisplayer.m in Sources */,
 				D5B49F141C41133A00847925 /* MBTableView.m in Sources */,
-				D5B49F101C41133A00847925 /* MBTableViewArrayDataSource.m in Sources */,
 				D5B49F161C41133A00847925 /* MBTableViewController.m in Sources */,
 				D5B49F111C41133A00847925 /* MBTableViewDataSource.m in Sources */,
 				D5B49F1B1C41133A00847925 /* MBTableViewPullToFetchControl.m in Sources */,
@@ -1792,12 +1818,15 @@
 				D5EE51192043DAA2009148B3 /* NSArray+App.m in Sources */,
 				D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */,
 				D501844E20F865D3009481D4 /* Number+App.swift in Sources */,
+				D5FA7D5B29D827380011DA4E /* OAChatResponse.swift in Sources */,
 				D531420429D72422004EDCCA /* OAEngine.swift in Sources */,
 				D531420229D70327004EDCCA /* OAModel.swift in Sources */,
+				D5FA7D5729D813B30011DA4E /* OANetwork.swift in Sources */,
 				D50CFA6525C90F22003329EE /* ObjectPool.swift in Sources */,
 				D5031C2E25C044FF00C2849E /* ResizeObservableView.swift in Sources */,
 				D558FDF52046913B00A01EE6 /* RootViewController.swift in Sources */,
 				D5EEE5A529C73FF3006759DE /* SceneDelegate.swift in Sources */,
+				D5FA7D6429D881400011DA4E /* EngineCellView.swift in Sources */,
 				D5B9669C2501CFCB009D77A0 /* SearchHighlight.swift in Sources */,
 				D5B1906D2404AFDC0076CD61 /* SearchTextField.swift in Sources */,
 				D5B4C7B229C9D946005D4C3E /* SettingVC.swift in Sources */,
@@ -1871,6 +1900,15 @@
 				D51B7FF629D0667400DD825C /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D5FA7D6729D955550011DA4E /* Setting.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5FA7D6629D955550011DA4E /* Base */,
+				D5FA7D6929D955590011DA4E /* zh-Hans */,
+			);
+			name = Setting.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

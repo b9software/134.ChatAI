@@ -35,7 +35,6 @@ class RootViewController: B9RootViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,5 +93,9 @@ class RootViewController: B9RootViewController {
 
     @IBAction private func gotoSetting(_ sender: Any) {
         navigator.setViewControllers([SettingViewController.newFromStoryboard()], animated: false)
+    }
+
+    @IBAction func orderFrontStandardAboutPanel(_ sender: Any) {
+        navigator.pushViewController(AboutViewController.newFromStoryboard(), animated: true)
     }
 }

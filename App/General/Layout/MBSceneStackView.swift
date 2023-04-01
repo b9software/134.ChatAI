@@ -22,9 +22,7 @@ import UIKit
  */
 class MBSceneStackView: UIStackView {
 
-    var activeSceneIndex: Int {
-        return _activeSceneIndex
-    }
+    private(set) var activeSceneIndex = 0
 
     var scenes = [[UIView]]() {
         didSet {
@@ -36,15 +34,13 @@ class MBSceneStackView: UIStackView {
 
     var onSceneChanged: ((MBSceneStackView, Int) -> Void)?
 
-    private var _activeSceneIndex = 0
-
-    func setActiveScene(at index: Int, animated: Bool) {
+    func setActiveScene(at index: Int, animated: Bool, layoutView: UIView? = nil) {
         guard index < scenes.count else { return }
 
         let sceneNeedHide = scenes[activeSceneIndex]
         let sceneNeedShow = scenes[index]
         let transform: CGFloat = (activeSceneIndex < index) ? 100 : -100
-        _activeSceneIndex = index
+        activeSceneIndex = index
 
         if let onSceneChanged = onSceneChanged {
             onSceneChanged(self, index)
@@ -72,7 +68,7 @@ class MBSceneStackView: UIStackView {
                 $0.alpha = 0
                 $0.transform = CGAffineTransform(translationX: transform, y: 0)
             }
-            self.layoutIfNeeded()
+            (layoutView ?? self).layoutIfNeeded()
 
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
                 sceneNeedShow.forEach {
@@ -91,4 +87,3 @@ class MBSceneStackView: UIStackView {
         setActiveScene(at: activeSceneIndex - 1, animated: animated)
     }
 }
-

@@ -9,4 +9,6 @@
 enum FileURL {
     // swiftlint:disable:next force_try
     static var supportDirectory: URL = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+
+    static var database: URL = supportDirectory.appendingPathComponent("app.db")
 }

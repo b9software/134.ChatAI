@@ -41,7 +41,7 @@ extension MBFormFieldVerifyControl {
         guard let fields = textFields as? [TextField] else { return }
         for aField in fields {
             if validationSkipsHiddenFields && !aField.isVisible { continue }
-            guard aField.vaildFieldText(noticeWhenInvalid: true, becomeFirstResponderWhenInvalid: true) != nil else {
+            guard aField.validFieldText(noticeWhenInvalid: true, becomeFirstResponderWhenInvalid: true) != nil else {
                 return
             }
         }

@@ -12,8 +12,9 @@ enum ApplicationMenu {
     static func build(_ builder: UIMenuBuilder) {
         builder.remove(menu: .format)
         builder.replace(menu: .newScene, with: UIMenu(title: L.Menu.new, children: [
-            UIKeyCommand(title: "Conversation", action: #selector(ApplicationDelegate.newConversation), input: "N", modifierFlags: .command, discoverabilityTitle: "New Conversation"),
-            UIKeyCommand(title: "Window", action: #selector(ApplicationDelegate.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
+            UIKeyCommand(title: L.Menu.New.conversation, action: #selector(ApplicationDelegate.newConversation), input: "N", modifierFlags: .command, discoverabilityTitle: "New Conversation"),
+            UIKeyCommand(title: L.Menu.New.tab, action: #selector(NSStandardActions.newWindowForTab(_:)), input: "T", modifierFlags: [.command], discoverabilityTitle: "New Window Tab"),
+            UIKeyCommand(title: L.Menu.New.window, action: #selector(ApplicationDelegate.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
         ]))
         ApplicationDelegate().debug.setupMenu(builder: builder)
     }
@@ -33,4 +34,9 @@ private extension ApplicationDelegate {
             //
         }
     }
+}
+
+
+final class NSStandardActions {
+    @IBAction func newWindowForTab(_ sender: Any?) {}
 }

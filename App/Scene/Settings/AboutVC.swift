@@ -7,7 +7,9 @@
 
 import Foundation
 
-class AboutViewController: UIViewController {
+class AboutViewController: UIViewController, StoryboardCreation {
 // https://openai.com/policies/privacy-policy
 // https://openai.com/policies/terms-of-use
+
+    static var storyboardID: StoryboardID { .setting }
 }
