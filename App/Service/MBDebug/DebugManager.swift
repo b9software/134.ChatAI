@@ -13,12 +13,13 @@ final class DebugManager {
 #if DEBUG
     func setupMenu(builder: UIMenuBuilder) {
         let menu = UIMenu(title: "Developer", children: [
-            UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu(_:))),
+            UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
             UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
             UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
+            UICommand(title: "Destroy Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
             UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
-            UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch(_:)), state: debugSystemUI ? .on : .off),
-            UICommand(title: "Debug Responder", action: #selector(ApplicationDelegate.debugResponderSwitch(_:)), state: debugResponder ? .on : .off),
+            UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
+            UICommand(title: "Debug Responder", action: #selector(ApplicationDelegate.debugResponderSwitch), state: debugResponder ? .on : .off),
         ])
         builder.insertSibling(menu, afterMenu: .window)
     }
@@ -34,20 +35,22 @@ final class DebugManager {
     }
 #else
     func setupMenu(builder: UIMenuBuilder) {}
+
+    let debugResponder = false
 #endif
 }
 
 #if DEBUG
-private extension ApplicationDelegate {
-    @IBAction func debugRebuildMenu(_ sender: Any) {
+fileprivate extension ApplicationDelegate {
+    @objc func debugRebuildMenu(_ sender: Any) {
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @IBAction func onTest2(_ sender: Any) {
+    @objc func onTest2(_ sender: Any) {
 //        debugPrint(UIApplication.shared.connectedScenes)
     }
 
-    @IBAction func debugWindow(_ sender: Any) {
+    @objc func debugWindow(_ sender: Any) {
         print("Windows: \(UIApplication.shared.windows)")
         print("Key win: \(UIApplication.shared.keyWindow)")
         print("Scenes: \(UIApplication.shared.connectedScenes)")
@@ -57,18 +60,24 @@ private extension ApplicationDelegate {
 //        }
     }
 
-    @IBAction func debugSystemUISwitch(_ sender: Any) {
+    @objc func debugSystemUISwitch(_ sender: Any) {
         debug.debugSystemUI.toggle()
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @IBAction func debugResponderSwitch(_ sender: Any) {
+    @objc func debugResponderSwitch(_ sender: Any) {
         debug.debugResponder.toggle()
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @IBAction func debugDumpDatabase(_ sender: Any) {
-        AppDatabase().dump()
+    @objc func debugDumpDatabase(_ sender: Any) {
+        Current.database.dump()
+    }
+
+    @objc func debugDestroyConversation(_ sender: Any) {
+        let ctx = Current.database.viewContext
+        try? ctx.fetch(CDConversation.fetchRequest()).forEach { ctx.delete($0) }
+        ctx.trySave()
     }
 }
 #endif

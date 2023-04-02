@@ -59,12 +59,10 @@ class EngineCreateView: UIView {
     @IBOutlet private weak var logLabel: LogLabel!
 
     @IBAction private func onTypeApi(_ sender: Any) {
-        typeButton.changesSelectionAsPrimaryAction = true
         typeScene.setActiveScene(at: 1, animated: true, layoutView: superview ?? self)
         logLabel.text = nil
     }
     @IBAction private func onTypeProxy(_ sender: Any) {
-        typeButton.changesSelectionAsPrimaryAction = true
         typeScene.setActiveScene(at: 2, animated: true, layoutView: superview ?? self)
     }
 
@@ -89,7 +87,7 @@ class EngineCreateView: UIView {
     private func createDone(result: Result<Engine, Error>) {
         if result.isSuccess {
             apiKeyField.text = nil
-            AppDatabase().container.viewContext.refreshAllObjects()
+            Current.database.container.viewContext.refreshAllObjects()
         }
         apiKeyField.isEnabled = true
         apiKeySubmitButton.configuration?.showsActivityIndicator = false

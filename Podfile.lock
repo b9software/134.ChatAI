@@ -2,7 +2,6 @@ PODS:
   - AFNetworking/Reachability (4.0.1)
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
-  - Alamofire (5.6.4)
   - JSONModel (1.8.0)
   - MBAppKit/Button (0.13.0):
     - RFInitializing
@@ -219,7 +218,6 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - Alamofire
   - MBAppKit/Button (from `https://github.com/RFUI/MBAppKit.git`)
   - MBAppKit/Input (from `https://github.com/RFUI/MBAppKit.git`)
   - MBAppKit/Worker (from `https://github.com/RFUI/MBAppKit.git`)
@@ -248,7 +246,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
-    - Alamofire
     - JSONModel
     - RFAlpha
     - RFAPI
@@ -271,7 +268,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
-  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   MBAppKit: be40a93b7463347c6b12c11ccee79cfa89c18e64
   RFAlpha: b903f1725ccadee2226ab34fd0b9009cffa364d2
@@ -284,6 +280,6 @@ SPEC CHECKSUMS:
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: a5262c72b7819320f2dc1e96b4e0348462fdb838
+PODFILE CHECKSUM: a490b7e0bf095328faeb1470c1acadc87c438718
 
 COCOAPODS: 1.12.0

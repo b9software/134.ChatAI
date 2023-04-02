@@ -28,6 +28,10 @@ pod install
 fastlane setup_project
 ```
 
+资料：
+
+* https://github.com/mhdhejazi/Catalyst-AppKit mac 插件
+
 接口
 
 * https://github.com/MacPaw/OpenAI 不支持流
@@ -41,6 +45,15 @@ fastlane setup_project
 
 * https://github.com/chenxi92/ChatGPT
 * https://github.com/Yoddikko/yoddChatGPT
+
+Chrome插件Web Chat GPT，可让你网络联通并实时搜索ChatGPT
+a i p r m是一款Chrome插件，提供预设好的各种prompt；
+可在使用ChatGPT时提供提高回答质量的推荐
+Charge Show Cut 类似于a i p r m，也是按类别分好的提示词，从而帮助构建更好的prompt；
+小插件 Chi Hub 固定在你的浏览器、支持提取和总结文本并进行语法检查、翻译等操作；
+Open AI Translator 提供高质量的华词翻译，配有API。
+PDF助手 Chi PDF，可协助在文献中搜索关键内容，并快速进行对此的总结。
+Software Client 为Windows，Mac以及Linux系统提供了额外的ChatGPT客户端，包含Awesome Tragibility Prompt的指令；
 
 
 ## License

@@ -8,13 +8,10 @@
 @testable import B9ChatAI
 import XCTest
 
-class CoreDataTests: XCTestCase {
-    let ctx = AppDatabase().container.viewContext
+class CoreDataTests: TestCase {
+    override class var mockResetPoint: TestCase.ResetPoint { [.setUpClass, .tearDownClass] }
 
-    override func tearDown() {
-        super.tearDown()
-        ctx.reset()
-    }
+    let ctx = Current.database.container.viewContext
 
     func testConversationMessageRelationshipDelete() throws {
         let conv = CDConversation(context: ctx)
@@ -41,5 +38,14 @@ class CoreDataTests: XCTestCase {
         messages = try ctx.fetch(CDMessage.fetchRequest())
         XCTAssert(messages.count == 0)
         XCTAssert(conv.messages?.count == 0)
+    }
+
+    func testPredicateWithBadKey() throws {
+        XCTExpectFailure()
+        ctx.createEngine(id: "t1")
+        let request = CDEngine.fetchRequest()
+        request.predicate = NSPredicate(format: "bad-key = %@", "t1")
+        _ = try ctx.fetch(request)
+        XCTFail("Should not execute here")
     }
 }

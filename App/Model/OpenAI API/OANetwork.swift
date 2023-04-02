@@ -6,7 +6,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 class OANetwork {
     var baseURL: URL = "https://api.openai.com/"

@@ -7,7 +7,7 @@ import B9AssociatedObject
 /**
  添加到 model 上支持搜索高亮
 
- 基于 NSObject 的对象有自动生成，只需要声明协议即可
+ 基于 class 的对象有自动生成，只需要声明协议即可
  */
 protocol EntitySearchHighlight: AnyObject {
     /// 当前的搜索关键字
@@ -15,7 +15,7 @@ protocol EntitySearchHighlight: AnyObject {
 }
 
 private let association = AssociatedObject<String>()
-extension EntitySearchHighlight where Self: NSObject {
+extension EntitySearchHighlight where Self: AnyObject {
     var searchingKeyword: String? {
         get { association[self] }
         set { association[self] = newValue }
@@ -33,7 +33,7 @@ extension UILabel {
         }
         let atts = NSMutableAttributedString(string: aText)
         let nsRange = NSRange(range, in: aText)
-        let highlightColor = window?.tintColor ?? UIColor(named: "primary")!
+        let highlightColor = window?.tintColor ?? .systemBlue
         atts.setAttributes([.foregroundColor: highlightColor], range: nsRange)
         attributedText = atts
     }

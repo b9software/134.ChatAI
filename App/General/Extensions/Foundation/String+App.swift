@@ -41,6 +41,18 @@ extension String {
         return ""
     }
 
+    //! REF: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/TextLayout/Tasks/CountLines.html
+    var numberOfHardLineBreaks: Int {
+        var numberOfLines = 0
+        var index = startIndex
+        while index < endIndex {
+            let lineRange = lineRange(for: index..<index)
+            index = lineRange.upperBound
+            numberOfLines += 1
+        }
+        return numberOfLines
+    }
+
     // @MBDependency:2
     /// 手机号/电话号打码
     /// 支持任意长度

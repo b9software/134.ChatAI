@@ -1,3 +1,12 @@
+/* Class = "UIButton"; normalTitle = "OpenAI Privacy Policy"; ObjectID = "about-openai-privacy-button"; */
+"about-openai-privacy-button.normalTitle" = "OpenAI 隐私政策";
+
+/* Class = "UIButton"; normalTitle = "OpenAI Terms of Use"; ObjectID = "about-openai-term"; */
+"about-openai-term.normalTitle" = "OpenAI 使用条款";
+
+/* Class = "UILabel"; text = "Source code will be open in the future"; ObjectID = "about-source-notice"; */
+"about-source-notice.text" = "源代码将在未来开放";
+
 /* Class = "UIViewController"; title = "About"; ObjectID = "about-vc"; */
 "about-vc.title" = "关于";
 
@@ -9,9 +18,6 @@
 
 /* Class = "UICommand"; discoverabilityTitle = "Use a proxy server foward requests to OpenAI API"; ObjectID = "engine-create-type-2"; */
 "engine-create-type-2.discoverabilityTitle" = "使用第三方中转代理服务器访问 OpenAI 的接口";
-
-/* Class = "UILabel"; text = "Comming Soon"; ObjectID = "engine-create-type-proxy-comming"; */
-"engine-create-type-proxy-comming.text" = "";
 
 /* Class = "UIButton"; configuration.title = "Add new"; ObjectID = "engine-manage-add-button"; */
 "engine-manage-add-button.configuration.title" = "添加新引擎";

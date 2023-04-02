@@ -8,6 +8,24 @@
  https://opensource.org/licenses/MIT
  */
 
+#if canImport(CoreData)
+import CoreData
+
+extension NSFetchedResultsChangeType: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        switch self {
+        case .insert: return ".insert"
+        case .delete: return ".delete"
+        case .move: return ".move"
+        case .update: return ".update"
+        @unknown default: return ".unknown(\(rawValue))"
+        }
+    }
+}
+
+#endif
+
+#if canImport(UIKey)
 import UIKit
 
 extension UIGestureRecognizer.State: CustomDebugStringConvertible {
@@ -24,3 +42,5 @@ extension UIGestureRecognizer.State: CustomDebugStringConvertible {
         }
     }
 }
+
+#endif

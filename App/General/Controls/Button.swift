@@ -74,11 +74,14 @@ class Button: MBButton {
 
     override func updateConfiguration() {
         super.updateConfiguration()
+        if let image = image(for: state) {
+            configuration?.image = image
+        }
         if state == .disabled {
             setBackground(color: Asset.Button.stdBase.color.withAlphaComponent(0.5))
             return
         }
-        if state == .highlighted {
+        if state == .highlighted || state == .selected {
             setBackground(color: tintColor)
             return
         }

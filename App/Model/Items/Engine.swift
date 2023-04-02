@@ -30,7 +30,7 @@ class Engine {
         }
     }
 
-    init(entity: CDEngine) throws {
+    private init(entity: CDEngine) throws {
         guard let type = EType(rawValue: entity.type ?? "") else {
             throw AppError.message("Engine> init with invalid type: \(entity.type ?? "nil").")
         }
@@ -42,15 +42,36 @@ class Engine {
                 throw AppError.message("Engine> init with nil raw.")
             }
             oaEngine = try OAEngine.decode(raw)
+            if let id = entity.id {
+                oaEngine.apiKey = try B9Keychain.string(account: id)
+            }
         case .openAIProxy:
             fatalError("todo")
         }
     }
 
-    init(type: EType, oaEngine: OAEngine, entity: CDEngine) {
+    private init(type: EType, oaEngine: OAEngine, entity: CDEngine) {
         self.type = type
         self.oaEngine = oaEngine
         self.entity = entity
+    }
+
+    static func from(entity: CDEngine) -> Engine? {
+        entity.access { _ in
+            guard let id = entity.id else {
+                assert(false)
+                return nil
+            }
+            if let old = enginePool[id] { return old }
+            do {
+                let new = try Engine(entity: entity)
+                enginePool[id] = new
+                return new
+            } catch {
+                AppLog().critical("Unable load engine from db: \(error).")
+                return nil
+            }
+        }
     }
 
     static func create(engine: OAEngine, logHandler log: LogHandler?, completion: @escaping (Result<Engine, Error>) -> Void) -> Task<Void, Never> {
@@ -99,9 +120,10 @@ class Engine {
             throw AppError.message(L.Engine.Create.Fail.existKey)
         }
         try B9Keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
-        let oaEngine = OAEngine(id: id, models: models)
+        let oaEngine = OAEngine(models: models)
+        oaEngine.apiKey = key
         let oaData = try oaEngine.encode()
-        let item = AppDatabase().context.perform {
+        let item = Current.database.context.perform {
             let entity = CDEngine(context: $0)
             entity.id = id
             entity.name = key.keyMasked()
@@ -112,5 +134,16 @@ class Engine {
             return Engine(type: .openAI, oaEngine: oaEngine, entity: entity)
         }
         return item
+    }
+}
+
+extension Engine {
+    var isValid: Bool {
+        switch type {
+        case .openAI:
+            return oaEngine.apiKey?.isNotEmpty == true
+        case .openAIProxy:
+            return false
+        }
     }
 }

@@ -49,6 +49,12 @@ extension UserDefaults {
         get { bool(forKey: #function) }
         set { set(newValue, forKey: #function) }
     }
+
+    /// 颜色主题，0 system, 1 light, 2 dark
+    var preferredTheme: Int {
+        get { integer(forKey: #function) }
+        set { set(newValue, forKey: #function) }
+    }
 }
 
 // MARK: - 存储类型支持

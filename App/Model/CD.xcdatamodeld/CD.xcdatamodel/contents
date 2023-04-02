@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Conversation" representedClassName="CDConversation" syncable="YES" codeGenerationType="class">
+        <attribute name="archiveTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="cSetting" optional="YES" attributeType="Binary"/>
         <attribute name="deleteTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eSetting" optional="YES" attributeType="Binary"/>
-        <attribute name="isArchived" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isTop" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="sortIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shortCut" optional="YES" attributeType="String"/>
         <attribute name="subType" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" attributeType="String" defaultValueString=""/>
@@ -16,6 +17,9 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="conversation" inverseEntity="Message"/>
         <fetchIndex name="byTime">
             <fetchIndexElement property="lastTime" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byID">
+            <fetchIndexElement property="id" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Engine" representedClassName="CDEngine" syncable="YES" codeGenerationType="class">

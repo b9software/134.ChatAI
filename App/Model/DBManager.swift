@@ -7,11 +7,6 @@
 
 import CoreData
 
-/// 数据库单例
-func AppDatabase() -> DBManager {  // swiftlint:disable:this identifier_name
-    DBManager.shared ?? DBManager.setup()
-}
-
 /**
  注意：在远端修改后 UI 与内存中的状态同步
 
@@ -22,7 +17,6 @@ func AppDatabase() -> DBManager {  // swiftlint:disable:this identifier_name
 class DBManager {
     typealias CDContainer = NSPersistentCloudKitContainer
 
-    fileprivate static var shared: DBManager?
     static var loadedModel: NSManagedObjectModel?
 
     @discardableResult
@@ -34,9 +28,12 @@ class DBManager {
             container = CDContainer(name: "CD")
         }
         let useCloud = UserDefaults.standard.iCloudEnable
-        let description = NSPersistentStoreDescription(url: FileURL.database)
+        let description: NSPersistentStoreDescription
         if test {
+            description = .init()
             description.type = NSInMemoryStoreType
+        } else {
+            description = .init(url: FileURL.database)
         }
         description.configuration = useCloud ? "Cloud" : "Default"
         container.persistentStoreDescriptions = [description]
@@ -58,14 +55,16 @@ class DBManager {
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         let instance = DBManager(container: container)
-        shared = instance
         loadedModel = container.managedObjectModel
         return instance
     }
 
-//    let dbQueue = DispatchQueue(label: "app.database", qos: .userInitiated)
     let container: CDContainer
     let context: CDContext
+
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
 
     init(container: CDContainer) {
         self.container = container
@@ -127,29 +126,63 @@ class CDContext {
 extension NSManagedObjectContext {
     func trySave() {
         guard hasChanges else { return }
-        do {
+        Do.try {
             try save()
-        } catch {
-            AppLog().error("\(error)")
         }
     }
 }
 
+protocol CDEntityAccessing {
+    var managedObjectContext: NSManagedObjectContext? { get }
+}
+extension CDEntityAccessing {
+    /// For safely accessing the properties of an NSManagedObject object.
+    ///
+    /// CoreData objects are not thread-safe.
+    /// This method perform the given block on the object context queue.
+    ///
+    /// You can write like that:
+    /// ```
+    /// let title = entity.access { $0.title }
+    /// ```
+    func access<T>(_ block: (Self) -> T) -> T {
+        guard let ctx = managedObjectContext else {
+            fatalError("\(self) must create with object context")
+        }
+        var result: T!
+        ctx.performAndWait {
+            result = block(self)
+        }
+        return result
+    }
+
+    /// Make asynchronous changes then save safely
+    func modify(_ block: @escaping (Self, NSManagedObjectContext) -> Void) {
+        guard let ctx = managedObjectContext else {
+            fatalError("\(self) must create with object context")
+        }
+        ctx.perform {
+            block(self, ctx)
+            ctx.trySave()
+        }
+    }
+}
+extension NSManagedObject: CDEntityAccessing {}
+
 #if DEBUG
 extension DBManager {
     func dump() {
-        Task {
-            let context = AppDatabase().context
-            context.perform(save: false) { _ in
-                var items: [NSManagedObject]!
-                items = context.fetch(CDEngine.fetchRequest())
-                print("Engine:")
-                print((items as NSArray).description)
+        Do.try {
+            let context = Current.database.viewContext
 
-                items = context.fetch(CDConversation.fetchRequest())
-                print("Conversation:")
-                print((items as NSArray).description)
-            }
+            var items: [NSManagedObject]!
+            items = try context.fetch(CDEngine.fetchRequest())
+            print("Engine:")
+            print((items as NSArray).description)
+
+            items = try context.fetch(CDConversation.debugRequest)
+            print("Conversation:")
+            print((items as NSArray).description)
         }
     }
 }

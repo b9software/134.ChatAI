@@ -8,7 +8,6 @@
 enum StoryboardID: String {
     case main = "Main"
     case conversation = "Conversation"
-    case chat = "Chat"
     case guide = "Guide"
     case setting = "Setting"
 }

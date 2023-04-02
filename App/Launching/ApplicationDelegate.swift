@@ -24,13 +24,15 @@ class ApplicationDelegate: MBApplicationDelegate {
     #endif
 
     override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        if isTesting { return false }
         return true
     }
 
     override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        if isTesting {
+            return UISceneConfiguration()
+        }
+        return UISceneConfiguration(name: "Main", sessionRole: .windowApplication)
     }
 
     override func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
@@ -44,20 +46,22 @@ class ApplicationDelegate: MBApplicationDelegate {
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         AppUserDefaultsShared().applicationLastLaunchTime = Date()
         _ = MBApp.status()
-        DBManager.setup(test: isTesting)
+        _ = Current.database
         return true
     }
 
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        #if PREVIEW
-        #elseif DEBUG
-        // https://github.com/BB9z/iOS-Project-Template/wiki/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B#tools-implement-faster
-        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle")?.load()
-        #endif
+
+        if !isTesting {
+#if DEBUG
+            // https://github.com/BB9z/iOS-Project-Template/wiki/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B#tools-implement-faster
+            Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle")?.load()
+            dispatch_after_seconds(0, setupDebugger)
+#endif
+        }
 //        MBEnvironment.registerWorkers()
-        RFKeyboard.autoDisimssKeyboardWhenTouch = true
+//        RFKeyboard.autoDisimssKeyboardWhenTouch = true
         setupUIAppearance()
-        dispatch_after_seconds(0, setupDebugger)
         return true
     }
 
@@ -75,9 +79,6 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     private func setupUIAppearance() {
-        // 统一全局色，storyboard 的全局色只对部分 UI 生效，比如无法对 UIAlertController 应用
-        window.tintColor = UIColor(named: "primary")!
-
         // 列表 data source 全局调整
         MBListDataSource<AnyObject>.defualtPageStartZero = false
         MBListDataSource<AnyObject>.defaultPageSizeParameterName = "size"

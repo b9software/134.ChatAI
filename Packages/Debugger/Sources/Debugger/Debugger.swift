@@ -71,7 +71,7 @@ public enum Debugger {
     }
 
     /// 自定义对象检查方法
-    public static var vauleInspector: ((Any) -> Void)?
+    public static var valueInspector: ((Any) -> Void)?
 
     /// 检测列表时依据的属性名
     /// 列表可以是 UITableView、UICollectionView 和 VisableCellInspecting
@@ -110,7 +110,7 @@ public extension Debugger {
         guard let value = unwrap(optional: value) else {
             return
         }
-        if let cb = vauleInspector {
+        if let cb = valueInspector {
             cb(value)
             return
         }
@@ -124,7 +124,7 @@ public extension Debugger {
     }
 
     /// 检测列表可见单元
-    static func inspectVisableCell() {
+    static func inspectVisibleCell() {
         guard let cells = inspectListCell(Debugger.currentViewController) else {
             return
         }

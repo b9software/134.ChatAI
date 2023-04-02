@@ -87,6 +87,21 @@ class RootViewController: B9RootViewController {
         navigator.popViewController(animated: true)
     }
 
+    func gotoWelcome() {
+        navigator.setViewControllers([WelcomeViewController.newFromStoryboard()], animated: false)
+    }
+
+    func gotoChatDetail(item: Conversation) {
+        if let vc = navigator.visibleViewController as? ConversationDetailViewController {
+            if vc.item == item {
+                return
+            }
+        }
+        let vc = ConversationDetailViewController.newFromStoryboard()
+        vc.item = item
+        navigator.setViewControllers([vc], animated: false)
+    }
+
     @IBAction private func gotoGuide(_ sender: Any) {
         navigator.setViewControllers([GuideViewController.newFromStoryboard()], animated: false)
     }

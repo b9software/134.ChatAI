@@ -1,3 +1,6 @@
+/* (No Comment) */
+"app.privacy-sort" = "B9ChatAI 不会收集您的任何信息，所有数据都在您的掌控下。\n\n但在应用使用时，会调用第三方服务，这些服务可能会收集您的信息。虽然调用哪些服务由您掌控，但仍请您注意信息保护，仔细阅读并理解相关服务的隐私政策，尤其要小心第三方提供的代理服务器。";
+
 /* 取消 */
 "Cancel" = "取消";
 
@@ -31,7 +34,12 @@
 /* (No Comment) */
 "menu.new" = "新建";
 
+/* (No Comment) */
 "menu.new.conversation" = "会话";
+
+/* (No Comment) */
 "menu.new.tab" = "标签页";
+
+/* (No Comment) */
 "menu.new.window" = "窗口";
 

@@ -16,6 +16,10 @@ enum ApplicationMenu {
             UIKeyCommand(title: L.Menu.New.tab, action: #selector(NSStandardActions.newWindowForTab(_:)), input: "T", modifierFlags: [.command], discoverabilityTitle: "New Window Tab"),
             UIKeyCommand(title: L.Menu.New.window, action: #selector(ApplicationDelegate.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
         ]))
+//        let preferencesCommand = UIKeyCommand(input: ",", modifierFlags: [.command], action: #selector(ApplicationDelegate.newWindow))
+//        preferencesCommand.title = "Preferences..."
+//        let openPreferences = UIMenu(title: "Preferences...", image: nil, identifier: .preferences, options: .displayInline, children: [preferencesCommand])
+//        builder.replace(menu: .preferences, with: openPreferences)
         ApplicationDelegate().debug.setupMenu(builder: builder)
     }
 
@@ -26,6 +30,10 @@ enum ApplicationMenu {
 
 private extension ApplicationDelegate {
     @IBAction func newConversation(_ sender: Any) {
+        debugPrint(#function)
+    }
+
+    @IBAction func test333(_ sender: Any) {
         debugPrint(#function)
     }
 

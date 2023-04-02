@@ -11,19 +11,20 @@ import Foundation
 /// App only model
 class OAEngine: Codable {
     private enum CodingKeys: String, CodingKey {
-        case keyHash = "k"
         case models = "m"
+        case lastModel = "ml"
     }
 
-    var apiKey: String?
-    private var keyHash: String?
+    var lastModel: StringID?
     var models: [OAModel]?
+
+    /// Memory only
+    var apiKey: String?
 }
 
 extension OAEngine {
-    convenience init(id: StringID, models: [OAModel]) {
+    convenience init(models: [OAModel]) {
         self.init()
-        self.keyHash = id
         self.models = models
     }
 }

@@ -74,18 +74,18 @@ internal extension Debugger {
     /// 尝试找应用处于活跃的窗体
     @available(iOS 13.0, *)
     static var activatedWindowScene: UIWindowScene? {
-        if let activated = tureKeyWindow?.windowScene { return activated }
+        if let activated = trueKeyWindow?.windowScene { return activated }
         let scenes = UIApplication.shared.connectedScenes
         return (scenes.first(where: { $0.activationState == .foregroundActive }) ?? scenes.first) as? UIWindowScene
     }
 
-    private static var tureKeyWindow: UIWindow? {
+    private static var trueKeyWindow: UIWindow? {
         (UIApplication.shared as DeprecatedKeyWindow).keyWindow
     }
 
     /// 尝试找应用活跃窗体的 key window
     static var mainWindow: UIWindow? {
-        if let activated = tureKeyWindow { return activated }
+        if let activated = trueKeyWindow { return activated }
         if #available(iOS 13.0, *) {
             let windows = activatedWindowScene?.windows ?? UIApplication.shared.windows
             return windows.first(where: { $0.isKeyWindow }) ?? windows.first
@@ -165,7 +165,7 @@ internal extension Debugger {
         return title
     }
 
-    static func toggleControlCenterVisableFromButton() {
+    static func toggleControlCenterVisibleFromButton() {
         if floatWindow.isHidden {
             showControlCenter()
             return

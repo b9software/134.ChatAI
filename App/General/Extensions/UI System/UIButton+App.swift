@@ -13,9 +13,13 @@ extension UIButton {
      */
     @objc var text: String? {
         get {
-            currentTitle
+            configuration?.title ?? currentTitle
         }
         set {
+            if configuration != nil {
+                configuration?.title = newValue
+                return
+            }
             if title(for: state) == nil {
                 // 文字未设置，设置默认
                 setTitle(newValue, for: .normal)

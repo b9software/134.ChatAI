@@ -25,6 +25,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal enum Background {
+    internal static let box = ColorAsset(name: "Background/Box")
     internal static let page = ColorAsset(name: "Background/Page")
   }
   internal enum Button {
@@ -56,22 +57,19 @@ internal enum Asset {
     internal static let avatarPlaceholder = ImageAsset(name: "avatar_placeholder")
   }
   internal enum Icon {
+    internal static let archivebox = ImageAsset(name: "Icon/archivebox")
+    internal static let gearBadge = ImageAsset(name: "Icon/gear-badge")
+    internal static let gear = ImageAsset(name: "Icon/gear")
+    internal static let infoBubble = ImageAsset(name: "Icon/info-bubble")
     internal static let test16 = ImageAsset(name: "Icon/test16")
     internal static let test24 = ImageAsset(name: "Icon/test24")
+    internal static let trash = ImageAsset(name: "Icon/trash")
+    internal static let xmark = ImageAsset(name: "Icon/xmark")
   }
   internal enum LegacyColor {
     internal static let accentColor = ColorAsset(name: "AccentColor")
-    internal static let background = ColorAsset(name: "background")
-    internal static let onBackground = ColorAsset(name: "on_background")
-    internal static let onPrimary = ColorAsset(name: "on_primary")
-    internal static let onSecondary = ColorAsset(name: "on_secondary")
-    internal static let onSurface = ColorAsset(name: "on_surface")
     internal static let placeholder = ColorAsset(name: "placeholder")
-    internal static let primary = ColorAsset(name: "primary")
-    internal static let primaryVariant = ColorAsset(name: "primary_variant")
-    internal static let secondary = ColorAsset(name: "secondary")
     internal static let shadow = ColorAsset(name: "shadow")
-    internal static let surface = ColorAsset(name: "surface")
   }
   internal enum List {
     internal static let listAccessory10 = ImageAsset(name: "list_accessory10")

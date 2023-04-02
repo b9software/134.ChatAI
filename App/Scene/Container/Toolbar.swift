@@ -36,9 +36,11 @@ class Toolbar: NSToolbar, NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        #if DEBUG
         if ApplicationDelegate().debug.debugSystemUI {
             AppLog().debug("Toolbar> request item for \(itemIdentifier.rawValue)")
         }
+        #endif
         switch itemIdentifier {
         case .back: return .back()
         case .test: return .test()

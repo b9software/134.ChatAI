@@ -13,27 +13,19 @@ import UIKit
 class EngineListView: UITableView, UITableViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
-        dataSource = self
+        listDataSource.tableView = self
+        listDataSource.fetchCacheName = "engine_list"
         delegate = self
         selectionFollowsFocus = true
         allowsFocus = true
         allowsMultipleSelection = true
-        allowsMultipleSelectionDuringEditing = true
     }
+
+    private lazy var listDataSource = CDFetchTableViewDataSource<CDEngine>()
 
     var fetchRequest: NSFetchRequest<CDEngine>? {
         didSet {
-            guard let request = fetchRequest else { return }
-            fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDatabase().container.viewContext, sectionNameKeyPath: nil, cacheName: "engine_list")
-        }
-    }
-
-    private(set) var fetchController: NSFetchedResultsController<CDEngine>? {
-        didSet {
-            fetchController?.delegate = self
-            Do.try {
-                try fetchController?.performFetch()
-            }
+            listDataSource.fetchRequest = fetchRequest
         }
     }
 
@@ -61,7 +53,7 @@ class EngineListView: UITableView, UITableViewDelegate {
         }
     }
 
-    lazy var needsUpdateFocus = DelayAction(Action(target: self, selector: #selector(doUpdateFocus)))
+    private lazy var needsUpdateFocus = DelayAction(Action(target: self, selector: #selector(doUpdateFocus)))
 
     @objc
     private func doUpdateFocus() {
@@ -70,12 +62,8 @@ class EngineListView: UITableView, UITableViewDelegate {
 
     override func delete(_ sender: Any?) {
         indexPathsForSelectedRows?.forEach { ip in
-            guard let entity = fetchController?.object(at: ip) else {
-                return
-            }
-            entity.managedObjectContext?.delete(entity)
+            listDataSource.item(at: ip)?.delete()
         }
-        fetchController?.managedObjectContext.trySave()
     }
 
     @objc
@@ -84,7 +72,8 @@ class EngineListView: UITableView, UITableViewDelegate {
             assert(false)
             return
         }
-        guard let entity = fetchController?.object(at: IndexPath(row: idx, section: 0)) else {
+        let ip = IndexPath(row: idx, section: 0)
+        guard let entity = listDataSource.item(at: ip) else {
             return
         }
         entity.managedObjectContext?.delete(entity)
@@ -117,14 +106,13 @@ class EngineListView: UITableView, UITableViewDelegate {
     }
 }
 
-class EngineListCell: UITableViewCell, HasItem {
-    var item: CDEngine! {
-        didSet {
-            cellView.item = item
-        }
-    }
+/// 用于会话设置
+class EnginePickListCell: GeneralListCell {
 
-    @IBOutlet private weak var cellView: EngineCellView!
+}
+
+/// 用于管理
+class EngineListCell: GeneralListCell {
     @IBOutlet private weak var boxView: UIView!
 
     override func awakeFromNib() {
@@ -154,61 +142,6 @@ class EngineListCell: UITableViewCell, HasItem {
         } else {
             boxView.backgroundColor = .systemFill
             boxView.layer.borderWidth = 0
-        }
-    }
-}
-
-extension EngineListView: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        fetchController?.sections?.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fetchController?.sections?[section].numberOfObjects ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? (UITableViewCell & AnyHasItem) else {
-            fatalError("Cell must confirm to HasItem.")
-        }
-        let item = fetchController?.object(at: indexPath)
-        cell.setItem(item)
-        return cell
-    }
-}
-
-extension EngineListView: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        beginUpdates()
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        endUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            insertRows(at: [newIndexPath!], with: .fade)
-        case .delete:
-            deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            moveRow(at: indexPath!, to: newIndexPath!)
-        @unknown default:
-            break
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex idx: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            insertSections(IndexSet(integer: idx), with: .fade)
-        case .delete:
-            deleteSections(IndexSet(integer: idx), with: .fade)
-        default:
-            break
         }
     }
 }

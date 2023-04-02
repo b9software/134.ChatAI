@@ -1,9 +1,20 @@
 
+"menu.archive" = "Archive";
 "menu.delete" = "Delete";
+"menu.setting" = "Settings";
+"menu.guide" = "Guide";
 "menu.new.conversation" = "Conversation";
 "menu.new.tab" = "Window Tab";
 "menu.new.window" = "Window";
 "menu.new" = "New";
+
+"chat.defaultTitle" = "New Chat";
+"chat.archived" = "Archived";
+"chat.unArchive" = "Unarchive";
+"chat.deleted" = "Deleted";
+"chat.deleteRestore" = "Undelete";
+"chat.deleteNow" = "Delete Immediately";
+"chat.setupBeforeUseNotice" = "You must set up the engine before you can chat.";
 
 "engine.create.step-verify" = "Verifying....";
 "engine.create.step-models" = "Checking models...";
@@ -13,3 +24,5 @@
 "engine.create.unrecognized-chat-warning" = "It seems that the chat content is not read properly, please check if there is a new version of B9ChatAI.";
 "engine.create.fail.hash-key" = "Unable to generate secure data for key.";
 "engine.create.fail.exist-key" = "Engine with the given key already exist.";
+
+"app.privacy-sort" = "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.";

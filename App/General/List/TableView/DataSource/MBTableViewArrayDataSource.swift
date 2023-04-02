@@ -18,7 +18,11 @@ import UIKit
 
  An array-based data source for table view.
  */
-class MBTableViewArrayDataSource<ObjectType>: NSObject, UITableViewDataSource {
+class MBTableViewArrayDataSource<ObjectType>:
+    NSObject,
+    UITableViewDelegate,
+    UITableViewDataSource
+{
     /// 可选择设置，如果设置了数据源更新后会自动刷新 table view
     ///
     /// If set, the table view will automatically reload after the data source is updated.

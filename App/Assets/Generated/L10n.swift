@@ -13,6 +13,28 @@ internal enum L10n {
   internal enum InfoPlist {
     }
   internal enum Localizable {
+    internal enum App {
+      /// B9ChatAI does not collect any of your data, and all data is under your control.
+      /// 
+      /// However, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.
+      internal static let privacySort = L10n.tr("Localizable", "app.privacy-sort", fallback: "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.")
+    }
+    internal enum Chat {
+      /// Archived
+      internal static let archived = L10n.tr("Localizable", "chat.archived", fallback: "Archived")
+      /// New Chat
+      internal static let defaultTitle = L10n.tr("Localizable", "chat.defaultTitle", fallback: "New Chat")
+      /// Deleted
+      internal static let deleted = L10n.tr("Localizable", "chat.deleted", fallback: "Deleted")
+      /// Delete Immediately
+      internal static let deleteNow = L10n.tr("Localizable", "chat.deleteNow", fallback: "Delete Immediately")
+      /// Undelete
+      internal static let deleteRestore = L10n.tr("Localizable", "chat.deleteRestore", fallback: "Undelete")
+      /// You must set up the engine before you can chat.
+      internal static let setupBeforeUseNotice = L10n.tr("Localizable", "chat.setupBeforeUseNotice", fallback: "You must set up the engine before you can chat.")
+      /// Unarchive
+      internal static let unArchive = L10n.tr("Localizable", "chat.unArchive", fallback: "Unarchive")
+    }
     internal enum Engine {
       internal enum Create {
         /// [OK]
@@ -38,10 +60,16 @@ internal enum L10n {
       }
     }
     internal enum Menu {
+      /// Archive
+      internal static let archive = L10n.tr("Localizable", "menu.archive", fallback: "Archive")
       /// Delete
       internal static let delete = L10n.tr("Localizable", "menu.delete", fallback: "Delete")
+      /// Guide
+      internal static let guide = L10n.tr("Localizable", "menu.guide", fallback: "Guide")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
+      /// Settings
+      internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Settings")
       internal enum New {
         /// Conversation
         internal static let conversation = L10n.tr("Localizable", "menu.new.conversation", fallback: "Conversation")

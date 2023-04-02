@@ -149,7 +149,6 @@ identifier_name:
     - i       # loop
     - j       # loop
     - k       # loop
-    - as      # cast
     - e       # error
     - id      # identifier
     - c       # RFAPI, context
@@ -168,6 +167,7 @@ identifier_name:
     - sv      # scroll view
     - cb      # callback
     - ds      # dataSource
+    - fm      # file manager
     - ip      # indexPath
     - db      # database
     - on      # on/off
