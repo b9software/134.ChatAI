@@ -12,11 +12,13 @@ import Foundation
 class OAEngine: Codable {
     private enum CodingKeys: String, CodingKey {
         case models = "m"
-        case lastModel = "ml"
+        case modelLastUsed = "ml"
+        case modelLastFetchTime = "mt"
     }
 
-    var lastModel: StringID?
     var models: [OAModel]?
+    var modelLastUsed: StringID?
+    var modelLastFetchTime: Date?
 
     /// Memory only
     var apiKey: String?

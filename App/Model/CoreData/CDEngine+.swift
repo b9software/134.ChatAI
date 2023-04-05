@@ -12,6 +12,7 @@ extension CDEngine {
     static func fetch(id: StringID) -> CDEngine? {
         let request = fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
+        request.fetchLimit = 1
         let items: [CDEngine]? = Current.database.context.fetch(request)
         return items?.first
     }
@@ -27,22 +28,64 @@ extension CDEngine {
 
     func delete() {
         AppLog().debug("Engine> Delete \(objectID)...")
-        guard let ctx = managedObjectContext else {
-            assert(false)
-            return
-        }
-        ctx.perform {
-            let idCopy = self.id
-            ctx.delete(self)
+        modify { this, ctx in
+            let idCopy = this.id
+            ctx.delete(this)
             ctx.trySave()
-            guard let account = idCopy else {
-                assert(false)
-                return
+            if let account = idCopy {
+                Do.try {
+                    try B9Keychain.update(data: nil, account: account)
+                }
             }
-            Do.try {
-                try B9Keychain.update(data: nil, account: account)
+            AppLog().info("Engine> Delete \(idCopy ?? "?") success.")
+        }
+    }
+
+    func loadOAEngine() throws -> OAEngine {
+        guard let raw = self.raw else {
+            throw AppError.message("Engine> init with nil raw.")
+        }
+        let oaEngine = try OAEngine.decode(raw)
+        if let id = self.id {
+            oaEngine.apiKey = try B9Keychain.string(account: id)
+        }
+        return oaEngine
+    }
+
+    func save(oaEngine: OAEngine) {
+        modify { this, _ in
+            Do.try { // Encode won't fail
+                this.raw = try oaEngine.encode()
             }
-            AppLog().info("Engine> Delete \(account) success.")
         }
     }
 }
+
+#if DEBUG
+// swiftlint:disable all
+extension CDEngine {
+    static func debugCreateWithNoKey() {
+        Current.database.context.async { ctx in
+            let engine = CDEngine(context: ctx)
+            engine.id = "OA-No key"
+            engine.name = "No Key"
+            engine.type = Engine.EType.openAI.rawValue
+            let item = OAEngine(models: [])
+            engine.raw = try! item.encode()
+        }
+    }
+
+    static func debugCreateWithInvalidKey() {
+        Current.database.context.async { ctx in
+            let engine = CDEngine(context: ctx)
+            engine.id = "OA-Invalid"
+            try! B9Keychain.update(string: "Invalid", account: engine.id!)
+            engine.name = "Invalid Key"
+            engine.type = Engine.EType.openAI.rawValue
+            let item = OAEngine(models: [])
+            engine.raw = try! item.encode()
+        }
+    }
+}
+// swiftlint:enable all
+#endif

@@ -38,10 +38,21 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
 
     /// 选中的对象
     var selectedItems: [Item] {
-        if isItemSelectable {
-            return inputItems.filter { ($0 as? ItemSelectable)?.isSelected == true }
-        } else {
-            return (tableView?.indexPathsForSelectedRows?.compactMap { itemIdentifier(for: $0) }) ?? []
+        get {
+            if isItemSelectable {
+                return inputItems.filter { ($0 as? ItemSelectable)?.isSelected == true }
+            } else {
+                return (tableView?.indexPathsForSelectedRows?.compactMap { itemIdentifier(for: $0) }) ?? []
+            }
+        }
+        set {
+            guard let tableView = tableView else { return }
+            if isItemSelectable {
+                fatalError("todo")
+            } else {
+                let newIndexPaths = newValue.compactMap { indexPath(for: $0) }
+                tableView.setSelected(indexPaths: newIndexPaths, animated: false)
+            }
         }
     }
 
@@ -96,7 +107,7 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
         var snap = NSDiffableDataSourceSnapshot<Int, Item>()
         snap.appendSections([0])
         snap.appendItems(displayItems, toSection: 0)
-        apply(snap)
+        apply(snap, animatingDifferences: tableView?.isVisible == true)
         updateStateView(isEmpty: displayItems.isEmpty)
     }
 

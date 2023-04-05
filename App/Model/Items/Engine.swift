@@ -20,15 +20,8 @@ class Engine {
         }
     }
 
-    var entity: CDEngine
+    private(set) var entity: CDEngine
     let type: EType
-    var oaEngine: OAEngine {
-        didSet {
-            Do.try {
-                entity.raw = try oaEngine.encode()
-            }
-        }
-    }
 
     private init(entity: CDEngine) throws {
         guard let type = EType(rawValue: entity.type ?? "") else {
@@ -38,13 +31,7 @@ class Engine {
         self.entity = entity
         switch type {
         case .openAI:
-            guard let raw = entity.raw else {
-                throw AppError.message("Engine> init with nil raw.")
-            }
-            oaEngine = try OAEngine.decode(raw)
-            if let id = entity.id {
-                oaEngine.apiKey = try B9Keychain.string(account: id)
-            }
+            oaEngine = try entity.loadOAEngine()
         case .openAIProxy:
             fatalError("todo")
         }
@@ -65,6 +52,7 @@ class Engine {
             if let old = enginePool[id] { return old }
             do {
                 let new = try Engine(entity: entity)
+                AppLog().debug("Engine> Create instance of \(id).")
                 enginePool[id] = new
                 return new
             } catch {
@@ -126,7 +114,7 @@ class Engine {
         let item = Current.database.context.perform {
             let entity = CDEngine(context: $0)
             entity.id = id
-            entity.name = key.keyMasked()
+            entity.name = key.keyMasked().replacingOccurrences(of: "**", with: "*")
             entity.type = EType.openAI.rawValue
             entity.createTime = .current
             entity.usedTime = nil
@@ -135,6 +123,9 @@ class Engine {
         }
         return item
     }
+
+    private var oaEngine: OAEngine
+    private var _oaNetwork: OANetwork?
 }
 
 extension Engine {
@@ -144,6 +135,52 @@ extension Engine {
             return oaEngine.apiKey?.isNotEmpty == true
         case .openAIProxy:
             return false
+        }
+    }
+
+    private func getOANetworking() throws -> OANetwork {
+        if let result = _oaNetwork { return result }
+        guard let key = oaEngine.apiKey else {
+            throw AppError.message("Engine is missing API key.")
+        }
+        let result = OANetwork(apiKey: key)
+        _oaNetwork = result
+        return result
+    }
+
+    var lastSelectedModel: StringID? {
+        get { oaEngine.modelLastUsed }
+        set {
+            if oaEngine.modelLastUsed == newValue { return }
+            oaEngine.modelLastUsed = newValue
+            entity.save(oaEngine: oaEngine)
+        }
+    }
+
+    func listModel() -> [StringID]? {
+        guard let models = oaEngine.models else {
+            return nil
+        }
+        return models.filter { $0.isChatMode }.map { $0.id }
+    }
+
+    func refreshModels() -> Task<[StringID], Error> {
+        Task {
+            if Date.isRecent(oaEngine.modelLastFetchTime, range: 20) {
+                return listModel() ?? []
+            }
+            let api = try getOANetworking()
+            AppLog().info("Engine> Start refresh models...")
+            oaEngine.models = try await api.listModel()
+            oaEngine.modelLastFetchTime = .current
+            entity.save(oaEngine: oaEngine)
+            return listModel() ?? []
+        }
+    }
+
+    func updateUsedTime() {
+        entity.modify { this, _ in
+            this.usedTime = .current
         }
     }
 }

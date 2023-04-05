@@ -5,6 +5,42 @@
 "Cancel" = "取消";
 
 /* (No Comment) */
+"chat.archived" = "归档";
+
+/* (No Comment) */
+"chat.defaultTitle" = "新会话";
+
+/* (No Comment) */
+"chat.deleted" = "已删除";
+
+/* (No Comment) */
+"chat.deleteNow" = "立即删除";
+
+/* (No Comment) */
+"chat.deleteRestore" = "还原删除";
+
+/* (No Comment) */
+"chat.setting.choiceEngine" = "请选择一个引擎";
+
+/* (No Comment) */
+"chat.setting.choiceModel" = "请选择一个模型";
+
+/* (No Comment) */
+"chat.setting.engineMissingKey" = "引擎的 API 密钥缺失，请更新引擎或选择另一个";
+
+/* (No Comment) */
+"chat.setting.modelFetching" = "获取模型中…";
+
+/* (No Comment) */
+"chat.setting.selectBadEngine" = "引擎数据异常";
+
+/* (No Comment) */
+"chat.setupBeforeUseNotice" = "在开始聊天之前，你必须先设置好引擎";
+
+/* (No Comment) */
+"chat.unArchive" = "还原归档";
+
+/* (No Comment) */
 "engine.create.fail.exist-key" = "这个 API Key 已经添加过了";
 
 /* (No Comment) */
@@ -29,7 +65,13 @@
 "engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
 
 /* (No Comment) */
+"menu.archive" = "归档";
+
+/* (No Comment) */
 "menu.delete" = "删除";
+
+/* (No Comment) */
+"menu.guide" = "指南";
 
 /* (No Comment) */
 "menu.new" = "新建";
@@ -42,4 +84,7 @@
 
 /* (No Comment) */
 "menu.new.window" = "窗口";
+
+/* (No Comment) */
+"menu.setting" = "设置";
 

@@ -16,9 +16,24 @@ class NavigationController: B9NavigationController {
 
     override func handleViewControllersChanges() {
         super.handleViewControllersChanges()
-        if let title = topViewController?.title {
-            view.window?.windowScene?.title = title
+        if let scene = view.window?.windowScene {
+            scene.title = currentViewControllerTitle
         }
+        updateToolbar()
+    }
+
+    var currentViewControllerTitle: String {
+        topViewController?.navigationItem.title ?? topViewController?.title ?? L.App.name
+    }
+
+    func updateToolbar() {
+#if targetEnvironment(macCatalyst)
+        let toolItems: [NSToolbarItem] = topViewController?.navigationItem.rightBarButtonItems?.compactMap {
+            let id = $0.action?.description ?? UUID().uuidString
+            return NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier(id), barButtonItem: $0)
+        } ?? []
+        NSToolbarController.of(view)?.update(additionalItems: toolItems)
+#endif
     }
 }
 

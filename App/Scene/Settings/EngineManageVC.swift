@@ -8,7 +8,11 @@
 import CoreData
 import UIKit
 
-class EngineManageViewController: UIViewController {
+class EngineManageViewController:
+    UIViewController,
+    StoryboardCreation
+{
+    static var storyboardID: StoryboardID { .setting }
 
     @IBOutlet private weak var createView: EngineCreateView!
     @IBOutlet private weak var listView: EngineListView!

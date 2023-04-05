@@ -23,11 +23,6 @@ class ApplicationDelegate: MBApplicationDelegate {
     let isTesting = false
     #endif
 
-    override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
-        if isTesting { return false }
-        return true
-    }
-
     override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         if isTesting {
             return UISceneConfiguration()
@@ -95,7 +90,19 @@ class ApplicationDelegate: MBApplicationDelegate {
         }
     }
 
+    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        AppLog().info("App> Open \(url). \(options)")
+        return super.application(app, open: url, options: options)
+    }
+
+    override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        AppLog().info("App> UserActivity will continue: \(userActivityType).")
+        if isTesting { return false }
+        return true
+    }
+
     override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        AppLog().info("App> UserActivity continue: \(userActivity).")
         var hasHande = false
         enumerateEventListeners { listener in
             if listener.application?(application, continue: userActivity, restorationHandler: restorationHandler) ?? false {
@@ -105,8 +112,18 @@ class ApplicationDelegate: MBApplicationDelegate {
         return hasHande
     }
 
-    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return super.application(app, open: url, options: options)
+    override func application(_ application: UIApplication, didUpdate userActivity: NSUserActivity) {
+        AppLog().info("App> UserActivity did update: \(userActivity).")
+    }
+
+    override func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+        AppLog().error("App> UserActivity fail to continue: \(userActivityType) \(error).")
+    }
+
+    override func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        AppLog().error("App> Perform Action: \(shortcutItem).")
+        completionHandler(false)
+        // 似乎可以只启动不激活
     }
 }
 

@@ -111,6 +111,15 @@ class CDContext {
         }
     }
 
+    func async(_ operation: @escaping (NSManagedObjectContext) throws -> Void){
+        ctx.perform { [self] in
+            Do.try {
+                try operation(ctx)
+                try ctx.save()
+            }
+        }
+    }
+
     func perform<T>(save: Bool = true, _ operation: (NSManagedObjectContext) throws -> T) rethrows -> T {
         assertDispatch(.notOnQueue(.main))
         let result = try ctx.performAndWait {
@@ -154,6 +163,20 @@ extension CDEntityAccessing {
             result = block(self)
         }
         return result
+    }
+
+    func read<T>(_ block: (Self, NSManagedObjectContext) throws -> T) -> T? {
+        guard let ctx = managedObjectContext else {
+            fatalError("\(self) must create with object context")
+        }
+        return ctx.performAndWait {
+            do {
+                return try block(self, ctx)
+            } catch {
+                AppLog().critical("DB> Read error: \(error).")
+                return nil
+            }
+        }
     }
 
     /// Make asynchronous changes then save safely

@@ -16,6 +16,8 @@ final class DebugManager {
             UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
             UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
             UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
+            UICommand(title: "Engine no key", action: #selector(ApplicationDelegate.debugEngineCreateWithNoKey)),
+            UICommand(title: "Engine invalid key", action: #selector(ApplicationDelegate.debugEngineCreateWithInvalidKey)),
             UICommand(title: "Destroy Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
             UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
             UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
@@ -42,15 +44,15 @@ final class DebugManager {
 
 #if DEBUG
 fileprivate extension ApplicationDelegate {
-    @objc func debugRebuildMenu(_ sender: Any) {
+    @objc func debugRebuildMenu() {
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @objc func onTest2(_ sender: Any) {
+    @objc func onTest2() {
 //        debugPrint(UIApplication.shared.connectedScenes)
     }
 
-    @objc func debugWindow(_ sender: Any) {
+    @objc func debugWindow() {
         print("Windows: \(UIApplication.shared.windows)")
         print("Key win: \(UIApplication.shared.keyWindow)")
         print("Scenes: \(UIApplication.shared.connectedScenes)")
@@ -60,21 +62,29 @@ fileprivate extension ApplicationDelegate {
 //        }
     }
 
-    @objc func debugSystemUISwitch(_ sender: Any) {
+    @objc func debugSystemUISwitch() {
         debug.debugSystemUI.toggle()
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @objc func debugResponderSwitch(_ sender: Any) {
+    @objc func debugResponderSwitch() {
         debug.debugResponder.toggle()
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @objc func debugDumpDatabase(_ sender: Any) {
+    @objc func debugDumpDatabase() {
         Current.database.dump()
     }
 
-    @objc func debugDestroyConversation(_ sender: Any) {
+    @objc func debugEngineCreateWithNoKey() {
+        CDEngine.debugCreateWithNoKey()
+    }
+
+    @objc func debugEngineCreateWithInvalidKey() {
+        CDEngine.debugCreateWithInvalidKey()
+    }
+
+    @objc func debugDestroyConversation() {
         let ctx = Current.database.viewContext
         try? ctx.fetch(CDConversation.fetchRequest()).forEach { ctx.delete($0) }
         ctx.trySave()

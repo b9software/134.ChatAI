@@ -14,6 +14,8 @@ internal enum L10n {
     }
   internal enum Localizable {
     internal enum App {
+      /// B9ChatAI
+      internal static let name = L10n.tr("Localizable", "app.name", fallback: "B9ChatAI")
       /// B9ChatAI does not collect any of your data, and all data is under your control.
       /// 
       /// However, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.
@@ -34,6 +36,18 @@ internal enum L10n {
       internal static let setupBeforeUseNotice = L10n.tr("Localizable", "chat.setupBeforeUseNotice", fallback: "You must set up the engine before you can chat.")
       /// Unarchive
       internal static let unArchive = L10n.tr("Localizable", "chat.unArchive", fallback: "Unarchive")
+      internal enum Setting {
+        /// Please choose a engine.
+        internal static let choiceEngine = L10n.tr("Localizable", "chat.setting.choiceEngine", fallback: "Please choose a engine.")
+        /// Please choose a model.
+        internal static let choiceModel = L10n.tr("Localizable", "chat.setting.choiceModel", fallback: "Please choose a model.")
+        /// This engine is missing the API key, please update it or choose another one.
+        internal static let engineMissingKey = L10n.tr("Localizable", "chat.setting.engineMissingKey", fallback: "This engine is missing the API key, please update it or choose another one.")
+        /// Fetching models...
+        internal static let modelFetching = L10n.tr("Localizable", "chat.setting.modelFetching", fallback: "Fetching models...")
+        /// This engine is anomalous.
+        internal static let selectBadEngine = L10n.tr("Localizable", "chat.setting.selectBadEngine", fallback: "This engine is anomalous.")
+      }
     }
     internal enum Engine {
       internal enum Create {

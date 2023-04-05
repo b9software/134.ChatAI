@@ -69,7 +69,7 @@
                                                             <constraint firstAttribute="height" constant="10" id="aXB-6d-fR9"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appearance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUl-Th-VSO">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appearance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-appearance-section">
                                                         <rect key="frame" x="0.0" y="114.66666666666666" width="240" height="26.333333333333343"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
@@ -78,7 +78,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dyy-BG-d31">
                                                         <rect key="frame" x="0.0" y="149" width="240" height="64.333333333333314"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNR-Gj-c6u">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-theme-title">
                                                                 <rect key="frame" x="20.000000000000004" y="23" width="50.333333333333343" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <color key="textColor" name="Text/Second"/>
@@ -91,17 +91,17 @@
                                                                 </constraints>
                                                                 <menu key="menu" id="gRH-Qy-KGL">
                                                                     <children>
-                                                                        <command title="System" id="JWo-IU-gCW">
+                                                                        <command title="System" id="setting-theme-system">
                                                                             <connections>
                                                                                 <action selector="onThemeSystem:" destination="setting-vc" id="p1S-82-tvD"/>
                                                                             </connections>
                                                                         </command>
-                                                                        <command title="Light" id="QgC-ua-emn">
+                                                                        <command title="Light" id="setting-theme-light">
                                                                             <connections>
                                                                                 <action selector="onThemeLight:" destination="setting-vc" id="XRh-J4-dCz"/>
                                                                             </connections>
                                                                         </command>
-                                                                        <command title="Dark" menuElementState="on" id="zbo-dg-FeR">
+                                                                        <command title="Dark" menuElementState="on" id="setting-theme-dark">
                                                                             <connections>
                                                                                 <action selector="onThemeDark:" destination="setting-vc" id="dFQ-AL-P8M"/>
                                                                             </connections>
@@ -115,10 +115,10 @@
                                                         <constraints>
                                                             <constraint firstItem="mUZ-Yd-tR9" firstAttribute="top" secondItem="Dyy-BG-d31" secondAttribute="top" constant="15" id="5gm-LG-0kH"/>
                                                             <constraint firstAttribute="trailing" secondItem="mUZ-Yd-tR9" secondAttribute="trailing" constant="20" symbolic="YES" id="IaK-8r-FUY"/>
-                                                            <constraint firstItem="TNR-Gj-c6u" firstAttribute="leading" secondItem="Dyy-BG-d31" secondAttribute="leading" constant="20" symbolic="YES" id="Jcf-um-u25"/>
-                                                            <constraint firstItem="mUZ-Yd-tR9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TNR-Gj-c6u" secondAttribute="trailing" constant="10" id="mdy-Gk-0iT"/>
+                                                            <constraint firstItem="setting-theme-title" firstAttribute="leading" secondItem="Dyy-BG-d31" secondAttribute="leading" constant="20" symbolic="YES" id="Jcf-um-u25"/>
+                                                            <constraint firstItem="mUZ-Yd-tR9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="setting-theme-title" secondAttribute="trailing" constant="10" id="mdy-Gk-0iT"/>
                                                             <constraint firstAttribute="bottom" secondItem="mUZ-Yd-tR9" secondAttribute="bottom" constant="15" id="wVO-73-4kY"/>
-                                                            <constraint firstItem="TNR-Gj-c6u" firstAttribute="firstBaseline" secondItem="mUZ-Yd-tR9" secondAttribute="firstBaseline" id="y7Z-RV-5WJ"/>
+                                                            <constraint firstItem="setting-theme-title" firstAttribute="firstBaseline" secondItem="mUZ-Yd-tR9" secondAttribute="firstBaseline" id="y7Z-RV-5WJ"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -132,7 +132,7 @@
                                                             <constraint firstAttribute="height" constant="10" id="jvA-cS-XJS"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Bindings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdc-MH-K8E">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Bindings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-keys-section">
                                                         <rect key="frame" x="0.0" y="239.33333333333331" width="240" height="26.333333333333314"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
@@ -293,7 +293,7 @@
                                                                                             <rect key="frame" x="0.0" y="0.0" width="193.33333333333334" height="46"/>
                                                                                             <menu key="menu" id="2lI-FG-MzQ">
                                                                                                 <children>
-                                                                                                    <command title="Choose Type" discoverabilityTitle="" id="9jw-Im-29A"/>
+                                                                                                    <command title="Choose Type" discoverabilityTitle="" id="engine-create-type-0"/>
                                                                                                     <command title="ChatGPT / OpenAI API" discoverabilityTitle="Use offical OpenAI API" id="engine-create-type-1">
                                                                                                         <connections>
                                                                                                             <action selector="onTypeApi:" destination="BOp-m6-wOm" id="b6J-wY-YSe"/>
@@ -397,6 +397,9 @@
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                     <color key="textColor" name="Text/Thrid"/>
                                                                                     <nil key="highlightedColor"/>
+                                                                                    <attributedString key="userComments">
+                                                                                        <fragment content="&lt;Pass&gt;"/>
+                                                                                    </attributedString>
                                                                                 </label>
                                                                             </subviews>
                                                                         </stackView>
@@ -506,17 +509,23 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-gW-ZGs">
                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="42.333333333333336"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfU-GV-jZc">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfU-GV-jZc">
                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="18.666666666666668"/>
                                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                                             <color key="textColor" name="Text/First"/>
                                                                             <nil key="highlightedColor"/>
+                                                                            <attributedString key="userComments">
+                                                                                <fragment content="&lt;Pass&gt;"/>
+                                                                            </attributedString>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ud4-ke-FZX">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ud4-ke-FZX">
                                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="240" height="15.666666666666668"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" name="Text/Second"/>
                                                                             <nil key="highlightedColor"/>
+                                                                            <attributedString key="userComments">
+                                                                                <fragment content="&lt;Pass&gt;"/>
+                                                                            </attributedString>
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>

@@ -9,7 +9,11 @@ import Foundation
 
 // swiftlint:disable identifier_name
 
-struct OAModel: Codable, ModelValidate {
+struct OAModel:
+    Codable,
+    Hashable,
+    ModelValidate
+{
     private(set) var id: StringID
     private(set) var object: String = "model"
     private(set) var created: Timestamp?

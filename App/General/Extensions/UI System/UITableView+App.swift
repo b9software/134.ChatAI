@@ -19,6 +19,18 @@ extension UITableView {
         }
     }
 
+    func setSelected(indexPaths: [IndexPath]?, animated: Bool) {
+        let oldIndexPaths = indexPathsForSelectedRows ?? []
+        let newIndexPaths = indexPaths ?? []
+        if oldIndexPaths == newIndexPaths { return }
+        oldIndexPaths.forEach {
+            deselectRow(at: $0, animated: animated)
+        }
+        newIndexPaths.forEach {
+            selectRow(at: $0, animated: animated, scrollPosition: .none)
+        }
+    }
+
     // @MBDependency:1
     /// 某一 section 的选中单元数量
     func selectRowCount(inSection section: Int) -> Int {

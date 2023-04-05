@@ -1,0 +1,42 @@
+/* Class = "UILabel"; text = "Conversation are available here for 30 days. After that time, conversations will be permanently deleted."; ObjectID = "chat-deleted-header-tip"; */
+"chat-deleted-header-tip.text" = "此处会话将会保留 30 天，之后会被永久删除";
+
+/* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "chat-setting-cancel-button"; */
+"chat-setting-cancel-button.configuration.title" = "取消";
+
+/* Class = "UILabel"; text = "No engine. You need create one first."; ObjectID = "chat-setting-engine-empty"; */
+"chat-setting-engine-empty.text" = "你需要先创建一个引擎";
+
+/* Class = "UIButton"; configuration.title = "Manage Engines"; ObjectID = "chat-setting-engine-manage-button"; */
+"chat-setting-engine-manage-button.configuration.title" = "管理引擎";
+
+/* Class = "UIButton"; normalTitle = "Manage Engines"; ObjectID = "chat-setting-engine-manage-button"; */
+"chat-setting-engine-manage-button.normalTitle" = "管理引擎";
+
+/* Class = "UILabel"; text = "Engine"; ObjectID = "chat-setting-engine-section"; */
+"chat-setting-engine-section.text" = "引擎";
+
+/* Class = "UILabel"; text = "ID"; ObjectID = "chat-setting-id-section"; */
+"chat-setting-id-section.text" = "ID";
+
+/* Class = "UILabel"; text = "Used for inter-application interaction, it must be distinct."; ObjectID = "chat-setting-id-tip"; */
+"chat-setting-id-tip.text" = "用于应用间相互调用，必须互不相同";
+
+/* Class = "UILabel"; text = "Basic Info"; ObjectID = "chat-setting-info"; */
+"chat-setting-info.text" = "基本信息";
+
+/* Class = "UILabel"; text = "Model"; ObjectID = "chat-setting-model-section"; */
+"chat-setting-model-section.text" = "模型";
+
+/* Class = "UITextField"; placeholder = "Optional"; ObjectID = "chat-setting-name-field"; */
+"chat-setting-name-field.placeholder" = "可选";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "chat-setting-name-section"; */
+"chat-setting-name-section.text" = "名字";
+
+/* Class = "UILabel"; text = "The title display in list and window"; ObjectID = "chat-setting-name-tip"; */
+"chat-setting-name-tip.text" = "显示在列表和窗口上";
+
+/* Class = "UIButton"; configuration.title = "Save"; ObjectID = "chat-setting-save-button"; */
+"chat-setting-save-button.configuration.title" = "保存";
+

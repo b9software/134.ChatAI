@@ -15,11 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController as? RootViewController
     }
 
+    private(set) lazy var toolbarController = NSToolbarController()
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         #if targetEnvironment(macCatalyst)
         if let titlebar = windowScene.titlebar {
-            titlebar.toolbar = Toolbar()
+            toolbarController.windowTitleBar = titlebar
+            toolbarController.update(additionalItems: [])
         }
         #endif
         /*
@@ -67,5 +70,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         AppLog().debug("Scene> Background: \(scene.title ?? "?")")
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        AppLog().debug("Scene> Open url \(URLContexts)")
+    }
+
+    func scene(_ scene: UIScene, willContinueUserActivityWithType type: String) {
+        AppLog().debug("Scene> UserActivity will continue: \(type).")
+    }
+
+    func scene(_ scene: UIScene, continue activity: NSUserActivity) {
+        AppLog().debug("Scene> UserActivity continue: \(activity).")
+    }
+
+    func scene(_ scene: UIScene, didFailToContinueUserActivityWithType type: String, error: Error) {
+        AppLog().debug("Scene> UserActivity \(type) fail: \(error).")
+    }
+
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        AppLog().debug("Scene> UserActivity request state.")
+        return scene.userActivity
+    }
+
+    func scene(_ scene: UIScene, restoreInteractionStateWith activity: NSUserActivity) {
+        AppLog().debug("Scene> UserActivity restore interaction: \(activity).")
+    }
+
+    func scene(_ scene: UIScene, didUpdate activity: NSUserActivity) {
+        AppLog().debug("Scene> UserActivity did update: \(activity).")
     }
 }

@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "OpenAI Terms of Use"; ObjectID = "about-openai-term"; */
 "about-openai-term.normalTitle" = "OpenAI 使用条款";
 
+/* Class = "UILabel"; text = "Privacy"; ObjectID = "about-privacy"; */
+"about-privacy.text" = "隐私";
+
 /* Class = "UILabel"; text = "Source code will be open in the future"; ObjectID = "about-source-notice"; */
 "about-source-notice.text" = "源代码将在未来开放";
 
@@ -12,6 +15,9 @@
 
 /* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "engine-create-cancel"; */
 "engine-create-cancel.configuration.title" = "取消";
+
+/* Class = "UICommand"; title = "Choose Type"; ObjectID = "engine-create-type-0"; */
+"engine-create-type-0.title" = "选择类型";
 
 /* Class = "UICommand"; discoverabilityTitle = "Use offical OpenAI API"; ObjectID = "engine-create-type-1"; */
 "engine-create-type-1.discoverabilityTitle" = "使用 OpenAI 官方的 API";
@@ -40,6 +46,9 @@
 /* Class = "UIButton"; configuration.title = "About"; ObjectID = "setting-about-button"; */
 "setting-about-button.configuration.title" = "关于";
 
+/* Class = "UILabel"; text = "Appearance"; ObjectID = "setting-appearance-section"; */
+"setting-appearance-section.text" = "外观";
+
 /* Class = "UIButton"; configuration.title = "Configuration"; ObjectID = "setting-engine-config-button"; */
 "setting-engine-config-button.configuration.title" = "配置引擎";
 
@@ -49,12 +58,21 @@
 /* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
 "setting-engine-section.text" = "AI 引擎";
 
+/* Class = "UILabel"; text = "Key Bindings"; ObjectID = "setting-keys-section"; */
+"setting-keys-section.text" = "按键配置";
+
+/* Class = "UICommand"; title = "Dark"; ObjectID = "setting-theme-dark"; */
+"setting-theme-dark.title" = "深色";
+
+/* Class = "UICommand"; title = "Light"; ObjectID = "setting-theme-light"; */
+"setting-theme-light.title" = "浅色";
+
+/* Class = "UICommand"; title = "System"; ObjectID = "setting-theme-system"; */
+"setting-theme-system.title" = "跟随系统";
+
+/* Class = "UILabel"; text = "Theme"; ObjectID = "setting-theme-title"; */
+"setting-theme-title.text" = "主题";
+
 /* Class = "UIViewController"; title = "Setting"; ObjectID = "setting-vc"; */
 "setting-vc.title" = "设置";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "ud4-ke-FZX"; */
-"ud4-ke-FZX.text" = "Label";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "vfU-GV-jZc"; */
-"vfU-GV-jZc.text" = "Label";
 

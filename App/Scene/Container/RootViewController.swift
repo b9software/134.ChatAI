@@ -20,9 +20,6 @@ class RootViewController: B9RootViewController {
 
     private(set) var navigator: NavigationController!
     private(set) var split: SplitViewController!
-    #if targetEnvironment(macCatalyst)
-    private(set) lazy var toolbar = Toolbar()
-    #endif
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +105,10 @@ class RootViewController: B9RootViewController {
 
     @IBAction private func gotoSetting(_ sender: Any) {
         navigator.setViewControllers([SettingViewController.newFromStoryboard()], animated: false)
+    }
+
+    @IBAction private func pushEngineManage(_ sender: Any) {
+        navigator.pushViewController(EngineManageViewController.newFromStoryboard(), animated: true)
     }
 
     @IBAction func orderFrontStandardAboutPanel(_ sender: Any) {

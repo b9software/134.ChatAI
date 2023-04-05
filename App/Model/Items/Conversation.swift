@@ -25,6 +25,7 @@ class Conversation {
         self.id = entity.id!
         self.entity = entity
         title = entity.title
+        AppLog().debug("Chat> Create conversation instance of \(id).")
     }
 
     static func from(entity: CDConversation) -> Conversation {
@@ -53,7 +54,7 @@ class Conversation {
 
     private var _chatConfig: ChatConfig?
     private var _engineConfig: EngineConfig?
-    private var _engine: Engine?
+    private(set) var engine: Engine?
 }
 
 extension Conversation {
@@ -69,13 +70,13 @@ extension Conversation {
         if entity.deleteTime != nil || entity.archiveTime != nil {
             return .archived
         }
-        if _engine == nil {
+        if engine == nil {
             guard let engineData = entity.engine else {
                 return .forceSetup
             }
-            _engine = Engine.from(entity: engineData)
+            engine = Engine.from(entity: engineData)
         }
-        guard let engine = _engine,
+        guard let engine = engine,
               engineConfig.model?.isNotEmpty == true else {
             return .forceSetup
         }
@@ -148,6 +149,28 @@ extension Conversation {
 
     func undelete() {
         entity.modify { this, _ in this.deleteTime = nil }
+        needsUpdateUsable.set()
+    }
+
+    func save(name: String?, id: String?, engine: Engine, model: StringID) throws {
+        let newID = id ?? self.id
+        guard entity.isNewIDAvailable(newID: newID) else {
+            throw AppError.message("The same ID already exists.")
+        }
+        if engineConfig.model != model {
+            var config = engineConfig
+            config.model = model
+            engineConfig = config
+        }
+        engine.lastSelectedModel = model
+        engine.updateUsedTime()
+        self.engine = engine
+        entity.modify { this, _ in
+            this.id = newID
+            this.title = name
+            this.updateTime = .current
+            this.engine = engine.entity
+        }
         needsUpdateUsable.set()
     }
 }

@@ -46,6 +46,7 @@ internal enum Asset {
       internal static let checkboxOn = ImageAsset(name: "checkbox_on")
     }
     internal enum Input {
+      internal static let inputBox = ImageAsset(name: "input_box")
       internal static let textFieldBgDisabled = ImageAsset(name: "text_field_bg_disabled")
       internal static let textFieldBgFocused = ImageAsset(name: "text_field_bg_focused")
       internal static let textFieldBgNormal = ImageAsset(name: "text_field_bg_normal")

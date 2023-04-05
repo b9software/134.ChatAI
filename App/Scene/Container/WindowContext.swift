@@ -8,17 +8,15 @@
 
 import UIKit
 
-#if targetEnvironment(macCatalyst)
-extension NSToolbar {
-    static func of(_ view: UIView) -> NSToolbar? {
-        view.window?.windowScene?.titlebar?.toolbar
-    }
-}
-#endif
-
 extension SceneDelegate {
     static func of(_ view: UIView) -> Self? {
         view.window?.windowScene?.delegate as? Self
+    }
+}
+
+extension NSToolbarController {
+    static func of(_ view: UIView) -> NSToolbarController? {
+        SceneDelegate.of(view)?.toolbarController
     }
 }
 

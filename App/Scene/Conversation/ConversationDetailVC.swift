@@ -19,6 +19,7 @@ class ConversationDetailViewController:
     var item: Conversation! {
         didSet {
             title = item.name
+            navigationItem.title = item.name
             item.delegates.add(self)
             item.requireUsableState()
         }
@@ -29,6 +30,7 @@ class ConversationDetailViewController:
         conversation(item, useState: item.usableState)
     }
 
+    @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
     @IBOutlet private weak var barLayoutContainer: UIView!
     @IBOutlet private weak var standardBar: UIView!
     @IBOutlet private weak var inputTextView: UITextView!
@@ -41,8 +43,19 @@ extension ConversationDetailViewController {
     func conversation(_ item: Conversation, useState: Conversation.UsableState) {
         if useState == .forceSetup {
             if !children.contains(where: { $0 is ConversationSettingViewController }) {
-                ConversationSettingViewController.showFrom(detail: self)
+                ConversationSettingViewController.showFrom(detail: self, animate: false)
             }
+        }
+    }
+
+    @IBAction private func onShowSetting(_ sender: Any) {
+        if let vc = children.first(where: { $0 is ConversationSettingViewController }) as? ConversationSettingViewController {
+            if item.usableState == .forceSetup {
+                return
+            }
+            vc.dismiss(animate: true)
+        } else {
+            ConversationSettingViewController.showFrom(detail: self, animate: true)
         }
     }
 }
@@ -55,6 +68,16 @@ extension ConversationDetailViewController: UITextViewDelegate {
             UIKeyCommand(input: "\r", modifierFlags: .command, action: #selector(onSend)),
         ]
     }
+
+    // 可以 track +shift
+//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+//        debugPrint("begin", presses)
+//        super.pressesBegan(presses, with: event)
+//    }
+//    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+//        debugPrint("end", presses)
+//        super.pressesEnded(presses, with: event)
+//    }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return true

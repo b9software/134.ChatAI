@@ -31,6 +31,7 @@ fastlane setup_project
 资料：
 
 * https://github.com/mhdhejazi/Catalyst-AppKit mac 插件
+* https://github.com/openai/openai-cookbook
 
 接口
 
@@ -40,11 +41,13 @@ fastlane setup_project
 * https://console.anthropic.com/docs/api/reference
 * https://platform.openai.com/docs/models/model-endpoint-compatibility 模型支持列表
 * https://github.com/openai/tiktoken token 数量计算
+* https://platform.openai.com/tokenizer 在线计算
 
 应用
 
 * https://github.com/chenxi92/ChatGPT
 * https://github.com/Yoddikko/yoddChatGPT
+* https://github.com/KittenYang/charming-chatgpt Raycast 插件
 
 Chrome插件Web Chat GPT，可让你网络联通并实时搜索ChatGPT
 a i p r m是一款Chrome插件，提供预设好的各种prompt；

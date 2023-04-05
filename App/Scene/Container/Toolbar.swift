@@ -9,70 +9,72 @@
 #if targetEnvironment(macCatalyst)
 import UIKit
 
-class Toolbar: NSToolbar, NSToolbarDelegate {
-    init() {
-        super.init(identifier: .appMain)
-        delegate = self
-        displayMode = .iconOnly
-        allowsUserCustomization = true
-        showsBaselineSeparator = false
-    }
+class NSToolbarController {
+    private class ToolbarStates: NSObject, NSToolbarDelegate {
+        let additionalItems: [NSToolbarItem]
+        private var additionalItemsID = [NSToolbarItem.Identifier]()
 
-    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        [
-            .toggleSidebar, .back, .flexibleSpace
-        ]
-    }
-
-    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        [
-            .toggleSidebar, .back, .test, .test2,
-            .flexibleSpace, .space
-        ]
-    }
-
-    func toolbarImmovableItemIdentifiers(_ toolbar: NSToolbar) -> Set<NSToolbarItem.Identifier> {
-        [.toggleSidebar, .back]
-    }
-
-    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        #if DEBUG
-        if ApplicationDelegate().debug.debugSystemUI {
-            AppLog().debug("Toolbar> request item for \(itemIdentifier.rawValue)")
+        init(additionalItems: [NSToolbarItem]) {
+            self.additionalItems = additionalItems
+            additionalItemsID = additionalItems.map { $0.itemIdentifier }
         }
-        #endif
-        switch itemIdentifier {
-        case .back: return .back()
-        case .test: return .test()
-        case .test2: return .test2()
-        default: break
+
+        func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+            var ids: [NSToolbarItem.Identifier] = [
+                .toggleSidebar, .back, .flexibleSpace
+            ]
+            ids.append(contentsOf: additionalItemsID)
+            return ids
         }
-        if let index = additionalItemsID.firstIndex(of: itemIdentifier) {
-            return additionalItems[index]
+
+        func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+            var ids: [NSToolbarItem.Identifier] = [
+                .toggleSidebar, .back, .test, .test2,
+                .flexibleSpace, .space
+            ]
+            ids.append(contentsOf: additionalItemsID)
+            return ids
         }
-        return nil
+
+        func toolbarImmovableItemIdentifiers(_ toolbar: NSToolbar) -> Set<NSToolbarItem.Identifier> {
+            [.toggleSidebar, .back]
+        }
+
+        func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+            switch itemIdentifier {
+            case .back: return .back()
+            case .test: return .test()
+            case .test2: return .test2()
+            default: break
+            }
+            if let index = additionalItemsID.firstIndex(of: itemIdentifier) {
+                return additionalItems[index]
+            }
+            return nil
+        }
     }
 
-    private var additionalItemsID = [NSToolbarItem.Identifier]()
-    private(set) var additionalItems = [NSToolbarItem]()
+    var windowTitleBar: UITitlebar!
+    private var toolbarStatus: ToolbarStates?
+    private(set) var additionalItems: [NSToolbarItem]?
 
-    func setAdditionalItems(_ additions: [NSToolbarItem]) {
-        if additions == additionalItems { return }
-        assert(delegate != nil)
-        additionalItems.forEach {
-            if let idx = items.firstIndex(of: $0) {
-                removeItem(at: idx)
+    func update(additionalItems newItems: [NSToolbarItem]) {
+        if additionalItems == newItems {
+            if windowTitleBar.toolbar != nil {
+                return
             }
         }
-        additionalItemsID = additions.map { $0.itemIdentifier }
-        additionalItems = additions
-        additions.forEach {
-            insertItem(withItemIdentifier: $0.itemIdentifier, at: items.count)
-        }
-    }
-
-    @IBAction func toolBarTest(_ sender: Any) {
-        debugPrint("test")
+        // Due to system bug, have to create a new toolbar every time.
+        // When there are multiple windows, removeItem(at:) may go out of bounds.
+        let newStatus = ToolbarStates(additionalItems: newItems)
+        let newToolbar = NSToolbar(identifier: .appMain)
+        newToolbar.delegate = newStatus
+        newToolbar.displayMode = .iconOnly
+        newToolbar.allowsUserCustomization = true
+        newToolbar.showsBaselineSeparator = false
+        additionalItems = newItems
+        toolbarStatus = newStatus
+        windowTitleBar.toolbar = newToolbar
     }
 }
 

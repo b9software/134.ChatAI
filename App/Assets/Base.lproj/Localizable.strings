@@ -14,7 +14,13 @@
 "chat.deleted" = "Deleted";
 "chat.deleteRestore" = "Undelete";
 "chat.deleteNow" = "Delete Immediately";
+
 "chat.setupBeforeUseNotice" = "You must set up the engine before you can chat.";
+"chat.setting.choiceEngine" = "Please choose a engine.";
+"chat.setting.choiceModel" = "Please choose a model.";
+"chat.setting.selectBadEngine" = "This engine is anomalous.";
+"chat.setting.engineMissingKey" = "This engine is missing the API key, please update it or choose another one.";
+"chat.setting.modelFetching" = "Fetching models...";
 
 "engine.create.step-verify" = "Verifying....";
 "engine.create.step-models" = "Checking models...";
@@ -25,4 +31,5 @@
 "engine.create.fail.hash-key" = "Unable to generate secure data for key.";
 "engine.create.fail.exist-key" = "Engine with the given key already exist.";
 
+"app.name" = "B9ChatAI";
 "app.privacy-sort" = "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.";

@@ -1,0 +1,15 @@
+/* Class = "UIButton"; configuration.title = "Deleted"; ObjectID = "sidebar-deleted-button"; */
+"sidebar-deleted-button.configuration.title" = "已删除";
+
+/* Class = "UIButton"; configuration.title = "Guide"; ObjectID = "sidebar-guide-button"; */
+"sidebar-guide-button.configuration.title" = "指南";
+
+/* Class = "UIButton"; configuration.title = "New Chat"; ObjectID = "sidebar-new-chat"; */
+"sidebar-new-chat.configuration.title" = "新会话";
+
+/* Class = "UIButton"; configuration.title = "Settings"; ObjectID = "sidebar-setting-button"; */
+"sidebar-setting-button.configuration.title" = "设置";
+
+/* Class = "UIButton"; configuration.title = "Archived"; ObjectID = "Wdx-eU-NKe"; */
+"Wdx-eU-NKe.configuration.title" = "已归档";
+

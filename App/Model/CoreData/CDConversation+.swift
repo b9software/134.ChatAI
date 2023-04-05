@@ -33,9 +33,16 @@ extension CDConversation {
     static var debugRequest: NSFetchRequest<CDConversation> {
         let request = fetchRequest()
         request.propertiesToFetch = [
-            titleKey,
+            "id", titleKey,
             updateTimeKey, lastTimeKey, archiveTimeKey, deleteTimeKey
         ]
+        return request
+    }
+
+    static func request(id: StringID) -> NSFetchRequest<CDConversation> {
+        let request = fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        request.fetchLimit = 1
         return request
     }
 
@@ -74,6 +81,15 @@ extension CDConversation {
 }
 
 extension CDConversation {
+    func isNewIDAvailable(newID: String) -> Bool {
+        read { this, ctx in
+            if newID == this.id {
+                return true
+            }
+            return try ctx.fetch(Self.request(id: newID)).first == nil
+        } ?? false
+    }
+
     func loadChatConfig() -> Conversation.ChatConfig? {
         guard let data = cSetting else { return nil }
         do {
