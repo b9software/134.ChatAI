@@ -74,20 +74,6 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     private func setupUIAppearance() {
-        // 列表 data source 全局调整
-        MBListDataSource<AnyObject>.defualtPageStartZero = false
-        MBListDataSource<AnyObject>.defaultPageSizeParameterName = "size"
-        MBListDataSource<AnyObject>.defaultFetchFailureHandler = { _, error in
-            let e = error as NSError
-            if e.domain == NSURLErrorDomain &&
-                (e.code == NSURLErrorTimedOut
-                || e.code == NSURLErrorNotConnectedToInternet) {
-                // 超时断网不报错
-            } else {
-                AppHUD().alertError(e, title: nil, fallbackMessage: "列表加载失败")
-            }
-            return false
-        }
     }
 
     override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -128,6 +114,9 @@ class ApplicationDelegate: MBApplicationDelegate {
 }
 
 // MARK: - Responder Chain
+private var lastCanPerformAction: Selector?
+private var lastTargetAction: Selector?
+
 extension ApplicationDelegate {
     override func validate(_ command: UICommand) {
         super.validate(command)
@@ -137,7 +126,8 @@ extension ApplicationDelegate {
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         let result = super.canPerformAction(action, withSender: sender)
         if debug.debugResponder {
-            if !["toolbarBack:"].contains(action.description) {
+            if lastCanPerformAction != action {
+                lastCanPerformAction = action
                 AppLog().debug("Responder> Can perform \(action) = \(result)")
             }
         }
@@ -147,7 +137,10 @@ extension ApplicationDelegate {
     override func target(forAction action: Selector, withSender sender: Any?) -> Any? {
         let target = super.target(forAction: action, withSender: sender)
         if debug.debugResponder {
-            AppLog().debug("Responder> action: \(action), sender: \(sender.debugDescription), target: \(target.debugDescription)")
+            if lastTargetAction != action {
+                lastTargetAction = action
+                AppLog().debug("Responder> action: \(action), sender: \(sender.debugDescription), target: \(target.debugDescription)")
+            }
         }
         return target
     }

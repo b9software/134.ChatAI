@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="-253" y="-92"/>
         </scene>
-        <!--Guide-->
+        <!--Welcome-->
         <scene sceneID="zxg-0m-tJw">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" title="Guide" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kl5-E5-bc5" customClass="WelcomeViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" title="Welcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kl5-E5-bc5" customClass="WelcomeViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ten-3A-6he">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

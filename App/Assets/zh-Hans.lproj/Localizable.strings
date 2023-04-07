@@ -20,6 +20,9 @@
 "chat.deleteRestore" = "还原删除";
 
 /* (No Comment) */
+"chat.setting.badSameID" = "已存在相同的 ID";
+
+/* (No Comment) */
 "chat.setting.choiceEngine" = "请选择一个引擎";
 
 /* (No Comment) */
@@ -33,6 +36,21 @@
 
 /* (No Comment) */
 "chat.setting.selectBadEngine" = "引擎数据异常";
+
+/* (No Comment) */
+"chat.setting.temperatureTipLower" = "更加专注和确定";
+
+/* (No Comment) */
+"chat.setting.temperatureTipStand" = "均衡的输出";
+
+/* (No Comment) */
+"chat.setting.temperatureTipUpper" = "更具创造性";
+
+/* (No Comment) */
+"chat.setting.topPossibleTipLower" = "限制只使用最常用的词句";
+
+/* (No Comment) */
+"chat.setting.topPossibleTipUpper" = "允许使用广泛的用词";
 
 /* (No Comment) */
 "chat.setupBeforeUseNotice" = "在开始聊天之前，你必须先设置好引擎";
@@ -86,5 +104,8 @@
 "menu.new.window" = "窗口";
 
 /* (No Comment) */
-"menu.setting" = "设置";
+"menu.setting" = "应用设置";
+
+/* (No Comment) */
+"menu.settingChat" = "会话设置";
 

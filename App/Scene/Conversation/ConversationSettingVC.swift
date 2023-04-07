@@ -33,16 +33,25 @@ class ConversationSettingViewController:
         stateLabel.text = nil
         if item.usableState == .forceSetup {
             cancelButton.isHidden = true
-            stateLabel.text = L.Chat.setupBeforeUseNotice
+            stateLabel.set(normal: L.Chat.setupBeforeUseNotice)
         }
         basicInfo.updateUI(item: item)
+        systemField.text = item.engineConfig.system
+        updateTemperature(item.engineConfig.temperature)
+        updateTopP(item.engineConfig.topP)
     }
 
     @IBOutlet private weak var contentContainer: UIScrollView!
     @IBOutlet private weak var basicInfo: CSBasicInfoScene!
 
+    @IBOutlet private weak var systemField: UITextView!
+    @IBOutlet private weak var temperatureSlider: UISlider!
+    @IBOutlet private weak var temperatureDescribeLabel: UILabel!
+    @IBOutlet private weak var topProbabilitySlider: UISlider!
+    @IBOutlet private weak var topProbabilityDescribeLabel: UILabel!
+
     @IBOutlet private weak var barContainer: UIView!
-    @IBOutlet private weak var stateLabel: UILabel!
+    @IBOutlet private weak var stateLabel: ErrorLabel!
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var submitButton: UIButton!
 }
@@ -54,16 +63,6 @@ extension ConversationSettingViewController {
         detail.addChild(vc)
         detail.view.addSubview(vc.view, resizeOption: .fill)
         vc.animateShown(animate: animate)
-    }
-
-    private func showState(_ str: String) {
-        stateLabel.text = str
-        stateLabel.isHighlighted = false
-    }
-
-    private func showError(_ str: String) {
-        stateLabel.text = str
-        stateLabel.isHighlighted = true
     }
 
     private func animateShown(animate: Bool) {
@@ -110,29 +109,49 @@ extension ConversationSettingViewController {
     }
 
     @IBAction private func onCancel(_ sender: Any) {
+        if item.usableState == .forceSetup {
+            stateLabel.set(error: L.Chat.setupBeforeUseNotice)
+            return
+        }
         dismiss(animate: true)
     }
 
     @IBAction private func onSubmit(_ sender: Any) {
         guard let engine = basicInfo.selectedEngine else {
-            showError(L.Chat.Setting.choiceEngine)
+            stateLabel.set(error: L.Chat.Setting.choiceEngine)
             return
         }
         guard let model = basicInfo.selectedModel else {
-            showError(L.Chat.Setting.choiceModel)
+            stateLabel.set(error: L.Chat.Setting.choiceModel)
             return
         }
+        let cfgChat = Conversation.ChatConfig(
+        )
+        let cfgEngine = Conversation.EngineConfig(
+            model: model,
+            system: systemField.text.trimmed(),
+            temperature: temperatureSlider.value,
+            topP: topProbabilitySlider.value
+        )
         do {
             try item.save(
                 name: basicInfo.nameField.text?.trimmed(),
                 id: basicInfo.idField.text?.trimmed(),
                 engine: engine,
-                model: model
+                cfgChat: cfgChat,
+                cfgEngine: cfgEngine
             )
             dismiss(animate: true)
         } catch {
-            showError(error.localizedDescription)
+            stateLabel.set(error: error.localizedDescription)
         }
+    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        [
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(onCancel)),
+            UIKeyCommand(input: "\r", modifierFlags: .command, action: #selector(onSubmit)),
+        ]
     }
 }
 
@@ -201,7 +220,6 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
     }
 
     func updateUIForEngineSelection() {
-        debugPrint(#function, isVisible)
         if let engine = selectedEngine {
             modelPickViews.views(hidden: false, animated: true)
             selectedModel = nil
@@ -262,4 +280,40 @@ class ModelNameSelectionCell: GeneralListCell {
     }
 
     @IBOutlet private weak var nameLabel: UILabel!
+}
+
+extension ConversationSettingViewController {
+    private func updateTemperature(_ value: FloatParameter) {
+        if abs(temperatureSlider.value - value) > 0.01 {
+            temperatureSlider.value = value
+        }
+        switch value {
+        case 0..<0.33:
+            temperatureDescribeLabel.text = L.Chat.Setting.temperatureTipLower
+        case 0.33..<0.66:
+            temperatureDescribeLabel.text = L.Chat.Setting.temperatureTipStand
+        default:
+            temperatureDescribeLabel.text = L.Chat.Setting.temperatureTipUpper
+        }
+    }
+
+    @IBAction private func onTemperatureSliderChange() {
+        updateTemperature(temperatureSlider.value)
+    }
+
+    private func updateTopP(_ value: FloatParameter) {
+        if abs(topProbabilitySlider.value - value) > 0.01 {
+            topProbabilitySlider.value = value
+        }
+        switch value {
+        case 0..<0.5:
+            topProbabilityDescribeLabel.text = L.Chat.Setting.topPossibleTipLower
+        default:
+            topProbabilityDescribeLabel.text = L.Chat.Setting.topPossibleTipUpper
+        }
+    }
+
+    @IBAction private func onTopPSliderChange() {
+        updateTopP(topProbabilitySlider.value)
+    }
 }

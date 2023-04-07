@@ -11,7 +11,7 @@ public extension CDConversation {
     override func awakeFromInsert() {
         super.awakeFromInsert()
         id = UUID().uuidString
-        updateTime = .current
+        createTime = .current
     }
 
     override func awakeFromFetch() {
@@ -26,7 +26,7 @@ public extension CDConversation {
 extension CDConversation {
     static let titleKey = #keyPath(CDConversation.title)
     static let lastTimeKey = #keyPath(CDConversation.lastTime)
-    static let updateTimeKey = #keyPath(CDConversation.updateTime)
+    static let createTimeKey = #keyPath(CDConversation.createTime)
     static let archiveTimeKey = #keyPath(CDConversation.archiveTime)
     static let deleteTimeKey = #keyPath(CDConversation.deleteTime)
 
@@ -34,7 +34,7 @@ extension CDConversation {
         let request = fetchRequest()
         request.propertiesToFetch = [
             "id", titleKey,
-            updateTimeKey, lastTimeKey, archiveTimeKey, deleteTimeKey
+            createTimeKey, lastTimeKey, archiveTimeKey, deleteTimeKey
         ]
         return request
     }
@@ -49,7 +49,7 @@ extension CDConversation {
     static var chatListRequest: NSFetchRequest<CDConversation> {
         let request = fetchRequest()
         request.sortDescriptors = [
-            NSSortDescriptor(key: updateTimeKey, ascending: false),
+            NSSortDescriptor(key: createTimeKey, ascending: false),
         ]
         request.predicate = NSPredicate(
             format: "%K == nil AND %K == nil",
@@ -101,7 +101,7 @@ extension CDConversation {
     }
 
     func loadEngineConfig() -> Conversation.EngineConfig? {
-        guard let data = cSetting else { return nil }
+        guard let data = eSetting else { return nil }
         do {
             return try Conversation.EngineConfig.decode(data)
         } catch {

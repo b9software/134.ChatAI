@@ -66,6 +66,15 @@ final class ObjectPool<Key: Hashable, Value: AnyObject> {
         return obj
     }
 
+    func updateObjectKey(from oldKey: Key, to newKey: Key) {
+        lock.lock()
+        defer { lock.unlock() }
+        if let obj = store[oldKey]?.object {
+            store[newKey] = Weak(object: obj)
+        }
+        store.removeValue(forKey: oldKey)
+    }
+
     func removeAll() {
         lock.lock()
         store = [:]

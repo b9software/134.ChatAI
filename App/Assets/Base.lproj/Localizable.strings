@@ -1,7 +1,8 @@
 
 "menu.archive" = "Archive";
 "menu.delete" = "Delete";
-"menu.setting" = "Settings";
+"menu.setting" = "Application Settings";
+"menu.settingChat" = "Conversation Settings";
 "menu.guide" = "Guide";
 "menu.new.conversation" = "Conversation";
 "menu.new.tab" = "Window Tab";
@@ -21,6 +22,12 @@
 "chat.setting.selectBadEngine" = "This engine is anomalous.";
 "chat.setting.engineMissingKey" = "This engine is missing the API key, please update it or choose another one.";
 "chat.setting.modelFetching" = "Fetching models...";
+"chat.setting.badSameID" = "The same ID already exists.";
+"chat.setting.temperatureTipLower" = "More focused and deterministic.";
+"chat.setting.temperatureTipStand" = "Balanced output.";
+"chat.setting.temperatureTipUpper" = "More interesting and creative.";
+"chat.setting.topPossibleTipLower" = "Sticks to the most likely words and phrases.";
+"chat.setting.topPossibleTipUpper" = "Allowed choose from a wider range of words and phrases.";
 
 "engine.create.step-verify" = "Verifying....";
 "engine.create.step-models" = "Checking models...";

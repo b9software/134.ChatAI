@@ -49,6 +49,21 @@ extension UITableView {
     var indexPathsForVisibleCells: [IndexPath] {
         visibleCells.compactMap { indexPath(for: $0) }
     }
+
+    /// 最后一行的 IndexPath
+    var lastRowIndexPath: IndexPath? {
+        let section = numberOfSections - 1
+        guard section >= 0 else { return nil }
+        let row = numberOfRows(inSection: section) - 1
+        guard row >= 0 else { return nil }
+        return IndexPath(row: row, section: section)
+    }
+
+    /// 滚动到最后一行
+    func scrollToLastRow(animated: Bool) {
+        guard let ip = lastRowIndexPath else { return }
+        scrollToRow(at: ip, at: .middle, animated: animated)
+    }
 }
 
 /// 防止 cell 高亮时变色

@@ -32,10 +32,14 @@ class ConversationCell:
 
     func updateUI() {
         guard let item = item else { return }
-        nameLabel.text = item.name
+        conversationListStateChanged(item)
     }
 
     @IBOutlet private weak var nameLabel: UILabel!
+
+    func conversationListStateChanged(_ item: Conversation) {
+        nameLabel.text = item.name
+    }
 }
 
 class ConversationEntityCell:

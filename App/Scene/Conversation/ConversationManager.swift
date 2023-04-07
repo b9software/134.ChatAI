@@ -66,13 +66,13 @@ class ConversationManager: NSObject {
     }
 
     private var needsReloadListAfterChangeEnd = false
-    private lazy var needsNoticeListChange = DelayAction(Action({ [weak self] in
+    private lazy var needsNoticeListChange = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
         sf.delegates.invoke {
             $0.conversations(sf, listUpdated: sf.listItems)
         }
         AppLog().debug("CM> Did notice list change")
-    }), queue: .main)
+    })
 }
 
 private var testCounter = 0
@@ -98,6 +98,8 @@ extension ConversationManager: NSFetchedResultsControllerDelegate {
                    let entity = anObject as? CDConversation {
                     handleListDelete(idx: idx, entity: entity)
                 }
+            case .move:
+                needsReloadListAfterChangeEnd = true
             default:
                 break
             }

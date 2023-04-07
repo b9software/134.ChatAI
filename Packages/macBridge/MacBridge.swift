@@ -39,6 +39,10 @@ class MacBridge: NSObject, MacInterface {
         }
     }
 
+    func beep() {
+        NSSound.beep()
+    }
+
     func sayHello() {
         let alert = NSAlert()
         alert.alertStyle = .informational

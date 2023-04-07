@@ -12,16 +12,43 @@ class SplitViewController: UIViewController {
     @IBOutlet private weak var sidebarContainer: UIView!
     @IBOutlet private weak var detailContainer: UIView!
 
+    let sidebarFocusGuide = UIFocusGuide()
+    let detailFocusGuide = UIFocusGuide()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initWidth()
         updateUI(compact: view.width < becomeCompactWidth)
         updateUI(isCollapsed: isCollapsed)
+//        view.addLayoutGuide(sidebarFocusGuide)
+//        view.addLayoutGuide(detailFocusGuide)
+//        sidebarFocusGuide.preferredFocusEnvironments = [sidebarContainer]
+//        detailFocusGuide.preferredFocusEnvironments = [detailContainer]
+//        NSLayoutConstraint.activate([
+//            sidebarFocusGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            sidebarFocusGuide.topAnchor.constraint(equalTo: view.topAnchor),
+//            sidebarFocusGuide.trailingAnchor.constraint(equalTo: sidebarContainer.trailingAnchor),
+//            sidebarFocusGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            detailFocusGuide.leadingAnchor.constraint(equalTo: sidebarFocusGuide.trailingAnchor),
+//            detailFocusGuide.topAnchor.constraint(equalTo: view.topAnchor),
+//            detailFocusGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            detailFocusGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//        ])
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setNeedsUpdateCompact()
+    }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        guard let next = context.nextFocusedItem else { return }
+        if next.focusGroupIdentifier == "sidebar_cmd" {
+            sidebarFocusGuide.preferredFocusEnvironments = [next]
+        }
+        AppLog().debug("Next: \(next)")
+        AppLog().debug("  parent: \(next.parentFocusEnvironment)")
+        AppLog().debug("  Container: \(next.focusItemContainer)")
     }
 
     // MARK: - Collapsed

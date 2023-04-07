@@ -21,7 +21,9 @@ final class DebugManager {
             UICommand(title: "Destroy Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
             UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
             UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
-            UICommand(title: "Debug Responder", action: #selector(ApplicationDelegate.debugResponderSwitch), state: debugResponder ? .on : .off),
+            UICommand(title: "Listen Focus Update", action: #selector(ApplicationDelegate.debugListenFocus), state: debugListenFocus ? .on : .off),
+            UICommand(title: "Log Responder Chain", action: #selector(ApplicationDelegate.debugResponderChain)),
+            UICommand(title: "Debug Action Target", action: #selector(ApplicationDelegate.debugResponderSwitch), state: debugResponder ? .on : .off),
         ])
         builder.insertSibling(menu, afterMenu: .window)
     }
@@ -35,6 +37,11 @@ final class DebugManager {
         get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
+
+    var debugListenFocus: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
+    }
 #else
     func setupMenu(builder: UIMenuBuilder) {}
 
@@ -43,6 +50,7 @@ final class DebugManager {
 }
 
 #if DEBUG
+private var focusSystemUpdateObserver: NSObjectProtocol?
 fileprivate extension ApplicationDelegate {
     @objc func debugRebuildMenu() {
         ApplicationMenu.setNeedsRebuild()
@@ -67,9 +75,33 @@ fileprivate extension ApplicationDelegate {
         ApplicationMenu.setNeedsRebuild()
     }
 
+    @objc func debugListenFocus() {
+        debug.debugListenFocus.toggle()
+        if debug.debugListenFocus {
+            focusSystemUpdateObserver = NotificationCenter.default.addObserver(forName: UIFocusSystem.didUpdateNotification, object: nil, queue: nil) { notice in
+                // swiftlint:disable:next force_cast
+                let itemDesc = (notice.object as! UIFocusSystem).focusedItem?.description ?? "nil"
+                AppLog().debug("\(notice.name.rawValue): \(itemDesc)")
+            }
+        } else {
+            NotificationCenter.default.removeObserver(focusSystemUpdateObserver as Any)
+        }
+    }
+
     @objc func debugResponderSwitch() {
         debug.debugResponder.toggle()
         ApplicationMenu.setNeedsRebuild()
+    }
+
+    @objc func debugResponderChain() {
+        var first: UIResponder? = UIResponder.firstResponder
+        print("First Responder: \(first?.description ?? "nil")")
+        while first != nil {
+            if let obj = first {
+                print("   | \(obj.description)")
+            }
+            first = first?.next
+        }
     }
 
     @objc func debugDumpDatabase() {

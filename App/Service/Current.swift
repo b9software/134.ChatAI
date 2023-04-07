@@ -2,7 +2,6 @@
 //  Current.swift
 //  B9ChatAI
 //
-//  Created by Joseph Zhao on 2023/4/1.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
@@ -25,6 +24,14 @@ enum Current {
         }()
     }
 
+    static var messageSender: MessageSender {
+        Mocked.messageSender ?? {
+            let instance = MessageSender()
+            Mocked.messageSender = instance
+            return instance
+        }()
+    }
+
     static var osBridge: MacInterface {
         Mocked.osBridge ?? {
             let instance = MockedMacInterface.load() ?? MockedMacInterface()
@@ -35,9 +42,10 @@ enum Current {
 }
 
 enum Mocked {
-    static var conversationManager: ConversationManager?
-    static var database: DBManager?
-    static var osBridge: MacInterface?
+      static var conversationManager: ConversationManager?
+      static var database: DBManager?
+      static var messageSender: MessageSender?
+      static var osBridge: MacInterface?
 
     static func reset() {
         conversationManager = nil

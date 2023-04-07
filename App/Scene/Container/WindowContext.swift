@@ -29,47 +29,24 @@ extension RootViewController {
 class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        let selectionInteraction = UITextInteraction(for: .nonEditable)
+
+        // Assign `textInput` to your view that implements the `UITextInput` protocol
+        // to get more control over the selection behavior and the text input system.
+        selectionInteraction.textInput = label
+
+        // Add the interaction to the view.
+        label.addInteraction(selectionInteraction)
     }
 
-    @IBAction private func onTest(_ sender: UIButton) {
-//        sender.isEnabled = false
-        if let task = testTask {
-            return
-        }
-        testTask = createTask()
-//        testTask = Task {
-//            try? await syncWork()
-//            sender.isEnabled = true
-//        }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            AppLog().debug("Work cancel")
-//            self.testTask?.cancel()
-//        }
+    @IBOutlet private weak var topDistance: NSLayoutConstraint!
+
+    @IBAction private func onAdd(_ sender: Any) {
+        topDistance.constant += 100
+    }
+    @IBAction private func onRemove(_ sender: Any) {
+        topDistance.constant -= 50
     }
 
-    func createTask() -> Task<[String], Error> {
-        Task {
-            AppLog().debug("Task <<<")
-            await Task.yield()
-            AppLog().debug("Task sleep")
-            sleep(10)
-
-            AppLog().debug("Task >>>")
-
-            return ["a", "b"]
-        }
-    }
-
-    func syncWork() async throws {
-        AppLog().debug("Work <<<")
-        try? await Task.sleep(nanoseconds: 1000000000)
-//        if Task.isCancelled {
-//            AppLog().debug("Work got cancel")
-//            return
-//        }
-        try Task.checkCancellation()
-        AppLog().debug("Work >>>")
-    }
-
-    var testTask: Task<[String], Error>?
+    @IBOutlet private weak var label: SelectableLabel!
 }

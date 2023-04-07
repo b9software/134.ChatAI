@@ -12,39 +12,42 @@ enum ApplicationMenu {
     static func build(_ builder: UIMenuBuilder) {
         builder.remove(menu: .format)
         builder.replace(menu: .newScene, with: UIMenu(title: L.Menu.new, children: [
-            UIKeyCommand(title: L.Menu.New.conversation, action: #selector(ApplicationDelegate.newConversation), input: "N", modifierFlags: .command, discoverabilityTitle: "New Conversation"),
-            UIKeyCommand(title: L.Menu.New.tab, action: #selector(NSStandardActions.newWindowForTab(_:)), input: "T", modifierFlags: [.command], discoverabilityTitle: "New Window Tab"),
-            UIKeyCommand(title: L.Menu.New.window, action: #selector(ApplicationDelegate.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
+            UIKeyCommand(title: L.Menu.New.conversation, action: #selector(StandardActions.newConversation), input: "N", modifierFlags: .command, discoverabilityTitle: "New Conversation"),
+            UIKeyCommand(title: L.Menu.New.tab, action: #selector(StandardActions.newWindowForTab(_:)), input: "T", modifierFlags: [.command], discoverabilityTitle: "New Window Tab"),
+            UIKeyCommand(title: L.Menu.New.window, action: #selector(StandardActions.newWindow), input: "T", modifierFlags: [.command, .shift], discoverabilityTitle: "New Window"),
         ]))
-//        let preferencesCommand = UIKeyCommand(input: ",", modifierFlags: [.command], action: #selector(ApplicationDelegate.newWindow))
-//        preferencesCommand.title = "Preferences..."
-//        let openPreferences = UIMenu(title: "Preferences...", image: nil, identifier: .preferences, options: .displayInline, children: [preferencesCommand])
-//        builder.replace(menu: .preferences, with: openPreferences)
+        var settingItem = builder.menu(for: .preferences) ?? UIMenu(title: L.Menu.setting, identifier: .preferences, options: .displayInline)
+        settingItem = settingItem.replacingChildren([
+            UIKeyCommand(title: L.Menu.setting, action: #selector(ApplicationDelegate.gotoSetting), input: ",", modifierFlags: [.command]),
+            UIKeyCommand(title: "Chat setting", action: #selector(StandardActions.gotoChatSetting), input: ",", modifierFlags: [.command, .shift]),
+        ])
+        builder.replace(menu: .preferences, with: settingItem)
         ApplicationDelegate().debug.setupMenu(builder: builder)
     }
 
     static func setNeedsRebuild() {
         UIMenuSystem.main.setNeedsRebuild()
     }
+
+    static func setNeedsRevalidate() {
+        UIMenuSystem.main.setNeedsRevalidate()
+    }
 }
 
 private extension ApplicationDelegate {
-    @IBAction func newConversation(_ sender: Any) {
-        debugPrint(#function)
+    @IBAction func gotoSetting(_ sender: Any) {
+        let activity = NSUserActivity(activityType: UserActivityType.setting.rawValue)
+        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: activity, options: nil)
     }
 
-    @IBAction func test333(_ sender: Any) {
-        debugPrint(#function)
-    }
-
-    @IBAction func newWindow(_ sender: Any) {
-        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { (error) in
-            //
-        }
+    @IBAction func newWindow(_ sender: Any?) {
+        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: nil, options: nil)
     }
 }
 
-
-final class NSStandardActions {
+final class StandardActions {
+    @IBAction func newConversation(_ sender: Any?) {}
+    @IBAction func newWindow(_ sender: Any?) {}
     @IBAction func newWindowForTab(_ sender: Any?) {}
+    @IBAction func gotoChatSetting(_ sender: Any?) {}
 }

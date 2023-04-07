@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum UserActivityType: String {
+    case setting
+    case newConversation
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
@@ -25,6 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             toolbarController.update(additionalItems: [])
         }
         #endif
+        AppLog().debug("Scene> Will connect, \(connectionOptions.userActivities).")
+        for activity in connectionOptions.userActivities {
+            session.stateRestorationActivity = activity
+        }
         /*
         switch AppUserDefaultsShared().preferredTheme {
         case 0:
@@ -51,7 +60,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        AppLog().debug("Scene> Active: \(scene.title ?? "?")")
+        AppLog().debug("Scene> Active: \(scene.title ?? "?"), activity:  \(scene.session.stateRestorationActivity?.activityType ?? "nil").")
+        guard let activity = scene.session.stateRestorationActivity else {
+            return
+        }
+        if activity.activityType == UserActivityType.setting.rawValue {
+            rootViewController.gotoSetting(self)
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

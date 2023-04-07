@@ -12,14 +12,19 @@ import CoreData
 private let conversationPool = ObjectPool<StringID, Conversation>()
 
 class Conversation {
-    let id: StringID
-    var entity: CDConversation
+    private(set) var id: StringID
+    private(set) var entity: CDConversation
     private(set) lazy var delegates = MulticastDelegate<ConversationUpdating>()
 
     var name: String {
         title ?? L.Chat.defaultTitle
     }
-    private var title: String?
+    private var title: String? {
+        didSet {
+            if oldValue == title { return }
+            needsListStateChanged.set()
+        }
+    }
 
     private init(entity: CDConversation) {
         self.id = entity.id!
@@ -31,6 +36,8 @@ class Conversation {
     static func from(entity: CDConversation) -> Conversation {
         conversationPool.object(key: entity.id!, creator: Conversation(entity: entity))
     }
+
+    private lazy var needsListStateChanged = DelayAction(.init(target: self, selector: #selector(noticeListStateChanged)))
 
     enum UsableState {
         case normal
@@ -50,6 +57,16 @@ class Conversation {
 
     struct EngineConfig: Codable, Equatable {
         var model: StringID?
+        var system: String?
+        var temperature: FloatParameter = 0.5
+        /// Tokens top probability
+        var topP: FloatParameter = 1
+        /// Presence penalty, between -2.0 and 2.0
+        var presenceP: FloatParameter = 0.5
+        /// Frequency penalty, between -2.0 and 2.0
+        var frequencyP: FloatParameter = 0.5
+        var choiceNumber = 1
+        var maxTokens = 0
     }
 
     private var _chatConfig: ChatConfig?
@@ -118,7 +135,7 @@ extension Conversation {
             _engineConfig = newValue
             entity.modify { this, _ in
                 Do.try {
-                    this.cSetting = try newValue.encode()
+                    this.eSetting = try newValue.encode()
                 }
             }
         }
@@ -152,19 +169,27 @@ extension Conversation {
         needsUpdateUsable.set()
     }
 
-    func save(name: String?, id: String?, engine: Engine, model: StringID) throws {
+    func send(text: String) {
+        Message.create(sendText: text, from: self)
+    }
+
+    func save(name: String?, id: String?, engine: Engine, cfgChat: ChatConfig, cfgEngine: EngineConfig) throws {
         let newID = id ?? self.id
         guard entity.isNewIDAvailable(newID: newID) else {
-            throw AppError.message("The same ID already exists.")
+            throw AppError.message(L.Chat.Setting.badSameID)
         }
-        if engineConfig.model != model {
-            var config = engineConfig
-            config.model = model
-            engineConfig = config
+        if self.id != newID {
+            conversationPool.updateObjectKey(from: self.id, to: newID)
+            self.id = newID
         }
-        engine.lastSelectedModel = model
+        if let model = cfgEngine.model {
+            engine.lastSelectedModel = model
+        }
         engine.updateUsedTime()
         self.engine = engine
+        title = name
+        chatConfig = cfgChat
+        engineConfig = cfgEngine
         entity.modify { this, _ in
             this.id = newID
             this.title = name
@@ -192,6 +217,12 @@ extension Conversation: Hashable, ItemTextSearchable {
 }
 
 // MARK: - 状态通知
+
+extension Conversation {
+    @objc private func noticeListStateChanged() {
+        delegates.invoke { $0.conversationListStateChanged(self) }
+    }
+}
 
 protocol ConversationUpdating {
     /// 影响会话列表的状态

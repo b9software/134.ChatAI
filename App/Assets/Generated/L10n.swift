@@ -37,6 +37,8 @@ internal enum L10n {
       /// Unarchive
       internal static let unArchive = L10n.tr("Localizable", "chat.unArchive", fallback: "Unarchive")
       internal enum Setting {
+        /// The same ID already exists.
+        internal static let badSameID = L10n.tr("Localizable", "chat.setting.badSameID", fallback: "The same ID already exists.")
         /// Please choose a engine.
         internal static let choiceEngine = L10n.tr("Localizable", "chat.setting.choiceEngine", fallback: "Please choose a engine.")
         /// Please choose a model.
@@ -47,6 +49,16 @@ internal enum L10n {
         internal static let modelFetching = L10n.tr("Localizable", "chat.setting.modelFetching", fallback: "Fetching models...")
         /// This engine is anomalous.
         internal static let selectBadEngine = L10n.tr("Localizable", "chat.setting.selectBadEngine", fallback: "This engine is anomalous.")
+        /// More focused and deterministic.
+        internal static let temperatureTipLower = L10n.tr("Localizable", "chat.setting.temperatureTipLower", fallback: "More focused and deterministic.")
+        /// Balanced output.
+        internal static let temperatureTipStand = L10n.tr("Localizable", "chat.setting.temperatureTipStand", fallback: "Balanced output.")
+        /// More interesting and creative.
+        internal static let temperatureTipUpper = L10n.tr("Localizable", "chat.setting.temperatureTipUpper", fallback: "More interesting and creative.")
+        /// Sticks to the most likely words and phrases.
+        internal static let topPossibleTipLower = L10n.tr("Localizable", "chat.setting.topPossibleTipLower", fallback: "Sticks to the most likely words and phrases.")
+        /// Allowed choose from a wider range of words and phrases.
+        internal static let topPossibleTipUpper = L10n.tr("Localizable", "chat.setting.topPossibleTipUpper", fallback: "Allowed choose from a wider range of words and phrases.")
       }
     }
     internal enum Engine {
@@ -82,8 +94,10 @@ internal enum L10n {
       internal static let guide = L10n.tr("Localizable", "menu.guide", fallback: "Guide")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
-      /// Settings
-      internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Settings")
+      /// Application Settings
+      internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Application Settings")
+      /// Conversation Settings
+      internal static let settingChat = L10n.tr("Localizable", "menu.settingChat", fallback: "Conversation Settings")
       internal enum New {
         /// Conversation
         internal static let conversation = L10n.tr("Localizable", "menu.new.conversation", fallback: "Conversation")

@@ -1,12 +1,15 @@
 /*
- MBHightlightTintImageView.swift
+ MBHighlightTintImageView.swift
 
- Copyright © 2020 BB9z.
+ Copyright © 2020, 2023 BB9z.
  https://github.com/BB9z/iOS-Project-Template
 
  The MIT License
  https://opensource.org/licenses/MIT
  */
+
+import B9Action
+import UIKit
 
 /**
  图片主题色根据高亮状态变化的 image view
@@ -15,33 +18,48 @@
  */
 class MBHighlightTintImageView: UIImageView {
 
-    private var normalTintColor: UIColor?
+    @IBInspectable var normalTintColor: UIColor? {
+        didSet { needsUpdateTint.set() }
+    }
     @IBInspectable var highlightTintColor: UIColor? {
-        didSet {
-            if isHighlighted, let color = highlightTintColor {
-                tintColor = color
-            }
-        }
+        didSet { needsUpdateTint.set() }
+    }
+
+    override var isHighlighted: Bool {
+        didSet { needsUpdateTint.set() }
     }
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        if isHighlighted {
-            return
-        }
-        normalTintColor = tintColor
+        needsUpdateTint.set()
     }
 
-    override var isHighlighted: Bool {
-        didSet {
-            guard let color = highlightTintColor else {
-                return
+    var intendedTintColor: UIColor? {
+        if let color = normalTintColor {
+            if !isHighlighted {
+                return color
             }
+        }
+        if let color = highlightTintColor {
             if isHighlighted {
-                tintColor = color
-            } else {
-                tintColor = normalTintColor
+                return color
             }
+        }
+        return nil
+    }
+
+    func setNeedsUpdateTintColor() {
+        needsUpdateTint.set()
+    }
+
+    private lazy var needsUpdateTint = DelayAction(Action { [weak self] in
+        self?.doUpdateTint()
+    })
+
+    private func doUpdateTint() {
+        let newTintColor = intendedTintColor ?? superview?.tintColor
+        if tintColor != newTintColor {
+            tintColor = newTintColor
         }
     }
 }

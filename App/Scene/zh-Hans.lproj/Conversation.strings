@@ -1,6 +1,9 @@
 /* Class = "UILabel"; text = "Conversation are available here for 30 days. After that time, conversations will be permanently deleted."; ObjectID = "chat-deleted-header-tip"; */
 "chat-deleted-header-tip.text" = "此处会话将会保留 30 天，之后会被永久删除";
 
+/* Class = "UIButton"; configuration.title = "SEND"; ObjectID = "chat-input-send-button"; Note = "<Pass>"; */
+"chat-input-send-button.configuration.title" = "发送";
+
 /* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "chat-setting-cancel-button"; */
 "chat-setting-cancel-button.configuration.title" = "取消";
 
@@ -37,6 +40,24 @@
 /* Class = "UILabel"; text = "The title display in list and window"; ObjectID = "chat-setting-name-tip"; */
 "chat-setting-name-tip.text" = "显示在列表和窗口上";
 
+/* Class = "UILabel"; text = "Parameters"; ObjectID = "chat-setting-parameters"; */
+"chat-setting-parameters.text" = "参数";
+
 /* Class = "UIButton"; configuration.title = "Save"; ObjectID = "chat-setting-save-button"; */
 "chat-setting-save-button.configuration.title" = "保存";
+
+/* Class = "UILabel"; text = "System"; ObjectID = "chat-setting-system-section"; */
+"chat-setting-system-section.text" = "交聚的话题";
+
+/* Class = "UILabel"; text = "Helps set the behavior of the assistant."; ObjectID = "chat-setting-system-tip"; */
+"chat-setting-system-tip.text" = "控制 AI 输出";
+
+/* Class = "UILabel"; text = "How much variation in output."; ObjectID = "chat-setting-temperature-tip"; */
+"chat-setting-temperature-tip.text" = "输出的随机性";
+
+/* Class = "UILabel"; text = "Richness of words used."; ObjectID = "chat-setting-topp-tip"; */
+"chat-setting-topp-tip.text" = "用词丰富程度";
+
+/* Class = "UIBarButtonItem"; title = "Setting"; ObjectID = "H5r-u7-O8f"; */
+"H5r-u7-O8f.title" = "会话设置";
 

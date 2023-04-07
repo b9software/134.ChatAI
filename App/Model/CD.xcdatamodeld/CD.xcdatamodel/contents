@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Conversation" representedClassName="CDConversation" syncable="YES" codeGenerationType="class">
+    <entity name="Conversation" representedClassName="CDConversation" syncable="YES">
         <attribute name="archiveTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="cSetting" optional="YES" attributeType="Binary"/>
         <attribute name="deleteTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eSetting" optional="YES" attributeType="Binary"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isTop" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="readTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="shortCut" optional="YES" attributeType="String"/>
+        <attribute name="sort" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="subType" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" attributeType="String" defaultValueString=""/>
@@ -22,7 +25,7 @@
             <fetchIndexElement property="id" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="Engine" representedClassName="CDEngine" syncable="YES" codeGenerationType="class">
+    <entity name="Engine" representedClassName="CDEngine" syncable="YES">
         <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
@@ -31,11 +34,19 @@
         <attribute name="usedTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="conversation" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="engine" inverseEntity="Conversation"/>
     </entity>
-    <entity name="Message" representedClassName="CDMessage" syncable="YES" codeGenerationType="class">
-        <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="time" attributeType="Date" defaultDateTimeInterval="-978336000" usesScalarValueType="NO"/>
+    <entity name="Message" representedClassName="CDMessage" syncable="YES">
+        <attribute name="by" optional="YES" attributeType="String"/>
+        <attribute name="content" optional="YES" attributeType="Binary"/>
+        <attribute name="end" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="medias" optional="YES" attributeType="Binary"/>
+        <attribute name="next" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="prev" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation"/>
     </entity>
     <configuration name="Cloud" usedWithCloudKit="YES">

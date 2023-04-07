@@ -33,7 +33,6 @@ enum ApplicationCondition {
 
 /// 窗口内部的状态
 enum SceneCondition {
-
 }
 
 #endif

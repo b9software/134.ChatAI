@@ -10,28 +10,25 @@ iOS 13+；Xcode 14.1+；macOS 13+。
 
 ```sh
 brew install cocoapods
-brew install fastlane  # 可选
-brew install swiftlint # 可选
 ```
 
-## 配置
+## URL Scheme
 
-项目初始化请双击执行 bootstrap.command，随引导操作。
+[打开应用](b9software.chat-ai://)
 
-command 脚本第一次运行时，系统可能会提示未认证的开发者禁止运行。可通过右键菜单，选择打开来解除限制。
-
-正常执行 CocoaPods 安装或用 fastlane 配置即可：
-
-```sh
-pod install
-或
-fastlane setup_project
-```
-
-资料：
+## 资料
 
 * https://github.com/mhdhejazi/Catalyst-AppKit mac 插件
 * https://github.com/openai/openai-cookbook
+
+渲染
+
+* https://github.com/johnxnguyen/Down 使用 cmark 解析
+* https://github.com/apple/swift-markdown 官方解析
+* https://github.com/SimonFairbairn/SwiftyMarkdown 看上去是目前首选
+* https://github.com/ruddfawcett/Notepad 高亮编辑
+* https://github.com/MacDownApp/macdown 应用
+* https://github.com/indragiek/CocoaMarkdown
 
 接口
 

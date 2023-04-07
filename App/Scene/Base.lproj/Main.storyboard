@@ -212,6 +212,7 @@
                                             <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" title="New Chat" imagePadding="8" buttonSize="large"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_list"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="onCreateNew:" destination="rPo-kp-4w0" eventType="touchUpInside" id="mma-pr-xx9"/>
@@ -233,7 +234,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li5-Is-CBx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li5-Is-CBx">
                                                     <rect key="frame" x="26" y="16" width="148" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -250,6 +251,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="Li5-Is-CBx" secondAttribute="bottom" constant="5" id="tpQ-HD-YpM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_list"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="nameLabel" destination="Li5-Is-CBx" id="Zg9-qJ-B89"/>
                                         </connections>
@@ -291,6 +295,7 @@
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_cmd"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onToggleArchive:" destination="rPo-kp-4w0" eventType="touchUpInside" id="M1G-Nj-mbL"/>
@@ -309,6 +314,7 @@
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_cmd"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onToggleDelete:" destination="rPo-kp-4w0" eventType="touchUpInside" id="QAs-ap-Jlk"/>
@@ -327,6 +333,7 @@
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_cmd"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="gotoGuide:" destination="UEZ-Ox-rsP" eventType="touchUpInside" id="MH9-Lt-hzL"/>
@@ -345,6 +352,7 @@
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_cmd"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="gotoSetting:" destination="UEZ-Ox-rsP" eventType="touchUpInside" id="lcN-UB-cgW"/>
@@ -389,6 +397,7 @@
                         <outlet property="deleteButton" destination="sidebar-deleted-button" id="q7g-T7-X7S"/>
                         <outlet property="guideButton" destination="sidebar-guide-button" id="LCa-PP-hex"/>
                         <outlet property="listView" destination="T4P-sY-sny" id="w4V-LS-1c4"/>
+                        <outlet property="newChatButton" destination="sidebar-new-chat" id="8zT-b8-hOD"/>
                         <outlet property="panelContainer" destination="Gbn-b1-m3B" id="Y9d-7r-iHf"/>
                         <outlet property="settingButton" destination="sidebar-setting-button" id="vdi-sR-b6k"/>
                     </connections>
@@ -397,10 +406,10 @@
             </objects>
             <point key="canvasLocation" x="-2505.3839364518976" y="787.90322580645159"/>
         </scene>
-        <!--SettingViewController-->
+        <!--WelcomeViewController-->
         <scene sceneID="hMP-6g-KCF">
             <objects>
-                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="SettingViewController" id="csS-Bd-1Sq" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Guide" referencedIdentifier="WelcomeViewController" id="csS-Bd-1Sq" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="k3h-KT-UQW"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IzP-m7-VLu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -412,57 +421,91 @@
             <objects>
                 <viewController id="yC0-8D-e4p" customClass="TestViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fRd-8b-XaP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="474"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="W:R H:R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwz-3o-0Df">
-                                <rect key="frame" x="40" y="125" width="103" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular" hidden="NO"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="W:R H:C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnG-Se-McX">
-                                <rect key="frame" x="40" y="205" width="103" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact-widthClass=regular" hidden="NO"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="W:C H:C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rM-ib-hYb">
-                                <rect key="frame" x="192" y="205" width="103" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact-widthClass=compact" hidden="NO"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="W:C H:R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lO2-bA-gsT">
-                                <rect key="frame" x="192" y="125" width="103" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fz5-sD-Niz">
-                                <rect key="frame" x="346" y="347" width="75" height="35"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSN-Jw-O6q" customClass="BottomStickyScrollview" customModule="B9ChatAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="300" height="414"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZRu-4J-RF9">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aK7-zN-n3t">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVA-ya-c0U">
+                                                <rect key="frame" x="0.0" y="100" width="300" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYJ-rJ-YNb">
+                                                <rect key="frame" x="0.0" y="200" width="300" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vr6-Kt-y9N">
+                                                <rect key="frame" x="0.0" y="300" width="300" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="400" id="KQw-wy-B3l"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="0CA-H4-X6K"/>
+                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="top" secondItem="WSN-Jw-O6q" secondAttribute="top" id="UOp-Ys-bYy"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZRu-4J-RF9" secondAttribute="trailing" id="e6C-dY-1UJ"/>
+                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="width" secondItem="WSN-Jw-O6q" secondAttribute="width" id="gJ8-un-nQv"/>
+                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="leading" secondItem="WSN-Jw-O6q" secondAttribute="leading" id="gNB-2b-ZER"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZRu-4J-RF9" secondAttribute="bottom" id="ppF-Qm-9df"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBc-M5-e4W">
+                                <rect key="frame" x="348" y="50" width="53" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                <connections>
+                                    <action selector="onAdd:" destination="yC0-8D-e4p" eventType="touchUpInside" id="3oZ-yU-Qk6"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha1-7H-yba">
+                                <rect key="frame" x="348" y="120" width="53" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="-"/>
+                                <connections>
+                                    <action selector="onRemove:" destination="yC0-8D-e4p" eventType="touchUpInside" id="61m-N3-f9Y"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iu3-lC-qcz" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
+                                <rect key="frame" x="353" y="236" width="155" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OzK-ys-XEM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OzK-ys-XEM" firstAttribute="bottom" secondItem="WSN-Jw-O6q" secondAttribute="bottom" constant="20" id="0js-3y-tVu"/>
+                            <constraint firstItem="WSN-Jw-O6q" firstAttribute="leading" secondItem="OzK-ys-XEM" secondAttribute="leading" constant="20" id="866-gA-eFB"/>
+                            <constraint firstItem="WSN-Jw-O6q" firstAttribute="top" secondItem="OzK-ys-XEM" secondAttribute="top" constant="20" id="PeI-MC-N7L"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playground" id="JWd-zy-7Jh"/>
                     <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="label" destination="iu3-lC-qcz" id="UpG-IU-e6C"/>
+                        <outlet property="topDistance" destination="UOp-Ys-bYy" id="zD5-hS-kuO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P8k-5S-dVe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1729" y="788"/>
+            <point key="canvasLocation" x="-1729.0379523389231" y="787.90322580645159"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="foV-UK-Rqx">
@@ -474,7 +517,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="csS-Bd-1Sq" kind="relationship" relationship="rootViewController" id="IUt-gU-Wnb"/>
+                        <segue destination="yC0-8D-e4p" kind="relationship" relationship="rootViewController" id="8ig-fi-wCd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ern-R7-bBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -660,6 +703,21 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

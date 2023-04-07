@@ -26,11 +26,16 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
         conversations(manager, listUpdated: manager.listItems)
         conversations(manager, hasArchived: manager.hasArchived)
         conversations(manager, hasDeleted: manager.hasDeleted)
+        RootViewController.of(view)?.sidebar = self
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateCommandButtonLayout()
+    }
+
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        [newChatButton]
     }
 
     private var selectedConversation: Conversation?
@@ -42,6 +47,7 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
         didSet { listView.dataSource = listDataSource }
     }
 
+    @IBOutlet private weak var newChatButton: UIButton!
     @IBOutlet private weak var commandButtonLayout: UIStackView!
     @IBOutlet private weak var archiveButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!

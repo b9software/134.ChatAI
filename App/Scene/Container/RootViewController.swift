@@ -20,6 +20,7 @@ class RootViewController: B9RootViewController {
 
     private(set) var navigator: NavigationController!
     private(set) var split: SplitViewController!
+    weak var sidebar: SidebarViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +37,6 @@ class RootViewController: B9RootViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if let titlebar = view.window?.windowScene?.titlebar {
-//            titlebar.toolbarStyle = .unified
-//            titlebar.toolbar = Toolbar()
-//        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -103,7 +100,10 @@ class RootViewController: B9RootViewController {
         navigator.setViewControllers([GuideViewController.newFromStoryboard()], animated: false)
     }
 
-    @IBAction private func gotoSetting(_ sender: Any) {
+    @IBAction func gotoSetting(_ sender: Any) {
+        if let _ = navigator.visibleViewController as? SettingViewController {
+            return
+        }
         navigator.setViewControllers([SettingViewController.newFromStoryboard()], animated: false)
     }
 

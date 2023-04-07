@@ -11,38 +11,36 @@ import Foundation
  UserDefaults 存一些简单的数据还是很好用的，方便，性能可以。但毕竟不是真正的数据库，应避免存入大量的数据。
 
  我记得它有存储量的限制，但文档里找不到了。在过去的实践中，存入量大时会出现存不进去的现象。
-
- 一些 key 加了下滑线前缀，是为了兼容旧版；新加的属性直接用 #function 就好
  */
 extension UserDefaults {
     /// 上次启动时间
     var applicationLastLaunchTime: Date? {
-        get { object(forKey: "_" + #function) as? Date }
-        set { set(newValue, forKey: "_" + #function) }
+        get { object(forKey: #function) as? Date }
+        set { set(newValue, forKey: #function) }
     }
 
     /// 上次启动时版本
     var lastVersion: String? {
-        get { string(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
+        get { string(forKey: #function) }
+        set { set(newValue, forKey: #function) }
     }
 
     /// 上次更新版本时的版本
     var previousVersion: String? {
-        get { string(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
+        get { string(forKey: #function) }
+        set { set(newValue, forKey: #function) }
     }
 
     /// App 总启动次数
     var launchCount: Int {
-        get { integer(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
+        get { integer(forKey: #function) }
+        set { set(newValue, forKey: #function) }
     }
 
     /// 当前版本启动次数
     var launchCountCurrentVersion: Int {
-        get { integer(forKey: "_" + #function) }
-        set { set(newValue, forKey: "_" + #function) }
+        get { integer(forKey: #function) }
+        set { set(newValue, forKey: #function) }
     }
 
     var iCloudEnable: Bool {

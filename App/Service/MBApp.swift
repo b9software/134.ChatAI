@@ -31,6 +31,7 @@ class MBApp: NSObject {
         guard let lastVersion = defaults.lastVersion else {
             // 全新启动
             defaults.lastVersion = version
+            defaults.preferredTheme = 2  // 默认暗黑
              // 一天内重新安装，通知会保留，需要清掉
              UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             return

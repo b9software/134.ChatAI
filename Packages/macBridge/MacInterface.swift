@@ -15,6 +15,9 @@ protocol MacInterface: NSObjectProtocol {
     func sayHello()
 
     var theme: Int { get set }
+
+    /// Plays the system beep.
+    func beep()
 }
 
 #if targetEnvironment(macCatalyst)
@@ -40,6 +43,8 @@ class MockedMacInterface: NSObject, MacInterface {
     }
 
     var theme: Int = 0
+
+    func beep() {}
 
     func sayHello() {}
 }

@@ -149,4 +149,6 @@ class Button: MBButton {
         }
         setNeedsUpdateConfiguration()
     }
+
+    override var canBecomeFocused: Bool { true }
 }

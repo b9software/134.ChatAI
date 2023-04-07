@@ -206,6 +206,10 @@ extension DBManager {
             items = try context.fetch(CDConversation.debugRequest)
             print("Conversation:")
             print((items as NSArray).description)
+
+            items = try context.fetch(CDMessage.fetchRequest())
+            print("Message:")
+            print((items as NSArray).description)
         }
     }
 }

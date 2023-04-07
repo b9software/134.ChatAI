@@ -10,9 +10,10 @@ import UIKit
 
 class ConversationDetailViewController:
     UIViewController,
-    StoryboardCreation,
+    ConversationUpdating,
     HasItem,
-    ConversationUpdating
+    StoryboardCreation,
+    UITableViewDelegate
 {
     static var storyboardID: StoryboardID { .conversation }
 
@@ -28,15 +29,32 @@ class ConversationDetailViewController:
     override func viewDidLoad() {
         super.viewDidLoad()
         conversation(item, useState: item.usableState)
+        listDataSource.conversation = item
     }
 
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
+
+    @IBOutlet private weak var listView: UITableView!
+    private lazy var listDataSource = MessageDataSource(tableView: listView)
+    var isReadingHistory = false {
+        didSet {
+            if oldValue == isReadingHistory { return }
+            AppLog().debug("CD> isReadingHistory => \(isReadingHistory)")
+        }
+    }
+
     @IBOutlet private weak var barLayoutContainer: UIView!
     @IBOutlet private weak var standardBar: UIView!
     @IBOutlet private weak var inputTextView: UITextView!
     @IBOutlet private var inputTextHeight: NSLayoutConstraint!
     @IBOutlet private weak var inputSendButton: UIButton!
     private var isInputExpand = false
+    private var isInputAllowed = false {
+        didSet {
+            inputTextView.isEditable = isInputAllowed
+            inputSendButton.isEnabled = isInputAllowed
+        }
+    }
 }
 
 extension ConversationDetailViewController {
@@ -46,10 +64,42 @@ extension ConversationDetailViewController {
                 ConversationSettingViewController.showFrom(detail: self, animate: false)
             }
         }
+        isInputAllowed = useState == .normal
     }
 
-    @IBAction private func onShowSetting(_ sender: Any) {
-        if let vc = children.first(where: { $0 is ConversationSettingViewController }) as? ConversationSettingViewController {
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        [listView, inputTextView]
+    }
+    override var canBecomeFirstResponder: Bool { true }
+
+    override func becomeFirstResponder() -> Bool {
+        ApplicationMenu.setNeedsRevalidate()
+        return super.becomeFirstResponder()
+    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        var commands = [UIKeyCommand]()
+        if isInputAllowed {
+            commands.append(.init(input: "\r", modifierFlags: .command, action: #selector(onSend)))
+        }
+        return commands
+    }
+}
+
+// MARK: - Setting
+
+extension ConversationDetailViewController {
+    var currentSetting: ConversationSettingViewController? {
+        children.first(where: { $0 is ConversationSettingViewController }) as? ConversationSettingViewController
+    }
+
+    // StandardActions
+    @IBAction func gotoChatSetting(_ sender: Any?) {
+        toggleSetting(sender)
+    }
+
+    @IBAction func toggleSetting(_ sender: Any?) {
+        if let vc = currentSetting {
             if item.usableState == .forceSetup {
                 return
             }
@@ -60,15 +110,46 @@ extension ConversationDetailViewController {
     }
 }
 
+// MARK: -
+
+extension ConversationDetailViewController {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            UIFocusSystem.focusSystem(for: tableView)?.requestFocusUpdate(to: cell)
+        }
+    }
+
+    var isLastCellVisable: Bool {
+        let lastRow = listView.numberOfRows(inSection: 0) - 1
+        return listView.indexPathsForVisibleRows?.contains(IndexPath(row: lastRow, section: 0)) == true
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == listView {
+            isReadingHistory = !isLastCellVisable
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == listView {
+//            if scrollView.contentOffset.y < 200 {
+//                listDataSource.loadHistory()
+//            }
+        }
+//        AppLog().debug("didscroll \(scrollView.contentOffset), tracking: \(scrollView.isTracking), Drag:\(scrollView.isDragging)")
+    }
+
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        if scrollView == listView {
+            listView.scrollToLastRow(animated: true)
+        }
+        return false
+    }
+}
+
 // MARK: - Input
 
 extension ConversationDetailViewController: UITextViewDelegate {
-    override var keyCommands: [UIKeyCommand]? {
-        [
-            UIKeyCommand(input: "\r", modifierFlags: .command, action: #selector(onSend)),
-        ]
-    }
-
     // 可以 track +shift
 //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 //        debugPrint("begin", presses)
@@ -80,6 +161,10 @@ extension ConversationDetailViewController: UITextViewDelegate {
 //    }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\t" {
+            textView.resignFirstResponder()
+            return false
+        }
         return true
     }
 
@@ -110,7 +195,9 @@ extension ConversationDetailViewController: UITextViewDelegate {
     }
 
     @IBAction private func onSend() {
-        print("Send!")
+        if let text = inputTextView.text.trimmed() {
+            item.send(text: text)
+        }
         inputTextView.text = nil
         setInputExpand(false, animate: true)
     }
