@@ -19,7 +19,7 @@
         <relationship name="engine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Engine" inverseName="conversation" inverseEntity="Engine"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="conversation" inverseEntity="Message"/>
         <fetchIndex name="byTime">
-            <fetchIndexElement property="lastTime" type="Binary" order="ascending"/>
+            <fetchIndexElement property="createTime" type="Binary" order="ascending"/>
         </fetchIndex>
         <fetchIndex name="byID">
             <fetchIndexElement property="id" type="Binary" order="ascending"/>
@@ -47,7 +47,9 @@
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="child" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="parent" inverseEntity="Message"/>
         <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="child" inverseEntity="Message"/>
     </entity>
     <configuration name="Cloud" usedWithCloudKit="YES">
         <memberEntity name="Conversation"/>

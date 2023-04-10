@@ -125,9 +125,9 @@ extension ConversationSettingViewController {
             stateLabel.set(error: L.Chat.Setting.choiceModel)
             return
         }
-        let cfgChat = Conversation.ChatConfig(
+        let cfgChat = ChatConfig(
         )
-        let cfgEngine = Conversation.EngineConfig(
+        let cfgEngine = EngineConfig(
             model: model,
             system: systemField.text.trimmed(),
             temperature: temperatureSlider.value,

@@ -90,20 +90,20 @@ extension CDConversation {
         } ?? false
     }
 
-    func loadChatConfig() -> Conversation.ChatConfig? {
+    func loadChatConfig() -> ChatConfig? {
         guard let data = cSetting else { return nil }
         do {
-            return try Conversation.ChatConfig.decode(data)
+            return try ChatConfig.decode(data)
         } catch {
             AppLog().critical("Unable decode ChatConfig: \(error)")
             return nil
         }
     }
 
-    func loadEngineConfig() -> Conversation.EngineConfig? {
+    func loadEngineConfig() -> EngineConfig? {
         guard let data = eSetting else { return nil }
         do {
-            return try Conversation.EngineConfig.decode(data)
+            return try EngineConfig.decode(data)
         } catch {
             AppLog().critical("Unable decode EngineConfig: \(error)")
             return nil

@@ -149,6 +149,7 @@ class MessageBaseCell:
             prepareAsyncLoad()
             sizeView?.isEnable = false
         }
+        messageSendStateChanged(item)
     }
 
     func messageDetailReady(_ item: Message) {
@@ -156,6 +157,10 @@ class MessageBaseCell:
             updateUI(item: item)
             sizeView?.isEnable = true
         }
+    }
+
+    func messageSendStateChanged(_ item: Message) {
+        // overwrite
     }
 
     func prepareAsyncLoad() {
@@ -177,11 +182,43 @@ class MessageMyTextCell: MessageBaseCell {
     }
 
     override func updateUI(item: Message) {
-        contentLabel.text = item.cachedText
+        contentLabel.text = item.cachedText ?? "❓"
     }
 
     @IBOutlet private weak var contentLabel: UILabel!
 }
+
+class MessageTextCell: MessageBaseCell {
+    static let id = "Text"
+
+    override func prepareAsyncLoad() {
+        contentLabel.text = "..."
+    }
+
+    override func updateUI(item: Message) {
+        contentLabel.text = item.cachedText ?? "❓"
+    }
+
+    override func messageSendStateChanged(_ item: Message) {
+        super.messageSendStateChanged(item)
+        stopButton.isHidden = !(item.senderState?.isSending ?? false)
+        stopButton.configuration?.subtitle = item.senderState?.error?.localizedDescription
+    }
+
+    func messageReceiveDeltaReplay(_ item: Message, text: String) {
+        contentLabel.text = (contentLabel.text ?? "") + text
+        AppLog().warning("\(contentLabel.text)")
+        contentLabel.setNeedsDisplay()
+    }
+
+    @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet private weak var stopButton: UIButton!
+
+    @IBAction private func onStop(_ sender: Any) {
+        item.stopResponse()
+    }
+}
+
 
 class MessageUnsupportedCell: MessageBaseCell {
     static let id = "Unsupported"

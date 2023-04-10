@@ -57,6 +57,8 @@ class ApplicationDelegate: MBApplicationDelegate {
 //        MBEnvironment.registerWorkers()
 //        RFKeyboard.autoDisimssKeyboardWhenTouch = true
         setupUIAppearance()
+        if isTesting { return true }
+        Current.messageSender.startIfNeeded()
         return true
     }
 

@@ -19,34 +19,10 @@ class OANetwork {
         config.httpCookieAcceptPolicy = .always
         config.httpAdditionalHeaders = [
             "Authorization": "Bearer \(apiKey)",
-            "Content-Type": "application/json; charset=utf-8",
+            "Content-Type": "application/json",
+            "User-Agent": Current.userAgent,
         ]
         session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
-    }
-
-    class Request<Success> {
-        var result: Result<Success, Error>? {
-            didSet {
-                if let result = result, let cb = completion {
-                    cb(result)
-                    completion = nil
-                }
-            }
-        }
-        var task: URLSessionTask?
-        var completion: ((Result<Success, Error>) -> Void)?
-        var request: URLRequest?
-        var response: URLResponse?
-
-        func cancel() {
-            if let task = task {
-                task.cancel()
-                self.task = nil
-            }
-            if result == nil {
-                result = .failure(AppError.cancel)
-            }
-        }
     }
 
     func request(path: String) throws -> URLRequest {
@@ -66,7 +42,7 @@ class OANetwork {
         request.httpBody = body.data(using: .utf8)
 
         var (data, response) = try await session.data(for: request)
-        data = try handleResponse(data: data, response: response, error: nil)
+        data = try handleResponse(data: data, response: response)
         let talk = try OAChatCompletion.decode(data)
         return talk
     }
@@ -74,46 +50,86 @@ class OANetwork {
     func listModel() async throws -> [OAModel] {
         let request = URLRequest(url: URL(string: "/v1/models", relativeTo: baseURL)!)
         var (data, response) = try await session.data(for: request)
-        data = try handleResponse(data: data, response: response, error: nil)
+        data = try handleResponse(data: data, response: response)
         return try [OAModel].decode(data)
+    }
+
+    func steamChat(config: EngineConfig, messages: [OAChatMessage]) async throws -> AsyncThrowingStream<OAChatCompletion.Choice, Error> {
+        var param = try config.toOpenAIParameters()
+        var pMsg = messages
+        if let system = config.system {
+            pMsg.insert(.init(role: .system, content: system), at: 0)
+        }
+        param["messages"] = pMsg.map { ["role": $0.role?.rawValue, "content": $0.content] }
+        param["user"] = Current.identifierForVendor
+        param["stream"] = true
+
+        var request = URLRequest(url: URL(string: "/v1/chat/completions", relativeTo: baseURL)!)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 90
+        request.httpBody = try JSONSerialization.data(withJSONObject: param)
+
+        let (result, response) = try await session.bytes(for: request)
+        try await handleResponse(stream: result, response: response)
+        return AsyncThrowingStream<OAChatCompletion.Choice, Error> { checked in
+            Task {
+                do {
+                    for try await line in result.lines {
+                        let part = try decodeStream(line: line)
+                        guard let choices = part?.choices else { continue }
+                        for choice in choices {
+                            checked.yield(choice)
+                            // TODO: fix multi choice end
+                            if choice.finishReason != nil {
+                                checked.finish()
+                                return
+                            }
+                        }
+                    }
+                } catch {
+                    checked.finish(throwing: error)
+                }
+            } // End: Task
+        } // End: Async Stream
+    }
+
+    private func decodeStream(line: String) throws -> OAChatCompletion? {
+        AppLog().debug("OA> Stream line: \(line)")
+        guard line.hasPrefix("data:") else { return nil }
+        guard let data = line.dropFirst(5).data(using: .utf8) else {
+            throw AppError.message("Bad stream data.")
+        }
+        return try OAChatCompletion.decode(data)
     }
 }
 
 // MARK: - Response
 
-struct OAErrorDetail: Codable {
-    var message: String?
-    var type: String?
-    var code: String?
-}
-
-struct OAError: Codable, LocalizedError {
-    var error: OAErrorDetail?
-
-    var errorDescription: String? {
-        guard let info = error else {
-            return "Unknown OpenAI error."
-        }
-        var msg = info.message ?? "Unknown OpenAI error."
-        if let type = info.code ?? info.type {
-            msg += " [\(type)]"
-        }
-        return msg
-    }
-
-    var isInvalidApiKey: Bool {
-        error?.code == "invalid_api_key"
-    }
-}
-
 extension OANetwork {
-    func handleResponse(data: Data?, response: URLResponse?, error: Error?) throws -> Data {
-        if let err = error { throw err }
+    func handleResponse(stream: URLSession.AsyncBytes, response: URLResponse) async throws {
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return
+        }
+        let statusCode = httpResponse.statusCode
+        guard 200..<300 ~= statusCode else {
+            var body = ""
+            for try await line in stream.lines {
+                body += line
+            }
+            let data = body.data(using: .utf8, allowLossyConversion: true)
+            if let error = tryDecodeErrorStruct(from: data) {
+                throw error
+            }
+            let description = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+            throw AppError.message("HTTP \(statusCode): \(description).")
+        }
+    }
+
+    func handleResponse(data: Data?, response: URLResponse) throws -> Data {
         if let httpResponse = response as? HTTPURLResponse {
             // 检查 HTTP 状态码
             let statusCode = httpResponse.statusCode
-            let isSuccessStatus = 200..<300 ~= statusCode
-            guard isSuccessStatus else {
+            guard 200..<300 ~= statusCode else {
                 if let error = tryDecodeErrorStruct(from: data) {
                     throw error
                 }

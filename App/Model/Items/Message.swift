@@ -48,6 +48,8 @@ class Message {
         case pend = 2
         /// 发现创建完成后较久仍未完成设置，不再自动请求，需用户需要手动点击
         case froze = 4
+        /// 出错了
+        case error = 9
     }
 
     let id: UUID
@@ -70,9 +72,34 @@ class Message {
     }
 
     // 缓存内容
-    var cachedText: String?
+    private(set) var cachedText: String?
+    private(set) weak var conversation: Conversation?
+
+    /// MessageSender 专用
+    var senderState: SenderState? {
+        didSet {
+            if oldValue == senderState { return }
+            needsNoticeSendStateChange.set()
+            if let err = senderState?.error {
+                AppLog().warning("Message send error: \(err.localizedDescription).")
+                entity.modify { this, _ in
+                    this.mState = .error
+                }
+            } else if senderState == nil {
+                entity.modify { this, _ in
+                    assert(this.text != nil)
+                    assert(this.content != nil)
+                    this.mState = .normal
+                }
+            }
+        }
+    }
 
     private(set) lazy var delegates = MulticastDelegate<MessageUpdating>()
+    private lazy var needsNoticeSendStateChange = DelayAction(Action { [weak self] in
+        guard let sf = self else { return }
+        sf.delegates.invoke { $0.messageSendStateChanged(sf) }
+    })
     private lazy var needsNoticeDetailReady = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
         sf.delegates.invoke { $0.messageDetailReady(sf) }
@@ -80,22 +107,14 @@ class Message {
 }
 
 extension Message {
-    static func create(sendText: String, from chatItem: Conversation) {
-        let chatID = chatItem.entity.access { $0.objectID }
+    static func create(sendText: String, from chatItem: Conversation, reply: Message?) {
+        // TODO: 出错了得通知用户
         Current.database.context.async { ctx in
-            let safeChat = ctx.object(with: chatID) as? CDConversation
-
-            let myEntity = CDMessage.createMy(ctx, text: sendText)
-            myEntity.conversation = safeChat
-
-            let replyEntity = CDMessage(context: ctx)
-            replyEntity.type = MType.changeable.rawValue
-            replyEntity.mRole = .assistant
-            replyEntity.mState = .pend
-            replyEntity.conversation = safeChat
-
-            myEntity.next = replyEntity.uid
-            replyEntity.prev = myEntity.uid
+            let chatID = chatItem.entity.access { $0.objectID }
+            let replyID = reply?.entity.access { $0.objectID }
+            let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
+            myEntity.mType = .text
+            myEntity.text = sendText
         }
     }
 
@@ -122,6 +141,60 @@ extension Message {
             needsNoticeDetailReady.set()
         }
     }
+
+    func loadConversation() async throws -> Conversation {
+        if let conversation = conversation { return conversation }
+        guard let ctx = entity.managedObjectContext else {
+            fatalError()
+        }
+        return try await ctx.perform(schedule: .enqueued) { [self] in
+            guard let chatEntity = self.entity.conversation else {
+                throw AppError.message("\(self) no conversation.")
+            }
+            return Conversation.from(entity: chatEntity)
+        }
+    }
+
+    func onSteamResponse(_ choice: OAChatCompletion.Choice) {
+        assertDispatch(.notOnQueue(.main))
+        assert(senderState?.isSending == true)
+        guard let delta = choice.delta else {
+            AppLog().warning("choice.delta should not be nil.")
+            return
+        }
+        if let value = delta.role {
+            assert(value == .assistant)
+            // 开始接收
+            cachedText = ""
+        }
+        if let content = delta.content {
+            assert(cachedText != nil)
+            cachedText?.append(contentsOf: content)
+            AppLog().debug("Reviving in message: \(content).")
+            dispatch_sync_on_main {
+                self.delegates.invoke { $0.messageReceiveDeltaReplay(self, text: content) }
+            }
+        }
+        if let finished = choice.finishReason {
+            entity.modify { this, _ in
+                var content = this.mContent ?? CDMessageContent()
+                if finished == "length" {
+                    content.isEnd = false
+                } else {
+                    assert(finished == "stop")
+                }
+                this.text = self.cachedText
+                this.mContent = content
+            }
+            needsNoticeDetailReady.set()
+        }
+    }
+
+    func stopResponse() {
+        Task {
+            await Current.messageSender.stop(message: self)
+        }
+    }
 }
 
 extension Message: Hashable, ListItem, CustomDebugStringConvertible {
@@ -136,7 +209,12 @@ extension Message: Hashable, ListItem, CustomDebugStringConvertible {
     func cellIdentifier(for: UITableView, indexPath: IndexPath) -> String {
         if role == .me {
             if type == .text { return MessageMyTextCell.id }
-            return MessageUnsupportedCell.id
+        } else if role == .assistant {
+            if type == .changeable {
+                return MessageUnsupportedCell.id
+            } else if type == .text {
+                return MessageTextCell.id
+            }
         }
         return MessageUnsupportedCell.id
     }
@@ -153,9 +231,16 @@ extension Message {
 }
 
 protocol MessageUpdating {
+    /// 数据已从数据库加载完毕，可以显示了
     func messageDetailReady(_ item: Message)
+    /// 发送/接收状态更新
+    func messageSendStateChanged(_ item: Message)
+    /// 接收到数据片段
+    func messageReceiveDeltaReplay(_ item: Message, text: String)
 }
 
 extension MessageUpdating {
     func messageDetailReady(_: Message) {}
+    func messageSendStateChanged(_ item: Message) {}
+    func messageReceiveDeltaReplay(_ item: Message, text: String) {}
 }

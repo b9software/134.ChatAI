@@ -92,6 +92,7 @@ public class CDMessage: NSManagedObject {
     }
 
     @NSManaged public var uid: UUID!
+    /// 上下文创建时间，用于列表排序
     @NSManaged public var time: Date!
     @NSManaged public var by: String!
 
@@ -105,15 +106,30 @@ public class CDMessage: NSManagedObject {
     @NSManaged public var updateTime: Date?
     /// 缓存的文本内容，简单的文本消息直接存这
     @NSManaged public var text: String?
-    /// 上下文关联
-    @NSManaged public var prev: UUID?
-    /// 上下文关联
-    @NSManaged public var next: UUID?
-
     /// 消息状态，暂定发送状态
     @NSManaged public var state: Int16
     /// 结束状态，区分是否还有下文
     @NSManaged public var end: Int16
 
     @NSManaged public var conversation: CDConversation?
+
+    /// 上下文关联，双向链表；对于 parent，指向子的第一个
+    @NSManaged public var prev: UUID?
+    /// 上下文关联，双向链表；对于 parent，指向子的最后一个
+    @NSManaged public var next: UUID?
+
+    @NSManaged public var child: NSSet?
+    @NSManaged public var parent: CDMessage?
+
+    @objc(addChildObject:)
+    @NSManaged public func addToChild(_ value: CDMessage)
+
+    @objc(removeChildObject:)
+    @NSManaged public func removeFromChild(_ value: CDMessage)
+
+    @objc(addChild:)
+    @NSManaged public func addToChild(_ values: NSSet)
+
+    @objc(removeChild:)
+    @NSManaged public func removeFromChild(_ values: NSSet)
 }

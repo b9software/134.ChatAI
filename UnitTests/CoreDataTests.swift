@@ -19,12 +19,12 @@ class CoreDataTests: TestCase {
 
         let msg1 = CDMessage(context: ctx)
         msg1.time = Date("2020-02-20 00:01:02")
-        msg1.content = "test message 1"
+        msg1.text = "test message 1"
         msg1.conversation = conv
 
         let msg2 = CDMessage(context: ctx)
         msg2.time = Date("2020-02-20 00:02:03")
-        msg2.content = "test message 2"
+        msg2.text = "test message 2"
         msg2.conversation = conv
 
         try ctx.save()

@@ -9,6 +9,7 @@ import Foundation
 
 // swiftlint:disable identifier_name
 
+/// 模型列表的响应
 struct OAModel:
     Codable,
     Hashable,

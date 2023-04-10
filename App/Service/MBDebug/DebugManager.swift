@@ -16,6 +16,7 @@ final class DebugManager {
             UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
             UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
             UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
+            UICommand(title: "Dump Sender", action: #selector(ApplicationDelegate.debugLogSender)),
             UICommand(title: "Engine no key", action: #selector(ApplicationDelegate.debugEngineCreateWithNoKey)),
             UICommand(title: "Engine invalid key", action: #selector(ApplicationDelegate.debugEngineCreateWithInvalidKey)),
             UICommand(title: "Destroy Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
@@ -106,6 +107,12 @@ fileprivate extension ApplicationDelegate {
 
     @objc func debugDumpDatabase() {
         Current.database.dump()
+    }
+
+    @objc func debugLogSender() {
+        Task {
+            await Current.messageSender.logDebugDescription()
+        }
     }
 
     @objc func debugEngineCreateWithNoKey() {

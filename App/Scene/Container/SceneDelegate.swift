@@ -34,18 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         for activity in connectionOptions.userActivities {
             session.stateRestorationActivity = activity
         }
-        /*
-        switch AppUserDefaultsShared().preferredTheme {
-        case 0:
-            window?.overrideUserInterfaceStyle = .unspecified
-        case 1:
-            window?.overrideUserInterfaceStyle = .light
-        case 2:
-            window?.overrideUserInterfaceStyle = .dark
-        default:
-            break
-        }
-         */
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 200)
     }
 

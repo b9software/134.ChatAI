@@ -24,6 +24,14 @@ enum Current {
         }()
     }
 
+    static var identifierForVendor: String {
+        Mocked.identifierForVendor ?? {
+            let uuid = (UIDevice.current.identifierForVendor ?? UUID()).uuidString
+            Mocked.identifierForVendor = uuid
+            return uuid
+        }()
+    }
+
     static var messageSender: MessageSender {
         Mocked.messageSender ?? {
             let instance = MessageSender()
@@ -39,17 +47,38 @@ enum Current {
             return instance
         }()
     }
+
+    static var userAgent: String {
+        Mocked.userAgent ?? {
+            let exeName = Bundle.main.executableURL?.lastPathComponent ?? "B9ChatAI"
+            let version = MBApp.global.version
+            let sysVer = UIDevice.current.systemVersion
+            #if targetEnvironment(macCatalyst)
+            let device = "macOS; catalyst/\(sysVer)"
+            #else
+            let device = "\(UIDevice.current.model); iOS/\(sysVer)"
+            #endif
+            let result = "\(exeName)/\(version) (\(device))"
+            Mocked.userAgent = result
+            return result
+        }()
+    }
 }
 
 enum Mocked {
-      static var conversationManager: ConversationManager?
-      static var database: DBManager?
-      static var messageSender: MessageSender?
-      static var osBridge: MacInterface?
+    static var conversationManager: ConversationManager?
+    static var database: DBManager?
+    static var identifierForVendor: String?
+    static var messageSender: MessageSender?
+    static var osBridge: MacInterface?
+    static var userAgent: String?
 
     static func reset() {
         conversationManager = nil
         database = nil
+        identifierForVendor = nil
+        messageSender = nil
         osBridge = nil
+        userAgent = nil
     }
 }

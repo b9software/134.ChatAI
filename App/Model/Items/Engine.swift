@@ -183,4 +183,23 @@ extension Engine {
             this.usedTime = .current
         }
     }
+
+    func send(message: Message, config: EngineConfig) -> Task<Void, Error> {
+        Task {
+            if type != .openAI {
+                throw AppError.message("Only OpenAI API is supported.")
+            }
+            let api = try getOANetworking()
+            let stream = try await api.steamChat(config: config, messages: [
+                .init(role: .user, content: "test")
+            ])
+            if Task.isCancelled { return }
+
+            for try await choice in stream {
+                if Task.isCancelled { return }
+                message.onSteamResponse(choice)
+            }
+            AppLog().debug("Stream Receive end")
+        }
+    }
 }

@@ -11,6 +11,44 @@ import CoreData
 
 private let conversationPool = ObjectPool<StringID, Conversation>()
 
+struct ChatConfig: Codable, Equatable {
+}
+
+struct EngineConfig: Codable, Equatable {
+    var model: StringID?
+    var system: String?
+    var temperature: FloatParameter = 0.5
+    /// Tokens top probability
+    var topP: FloatParameter = 1
+    /// Presence penalty, between -2.0 and 2.0
+    var presenceP: FloatParameter = 0.5
+    /// Frequency penalty, between -2.0 and 2.0
+    var frequencyP: FloatParameter = 0.5
+    var choiceNumber = 1
+    var maxTokens = 0
+
+    func toOpenAIParameters() throws -> [String: Any] {
+        guard let model = model else {
+            throw AppError.message("Missing model.")
+        }
+        var result = [String: Any]()
+        result["model"] = model
+        if !(0.495...0.505).contains(temperature) {
+            result["temperature"] = temperature * 2
+        }
+        if !(0.99...1).contains(topP) {
+            result["topP"] = topP
+        }
+        if !(0.495...0.505).contains(presenceP) {
+            result["presence_penalty"] = presenceP * 4 - 2
+        }
+        if !(0.495...0.505).contains(frequencyP) {
+            result["frequency_penalty"] = frequencyP * 4 - 2
+        }
+        return result
+    }
+}
+
 class Conversation {
     private(set) var id: StringID
     private(set) var entity: CDConversation
@@ -52,29 +90,28 @@ class Conversation {
     private(set) var usableState: UsableState = .normal
     private lazy var needsUpdateUsable = DelayAction(.init(target: self, selector: #selector(updateUsableState)))
 
-    struct ChatConfig: Codable, Equatable {
-    }
-
-    struct EngineConfig: Codable, Equatable {
-        var model: StringID?
-        var system: String?
-        var temperature: FloatParameter = 0.5
-        /// Tokens top probability
-        var topP: FloatParameter = 1
-        /// Presence penalty, between -2.0 and 2.0
-        var presenceP: FloatParameter = 0.5
-        /// Frequency penalty, between -2.0 and 2.0
-        var frequencyP: FloatParameter = 0.5
-        var choiceNumber = 1
-        var maxTokens = 0
-    }
-
     private var _chatConfig: ChatConfig?
     private var _engineConfig: EngineConfig?
     private(set) var engine: Engine?
 }
 
 extension Conversation {
+    func loadEngine() async throws -> Engine {
+        if let engine = engine { return engine }
+        guard let ctx = entity.managedObjectContext else {
+            fatalError()
+        }
+        return try await ctx.perform(schedule: .enqueued) {
+            guard let eEntity = self.entity.engine else {
+                throw AppError.message("Conversation no engine.")
+            }
+            guard let eItem = Engine.from(entity: eEntity) else {
+                throw AppError.message("Unable create engine.")
+            }
+            self.engine = eItem
+            return eItem
+        }
+    }
 
     @objc private func updateUsableState() {
         let new = calcUsableState()
@@ -169,8 +206,8 @@ extension Conversation {
         needsUpdateUsable.set()
     }
 
-    func send(text: String) {
-        Message.create(sendText: text, from: self)
+    func send(text: String, reply: Message?) {
+        Message.create(sendText: text, from: self, reply: reply)
     }
 
     func save(name: String?, id: String?, engine: Engine, cfgChat: ChatConfig, cfgEngine: EngineConfig) throws {

@@ -66,9 +66,45 @@ class DBManager {
         container.viewContext
     }
 
+    var backgroundContext: NSManagedObjectContext {
+        context.ctx
+    }
+
     init(container: CDContainer) {
         self.container = container
         self.context = CDContext(ctx: container.newBackgroundContext())
+    }
+
+    /// Async read in background
+    func read<T>(_ block: @escaping (NSManagedObjectContext) throws -> T) async throws -> T {
+        try await withCheckedThrowingContinuation { checked in
+            let ctx = backgroundContext
+            ctx.perform {
+                do {
+                    checked.resume(returning: try block(ctx))
+                } catch {
+                    checked.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    /// Async read in background
+    func read<T>(_ block: @escaping (NSManagedObjectContext) -> T) async -> T {
+        await withCheckedContinuation { checked in
+            let ctx = backgroundContext
+            ctx.perform {
+                checked.resume(returning: block(ctx))
+            }
+        }
+    }
+
+    /// Async make change then save in background
+    func write<T>(_ block: @escaping (NSManagedObjectContext) throws -> T) async rethrows -> T {
+        let ctx = backgroundContext
+        return try await ctx.perform(schedule: .enqueued, {
+            try block(ctx)
+        })
     }
 }
 
@@ -111,6 +147,7 @@ class CDContext {
         }
     }
 
+    /// Async and save
     func async(_ operation: @escaping (NSManagedObjectContext) throws -> Void){
         ctx.perform { [self] in
             Do.try {

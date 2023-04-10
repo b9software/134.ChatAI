@@ -60,7 +60,6 @@
 		D527917D27B557A800522240 /* B9MulticastDelegate in Frameworks */ = {isa = PBXBuildFile; productRef = D527917C27B557A800522240 /* B9MulticastDelegate */; };
 		D527917F27B558D600522240 /* Do.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527917E27B558D500522240 /* Do.swift */; };
 		D52A04E520F85F2600F535ED /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A04E420F85F2600F535ED /* Button.swift */; };
-		D52EAB652043B6B3007219E0 /* UIImage+MBImageSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EAB602043B6B3007219E0 /* UIImage+MBImageSet.m */; };
 		D52EAB672043B6B3007219E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D52EAB622043B6B3007219E0 /* Assets.xcassets */; };
 		D52EADEB2043B983007219E0 /* debug.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EADE72043B983007219E0 /* debug.m */; };
 		D52EADF02043BA3D007219E0 /* ShortCuts.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EADEE2043BA3D007219E0 /* ShortCuts.m */; };
@@ -106,6 +105,7 @@
 		D57CAD2129E2AA2600F4FF60 /* SelectableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD2029E2AA2600F4FF60 /* SelectableLabel.swift */; };
 		D57CAD2829E2D97D00F4FF60 /* MessageSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD2729E2D97D00F4FF60 /* MessageSender.swift */; };
 		D57D784E29C8B28C003099D6 /* B9NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D784D29C8B28C003099D6 /* B9NavigationController.swift */; };
+		D57EF74729E427CD00CD101E /* OAEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EF74629E427CD00CD101E /* OAEntityTests.swift */; };
 		D57FBB6B279BB727003A0533 /* B9AssociatedObject in Frameworks */ = {isa = PBXBuildFile; productRef = D57FBB6A279BB727003A0533 /* B9AssociatedObject */; };
 		D57FBB6E279BB770003A0533 /* B9Action in Frameworks */ = {isa = PBXBuildFile; productRef = D57FBB6D279BB770003A0533 /* B9Action */; };
 		D57FBB71279D51BA003A0533 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = D57FBB70279D51BA003A0533 /* Logging */; };
@@ -338,10 +338,8 @@
 		D525F3E82506988D003EBEB0 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D527917E27B558D500522240 /* Do.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Do.swift; sourceTree = "<group>"; };
 		D52A04E420F85F2600F535ED /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		D52EAB602043B6B3007219E0 /* UIImage+MBImageSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MBImageSet.m"; sourceTree = "<group>"; };
 		D52EAB612043B6B3007219E0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D52EAB622043B6B3007219E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D52EAB632043B6B3007219E0 /* UIImage+MBImageSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MBImageSet.h"; sourceTree = "<group>"; };
 		D52EADE42043B983007219E0 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		D52EADE52043B983007219E0 /* alpha.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = alpha.entitlements; sourceTree = "<group>"; };
 		D52EADE62043B983007219E0 /* debug.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = debug.entitlements; sourceTree = "<group>"; };
@@ -414,6 +412,7 @@
 		D57CAD2729E2D97D00F4FF60 /* MessageSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSender.swift; sourceTree = "<group>"; };
 		D57CAD2B29E2F5C200F4FF60 /* UIView+Focus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Focus.h"; sourceTree = "<group>"; };
 		D57D784D29C8B28C003099D6 /* B9NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9NavigationController.swift; sourceTree = "<group>"; };
+		D57EF74629E427CD00CD101E /* OAEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAEntityTests.swift; sourceTree = "<group>"; };
 		D5810C7429D97A5E0073F8C8 /* CDFetchTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDFetchTableViewDataSource.swift; sourceTree = "<group>"; };
 		D5810C7629D99C220073F8C8 /* ConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
 		D5810C7829D9AFE00073F8C8 /* CDEntityFetchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEntityFetchTests.swift; sourceTree = "<group>"; };
@@ -867,8 +866,6 @@
 				D5197D3417F027B400CA387C /* InfoPlist.strings */,
 				D5197D3717F027BB00CA387C /* Localizable.strings */,
 				D52EAB612043B6B3007219E0 /* README.md */,
-				D52EAB632043B6B3007219E0 /* UIImage+MBImageSet.h */,
-				D52EAB602043B6B3007219E0 /* UIImage+MBImageSet.m */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1112,6 +1109,14 @@
 			path = B9Lib;
 			sourceTree = "<group>";
 		};
+		D57EF74529E427B300CD101E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D57EF74629E427CD00CD101E /* OAEntityTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		D5B1906B2404AFBE0076CD61 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1327,6 +1332,7 @@
 		D5E8FA6F29CF088C00C3D753 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				D57EF74529E427B300CD101E /* Networking */,
 				D5E8FA7B29CF23F800C3D753 /* Support */,
 				D5810C7829D9AFE00073F8C8 /* CDEntityFetchTests.swift */,
 				D5810C8029D9C2410073F8C8 /* ConversationManagerTests.swift */,
@@ -1652,7 +1658,6 @@
 			);
 			mainGroup = D5197A3117EECAAF00CA387C;
 			packageReferences = (
-				D59C90C72787BBB300B0EF28 /* XCRemoteSwiftPackageReference "Pulse" */,
 				D57FBB69279BB727003A0533 /* XCRemoteSwiftPackageReference "AssociatedObject" */,
 				D57FBB6C279BB770003A0533 /* XCRemoteSwiftPackageReference "Action" */,
 				D57FBB6F279D51BA003A0533 /* XCRemoteSwiftPackageReference "swift-log" */,
@@ -2018,7 +2023,6 @@
 				D5031BFC25C03EA800C2849E /* UIButton+FontShrink.swift in Sources */,
 				D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */,
 				D579495F21788D67002E1C4A /* UIDevice+App.swift in Sources */,
-				D52EAB652043B6B3007219E0 /* UIImage+MBImageSet.m in Sources */,
 				D5EE520D2043F61D009148B3 /* UIImageView+MBRenderingMode.m in Sources */,
 				D5031A5C25BEC99700C2849E /* UIKit+Compatibility.swift in Sources */,
 				D5DB4C22241E39EA00832A0A /* UIKit+DynamicType.m in Sources */,
@@ -2046,6 +2050,7 @@
 				D5810C8129D9C2410073F8C8 /* ConversationManagerTests.swift in Sources */,
 				D5E8FA7929CF08B200C3D753 /* CoreDataTests.swift in Sources */,
 				D5E8FA7D29CF240500C3D753 /* Date+Test.swift in Sources */,
+				D57EF74729E427CD00CD101E /* OAEntityTests.swift in Sources */,
 				D51E92B329DAD06600922497 /* TestCase.swift in Sources */,
 				D5810C7D29D9B1710073F8C8 /* XCTestCase+AssertView.swift in Sources */,
 				D5810C7C29D9B1710073F8C8 /* XCTestCase+Test.swift in Sources */,
@@ -2646,14 +2651,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		D59C90C72787BBB300B0EF28 /* XCRemoteSwiftPackageReference "Pulse" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://gitee.com/b9swift/Pulse";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
 			};
 		};
 		D5F036B327FB479800C60A72 /* XCRemoteSwiftPackageReference "Debug" */ = {

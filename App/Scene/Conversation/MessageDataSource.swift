@@ -232,15 +232,17 @@ class MessageDataSource:
         }
         if heightCache[ip.row] == height { return }
         heightCache[ip.row] = height
-        indexPathsCellHeight.append(ip)
+//        indexPathsCellHeight.append(ip)
         needsUpdateCellHeight.set()
         AppLog().debug("DS> update height at \(ip.row) to \(height).")
 
     }
-    private var indexPathsCellHeight = [IndexPath]()
+//    private var indexPathsCellHeight = [IndexPath]()
     private lazy var needsUpdateCellHeight = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
-        sf.view.reloadRows(at: sf.indexPathsCellHeight, with: .none)
-        sf.indexPathsCellHeight = []
+        sf.view.beginUpdates()
+        sf.view.endUpdates()
+//        sf.view.reloadRows(at: sf.indexPathsCellHeight, with: .none)
+//        sf.indexPathsCellHeight = []
     })
 }

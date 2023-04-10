@@ -55,6 +55,7 @@ class ConversationDetailViewController:
             inputSendButton.isEnabled = isInputAllowed
         }
     }
+    private var inputReplyMessage: Message?
 }
 
 extension ConversationDetailViewController {
@@ -196,7 +197,7 @@ extension ConversationDetailViewController: UITextViewDelegate {
 
     @IBAction private func onSend() {
         if let text = inputTextView.text.trimmed() {
-            item.send(text: text)
+            item.send(text: text, reply: inputReplyMessage)
         }
         inputTextView.text = nil
         setInputExpand(false, animate: true)

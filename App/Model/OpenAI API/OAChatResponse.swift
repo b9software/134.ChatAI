@@ -32,9 +32,22 @@ enum OAChatRole: RawRepresentable, Codable {
         case .unknown(let string): return string
         }
     }
+
+    var isUnknown: Bool {
+        if case .unknown = self {
+            return true
+        }
+        return false
+    }
 }
 
+/// 发送与接收都使用
+struct OAChatMessage: Codable {
+    private(set) var role: OAChatRole?
+    private(set) var content: String?
+}
 
+/// 非流式返回
 struct OAChatCompletion: Codable {
 //    private(set) var id: String?
     private(set) var object: String?
@@ -50,13 +63,36 @@ struct OAChatCompletion: Codable {
 //    }
 
     struct Choice: Codable {
-        private(set) var message: Message?
-        private(set) var finish_reason: String?
+        private(set) var message: OAChatMessage?
+        private(set) var finishReason: String?
         private(set) var index: Int?
+        private(set) var delta: OAChatMessage?
+    }
+}
 
-        struct Message: Codable {
-            private(set) var role: OAChatRole
-            private(set) var content: String
+// MARK: - Error
+
+struct OAErrorDetail: Codable {
+    var message: String?
+    var type: String?
+    var code: String?
+}
+
+struct OAError: Codable, LocalizedError {
+    var error: OAErrorDetail?
+
+    var errorDescription: String? {
+        guard let info = error else {
+            return "Unknown OpenAI error."
         }
+        var msg = info.message ?? "Unknown OpenAI error."
+        if let type = info.code ?? info.type {
+            msg += " [\(type)]"
+        }
+        return msg
+    }
+
+    var isInvalidApiKey: Bool {
+        error?.code == "invalid_api_key"
     }
 }
