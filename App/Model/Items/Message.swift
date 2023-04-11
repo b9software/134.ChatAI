@@ -109,7 +109,7 @@ class Message {
 extension Message {
     static func create(sendText: String, from chatItem: Conversation, reply: Message?) {
         // TODO: 出错了得通知用户
-        Current.database.context.async { ctx in
+        Current.database.save { ctx in
             let chatID = chatItem.entity.access { $0.objectID }
             let replyID = reply?.entity.access { $0.objectID }
             let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)

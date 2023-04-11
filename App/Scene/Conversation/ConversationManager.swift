@@ -14,7 +14,7 @@ class ConversationManager: NSObject {
     let context: NSManagedObjectContext
 
     override init() {
-        context = Current.database.viewContext
+        context = Current.database.backgroundContext
         super.init()
         setup()
     }
@@ -81,7 +81,6 @@ private var testCounter = 0
 
 extension ConversationManager: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        assertDispatch(.onQueue(.main))
         if controller == listController {
             AppLog().debug("CM> list change \(type)")
             switch type {

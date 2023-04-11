@@ -34,7 +34,7 @@ class MessageDataSource:
     // MARK: - Loading
 
     private func refresh() {
-        Current.database.context.async { [weak self] ctx in
+        Current.database.async { [weak self] ctx in
             guard let sf = self else { return }
             let fetch = NSFetchedResultsController(
                 fetchRequest: CDMessage.conversationRequest(sf.conversation.entity, offset: 0, limit: sf.pageSize, ascending: false),
@@ -66,7 +66,7 @@ class MessageDataSource:
             return
         }
         isLoading = true
-        Current.database.context.async { [weak self] ctx in
+        Current.database.async { [weak self] ctx in
             guard let sf = self else { return }
             let req = CDMessage.conversationRequest(sf.conversation.entity, offset: offset, limit: sf.pageSize, ascending: true)
             let entities = try ctx.fetch(req)
@@ -169,7 +169,7 @@ class MessageDataSource:
         assertDispatch(.notOnQueue(.main))
         // 插入直接会在结果里，而不会限制在最初的 fetch limit
 
-        let ctx = Current.database.context.ctx
+        let ctx = Current.database.backgroundContext
         let items: [Message] = snapshot.itemIdentifiers
             .compactMap {
                 guard let id = $0 as? NSManagedObjectID,

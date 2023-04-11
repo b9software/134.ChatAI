@@ -32,12 +32,11 @@ class ChatArchivedListController:
 {
     static var storyboardID: StoryboardID { .conversation }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>()
+    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>(tableView: listView)
     @IBOutlet private weak var listView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        listDataSource.tableView = listView
         listDataSource.fetchRequest = CDConversation.archivedRequest
     }
 
@@ -105,12 +104,11 @@ class ChatDeletedListController:
 {
     static var storyboardID: StoryboardID { .conversation }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>()
+    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>(tableView: listView)
     @IBOutlet private weak var listView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        listDataSource.tableView = listView
         listDataSource.fetchRequest = CDConversation.deletedRequest
     }
 

@@ -124,9 +124,9 @@ fileprivate extension ApplicationDelegate {
     }
 
     @objc func debugDestroyConversation() {
-        let ctx = Current.database.viewContext
-        try? ctx.fetch(CDConversation.fetchRequest()).forEach { ctx.delete($0) }
-        ctx.trySave()
+        Current.database.save { ctx in
+            try? ctx.fetch(CDConversation.fetchRequest()).forEach { ctx.delete($0) }
+        }
     }
 }
 #endif

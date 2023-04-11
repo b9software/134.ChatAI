@@ -59,8 +59,7 @@ actor MessageSender:
     }
 
     private func loadInitItems() {
-        let ctx = fetchControl.managedObjectContext
-        ctx.performAndWait {
+        Current.database.save { [self] ctx in
             for entity in fetchControl.fetchedObjects ?? [] {
                 assert(entity.mState == .pend)
                 if Date.isRecent(entity.time, range: 60) {
@@ -69,9 +68,8 @@ actor MessageSender:
                     entity.mState = .froze
                 }
             }
-            ctx.trySave()
+            logDebugDescription()
         }
-        logDebugDescription()
     }
 
     private var works = [MessageOperation]()

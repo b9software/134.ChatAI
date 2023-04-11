@@ -60,19 +60,19 @@ class DBManager {
     }
 
     let container: CDContainer
-    let context: CDContext
+    let backgroundContext: NSManagedObjectContext
 
-    var viewContext: NSManagedObjectContext {
-        container.viewContext
-    }
-
-    var backgroundContext: NSManagedObjectContext {
-        context.ctx
+    private(set) var lastError: Error? {
+        didSet {
+            if let err = lastError {
+                AppLog().error("DB> Error: \(err)")
+            }
+        }
     }
 
     init(container: CDContainer) {
         self.container = container
-        self.context = CDContext(ctx: container.newBackgroundContext())
+        backgroundContext = container.newBackgroundContext()
     }
 
     /// Async read in background
@@ -106,71 +106,32 @@ class DBManager {
             try block(ctx)
         })
     }
-}
 
-class CDContext {
-    let ctx: NSManagedObjectContext
-    private(set) var lastError: Error? {
-        didSet {
-            if let err = lastError {
-                AppLog().error("DB> Error: \(err)")
-            }
-        }
-    }
-
-    fileprivate init(ctx: @autoclosure () -> NSManagedObjectContext) {
-        self.ctx = ctx()
-    }
-
-    /// Return `nil` when failed.
-    func fetch<T>(_ request: NSFetchRequest<T>) -> [T]? where T: NSFetchRequestResult {
-        assertDispatch(.notOnQueue(.main))
-        return ctx.performAndWait {
-            do {
-                return try ctx.fetch(request)
-            } catch {
-                lastError = error
-                return nil
-            }
-        }
-    }
-
-    func save() {
-        assertDispatch(.notOnQueue(.main))
-        ctx.performAndWait {
-            guard ctx.hasChanges else { return }
-            do {
-                try ctx.save()
-            } catch {
-                lastError = error
-            }
-        }
-    }
-
-    /// Async and save
-    func async(_ operation: @escaping (NSManagedObjectContext) throws -> Void){
-        ctx.perform { [self] in
+    /// Async read
+    func async(_ block: @escaping (NSManagedObjectContext) throws -> Void) {
+        let ctx = backgroundContext
+        ctx.perform {
             Do.try {
-                try operation(ctx)
-                try ctx.save()
+                try block(ctx)
             }
         }
     }
 
-    func perform<T>(save: Bool = true, _ operation: (NSManagedObjectContext) throws -> T) rethrows -> T {
-        assertDispatch(.notOnQueue(.main))
-        let result = try ctx.performAndWait {
-            try operation(ctx)
+    /// Async save
+    func save(_ block: @escaping (NSManagedObjectContext) throws -> Void) {
+        let ctx = backgroundContext
+        ctx.perform {
+            Do.try {
+                try block(ctx)
+                try ctx.save()
+            }
         }
-        if save {
-            self.save()
-        }
-        return result
     }
 }
 
-extension NSManagedObjectContext {
+private extension NSManagedObjectContext {
     func trySave() {
+        assertDispatch(.notOnQueue(.main))
         guard hasChanges else { return }
         Do.try {
             try save()
@@ -216,6 +177,16 @@ extension CDEntityAccessing {
         }
     }
 
+    /// Async read
+    func async(_ block: @escaping (Self, NSManagedObjectContext) -> Void) {
+        guard let ctx = managedObjectContext else {
+            fatalError("\(self) must create with object context")
+        }
+        ctx.perform {
+            block(self, ctx)
+        }
+    }
+
     /// Make asynchronous changes then save safely
     func modify(_ block: @escaping (Self, NSManagedObjectContext) -> Void) {
         guard let ctx = managedObjectContext else {
@@ -233,7 +204,7 @@ extension NSManagedObject: CDEntityAccessing {}
 extension DBManager {
     func dump() {
         Do.try {
-            let context = Current.database.viewContext
+            let context = Current.database.backgroundContext
 
             var items: [NSManagedObject]!
             items = try context.fetch(CDEngine.fetchRequest())

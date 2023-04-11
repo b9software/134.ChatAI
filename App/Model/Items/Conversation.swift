@@ -57,7 +57,7 @@ class Conversation {
     var name: String {
         title ?? L.Chat.defaultTitle
     }
-    private var title: String? {
+    private(set) var title: String? {
         didSet {
             if oldValue == title { return }
             needsListStateChanged.set()
@@ -114,10 +114,14 @@ extension Conversation {
     }
 
     @objc private func updateUsableState() {
-        let new = calcUsableState()
-        if usableState == new { return }
-        usableState = new
-        delegates.invoke { $0.conversation(self, useState: new) }
+        entity.async { [self] _, _ in
+            let new: UsableState = calcUsableState()
+            if usableState == new { return }
+            usableState = new
+            dispatch_async_on_main {
+                self.delegates.invoke { $0.conversation(self, useState: new) }
+            }
+        }
     }
 
     private func calcUsableState() -> UsableState {

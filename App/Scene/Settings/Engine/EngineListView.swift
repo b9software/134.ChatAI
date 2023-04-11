@@ -13,7 +13,6 @@ import UIKit
 class EngineListView: UITableView, UITableViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
-        listDataSource.tableView = self
         listDataSource.fetchCacheName = "engine_list"
         delegate = self
         selectionFollowsFocus = true
@@ -21,7 +20,7 @@ class EngineListView: UITableView, UITableViewDelegate {
         allowsMultipleSelection = true
     }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDEngine>()
+    private lazy var listDataSource = CDFetchTableViewDataSource<CDEngine>(tableView: self)
 
     var fetchRequest: NSFetchRequest<CDEngine>? {
         didSet {

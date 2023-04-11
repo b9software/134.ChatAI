@@ -23,14 +23,15 @@ import UIKit
  ```
  */
 class CDFetchTableViewDataSource<Entity: NSManagedObject>:
-    NSObject,
-    UITableViewDataSource,
+    UITableViewDiffableDataSource<Int, Entity>,
     NSFetchedResultsControllerDelegate
 {
-    weak var tableView: UITableView? {
-        didSet {
-            tableView?.dataSource = self
-        }
+    weak var tableView: UITableView?
+
+    init(tableView: UITableView) {
+        self.tableView = tableView
+        super.init(tableView: tableView, cellProvider: UITableView.cellProvider(_:indexPath:object:))
+        tableView.dataSource = self
     }
 
     /// Set before set `fetchRequest`
@@ -39,15 +40,15 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
     var fetchRequest: NSFetchRequest<Entity>? {
         didSet {
             guard let request = fetchRequest else { return }
-            fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: Current.database.viewContext, sectionNameKeyPath: nil, cacheName: fetchCacheName)
+            fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: Current.database.backgroundContext, sectionNameKeyPath: nil, cacheName: fetchCacheName)
         }
     }
 
     private(set) var fetchController: NSFetchedResultsController<Entity>? {
         didSet {
             fetchController?.delegate = self
-            Do.try {
-                try fetchController?.performFetch()
+            Current.database.async { [weak self] _ in
+                try self?.fetchController?.performFetch()
             }
         }
     }
@@ -68,19 +69,24 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
 
     // MARK: Access
 
+    var listItems = [Entity]()
+
     func item(at indexPath: IndexPath?) -> Entity? {
         guard let ip = indexPath else { return nil }
-        return fetchController?.object(at: ip)
+        return listItems.element(at: ip.row)
     }
 
     func items(at indexPaths: [IndexPath]) -> [Entity] {
         indexPaths.compactMap {
-            fetchController?.object(at: $0)
+            item(at: $0)
         }
     }
 
     func indexPath(of entity: Entity) -> IndexPath? {
-        fetchController?.indexPath(forObject: entity)
+        if let idx = listItems.firstIndex(of: entity) {
+            return IndexPath(row: idx, section: 0)
+        }
+        return nil
     }
 
     var managedObjectContext: NSManagedObjectContext? {
@@ -89,62 +95,33 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
 
     // MARK: -
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        fetchController?.sections?.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = fetchController?.sections?[section].numberOfObjects ?? 0
-        emptyView?.isHidden = !(section == 0 && count == 0)
-        return count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? (UITableViewCell & AnyHasItem) else {
-            fatalError("Cell must confirm to HasItem.")
+    func updateSnapShot(listItems: [Entity]) {
+        trackSelectionBeginRefresh()
+        self.listItems = listItems
+        var snap = snapshot()
+        snap.deleteAllItems()
+        snap.appendSections([0])
+        snap.appendItems(listItems, toSection: 0)
+        apply(snap) {
+            self.trackSelectionEndRefresh()
         }
-        let item = fetchController?.object(at: indexPath)
-        cell.setItem(item)
-        return cell
+        emptyView?.isHidden = listItems.count != 0
     }
 
     // MARK: -
 
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        trackSelectionBeginRefresh()
-        tableView?.beginUpdates()
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView?.endUpdates()
-        emptyView?.isHidden = controller.fetchedObjects?.count != 0
-        trackSelectionEndRefresh()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let table = tableView else { return }
-        switch type {
-        case .insert:
-            table.insertRows(at: [newIndexPath!], with: .fade)
-        case .delete:
-            table.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            table.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            table.moveRow(at: indexPath!, to: newIndexPath!)
-        @unknown default:
-            break
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        guard let ids = snapshot.itemIdentifiers as? [NSManagedObjectID] else {
+            assert(false)
+            return
         }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex idx: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView?.insertSections(IndexSet(integer: idx), with: .fade)
-        case .delete:
-            tableView?.deleteSections(IndexSet(integer: idx), with: .fade)
-        default:
-            break
+        let entities = ids.map { controller.managedObjectContext.object(with: $0) }
+        guard let items = entities as? [Entity] else {
+            assert(false)
+            return
+        }
+        dispatch_async_on_main { [weak self] in
+            self?.updateSnapShot(listItems: items)
         }
     }
 }
@@ -156,9 +133,11 @@ extension CDFetchTableViewDataSource {
 
     private func selectRows(items: [Entity]?) {
         guard let tableView = tableView else { return }
-        // @bug: indexPath(of: $0) 在未完全加载好时无返回
-        let entities = fetchController?.fetchedObjects ?? []
-        let newIndexPaths = items?.compactMap { entities.firstIndex(of: $0) }.map { IndexPath(row: $0, section: 0) }
+        if items?.isNotEmpty == true, listItems.isEmpty {
+            itemSelectedNeedsRestore = items
+            return
+        }
+        let newIndexPaths = items?.compactMap { indexPath(for: $0) }
         tableView.setSelected(indexPaths: newIndexPaths, animated: false)
     }
 

@@ -41,7 +41,7 @@ class ConversationSettingViewController:
         updateTopP(item.engineConfig.topP)
     }
 
-    @IBOutlet private weak var contentContainer: UIScrollView!
+    @IBOutlet private weak var contentContainer: UIView!
     @IBOutlet private weak var basicInfo: CSBasicInfoScene!
 
     @IBOutlet private weak var systemField: UITextView!
@@ -160,7 +160,7 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var idField: UITextField!
     @IBOutlet private weak var enginePicker: UITableView!
-    private lazy var engineDataSource = CDFetchTableViewDataSource<CDEngine>()
+    private lazy var engineDataSource = CDFetchTableViewDataSource<CDEngine>(tableView: enginePicker)
     @IBOutlet private weak var engineEmptyView: UIView!
     @IBOutlet private var modelPickViews: [UIView]!
     @IBOutlet private weak var modelPicker: UITableView!
@@ -175,14 +175,13 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
     func updateUI(item: Conversation) {
         engineDataSource.fetchCacheName = "engine_list"
         engineDataSource.keepsSelectionThroughIndexPaths = true
-        engineDataSource.tableView = enginePicker
         engineDataSource.fetchRequest = CDEngine.listRequest
         modelPicker.dataSource = modelDataSource
         if let entity = item.engine?.entity {
             engineDataSource.selectedItems = [entity]
         }
 
-        nameField.text = item.entity.title
+        nameField.text = item.title
         idField.placeholder = item.id
         setEngine(item.engine, allowNull: true)
     }

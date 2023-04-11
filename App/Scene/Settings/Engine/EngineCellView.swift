@@ -2,7 +2,6 @@
 //  EngineCellView.swift
 //  B9ChatAI
 //
-//  Created by Joseph Zhao on 2023/4/1.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
@@ -12,12 +11,35 @@ import UIKit
 class EngineCellView: UIView, HasItem {
     var item: CDEngine! {
         didSet {
-            nameLabel.text = item.name
-            if let type = Engine.EType(rawValue: item.type ?? "?") {
-                typeLabel.text = type.displayString
+            if let item = item {
+                asyncLoad(item: item)
             } else {
-                typeLabel.text = "Unsupported: \(item.type ?? "?")"
+                nameLabel.text = nil
+                typeLabel.text = nil
             }
+        }
+    }
+
+    func asyncLoad(item: CDEngine) {
+        Current.database.async { [weak self] _ in
+            guard let sf = self,
+                  sf.item === item else { return }
+            let name = item.name
+            let typeDesc: String
+            if let type = Engine.EType(rawValue: item.type ?? "?") {
+                typeDesc = type.displayString
+            } else {
+                typeDesc = "Unsupported: \(item.type ?? "?")"
+            }
+            sf.updateUI(name: name, type: typeDesc, flag: item)
+        }
+    }
+
+    func updateUI(name: String?, type: String?, flag: CDEngine) {
+        dispatch_async_on_main { [self] in
+            if flag !== item { return }
+            nameLabel.text = name
+            typeLabel.text = type
         }
     }
 

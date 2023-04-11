@@ -104,14 +104,14 @@ class Engine {
             throw AppError.message(L.Engine.Create.Fail.hashKey)
         }
         let id = "OA-" + keyHash
-        if CDEngine.fetch(id: id) != nil {
+        if await CDEngine.fetch(id: id) != nil {
             throw AppError.message(L.Engine.Create.Fail.existKey)
         }
         try B9Keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
         let oaEngine = OAEngine(models: models)
         oaEngine.apiKey = key
         let oaData = try oaEngine.encode()
-        let item = Current.database.context.perform {
+        let item = await Current.database.write {
             let entity = CDEngine(context: $0)
             entity.id = id
             entity.name = key.keyMasked().replacingOccurrences(of: "**", with: "*")

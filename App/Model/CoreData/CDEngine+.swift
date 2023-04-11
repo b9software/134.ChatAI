@@ -9,11 +9,13 @@ import CoreData
 
 extension CDEngine {
 
-    static func fetch(id: StringID) -> CDEngine? {
+    static func fetch(id: StringID) async -> CDEngine? {
         let request = fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
         request.fetchLimit = 1
-        let items: [CDEngine]? = Current.database.context.fetch(request)
+        let items: [CDEngine]? = await Current.database.read {
+            try? $0.fetch(request)
+        }
         return items?.first
     }
 
@@ -31,7 +33,6 @@ extension CDEngine {
         modify { this, ctx in
             let idCopy = this.id
             ctx.delete(this)
-            ctx.trySave()
             if let account = idCopy {
                 Do.try {
                     try B9Keychain.update(data: nil, account: account)
@@ -65,7 +66,7 @@ extension CDEngine {
 // swiftlint:disable all
 extension CDEngine {
     static func debugCreateWithNoKey() {
-        Current.database.context.async { ctx in
+        Current.database.save { ctx in
             let engine = CDEngine(context: ctx)
             engine.id = "OA-No key"
             engine.name = "No Key"
@@ -76,7 +77,7 @@ extension CDEngine {
     }
 
     static func debugCreateWithInvalidKey() {
-        Current.database.context.async { ctx in
+        Current.database.save { ctx in
             let engine = CDEngine(context: ctx)
             engine.id = "OA-Invalid"
             try! B9Keychain.update(string: "Invalid", account: engine.id!)
