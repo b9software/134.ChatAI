@@ -11,7 +11,7 @@ import XCTest
 class CDEntityFetchTests: TestCase {
     override class var mockResetPoint: TestCase.ResetPoint { [.setUpClass, .tearDownClass] }
 
-    lazy var ctx = Current.database.viewContext
+    lazy var ctx = Current.database.container.viewContext
 
     func testEngineOperations() throws {
         var items = try ctx.fetch(CDEngine.listRequest)
@@ -25,12 +25,14 @@ class CDEntityFetchTests: TestCase {
 
         let exp = expectation(description: "async")
         Task {
-            let entity1 = CDEngine.fetch(id: "e1")
+            let entity1 = await CDEngine.fetch(id: "e1")
             XCTAssertNotNil(entity1)
-            XCTAssertNil(CDEngine.fetch(id: "no-exist"))
+            let entity2 = await CDEngine.fetch(id: "no-exist")
+            assertEqual(entity2, nil)
             entity1?.delete()
 
-            assertEqual(CDEngine.fetch(id: "e1"), nil)
+            let entity3 = await CDEngine.fetch(id: "e1")
+            assertEqual(entity3, nil)
             exp.fulfill()
         }
         waitForExpectations(timeout: 0.01)

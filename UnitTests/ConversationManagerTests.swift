@@ -21,32 +21,48 @@ class ConversationManagerTests:
         ctx.assertIsFresh()
         defer { ctx.destroy() }
 
-        let archived1 = ctx.createConversation()
-        archived1.archiveTime = .current
-        let deleted1 = ctx.createConversation()
-        deleted1.deleteTime = .current
         assertEqual(manager.hasArchived, false)
         assertEqual(manager.hasDeleted, false)
 
-        noBlockingWait(0.01)
+        let archived1 = ctx.createConversation()
+        let deleted1 = ctx.createConversation()
+        ctx.perform {
+            archived1.archiveTime = .current
+            deleted1.deleteTime = .current
+            ctx.trySave()
+        }
+        wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
+
         assertEqual(manager.hasArchived, true)
         assertEqual(manager.hasDeleted, true)
 
-        ctx.delete(archived1)
+        ctx.perform {
+            ctx.delete(archived1)
+            ctx.trySave()
+        }
         wait(for: [prepareWaitForHasArchivedChanged()], timeout: 0.1)
         assertEqual(manager.hasArchived, false)
 
-        let archived2 = ctx.createConversation()
-        archived2.archiveTime = .current
+        ctx.perform {
+            let archived2 = ctx.createConversation()
+            archived2.archiveTime = .current
+            ctx.trySave()
+        }
         wait(for: [prepareWaitForHasArchivedChanged()], timeout: 0.1)
         assertEqual(manager.hasArchived, true)
 
-        ctx.delete(deleted1)
+        ctx.perform {
+            ctx.delete(deleted1)
+            ctx.trySave()
+        }
         wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
         assertEqual(manager.hasDeleted, false)
 
-        let deleted2 = ctx.createConversation()
-        deleted2.deleteTime = .current
+        ctx.perform {
+            let deleted2 = ctx.createConversation()
+            deleted2.deleteTime = .current
+            ctx.trySave()
+        }
         wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
         assertEqual(manager.hasDeleted, true)
     }
@@ -67,8 +83,11 @@ class ConversationManagerTests:
         wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 2)
 
-        ctx.delete(entity1)
-        ctx.delete(entity2)
+        ctx.perform {
+            ctx.delete(entity1)
+            ctx.delete(entity2)
+            ctx.trySave()
+        }
         wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 0)
     }

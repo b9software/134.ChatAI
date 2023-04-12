@@ -133,17 +133,23 @@ extension ConversationSettingViewController {
             temperature: temperatureSlider.value,
             topP: topProbabilitySlider.value
         )
-        do {
-            try item.save(
-                name: basicInfo.nameField.text?.trimmed(),
-                id: basicInfo.idField.text?.trimmed(),
-                engine: engine,
-                cfgChat: cfgChat,
-                cfgEngine: cfgEngine
-            )
-            dismiss(animate: true)
-        } catch {
-            stateLabel.set(error: error.localizedDescription)
+        Task {
+            do {
+                try await item.save(
+                    name: basicInfo.nameField.text?.trimmed(),
+                    id: basicInfo.idField.text?.trimmed(),
+                    engine: engine,
+                    cfgChat: cfgChat,
+                    cfgEngine: cfgEngine
+                )
+                Task { @MainActor in
+                    dismiss(animate: true)
+                }
+            } catch {
+                Task { @MainActor in
+                    stateLabel.set(error: error.localizedDescription)
+                }
+            }
         }
     }
 
@@ -160,7 +166,7 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var idField: UITextField!
     @IBOutlet private weak var enginePicker: UITableView!
-    private lazy var engineDataSource = CDFetchTableViewDataSource<CDEngine>(tableView: enginePicker)
+    private lazy var engineDataSource = CDFetchTableViewDataSource<Engine, CDEngine>(tableView: enginePicker, transformer: Engine.from(entity:))
     @IBOutlet private weak var engineEmptyView: UIView!
     @IBOutlet private var modelPickViews: [UIView]!
     @IBOutlet private weak var modelPicker: UITableView!
@@ -177,8 +183,8 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
         engineDataSource.keepsSelectionThroughIndexPaths = true
         engineDataSource.fetchRequest = CDEngine.listRequest
         modelPicker.dataSource = modelDataSource
-        if let entity = item.engine?.entity {
-            engineDataSource.selectedItems = [entity]
+        if let engine = item.engine {
+            engineDataSource.selectedItems = [engine]
         }
 
         nameField.text = item.title
@@ -199,11 +205,11 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == enginePicker {
-            guard let entity = engineDataSource.item(at: indexPath) else {
+            guard let item = engineDataSource.item(at: indexPath) else {
                 assert(false)
                 return
             }
-            setEngine(Engine.from(entity: entity), allowNull: false)
+            setEngine(item, allowNull: false)
         } else if tableView == modelPicker {
             selectedModel = modelDataSource.item(at: indexPath)
             selectedEngine?.lastSelectedModel = selectedModel

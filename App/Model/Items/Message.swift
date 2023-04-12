@@ -35,11 +35,11 @@ class Message {
     }
 
     enum MRole: String {
-        case me = "user"
+        case me = "user"  // swiftlint:disable:this identifier_name
         case assistant
     }
 
-    enum MState: Int16 {
+    enum MState: Int16, CustomStringConvertible {
         /// 异常或不识别
         case bad = 0
         /// 状态良好，不需要任何操作
@@ -50,18 +50,44 @@ class Message {
         case froze = 4
         /// 出错了
         case error = 9
+
+        var couldRetry: Bool {
+            switch self {
+            case .froze, .error:
+                return true
+            default:
+                return false
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .bad: return ".bad"
+            case .normal: return ".normal"
+            case .pend: return ".pend"
+            case .froze: return ".froze"
+            case .error: return ".error"
+            }
+        }
     }
 
     let id: UUID
+    let entity: CDMessage
     private(set) var type: MType
     private(set) var role: MRole?
-    let entity: CDMessage
-    var time: Date
+    private(set) var state: MState {
+        didSet {
+            assertDispatch(.notOnQueue(.main))
+            entity.mState = state
+        }
+    }
+    private(set) var time: Date
 
     private init(entity: CDMessage) {
         id = entity.uid
         type = entity.mType
         role = entity.mRole
+        state = entity.mState
         time = entity.time
         self.entity = entity
         // 其他属性异步加载
@@ -80,16 +106,19 @@ class Message {
         didSet {
             if oldValue == senderState { return }
             needsNoticeSendStateChange.set()
-            if let err = senderState?.error {
-                AppLog().warning("Message send error: \(err.localizedDescription).")
-                entity.modify { this, _ in
-                    this.mState = .error
-                }
-            } else if senderState == nil {
-                entity.modify { this, _ in
-                    assert(this.text != nil)
-                    assert(this.content != nil)
-                    this.mState = .normal
+            Current.database.save { [self] _ in
+                if let err = senderState?.error {
+                    AppLog().warning("Message send error: \(err.localizedDescription).")
+                    state = .error
+                } else if senderState == nil {
+                    // 发送成功
+                    if entity.content == nil {
+                        assert(false)
+                        state = .error
+                    } else {
+                        state = .normal
+                    }
+                    assert(entity.text != nil)
                 }
             }
         }
@@ -108,10 +137,10 @@ class Message {
 
 extension Message {
     static func create(sendText: String, from chatItem: Conversation, reply: Message?) {
-        // TODO: 出错了得通知用户
+        // todo: 出错了得通知用户
         Current.database.save { ctx in
-            let chatID = chatItem.entity.access { $0.objectID }
-            let replyID = reply?.entity.access { $0.objectID }
+            let chatID = chatItem.entity.objectID
+            let replyID = reply?.entity.objectID
             let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
             myEntity.mType = .text
             myEntity.text = sendText
@@ -187,6 +216,18 @@ extension Message {
                 this.mContent = content
             }
             needsNoticeDetailReady.set()
+        }
+    }
+
+    func retry(completion: ((Message) -> Void)?) {
+        Current.database.save { [self] _ in
+            assert(state != .pend)
+            state = .pend
+            entity.text = nil
+            entity.content = nil
+            dispatch_after_seconds(0.1) {
+                completion?(self)
+            }
         }
     }
 

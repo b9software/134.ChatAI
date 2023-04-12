@@ -8,6 +8,7 @@
 "menu.new.tab" = "Window Tab";
 "menu.new.window" = "Window";
 "menu.new" = "New";
+"menu.retry" = "Retry";
 
 "chat.defaultTitle" = "New Chat";
 "chat.archived" = "Archived";
@@ -15,6 +16,8 @@
 "chat.deleted" = "Deleted";
 "chat.deleteRestore" = "Undelete";
 "chat.deleteNow" = "Delete Immediately";
+"chat.loading" = "...";
+"chat.loadingQueue" = "Waiting....";
 
 "chat.setupBeforeUseNotice" = "You must set up the engine before you can chat.";
 "chat.setting.choiceEngine" = "Please choose a engine.";

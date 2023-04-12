@@ -30,6 +30,8 @@ class ConversationDetailViewController:
         super.viewDidLoad()
         conversation(item, useState: item.usableState)
         listDataSource.conversation = item
+        listView.allowsFocus = true
+        listView.selectionFollowsFocus = true
     }
 
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!

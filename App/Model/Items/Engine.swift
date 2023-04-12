@@ -21,13 +21,17 @@ class Engine {
     }
 
     private(set) var entity: CDEngine
+    let id: StringID
     let type: EType
+    var name: String?
 
     private init(entity: CDEngine) throws {
         guard let type = EType(rawValue: entity.type ?? "") else {
             throw AppError.message("Engine> init with invalid type: \(entity.type ?? "nil").")
         }
+        self.id = entity.id ?? "?"
         self.type = type
+        self.name = entity.name
         self.entity = entity
         switch type {
         case .openAI:
@@ -38,27 +42,28 @@ class Engine {
     }
 
     private init(type: EType, oaEngine: OAEngine, entity: CDEngine) {
+        self.id = entity.id ?? "?"
         self.type = type
-        self.oaEngine = oaEngine
+        self.name = entity.name
         self.entity = entity
+        self.oaEngine = oaEngine
     }
 
     static func from(entity: CDEngine) -> Engine? {
-        entity.access { _ in
-            guard let id = entity.id else {
-                assert(false)
-                return nil
-            }
-            if let old = enginePool[id] { return old }
-            do {
-                let new = try Engine(entity: entity)
-                AppLog().debug("Engine> Create instance of \(id).")
-                enginePool[id] = new
-                return new
-            } catch {
-                AppLog().critical("Unable load engine from db: \(error).")
-                return nil
-            }
+        assertDispatch(.notOnQueue(.main))
+        guard let id = entity.id else {
+            assert(false)
+            return nil
+        }
+        if let old = enginePool[id] { return old }
+        do {
+            let new = try Engine(entity: entity)
+            AppLog().debug("Engine> Create instance of \(id).")
+            enginePool[id] = new
+            return new
+        } catch {
+            AppLog().critical("Unable load engine from db: \(error).")
+            return nil
         }
     }
 
@@ -184,22 +189,21 @@ extension Engine {
         }
     }
 
-    func send(message: Message, config: EngineConfig) -> Task<Void, Error> {
-        Task {
-            if type != .openAI {
-                throw AppError.message("Only OpenAI API is supported.")
-            }
-            let api = try getOANetworking()
-            let stream = try await api.steamChat(config: config, messages: [
-                .init(role: .user, content: "test")
-            ])
-            if Task.isCancelled { return }
-
-            for try await choice in stream {
-                if Task.isCancelled { return }
-                message.onSteamResponse(choice)
-            }
-            AppLog().debug("Stream Receive end")
+    func send(message: Message, config: EngineConfig) throws -> Task<Void, Error> {
+        if type != .openAI {
+            throw AppError.message("Only OpenAI API is supported.")
         }
+        let api = try getOANetworking()
+        return api.steamChat(config: config, handler: message)
+    }
+}
+
+extension Engine: Hashable {
+    static func == (lhs: Engine, rhs: Engine) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

@@ -81,13 +81,14 @@ extension CDConversation {
 }
 
 extension CDConversation {
-    func isNewIDAvailable(newID: String) -> Bool {
-        read { this, ctx in
-            if newID == this.id {
+    func isNewIDAvailable(newID: String) async -> Bool {
+        await Current.database.read { ctx in
+            if newID == self.id {
                 return true
             }
-            return try ctx.fetch(Self.request(id: newID)).first == nil
-        } ?? false
+            let fetchResult = try? ctx.fetch(Self.request(id: newID))
+            return fetchResult?.isEmpty ?? false
+        }
     }
 
     func loadChatConfig() -> ChatConfig? {

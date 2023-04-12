@@ -47,13 +47,17 @@ class ConversationManager: NSObject {
     private(set) var hasArchived = false {
         didSet {
             if oldValue == hasArchived { return }
-            delegates.invoke { $0.conversations(self, hasArchived: hasArchived) }
+            Task { @MainActor in
+                delegates.invoke { $0.conversations(self, hasArchived: hasArchived) }
+            }
         }
     }
     private(set) var hasDeleted = false {
         didSet {
             if oldValue == hasDeleted { return }
-            delegates.invoke { $0.conversations(self, hasDeleted: hasDeleted) }
+            Task { @MainActor in
+                delegates.invoke { $0.conversations(self, hasDeleted: hasDeleted) }
+            }
         }
     }
 
@@ -145,8 +149,9 @@ extension ConversationManager: NSFetchedResultsControllerDelegate {
         case .delete:
             hasArchived = archivedController.fetchedObjects?.isNotEmpty ?? false
         default:
-            break
+            return
         }
+        AppLog().debug("CM> archived change \(type)")
     }
 
     private func handleDeletedChanges(_ type: NSFetchedResultsChangeType) {
@@ -156,8 +161,9 @@ extension ConversationManager: NSFetchedResultsControllerDelegate {
         case .delete:
             hasDeleted = deletedController.fetchedObjects?.isNotEmpty ?? false
         default:
-            break
+            return
         }
+        AppLog().debug("CM> deleted change \(type)")
     }
 }
 

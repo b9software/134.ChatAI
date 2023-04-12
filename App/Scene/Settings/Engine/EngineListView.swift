@@ -20,7 +20,7 @@ class EngineListView: UITableView, UITableViewDelegate {
         allowsMultipleSelection = true
     }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDEngine>(tableView: self)
+    private lazy var listDataSource = CDFetchTableViewDataSource<Engine, CDEngine>(tableView: self, transformer: Engine.from(entity:))
 
     var fetchRequest: NSFetchRequest<CDEngine>? {
         didSet {
@@ -61,7 +61,7 @@ class EngineListView: UITableView, UITableViewDelegate {
 
     override func delete(_ sender: Any?) {
         indexPathsForSelectedRows?.forEach { ip in
-            listDataSource.item(at: ip)?.delete()
+            listDataSource.item(at: ip)?.entity.delete()
         }
     }
 
@@ -72,10 +72,10 @@ class EngineListView: UITableView, UITableViewDelegate {
             return
         }
         let ip = IndexPath(row: idx, section: 0)
-        guard let entity = listDataSource.item(at: ip) else {
+        guard let item = listDataSource.item(at: ip) else {
             return
         }
-        entity.managedObjectContext?.delete(entity)
+        item.entity.delete()
     }
 
     override func selectAll(_ sender: Any?) {

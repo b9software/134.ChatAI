@@ -15,7 +15,7 @@ class OAEntityTests: TestCase {
         let jsonData = json.data(using: .utf8)!
 
         let item = try OAChatMessage.decode(jsonData)
-        assertEqual(item.role.isUnknown, true)
+        assertEqual(item.role?.isUnknown, true)
         assertEqual(item.content, "test")
     }
 
@@ -31,7 +31,7 @@ class OAEntityTests: TestCase {
             "frequency_penalty": -2,
             "presence_penalty": -2,
             "temperature": 0,
-            "topP": 0,
+            "top_p": 0,
         ] as NSDictionary)
 
         // Test upper

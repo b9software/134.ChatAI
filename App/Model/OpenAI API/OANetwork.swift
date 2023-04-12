@@ -54,43 +54,43 @@ class OANetwork {
         return try [OAModel].decode(data)
     }
 
-    func steamChat(config: EngineConfig, messages: [OAChatMessage]) async throws -> AsyncThrowingStream<OAChatCompletion.Choice, Error> {
-        var param = try config.toOpenAIParameters()
-        var pMsg = messages
-        if let system = config.system {
-            pMsg.insert(.init(role: .system, content: system), at: 0)
-        }
-        param["messages"] = pMsg.map { ["role": $0.role?.rawValue, "content": $0.content] }
-        param["user"] = Current.identifierForVendor
-        param["stream"] = true
+    func steamChat(config: EngineConfig, handler: Message) -> Task<Void, Error> {
+        Task {
+            var param = try config.toOpenAIParameters()
+            var pMsg: [OAChatMessage] = try await handler.entity.buildContext()
+            if let system = config.system {
+                pMsg.insert(.init(role: .system, content: system), at: 0)
+            }
+            param["messages"] = pMsg.map { ["role": $0.role?.rawValue, "content": $0.content] }
+            param["user"] = Current.identifierForVendor
+            param["stream"] = true
 
-        var request = URLRequest(url: URL(string: "/v1/chat/completions", relativeTo: baseURL)!)
-        request.httpMethod = "POST"
-        request.timeoutInterval = 90
-        request.httpBody = try JSONSerialization.data(withJSONObject: param)
+            var request = URLRequest(url: URL(string: "/v1/chat/completions", relativeTo: baseURL)!)
+            request.httpMethod = "POST"
+            request.timeoutInterval = 90
+            request.httpBody = try JSONSerialization.data(withJSONObject: param)
 
-        let (result, response) = try await session.bytes(for: request)
-        try await handleResponse(stream: result, response: response)
-        return AsyncThrowingStream<OAChatCompletion.Choice, Error> { checked in
-            Task {
-                do {
-                    for try await line in result.lines {
-                        let part = try decodeStream(line: line)
-                        guard let choices = part?.choices else { continue }
-                        for choice in choices {
-                            checked.yield(choice)
-                            // TODO: fix multi choice end
-                            if choice.finishReason != nil {
-                                checked.finish()
-                                return
-                            }
-                        }
+            AppLog().debug("Sending HTTP request")
+            let (result, response) = try await session.bytes(for: request)
+            try Task.checkCancellation()
+            AppLog().debug("Got HTTP response")
+            try await handleResponse(stream: result, response: response)
+            try Task.checkCancellation()
+
+            for try await line in result.lines {
+                try Task.checkCancellation()
+                let part = try decodeStream(line: line)
+                guard let choices = part?.choices else { continue }
+                for choice in choices {
+                    handler.onSteamResponse(choice)
+                    // TODO: fix multi choice end
+                    if let reason = choice.finishReason {
+                        AppLog().debug("Reply finished: \(reason).")
+                        return
                     }
-                } catch {
-                    checked.finish(throwing: error)
                 }
-            } // End: Task
-        } // End: Async Stream
+            }
+        }
     }
 
     private func decodeStream(line: String) throws -> OAChatCompletion? {

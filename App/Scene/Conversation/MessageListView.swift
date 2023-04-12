@@ -8,7 +8,7 @@
 import HasItem
 import UIKit
 
-/// 消息列表
+// 未使用
 class MessageListView: UITableView {
     /*
     var debugText: String {
@@ -93,11 +93,18 @@ class MessageListView: UITableView {
 
 class MessageCellSizeView: UIView {
     @IBOutlet private weak var cell: UITableViewCell!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    private var defaultHeight: CGFloat = 40
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint! {
+        didSet {
+            defaultHeight = heightConstraint.constant
+        }
+    }
     var isEnable = false {
         didSet {
             if isEnable {
                 superview?.layoutIfNeeded()
+            } else {
+                heightConstraint.constant = defaultHeight
             }
         }
     }
@@ -112,7 +119,7 @@ class MessageCellSizeView: UIView {
         guard let superview = superview, isEnable else {
             return
         }
-        if abs(bounds.height - superview.height) < 1 { return }
+        if abs(bounds.height - superview.bounds.height) < 1 { return }
         heightConstraint.constant = bounds.height
         updateCellHeight()
     }
@@ -142,6 +149,31 @@ class MessageBaseCell:
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let bgView = UIView()
+        bgView.backgroundColor = .systemRed.withAlphaComponent(0.1)
+        selectedBackgroundView = bgView
+        selectionView?.isHidden = true
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        selectionView?.isHidden = !selected
+    }
+
+    @IBOutlet private weak var selectionView: UIView?
+    @IBOutlet weak var contentBox: UIView?
+    @IBOutlet weak var sizeView: MessageCellSizeView?
+
+    func updateUI(item: Message) {
+        // overwrite
+    }
+
+    func prepareAsyncLoad() {
+        // overwrite
+    }
+
     private func loadData() {
         if item.fetchDetail() {
             messageDetailReady(item)
@@ -163,15 +195,9 @@ class MessageBaseCell:
         // overwrite
     }
 
-    func prepareAsyncLoad() {
+    func messageReceiveDeltaReplay(_ item: Message, text: String) {
         // overwrite
     }
-
-    func updateUI(item: Message) {
-        // overwrite
-    }
-
-    @IBOutlet weak var sizeView: MessageCellSizeView?
 }
 
 class MessageMyTextCell: MessageBaseCell {
@@ -196,23 +222,63 @@ class MessageTextCell: MessageBaseCell {
     }
 
     override func updateUI(item: Message) {
-        contentLabel.text = item.cachedText ?? "❓"
+        let couldRetry = item.state.couldRetry
+        retryButton.isHidden = !couldRetry
+        contentBox?.isHidden = couldRetry
+        if !retryButton.isHidden {
+            if let err = item.senderState?.error, !AppError.isCancel(err) {
+                retryButton.text = err.localizedDescription
+                retryButton.configuration?.baseForegroundColor = .systemRed
+            } else {
+                retryButton.text = L.Menu.retry
+                retryButton.configuration?.baseForegroundColor = .tintColor
+            }
+        }
+        let isSending = item.senderState?.isSending == true
+        if let text = item.cachedText {
+            contentLabel.text = text
+            contentBox?.isHidden = false
+        } else if isSending {
+            contentLabel.text = L.Chat.loading
+        } else if item.state == .pend {
+            contentLabel.text = L.Chat.loadingQueue
+        } else {
+            contentLabel.text = "❓"
+        }
     }
 
     override func messageSendStateChanged(_ item: Message) {
         super.messageSendStateChanged(item)
         stopButton.isHidden = !(item.senderState?.isSending ?? false)
-        stopButton.configuration?.subtitle = item.senderState?.error?.localizedDescription
+        if !stopButton.isHidden {
+            // Fix indicator may not shown after cell recycling
+            stopButton.configuration?.showsActivityIndicator = true
+        }
+        if let error = item.senderState?.error {
+            retryButton.text = error.localizedDescription
+            updateUI(item: item)
+            assert(retryButton.isHidden == false)
+        }
     }
 
-    func messageReceiveDeltaReplay(_ item: Message, text: String) {
-        contentLabel.text = (contentLabel.text ?? "") + text
-        AppLog().warning("\(contentLabel.text)")
+    override func messageReceiveDeltaReplay(_ item: Message, text: String) {
+        contentLabel.text = item.cachedText
         contentLabel.setNeedsDisplay()
+        AppLog().warning("\(contentLabel.text)")
     }
 
     @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet private weak var retryButton: UIButton!
     @IBOutlet private weak var stopButton: UIButton!
+
+    @IBAction private func onRetry(_ sender: Any) {
+        retryButton.isHidden = true
+        item.retry { [weak self] item in
+            guard let sf = self,
+            sf.item == item else { return }
+            sf.updateUI(item: item)
+        }
+    }
 
     @IBAction private func onStop(_ sender: Any) {
         item.stopResponse()

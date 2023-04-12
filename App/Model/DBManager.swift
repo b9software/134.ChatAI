@@ -53,7 +53,6 @@ class DBManager {
                 fatalError(err.localizedDescription)
             }
         }
-        container.viewContext.automaticallyMergesChangesFromParent = true
         let instance = DBManager(container: container)
         loadedModel = container.managedObjectModel
         return instance
@@ -73,6 +72,7 @@ class DBManager {
     init(container: CDContainer) {
         self.container = container
         backgroundContext = container.newBackgroundContext()
+        backgroundContext.automaticallyMergesChangesFromParent = true
     }
 
     /// Async read in background
@@ -123,13 +123,13 @@ class DBManager {
         ctx.perform {
             Do.try {
                 try block(ctx)
-                try ctx.save()
+                ctx.trySave()
             }
         }
     }
 }
 
-private extension NSManagedObjectContext {
+extension NSManagedObjectContext {
     func trySave() {
         assertDispatch(.notOnQueue(.main))
         guard hasChanges else { return }
@@ -161,20 +161,6 @@ extension CDEntityAccessing {
             result = block(self)
         }
         return result
-    }
-
-    func read<T>(_ block: (Self, NSManagedObjectContext) throws -> T) -> T? {
-        guard let ctx = managedObjectContext else {
-            fatalError("\(self) must create with object context")
-        }
-        return ctx.performAndWait {
-            do {
-                return try block(self, ctx)
-            } catch {
-                AppLog().critical("DB> Read error: \(error).")
-                return nil
-            }
-        }
     }
 
     /// Async read

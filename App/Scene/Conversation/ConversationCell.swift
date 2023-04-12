@@ -41,25 +41,3 @@ class ConversationCell:
         nameLabel.text = item.name
     }
 }
-
-class ConversationEntityCell:
-    UITableViewCell,
-    HasItem
-{
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        selectedBackgroundView = {
-            let bgView = UIView()
-            bgView.backgroundColor = .tintColor.withAlphaComponent(0.4)
-            return bgView
-        }()
-    }
-
-    var item: CDConversation! {
-        didSet {
-            nameLabel.text = item.title ?? L.Chat.defaultTitle
-        }
-    }
-
-    @IBOutlet private weak var nameLabel: UILabel!
-}

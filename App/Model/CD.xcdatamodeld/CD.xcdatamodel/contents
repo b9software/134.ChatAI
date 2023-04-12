@@ -37,6 +37,8 @@
     <entity name="Message" representedClassName="CDMessage" syncable="YES">
         <attribute name="by" optional="YES" attributeType="String"/>
         <attribute name="content" optional="YES" attributeType="Binary"/>
+        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deleteTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="end" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="medias" optional="YES" attributeType="Binary"/>
         <attribute name="next" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -50,6 +52,14 @@
         <relationship name="child" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="parent" inverseEntity="Message"/>
         <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="child" inverseEntity="Message"/>
+        <fetchIndex name="byParent">
+            <fetchIndexElement property="parent" type="Binary" order="ascending"/>
+            <fetchIndexElement property="createTime" type="Binary" order="descending"/>
+        </fetchIndex>
+        <fetchIndex name="byConversation">
+            <fetchIndexElement property="conversation" type="Binary" order="ascending"/>
+            <fetchIndexElement property="time" type="Binary" order="descending"/>
+        </fetchIndex>
     </entity>
     <configuration name="Cloud" usedWithCloudKit="YES">
         <memberEntity name="Conversation"/>

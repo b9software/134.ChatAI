@@ -32,6 +32,10 @@ internal enum L10n {
       internal static let deleteNow = L10n.tr("Localizable", "chat.deleteNow", fallback: "Delete Immediately")
       /// Undelete
       internal static let deleteRestore = L10n.tr("Localizable", "chat.deleteRestore", fallback: "Undelete")
+      /// ...
+      internal static let loading = L10n.tr("Localizable", "chat.loading", fallback: "...")
+      /// Waiting....
+      internal static let loadingQueue = L10n.tr("Localizable", "chat.loadingQueue", fallback: "Waiting....")
       /// You must set up the engine before you can chat.
       internal static let setupBeforeUseNotice = L10n.tr("Localizable", "chat.setupBeforeUseNotice", fallback: "You must set up the engine before you can chat.")
       /// Unarchive
@@ -94,6 +98,8 @@ internal enum L10n {
       internal static let guide = L10n.tr("Localizable", "menu.guide", fallback: "Guide")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
+      /// Retry
+      internal static let retry = L10n.tr("Localizable", "menu.retry", fallback: "Retry")
       /// Application Settings
       internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Application Settings")
       /// Conversation Settings

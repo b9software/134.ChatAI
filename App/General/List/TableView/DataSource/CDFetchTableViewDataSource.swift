@@ -12,24 +12,25 @@ import UIKit
 /**
 
  ```
- private lazy var listDataSource = CDFetchTableViewDataSource<CDEntity>()
+ private lazy var listDataSource = CDFetchTableViewDataSource<Item, CDEntity>(tableView: listView, transformer: ...)
  @IBOutlet private weak var listView: UITableView!
 
  override func viewDidLoad() {
      super.viewDidLoad()
-     listDataSource.tableView = listView
      listDataSource.fetchRequest = ...
  }
  ```
  */
-class CDFetchTableViewDataSource<Entity: NSManagedObject>:
-    UITableViewDiffableDataSource<Int, Entity>,
+class CDFetchTableViewDataSource<ListEntity: Hashable, Entity: NSManagedObject>:
+    UITableViewDiffableDataSource<Int, ListEntity>,
     NSFetchedResultsControllerDelegate
 {
     weak var tableView: UITableView?
+    let listEntityTransformer: (Entity) -> ListEntity?
 
-    init(tableView: UITableView) {
+    init(tableView: UITableView, transformer: @escaping (Entity) -> ListEntity?) {
         self.tableView = tableView
+        listEntityTransformer = transformer
         super.init(tableView: tableView, cellProvider: UITableView.cellProvider(_:indexPath:object:))
         tableView.dataSource = self
     }
@@ -56,7 +57,7 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
     weak var emptyView: UIView?
 
     /// 选中的对象
-    var selectedItems: [Entity]? {
+    var selectedItems: [ListEntity]? {
         get {
             tableView?.indexPathsForSelectedRows?.compactMap { item(at: $0) }
         }
@@ -65,24 +66,24 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
 
     /// 数据刷新前后，通过追踪选中对象，保持列表选中的元素不变
     var keepsSelectionThroughIndexPaths = false
-    private var itemSelectedNeedsRestore: [Entity]?
+    private var itemSelectedNeedsRestore: [ListEntity]?
 
     // MARK: Access
 
-    var listItems = [Entity]()
+    var listItems = [ListEntity]()
 
-    func item(at indexPath: IndexPath?) -> Entity? {
+    func item(at indexPath: IndexPath?) -> ListEntity? {
         guard let ip = indexPath else { return nil }
         return listItems.element(at: ip.row)
     }
 
-    func items(at indexPaths: [IndexPath]) -> [Entity] {
+    func items(at indexPaths: [IndexPath]) -> [ListEntity] {
         indexPaths.compactMap {
             item(at: $0)
         }
     }
 
-    func indexPath(of entity: Entity) -> IndexPath? {
+    func indexPath(of entity: ListEntity) -> IndexPath? {
         if let idx = listItems.firstIndex(of: entity) {
             return IndexPath(row: idx, section: 0)
         }
@@ -95,7 +96,7 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
 
     // MARK: -
 
-    func updateSnapShot(listItems: [Entity]) {
+    func updateSnapShot(listItems: [ListEntity]) {
         trackSelectionBeginRefresh()
         self.listItems = listItems
         var snap = snapshot()
@@ -120,8 +121,9 @@ class CDFetchTableViewDataSource<Entity: NSManagedObject>:
             assert(false)
             return
         }
-        dispatch_async_on_main { [weak self] in
-            self?.updateSnapShot(listItems: items)
+        let listItems = items.compactMap(listEntityTransformer)
+        Task { @MainActor in
+            updateSnapShot(listItems: listItems)
         }
     }
 }
@@ -131,7 +133,7 @@ extension CDFetchTableViewDataSource {
         tableView?.indexPathsForVisibleRows?.isNotEmpty ?? false
     }
 
-    private func selectRows(items: [Entity]?) {
+    private func selectRows(items: [ListEntity]?) {
         guard let tableView = tableView else { return }
         if items?.isNotEmpty == true, listItems.isEmpty {
             itemSelectedNeedsRestore = items

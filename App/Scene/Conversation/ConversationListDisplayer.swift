@@ -32,7 +32,7 @@ class ChatArchivedListController:
 {
     static var storyboardID: StoryboardID { .conversation }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>(tableView: listView)
+    private lazy var listDataSource = CDFetchTableViewDataSource<Conversation, CDConversation>(tableView: listView, transformer: Conversation.from(entity:))
     @IBOutlet private weak var listView: UITableView!
 
     override func viewDidLoad() {
@@ -42,21 +42,20 @@ class ChatArchivedListController:
 
     override func delete(_ sender: Any?) {
         listView.indexPathsForSelectedRows?.forEach { ip in
-            guard let entity = listDataSource.item(at: ip) else {
+            guard let item = listDataSource.item(at: ip) else {
                 assert(false)
                 return
             }
-            Conversation.from(entity: entity).delete()
+            item.delete()
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let entity = listDataSource.item(at: indexPath),
+        guard let item = listDataSource.item(at: indexPath),
               let parent = parent as? SidebarViewController else {
             assert(false)
             return
         }
-        let item = Conversation.from(entity: entity)
         parent.select(conversation: item, in: tableView)
     }
 
@@ -79,21 +78,21 @@ class ChatArchivedListController:
     @objc
     func restoreFromMenu(sender: UICommand) {
         guard let idx = sender.propertyList as? Int,
-              let entity = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
+              let item = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
             assert(false)
             return
         }
-        Conversation.from(entity: entity).unarchive()
+        item.unarchive()
     }
 
     @objc
     func deleteFromMenu(sender: UICommand) {
         guard let idx = sender.propertyList as? Int,
-              let entity = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
+              let item = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
             assert(false)
             return
         }
-        Conversation.from(entity: entity).undelete()
+        item.undelete()
     }
 }
 
@@ -104,7 +103,7 @@ class ChatDeletedListController:
 {
     static var storyboardID: StoryboardID { .conversation }
 
-    private lazy var listDataSource = CDFetchTableViewDataSource<CDConversation>(tableView: listView)
+    private lazy var listDataSource = CDFetchTableViewDataSource<Conversation, CDConversation>(tableView: listView, transformer: Conversation.from(entity:))
     @IBOutlet private weak var listView: UITableView!
 
     override func viewDidLoad() {
@@ -113,12 +112,11 @@ class ChatDeletedListController:
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let entity = listDataSource.item(at: indexPath),
+        guard let item = listDataSource.item(at: indexPath),
               let parent = parent as? SidebarViewController else {
             assert(false)
             return
         }
-        let item = Conversation.from(entity: entity)
         parent.select(conversation: item, in: tableView)
     }
 
@@ -141,20 +139,24 @@ class ChatDeletedListController:
     @objc
     func restoreFromMenu(sender: UICommand) {
         guard let idx = sender.propertyList as? Int,
-              let entity = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
+              let item = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
             assert(false)
             return
         }
-        entity.modify { this, _ in this.deleteTime = nil }
+        Current.database.save { _ in
+            item.entity.deleteTime = nil
+        }
     }
 
     @objc
     func deleteNowFromMenu(sender: UICommand) {
         guard let idx = sender.propertyList as? Int,
-              let entity = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
+              let item = listDataSource.item(at: IndexPath(row: idx, section: 0)) else {
             assert(false)
             return
         }
-        entity.modify { $1.delete($0) }
+        Current.database.save { ctx in
+            ctx.delete(item.entity)
+        }
     }
 }

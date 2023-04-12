@@ -90,6 +90,7 @@
 		D55959D320AB9FA20019D733 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55959D220AB9FA20019D733 /* MessageManager.swift */; };
 		D559AD6821746EEC005D4BCD /* TextField+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559AD6721746EEC005D4BCD /* TextField+Action.swift */; };
 		D564D5D31970EE340032FEC3 /* MBModalPresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D564D5D21970EE340032FEC3 /* MBModalPresentSegue.m */; };
+		D568290F29E74A5900E5A02D /* MessageBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568290E29E74A5900E5A02D /* MessageBuildTests.swift */; };
 		D569C9E821AE906900211E36 /* MBPublishImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D569C9D821AE906700211E36 /* MBPublishImagePicker.m */; };
 		D569C9EA21AE906900211E36 /* MBPublishSession.m in Sources */ = {isa = PBXBuildFile; fileRef = D569C9DE21AE906800211E36 /* MBPublishSession.m */; };
 		D569C9EB21AE906900211E36 /* MBAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D569C9E021AE906900211E36 /* MBAudioRecorder.m */; };
@@ -389,6 +390,7 @@
 		D559AD6721746EEC005D4BCD /* TextField+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+Action.swift"; sourceTree = "<group>"; };
 		D564D5D11970EE340032FEC3 /* MBModalPresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBModalPresentSegue.h; sourceTree = "<group>"; };
 		D564D5D21970EE340032FEC3 /* MBModalPresentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBModalPresentSegue.m; sourceTree = "<group>"; };
+		D568290E29E74A5900E5A02D /* MessageBuildTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBuildTests.swift; sourceTree = "<group>"; };
 		D569C9D721AE906700211E36 /* MBPublishImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPublishImagePicker.h; sourceTree = "<group>"; };
 		D569C9D821AE906700211E36 /* MBPublishImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPublishImagePicker.m; sourceTree = "<group>"; };
 		D569C9DD21AE906800211E36 /* MBPublishSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPublishSession.h; sourceTree = "<group>"; };
@@ -1337,6 +1339,7 @@
 				D5810C7829D9AFE00073F8C8 /* CDEntityFetchTests.swift */,
 				D5810C8029D9C2410073F8C8 /* ConversationManagerTests.swift */,
 				D5E8FA7829CF08B200C3D753 /* CoreDataTests.swift */,
+				D568290E29E74A5900E5A02D /* MessageBuildTests.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -2049,6 +2052,7 @@
 				D5810C7929D9AFE10073F8C8 /* CDEntityFetchTests.swift in Sources */,
 				D5810C8129D9C2410073F8C8 /* ConversationManagerTests.swift in Sources */,
 				D5E8FA7929CF08B200C3D753 /* CoreDataTests.swift in Sources */,
+				D568290F29E74A5900E5A02D /* MessageBuildTests.swift in Sources */,
 				D5E8FA7D29CF240500C3D753 /* Date+Test.swift in Sources */,
 				D57EF74729E427CD00CD101E /* OAEntityTests.swift in Sources */,
 				D51E92B329DAD06600922497 /* TestCase.swift in Sources */,

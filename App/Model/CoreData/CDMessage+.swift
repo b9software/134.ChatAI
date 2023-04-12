@@ -11,8 +11,10 @@ public extension CDMessage {
     override func awakeFromInsert() {
         super.awakeFromInsert()
         uid = UUID()
-        time = .current
-        updateTime = .current
+        let now = Date.current
+        time = now
+        createTime = now
+        updateTime = now
     }
 
     override func awakeFromFetch() {
@@ -24,6 +26,9 @@ public extension CDMessage {
         #if DEBUG
         if time == nil {
             AppLog().critical("CD> Missing time: \(self).")
+        }
+        if createTime == nil {
+            AppLog().warning("CD> Missing createTime: \(self).")
         }
         if by == nil {
             AppLog().critical("CD> Missing by: \(self).")
@@ -49,8 +54,12 @@ public extension CDMessage {
 }
 
 extension CDMessage {
-    static let timeKey = #keyPath(CDMessage.time)
+    static let createTimeKey = #keyPath(CDMessage.createTime)
+    static let conversationKey = #keyPath(CDMessage.conversation)
+    static let deleteTimeKey = #keyPath(CDMessage.deleteTime)
+    static let parentKey = #keyPath(CDMessage.parent)
     static let stateKey = #keyPath(CDMessage.state)
+    static let timeKey = #keyPath(CDMessage.time)
 
     /// 消息列表
     static func conversationRequest(_ chatEntity: CDConversation, offset: Int, limit: Int, ascending: Bool) -> NSFetchRequest<CDMessage> {
@@ -60,7 +69,11 @@ extension CDMessage {
         ]
         request.fetchOffset = offset
         request.fetchLimit = limit
-        request.predicate = NSPredicate(format: "conversation == %@", chatEntity)
+        request.predicate = NSPredicate(
+            format: "%K == %@ AND %K == nil",
+            conversationKey, chatEntity,
+            deleteTimeKey
+        )
         return request
     }
 
@@ -68,9 +81,22 @@ extension CDMessage {
     static func pendingRequest() -> NSFetchRequest<CDMessage> {
         let request = fetchRequest()
         request.sortDescriptors = [
-            NSSortDescriptor(key: timeKey, ascending: false),
+            NSSortDescriptor(key: timeKey, ascending: true),
         ]
         request.predicate = NSPredicate(format: "%K == %d", stateKey, Message.MState.pend.rawValue)
+        return request
+    }
+
+    static func childRequest(parent: CDMessage) -> NSFetchRequest<CDMessage> {
+        let request = fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: createTimeKey, ascending: false),
+        ]
+        request.predicate = NSPredicate(
+            format: "%K == %@ AND %K == nil",
+            parentKey, parent,
+            deleteTimeKey
+        )
         return request
     }
 }
@@ -120,6 +146,29 @@ extension CDMessage: ModelValidate {
         }
         if mState == .bad {
             throw AppError.message("Bad state")
+        }
+    }
+
+    func buildContext() async throws -> [OAChatMessage] {
+        try await Current.database.read { [self] ctx in
+            let parent = parent ?? self
+            var messages = try ctx.fetch(Self.childRequest(parent: parent))
+            messages.insert(parent, at: 0)
+            let result: [OAChatMessage] = messages.compactMap { entity in
+                guard entity.mType == .text,
+                      let value = entity.text else {
+                    return nil
+                }
+                switch entity.mRole {
+                case .me:
+                    return OAChatMessage(role: .user, content: value)
+                case .assistant:
+                    return OAChatMessage(role: .assistant, content: value)
+                case .none:
+                    return nil
+                }
+            }
+            return result
         }
     }
 

@@ -59,7 +59,7 @@ actor MessageSender:
     }
 
     private func loadInitItems() {
-        Current.database.save { [self] ctx in
+        Current.database.save { [self] _ in
             for entity in fetchControl.fetchedObjects ?? [] {
                 assert(entity.mState == .pend)
                 if Date.isRecent(entity.time, range: 60) {
@@ -153,10 +153,14 @@ class MessageOperation: Operation {
                 try await asyncRun()
                 try await engineTask?.value
                 message.senderState = nil
-                AppLog().warning("Task async finished")
+                AppLog().debug("Task async finished")
             } catch {
                 message.senderState = SenderState(isSending: false, error: error)
-                AppLog().error("Task error: \(error)")
+                if AppError.isCancel(error) {
+                    AppLog().info("Task cancelled.")
+                } else {
+                    AppLog().error("Task error: \(error)")
+                }
             }
             semaphore.signal()
         }
@@ -170,7 +174,7 @@ class MessageOperation: Operation {
         let engine = try await conversation.loadEngine()
         let config = conversation.engineConfig
         try checkCancel()
-        engineTask = engine.send(message: message, config: config)
+        engineTask = try engine.send(message: message, config: config)
     }
 
     func checkCancel() throws {

@@ -100,6 +100,10 @@ public class CDMessage: NSManagedObject {
     @NSManaged public var type: Int16
     /// 解析的消息体内容，需要结合 type 去解析
     @NSManaged public var content: Data?
+    /// 创建时间
+    @NSManaged public var createTime: Date?
+    /// 已删除？
+    @NSManaged public var deleteTime: Date?
     /// 媒体内容
     @NSManaged public var medias: Data?
     /// 返回收到的时间

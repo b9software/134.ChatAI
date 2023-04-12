@@ -120,9 +120,12 @@ private var lastCanPerformAction: Selector?
 private var lastTargetAction: Selector?
 
 extension ApplicationDelegate {
+#if DEBUG
     override func validate(_ command: UICommand) {
         super.validate(command)
-        debugPrint(command)
+        if debug.debugSystemUI {
+            debugPrint(command)
+        }
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
@@ -146,6 +149,7 @@ extension ApplicationDelegate {
         }
         return target
     }
+#endif // End debug
 }
 
 // MARK: - Menu

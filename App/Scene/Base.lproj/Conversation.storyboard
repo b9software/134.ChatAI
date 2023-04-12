@@ -75,7 +75,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3hW-8e-NzE" customClass="ConversationEntityCell" customModule="B9ChatAI" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3hW-8e-NzE" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="131" width="300" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hW-8e-NzE" id="Pqy-zi-ruw">
@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nYo-Gj-a8u" customClass="ConversationEntityCell" customModule="B9ChatAI" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nYo-Gj-a8u" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="300" height="53.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nYo-Gj-a8u" id="eVa-4E-EvC">
@@ -314,18 +314,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="400" height="72.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3q8-JE-me0" userLabel="BG">
-                                                    <rect key="frame" x="26" y="11" width="71.5" height="50.5"/>
-                                                    <color key="backgroundColor" name="Background/Box"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZA-tG-Cju" userLabel="Box">
                                                     <rect key="frame" x="26" y="11" width="71.5" height="50.5"/>
                                                     <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3q8-JE-me0" userLabel="BG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="71.5" height="50.5"/>
+                                                            <color key="backgroundColor" name="Background/Box"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xp-TC-kwL" customClass="MessageCellSizeView" customModule="B9ChatAI" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                             <subviews>
@@ -349,41 +349,58 @@
                                                         </view>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="3q8-JE-me0" secondAttribute="bottom" id="8tC-2F-MaB"/>
+                                                        <constraint firstItem="3q8-JE-me0" firstAttribute="leading" secondItem="gZA-tG-Cju" secondAttribute="leading" id="AJ3-rh-EdJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="1xp-TC-kwL" secondAttribute="trailing" id="MHT-9m-8x1"/>
                                                         <constraint firstItem="1xp-TC-kwL" firstAttribute="top" secondItem="gZA-tG-Cju" secondAttribute="top" id="XRk-av-Xjw"/>
                                                         <constraint firstItem="1xp-TC-kwL" firstAttribute="leading" secondItem="gZA-tG-Cju" secondAttribute="leading" id="bA2-o6-WzG"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3q8-JE-me0" secondAttribute="trailing" id="kEr-it-nlv"/>
+                                                        <constraint firstItem="3q8-JE-me0" firstAttribute="top" secondItem="gZA-tG-Cju" secondAttribute="top" id="n6V-oF-aNp"/>
                                                         <constraint firstAttribute="height" priority="800" constant="50" id="rYu-8b-P1e"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQ4-vF-ew8">
-                                                    <rect key="frame" x="238" y="19" width="136" height="34.5"/>
+                                                    <rect key="frame" x="230" y="11" width="144" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="J0L-wN-JxR"/>
+                                                    </constraints>
                                                     <color key="tintColor" name="Text/Second"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="gray" title="Stop Response" showsActivityIndicator="YES">
+                                                    <buttonConfiguration key="configuration" style="gray" image="blank" title="Stop Response" imagePadding="8" showsActivityIndicator="YES">
                                                         <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
                                                     </buttonConfiguration>
                                                     <connections>
                                                         <action selector="onStop:" destination="7gs-CP-DJ5" eventType="touchUpInside" id="WLy-tL-X5Q"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wG2-jP-QCm">
+                                                    <rect key="frame" x="309" y="11" width="65" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Dgd-JU-msC"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Retry"/>
+                                                    <connections>
+                                                        <action selector="onRetry:" destination="7gs-CP-DJ5" eventType="touchUpInside" id="ZVG-NP-659"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mQ4-vF-ew8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" constant="8" id="8yP-72-ufE"/>
-                                                <constraint firstItem="3q8-JE-me0" firstAttribute="leading" secondItem="gZA-tG-Cju" secondAttribute="leading" id="AbE-2A-xuV"/>
-                                                <constraint firstItem="3q8-JE-me0" firstAttribute="trailing" secondItem="gZA-tG-Cju" secondAttribute="trailing" id="BlV-HA-C4m"/>
-                                                <constraint firstItem="3q8-JE-me0" firstAttribute="bottom" secondItem="gZA-tG-Cju" secondAttribute="bottom" id="Byb-Ks-HlA"/>
+                                                <constraint firstItem="mQ4-vF-ew8" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="8yP-72-ufE"/>
+                                                <constraint firstItem="wG2-jP-QCm" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="GQl-8R-mBY"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mQ4-vF-ew8" secondAttribute="trailing" constant="10" id="KDC-St-mrM"/>
                                                 <constraint firstItem="gZA-tG-Cju" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="NY1-pU-p5e"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="mQ4-vF-ew8" secondAttribute="bottom" id="Nxp-iL-28X"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gZA-tG-Cju" secondAttribute="bottom" id="Ohl-jL-yh6"/>
-                                                <constraint firstItem="3q8-JE-me0" firstAttribute="top" secondItem="gZA-tG-Cju" secondAttribute="top" id="Ucp-pG-G8g"/>
                                                 <constraint firstItem="gZA-tG-Cju" firstAttribute="leading" secondItem="9Pg-2i-QI8" secondAttribute="leadingMargin" constant="10" id="W5T-hE-z6H"/>
-                                                <constraint firstItem="mQ4-vF-ew8" firstAttribute="centerY" secondItem="9Pg-2i-QI8" secondAttribute="centerY" priority="500" id="XXd-zX-OTn"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="mQ4-vF-ew8" secondAttribute="bottom" constant="8" id="eHs-ZD-i8T"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wG2-jP-QCm" secondAttribute="trailing" constant="10" id="Zyw-AB-TnC"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="gZA-tG-Cju" secondAttribute="trailing" constant="30" id="gSF-G7-nkD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentBox" destination="gZA-tG-Cju" id="nuC-0Y-UwD"/>
                                             <outlet property="contentLabel" destination="O19-0z-cwT" id="7nd-Kg-wyC"/>
+                                            <outlet property="retryButton" destination="wG2-jP-QCm" id="bdb-9H-Fqa"/>
                                             <outlet property="sizeView" destination="1xp-TC-kwL" id="acK-jl-SZH"/>
                                             <outlet property="stopButton" destination="mQ4-vF-ew8" id="aeb-tn-PO4"/>
                                         </connections>
@@ -1286,6 +1303,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="blank" width="1" height="1"/>
         <image name="checkbox_off" width="18" height="18"/>
         <image name="checkbox_on" width="18" height="18"/>
         <image name="input_box" width="11" height="11"/>

@@ -37,7 +37,7 @@ struct EngineConfig: Codable, Equatable {
             result["temperature"] = temperature * 2
         }
         if !(0.99...1).contains(topP) {
-            result["topP"] = topP
+            result["top_p"] = topP
         }
         if !(0.495...0.505).contains(presenceP) {
             result["presence_penalty"] = presenceP * 4 - 2
@@ -72,7 +72,8 @@ class Conversation {
     }
 
     static func from(entity: CDConversation) -> Conversation {
-        conversationPool.object(key: entity.id!, creator: Conversation(entity: entity))
+//        assertDispatch(.notOnQueue(.main))
+        return conversationPool.object(key: entity.id!, creator: Conversation(entity: entity))
     }
 
     private lazy var needsListStateChanged = DelayAction(.init(target: self, selector: #selector(noticeListStateChanged)))
@@ -214,9 +215,9 @@ extension Conversation {
         Message.create(sendText: text, from: self, reply: reply)
     }
 
-    func save(name: String?, id: String?, engine: Engine, cfgChat: ChatConfig, cfgEngine: EngineConfig) throws {
+    func save(name: String?, id: String?, engine: Engine, cfgChat: ChatConfig, cfgEngine: EngineConfig) async throws {
         let newID = id ?? self.id
-        guard entity.isNewIDAvailable(newID: newID) else {
+        guard await entity.isNewIDAvailable(newID: newID) else {
             throw AppError.message(L.Chat.Setting.badSameID)
         }
         if self.id != newID {

@@ -9,7 +9,7 @@ import Foundation
 
 // swiftlint:disable identifier_name nesting
 
-enum OAChatRole: RawRepresentable, Codable {
+enum OAChatRole: RawRepresentable, Codable, Equatable {
     case assistant
     case system
     case user
@@ -42,7 +42,7 @@ enum OAChatRole: RawRepresentable, Codable {
 }
 
 /// 发送与接收都使用
-struct OAChatMessage: Codable {
+struct OAChatMessage: Codable, Equatable {
     private(set) var role: OAChatRole?
     private(set) var content: String?
 }

@@ -118,7 +118,6 @@ class MessageDataSource:
 
     func applyFetched(items: [Message]) {
         assertDispatch(.onQueue(.main))
-        AppLog().debug("DS> append \(items)")
         if listItems.isEmpty {
             listItems.append(contentsOf: items.reversed())
             heightCache.append(contentsOf: [CGFloat?](repeating: nil, count: items.count))
@@ -234,8 +233,7 @@ class MessageDataSource:
         heightCache[ip.row] = height
 //        indexPathsCellHeight.append(ip)
         needsUpdateCellHeight.set()
-        AppLog().debug("DS> update height at \(ip.row) to \(height).")
-
+//        AppLog().debug("DS> update height at \(ip.row) to \(height).")
     }
 //    private var indexPathsCellHeight = [IndexPath]()
     private lazy var needsUpdateCellHeight = DelayAction(Action { [weak self] in

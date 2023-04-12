@@ -23,11 +23,17 @@ enum AppError: LocalizedError {
 
     /// Conveniently determine if an object is `AppError.cancel`
     static func isCancel(_ err: Error?) -> Bool {
-        guard let err = err as? AppError else {
+        if let err = err as? AppError {
+            if case .cancel = err {
+                return true
+            }
             return false
         }
-        if case .cancel = err {
+        if err is CancellationError {
             return true
+        }
+        if let urlError = err as? URLError {
+            return urlError.code == .cancelled
         }
         return false
     }
