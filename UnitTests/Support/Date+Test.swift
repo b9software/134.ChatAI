@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+@testable import B9ChatAI
 import Foundation
 
 extension Date {
@@ -24,15 +25,12 @@ extension Date {
     /// - Parameters:
     ///   - day: A string representation of the date in one of the following formats:
     ///     * `yyyy-MM-dd`
-    ///     * `yyyy-MM-dd HH:mm`
     ///     * `yyyy-MM-dd HH:mm:ss`
     init(day: String) {
         let formatter: DateFormatter
         switch day.count {
         case 10:
             formatter = .localDay
-        case 16:
-            formatter = .init(format: "yyyy-MM-dd HH:mm")
         case 19:
             formatter = .localDayTime
         default:
@@ -70,16 +68,5 @@ extension Date {
             fatalError("\(dateString) is not in acceptable format.")
         }
         self.init(timeInterval: 0, since: date)
-    }
-}
-
-extension DateFormatter {
-    static let localDay = DateFormatter(format: "yyyy-MM-dd")
-    static let localDayTime = DateFormatter(format: "yyyy-MM-dd HH:mm:ss")
-
-    /// Create instance with a given date format string.
-    convenience init(format: String) {
-        self.init()
-        dateFormat = format
     }
 }

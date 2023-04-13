@@ -151,19 +151,18 @@ class MessageBaseCell:
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        let bgView = UIView()
-        bgView.backgroundColor = .systemRed.withAlphaComponent(0.1)
-        selectedBackgroundView = bgView
+        selectedBackgroundView = UIView()
         selectionView?.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         selectionView?.isHidden = !selected
+        contentBox?.isSelected = selected
     }
 
     @IBOutlet private weak var selectionView: UIView?
-    @IBOutlet weak var contentBox: UIView?
+    @IBOutlet weak var contentBox: MessageBoxView?
     @IBOutlet weak var sizeView: MessageCellSizeView?
 
     func updateUI(item: Message) {
@@ -263,7 +262,7 @@ class MessageTextCell: MessageBaseCell {
 
     override func messageReceiveDeltaReplay(_ item: Message, text: String) {
         contentLabel.text = item.cachedText
-        contentLabel.setNeedsDisplay()
+        setNeedsLayout()
         AppLog().warning("\(contentLabel.text)")
     }
 

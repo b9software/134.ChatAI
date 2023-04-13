@@ -116,7 +116,7 @@ class Engine {
         let oaEngine = OAEngine(models: models)
         oaEngine.apiKey = key
         let oaData = try oaEngine.encode()
-        let item = await Current.database.write {
+        let item = await Current.database.read {
             let entity = CDEngine(context: $0)
             entity.id = id
             entity.name = key.keyMasked().replacingOccurrences(of: "**", with: "*")
@@ -124,6 +124,7 @@ class Engine {
             entity.createTime = .current
             entity.usedTime = nil
             entity.raw = oaData
+            $0.trySave()
             return Engine(type: .openAI, oaEngine: oaEngine, entity: entity)
         }
         return item

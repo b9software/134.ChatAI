@@ -25,4 +25,16 @@ extension DateFormatter {
     static let localizedShortWeek: DateFormatter = {
         DateFormatter.currentLocale(fromTemplate: "EEE")
     }()
+
+    static let localDay: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    static let localDayTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
 }

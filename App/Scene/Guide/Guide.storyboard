@@ -17,22 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="guide" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-2O-zbC">
-                                <rect key="frame" x="57" y="110" width="43" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="TEXT" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cn4-fd-NbU">
+                                <rect key="frame" x="30" y="89" width="440" height="347"/>
+                                <color key="textColor" name="Text/First"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Background/Page"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="cn4-fd-NbU" secondAttribute="bottom" constant="30" id="LFM-g9-Lr1"/>
+                            <constraint firstItem="cn4-fd-NbU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="LtT-WQ-ojM"/>
+                            <constraint firstItem="cn4-fd-NbU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="moC-SM-lDe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cn4-fd-NbU" secondAttribute="trailing" constant="30" id="vmD-W0-g1i"/>
+                        </constraints>
                     </view>
                     <size key="freeformSize" width="500" height="500"/>
+                    <connections>
+                        <outlet property="textView" destination="cn4-fd-NbU" id="wpb-M3-r5Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-253" y="-92"/>
+            <point key="canvasLocation" x="-253.43511450381678" y="-92.253521126760575"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="zxg-0m-tJw">
@@ -66,6 +75,9 @@
     <resources>
         <namedColor name="Background/Page">
             <color white="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <namedColor name="Text/First">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

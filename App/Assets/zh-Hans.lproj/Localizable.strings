@@ -20,6 +20,9 @@
 "chat.deleteRestore" = "还原删除";
 
 /* (No Comment) */
+"chat.loadingQueue" = "等待中…";
+
+/* (No Comment) */
 "chat.setting.badSameID" = "已存在相同的 ID";
 
 /* (No Comment) */
@@ -81,6 +84,9 @@
 
 /* (No Comment) */
 "engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
+
+/* (No Comment) */
+"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-13";
 
 /* (No Comment) */
 "menu.archive" = "归档";

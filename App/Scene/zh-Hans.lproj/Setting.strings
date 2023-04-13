@@ -40,14 +40,17 @@
 /* Class = "UIViewController"; title = "Engine Manage"; ObjectID = "engine-manage-vc"; */
 "engine-manage-vc.title" = "引擎管理";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "H8F-pB-bDg"; */
-"H8F-pB-bDg.normalTitle" = "Button";
-
 /* Class = "UIButton"; configuration.title = "About"; ObjectID = "setting-about-button"; */
 "setting-about-button.configuration.title" = "关于";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "setting-appearance-section"; */
 "setting-appearance-section.text" = "外观";
+
+/* Class = "UILabel"; text = "Auto-copy when selecting cell content"; ObjectID = "setting-auto-copy-title"; */
+"setting-auto-copy-title.text" = "选中文字时自动拷贝到剪切板";
+
+/* Class = "UILabel"; text = "Behaviours"; ObjectID = "setting-behaviour-section"; */
+"setting-behaviour-section.text" = "行为调整";
 
 /* Class = "UIButton"; configuration.title = "Configuration"; ObjectID = "setting-engine-config-button"; */
 "setting-engine-config-button.configuration.title" = "配置引擎";
@@ -57,6 +60,15 @@
 
 /* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
 "setting-engine-section.text" = "AI 引擎";
+
+/* Class = "UILabel"; text = "You can select cell content by double-clicking"; ObjectID = "setting-key-tip-auto-copy"; */
+"setting-key-tip-auto-copy.text" = "双击会话中的文字可以直接选中";
+
+/* Class = "UILabel"; text = "Tips: You can navigate through UI elements using your keyboard.\nTry it now by pressing the Tab (+shift) key and arrow keys."; ObjectID = "setting-key-tip-navigation"; */
+"setting-key-tip-navigation.text" = "提示：你可以通过键盘与界面交互\n现在试试按 Tab (或+shift) 和方向键";
+
+/* Class = "UILabel"; text = "Tips: You can send text by pressing Command+Enter in the input box.\nI will add more key binding settings in future releases."; ObjectID = "setting-key-tip-send"; */
+"setting-key-tip-send.text" = "提示：会话输入框按 Command+Enter 可以发送文字\n未来版本会加更多按键设置";
 
 /* Class = "UILabel"; text = "Key Bindings"; ObjectID = "setting-keys-section"; */
 "setting-keys-section.text" = "按键配置";
@@ -69,6 +81,9 @@
 
 /* Class = "UICommand"; title = "System"; ObjectID = "setting-theme-system"; */
 "setting-theme-system.title" = "跟随系统";
+
+/* Class = "UILabel"; text = "Since I always use dark mode, I am unsure about which colors would be suitable for the light mode.\nI welcome any discussion on this topic on GitHub."; ObjectID = "setting-theme-tip"; */
+"setting-theme-tip.text" = "因为我只用深色 UI，浅色模式不确定用什么颜色\n欢迎到 GitHub 上讨论下这个";
 
 /* Class = "UILabel"; text = "Theme"; ObjectID = "setting-theme-title"; */
 "setting-theme-title.text" = "主题";

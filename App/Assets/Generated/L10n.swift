@@ -89,6 +89,24 @@ internal enum L10n {
         }
       }
     }
+    internal enum Guide {
+      /// Dear user,
+      /// 
+      /// Thank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.
+      /// 
+      /// Please note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.
+      /// 
+      /// For a list of known issues, please refer to the following link: <link>
+      /// 
+      /// Thank you for your understanding and support.
+      /// 
+      /// Best regards,
+      /// 
+      /// BB9z
+      /// 
+      /// 2023-04-13
+      internal static let text1st = L10n.tr("Localizable", "guide.text1st", fallback: "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link: <link>\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-13")
+    }
     internal enum Menu {
       /// Archive
       internal static let archive = L10n.tr("Localizable", "menu.archive", fallback: "Archive")

@@ -60,6 +60,7 @@ extension CDMessage {
     static let parentKey = #keyPath(CDMessage.parent)
     static let stateKey = #keyPath(CDMessage.state)
     static let timeKey = #keyPath(CDMessage.time)
+    static let uidKey = #keyPath(CDMessage.uid)
 
     /// 消息列表
     static func conversationRequest(_ chatEntity: CDConversation, offset: Int, limit: Int, ascending: Bool) -> NSFetchRequest<CDMessage> {
@@ -90,7 +91,7 @@ extension CDMessage {
     static func childRequest(parent: CDMessage) -> NSFetchRequest<CDMessage> {
         let request = fetchRequest()
         request.sortDescriptors = [
-            NSSortDescriptor(key: createTimeKey, ascending: false),
+            NSSortDescriptor(key: createTimeKey, ascending: true),
         ]
         request.predicate = NSPredicate(
             format: "%K == %@ AND %K == nil",
@@ -98,6 +99,25 @@ extension CDMessage {
             deleteTimeKey
         )
         return request
+    }
+
+    static func entity(uuid: UUID?, context: NSManagedObjectContext) -> CDMessage? {
+        guard let uuid = uuid else {
+            return nil
+        }
+        let request = fetchRequest()
+        request.predicate = NSPredicate(
+            format: "%K == %@",
+            uidKey, uuid as NSUUID
+        )
+        do {
+            let entities = try context.fetch(request)
+            assert(entities.count <= 1)
+            return entities.first
+        } catch {
+            AppLog().critical("\(error)")
+            return nil
+        }
     }
 }
 
@@ -154,6 +174,8 @@ extension CDMessage: ModelValidate {
             let parent = parent ?? self
             var messages = try ctx.fetch(Self.childRequest(parent: parent))
             messages.insert(parent, at: 0)
+            debugPrint(messages.map { $0.text ?? "nil" })
+            debugPrint(messages.map { $0.createTime?.localTime ?? "nil" })
             let result: [OAChatMessage] = messages.compactMap { entity in
                 guard entity.mType == .text,
                       let value = entity.text else {
@@ -177,22 +199,43 @@ extension CDMessage: ModelValidate {
         guard let safeChat = ctx.object(with: conversation) as? CDConversation else {
             throw AppError.message("Unable get conversation entity.")
         }
-        assert(reply == nil, "todo")
         let myEntity = CDMessage(context: ctx)
         myEntity.mRole = .me
         myEntity.mState = .normal
         myEntity.conversation = safeChat
 
-        let replyEntity = CDMessage(context: ctx)
-        replyEntity.mType = .text
-        replyEntity.mRole = .assistant
-        replyEntity.mState = .pend
-        replyEntity.conversation = safeChat
-        replyEntity.parent = myEntity
+        var parentEntity: CDMessage = myEntity
+        var replyEntity: CDMessage?
+        if let replyID = reply,
+           let entity = ctx.object(with: replyID) as? CDMessage {
+            parentEntity = entity.parent ?? entity
+            myEntity.parent = parentEntity
+            replyEntity = entity
+        }
 
-        myEntity.next = replyEntity.uid
-        myEntity.prev = replyEntity.uid
-        replyEntity.prev = myEntity.uid
+        let newEntity = CDMessage(context: ctx)
+        newEntity.mType = .text
+        newEntity.mRole = .assistant
+        newEntity.mState = .pend
+        newEntity.conversation = safeChat
+        newEntity.parent = parentEntity
+
+        var replyNextID = replyEntity?.next
+        while let id = replyNextID {
+            let entity = entity(uuid: id, context: ctx)
+            if let entity = entity {
+                ctx.delete(entity)
+                AppLog().warning("Delete context message: \(entity.text ?? entity.time.localTime)")
+            }
+            replyNextID = entity?.next
+        }
+        replyEntity?.next = myEntity.uid
+        myEntity.prev = replyEntity?.uid ?? newEntity.uid
+        myEntity.next = newEntity.uid
+        newEntity.prev = myEntity.uid
+        parentEntity.next = newEntity.uid
+        assert(parentEntity.next != nil)
+        assert(parentEntity.prev != nil)
         return myEntity
     }
 }

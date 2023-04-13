@@ -53,6 +53,12 @@ extension UserDefaults {
         get { integer(forKey: #function) }
         set { set(newValue, forKey: #function) }
     }
+
+    /// 双击选中文本后自动复制文本到剪贴板
+    var chatSendClipboardWhenLabelEdit: Bool {
+        get { bool(forKey: #function) }
+        set { set(newValue, forKey: #function) }
+    }
 }
 
 // MARK: - 存储类型支持

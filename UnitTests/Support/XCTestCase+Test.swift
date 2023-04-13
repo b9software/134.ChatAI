@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+@testable import B9ChatAI
 @testable import B9Foundation
 import XCTest
 

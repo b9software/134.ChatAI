@@ -1,3 +1,9 @@
+/* Class = "UIButton"; configuration.title = "Retry"; ObjectID = "chat-cell-retry"; */
+"chat-cell-retry.configuration.title" = "重试";
+
+/* Class = "UIButton"; configuration.title = "Stop Response"; ObjectID = "chat-cell-stop-response"; */
+"chat-cell-stop-response.configuration.title" = "停止响应";
+
 /* Class = "UILabel"; text = "Conversation are available here for 30 days. After that time, conversations will be permanently deleted."; ObjectID = "chat-deleted-header-tip"; */
 "chat-deleted-header-tip.text" = "此处会话将会保留 30 天，之后会被永久删除";
 

@@ -34,6 +34,16 @@ class ConversationDetailViewController:
         listView.selectionFollowsFocus = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(onSelectionLabelEdit), name: .selectableLabelOnEdit, object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .selectableLabelOnEdit, object: nil)
+    }
+
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
 
     @IBOutlet private weak var listView: UITableView!
@@ -122,14 +132,24 @@ extension ConversationDetailViewController {
         }
     }
 
-    var isLastCellVisable: Bool {
+    @objc private func onSelectionLabelEdit(_ notice: Notification) {
+        guard let label = notice.object as? SelectableLabel,
+              let cell = label.next(type: MessageBaseCell.self) else {
+            assert(false)
+            return
+        }
+        let ip = listView.indexPath(for: cell)
+        listView.selectRow(at: ip, animated: false, scrollPosition: .none)
+    }
+
+    var isLastCellVisible: Bool {
         let lastRow = listView.numberOfRows(inSection: 0) - 1
         return listView.indexPathsForVisibleRows?.contains(IndexPath(row: lastRow, section: 0)) == true
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == listView {
-            isReadingHistory = !isLastCellVisable
+            isReadingHistory = !isLastCellVisible
         }
     }
 

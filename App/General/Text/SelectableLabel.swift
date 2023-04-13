@@ -7,14 +7,89 @@
 
 import UIKit
 
-/**
+extension NSNotification.Name {
+    static let selectableLabelOnEdit = NSNotification.Name("SelectableLabel.onEdit")
+}
+
+class SelectableLabel:
+    UILabel,
+    UITextViewDelegate
+{
+    @IBOutlet private weak var textView: UITextView! {
+        didSet {
+            textView.delegate = self
+            textView.isHidden = true
+        }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onDoubleTap))
+        tap.delaysTouchesBegan = true
+        tap.numberOfTapsRequired = 2
+        addGestureRecognizer(tap)
+    }
+
+    var isInEditing = false {
+        didSet {
+            alpha = isInEditing ? 0.07 : 1
+            textView.isHidden = !isInEditing
+            invalidateIntrinsicContentSize()
+            if isInEditing {
+                NotificationCenter.default.post(name: .selectableLabelOnEdit, object: self)
+            }
+        }
+    }
+
+    var onEditingChanged: ((Bool) -> Void)?
+
+    @objc private func onDoubleTap(_ sender: Any) {
+        textView.isHidden = false
+        if textView.becomeFirstResponder() {
+            textView.text = text
+            textView.font = font
+            textView.selectAll(self)
+        }
+        if AppUserDefaultsShared().chatSendClipboardWhenLabelEdit {
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = text
+        }
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        isInEditing = true
+        // Fix invalidateIntrinsicContentSize may not take effect immediately
+        setNeedsLayout()
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        isInEditing = false
+        textView.text = nil
+        assert(textView.isHidden)
+        // Fix invalidateIntrinsicContentSize may not take effect immediately
+        setNeedsLayout()
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        if isInEditing {
+            if size.width < 200 {
+                size.width = 200
+            }
+        }
+        return size
+    }
+}
+
+/*
  加上这个可以选择
  ```
  let selectionInteraction = UITextInteraction(for: .nonEditable)
  selectionInteraction.textInput = label
  label.addInteraction(selectionInteraction)
  ```
- */
+
 class SelectableLabel: UILabel, UITextInput {
     override var canBecomeFirstResponder: Bool {
         true // 需要
@@ -157,3 +232,4 @@ extension SelectableLabel: UITextInputTokenizer {
         false
     }
 }
+ */

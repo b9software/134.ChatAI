@@ -26,6 +26,11 @@ extension Date {
         DateFormatter.dayIdentifier.string(from: self) as MBDateDayIdentifier
     }
 
+    /// "yyyy-MM-dd HH:mm:ss" in local time zone
+    var localTime: String {
+        DateFormatter.localDayTime.string(from: self)
+    }
+
     // @MBDependency:2 范例性质，请根据项目需求修改
     /**
      今天，则“今天”

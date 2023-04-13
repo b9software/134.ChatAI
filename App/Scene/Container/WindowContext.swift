@@ -29,14 +29,6 @@ extension RootViewController {
 class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let selectionInteraction = UITextInteraction(for: .nonEditable)
-
-        // Assign `textInput` to your view that implements the `UITextInput` protocol
-        // to get more control over the selection behavior and the text input system.
-        selectionInteraction.textInput = label
-
-        // Add the interaction to the view.
-        label.addInteraction(selectionInteraction)
     }
 
     @IBOutlet private weak var topDistance: NSLayoutConstraint!

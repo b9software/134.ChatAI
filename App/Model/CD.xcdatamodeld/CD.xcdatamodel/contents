@@ -54,7 +54,7 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="child" inverseEntity="Message"/>
         <fetchIndex name="byParent">
             <fetchIndexElement property="parent" type="Binary" order="ascending"/>
-            <fetchIndexElement property="createTime" type="Binary" order="descending"/>
+            <fetchIndexElement property="createTime" type="Binary" order="ascending"/>
         </fetchIndex>
         <fetchIndex name="byConversation">
             <fetchIndexElement property="conversation" type="Binary" order="ascending"/>

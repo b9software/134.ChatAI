@@ -131,6 +131,7 @@
 		D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */; };
 		D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */; };
 		D5A3312421527BA100B0FD5B /* MBFlipCollapsibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A3312021527BA100B0FD5B /* MBFlipCollapsibleView.m */; };
+		D5A4F4DD29E81B22007319D6 /* MessageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A4F4DC29E81B22007319D6 /* MessageViews.swift */; };
 		D5B1905A24026DB90076CD61 /* EnumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B1905924026DB90076CD61 /* EnumListView.swift */; };
 		D5B1906D2404AFDC0076CD61 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B1906C2404AFDC0076CD61 /* SearchTextField.swift */; };
 		D5B49EC31C4111B600847925 /* MBFixWidthImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EBB1C4111B600847925 /* MBFixWidthImageView.m */; };
@@ -441,6 +442,7 @@
 		D59066B520AD0C4500411410 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D5A3312021527BA100B0FD5B /* MBFlipCollapsibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFlipCollapsibleView.m; sourceTree = "<group>"; };
 		D5A3312221527BA100B0FD5B /* MBFlipCollapsibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFlipCollapsibleView.h; sourceTree = "<group>"; };
+		D5A4F4DC29E81B22007319D6 /* MessageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViews.swift; sourceTree = "<group>"; };
 		D5B1905924026DB90076CD61 /* EnumListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumListView.swift; sourceTree = "<group>"; };
 		D5B1906C2404AFDC0076CD61 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		D5B49EBA1C4111B600847925 /* MBFixWidthImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFixWidthImageView.h; sourceTree = "<group>"; };
@@ -936,6 +938,7 @@
 				D5EEE5D129C89F77006759DE /* Container */,
 				D5B4C7AE29C9D8E5005D4C3E /* Conversation */,
 				D5B4C7B029C9D8F9005D4C3E /* Guide */,
+				D5A4F4DB29E81AD0007319D6 /* Message */,
 				D5B4C7AF29C9D8EE005D4C3E /* Settings */,
 				D50940C429DEE44A00D2A0FC /* Conversation.storyboard */,
 				D50940C829DEECA400D2A0FC /* Main.storyboard */,
@@ -1119,6 +1122,17 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		D5A4F4DB29E81AD0007319D6 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				D51E92BA29DB20C900922497 /* ConversationDetailVC.swift */,
+				D57CAD1A29E1641200F4FF60 /* MessageDataSource.swift */,
+				D57CAD1C29E1922000F4FF60 /* MessageListView.swift */,
+				D5A4F4DC29E81B22007319D6 /* MessageViews.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		D5B1906B2404AFBE0076CD61 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1282,12 +1296,9 @@
 			isa = PBXGroup;
 			children = (
 				D51E92B629DB07E600922497 /* ConversationCell.swift */,
-				D51E92BA29DB20C900922497 /* ConversationDetailVC.swift */,
 				D5B4C7B529C9DA1A005D4C3E /* ConversationListDisplayer.swift */,
 				D5810C7629D99C220073F8C8 /* ConversationManager.swift */,
 				D5EEF2DD29DD5CC800F3CF52 /* ConversationSettingVC.swift */,
-				D57CAD1A29E1641200F4FF60 /* MessageDataSource.swift */,
-				D57CAD1C29E1922000F4FF60 /* MessageListView.swift */,
 				D5B4C7BB29C9E60D005D4C3E /* SidebarVC.swift */,
 			);
 			path = Conversation;
@@ -1850,6 +1861,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D51B7FEA29CFD49200DD825C /* AboutVC.swift in Sources */,
+				D5A4F4DD29E81B22007319D6 /* MessageViews.swift in Sources */,
 				D5031C4425C04F8800C2849E /* AlertController.swift in Sources */,
 				D5F65F3424C1CAF20082FEC2 /* API.swift in Sources */,
 				D5E2DBFB24CEE54400CEB26D /* APIResponseSerializer.swift in Sources */,
@@ -2052,8 +2064,8 @@
 				D5810C7929D9AFE10073F8C8 /* CDEntityFetchTests.swift in Sources */,
 				D5810C8129D9C2410073F8C8 /* ConversationManagerTests.swift in Sources */,
 				D5E8FA7929CF08B200C3D753 /* CoreDataTests.swift in Sources */,
-				D568290F29E74A5900E5A02D /* MessageBuildTests.swift in Sources */,
 				D5E8FA7D29CF240500C3D753 /* Date+Test.swift in Sources */,
+				D568290F29E74A5900E5A02D /* MessageBuildTests.swift in Sources */,
 				D57EF74729E427CD00CD101E /* OAEntityTests.swift in Sources */,
 				D51E92B329DAD06600922497 /* TestCase.swift in Sources */,
 				D5810C7D29D9B1710073F8C8 /* XCTestCase+AssertView.swift in Sources */,

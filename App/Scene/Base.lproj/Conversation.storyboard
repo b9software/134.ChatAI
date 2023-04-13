@@ -76,14 +76,14 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3hW-8e-NzE" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="131" width="300" height="53"/>
+                                        <rect key="frame" x="0.0" y="131" width="300" height="53.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hW-8e-NzE" id="Pqy-zi-ruw">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-deleted-list-cell-name">
-                                                    <rect key="frame" x="26" y="16" width="248" height="21"/>
+                                                    <rect key="frame" x="26" y="16" width="248" height="21.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -161,14 +161,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nYo-Gj-a8u" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="300" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="300" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nYo-Gj-a8u" id="eVa-4E-EvC">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-acrhived-list-cell-name">
-                                                    <rect key="frame" x="26" y="16" width="248" height="21.5"/>
+                                                    <rect key="frame" x="26" y="16" width="248" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -219,7 +219,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SLA-3h-j7D" customClass="MessageListView" customModule="B9ChatAI" customModuleProvider="target">
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SLA-3h-j7D" customClass="MessageListView" customModule="B9ChatAI" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="74" width="400" height="420"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="tKw-Mw-iyB">
@@ -228,7 +228,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="55U-dp-2fV">
-                                    <rect key="frame" x="0.0" y="390.5" width="400" height="80"/>
+                                    <rect key="frame" x="0.0" y="390" width="400" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
@@ -243,14 +243,14 @@
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyText" id="hWS-U9-GxK" customClass="MessageMyTextCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="174" width="400" height="72.5"/>
+                                        <rect key="frame" x="0.0" y="174" width="400" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hWS-U9-GxK" id="1de-kl-SZp">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="72.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ap-xR-LyF" userLabel="BG">
-                                                    <rect key="frame" x="302.5" y="11" width="71.5" height="50.5"/>
+                                                    <rect key="frame" x="302.5" y="11" width="71.5" height="50"/>
                                                     <color key="backgroundColor" systemColor="tintColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -258,24 +258,42 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KU8-Ne-8P8" userLabel="Box">
-                                                    <rect key="frame" x="302.5" y="11" width="71.5" height="50.5"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KU8-Ne-8P8" userLabel="Box" customClass="MessageBoxView" customModule="B9ChatAI" customModuleProvider="target">
+                                                    <rect key="frame" x="302.5" y="11" width="71.5" height="50"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYV-Tz-bOU" customClass="MessageCellSizeView" customModule="B9ChatAI" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEXT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hho-Df-Ng6" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEXT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-cell-my-text" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
                                                                     <rect key="frame" x="15" y="10" width="41.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <connections>
+                                                                        <outlet property="textView" destination="bh2-h6-tkH" id="6OV-bn-2WV"/>
+                                                                    </connections>
                                                                 </label>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bh2-h6-tkH">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
+                                                                    <color key="textColor" name="Text/First"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="rect" keyPath="RFTextContainerInset">
+                                                                            <rect key="value" x="10" y="10" width="10" height="10"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </textView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="Hho-Df-Ng6" firstAttribute="top" secondItem="jYV-Tz-bOU" secondAttribute="top" constant="10" id="9Q9-zI-x2H"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Hho-Df-Ng6" secondAttribute="trailing" constant="15" id="DMS-gm-141"/>
-                                                                <constraint firstItem="Hho-Df-Ng6" firstAttribute="leading" secondItem="jYV-Tz-bOU" secondAttribute="leading" constant="15" id="YuY-Mz-fB3"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Hho-Df-Ng6" secondAttribute="bottom" constant="10" id="uNO-cc-9S8"/>
+                                                                <constraint firstItem="bh2-h6-tkH" firstAttribute="top" secondItem="jYV-Tz-bOU" secondAttribute="top" id="8Gp-8i-PDa"/>
+                                                                <constraint firstItem="chat-cell-my-text" firstAttribute="top" secondItem="jYV-Tz-bOU" secondAttribute="top" constant="10" id="9Q9-zI-x2H"/>
+                                                                <constraint firstAttribute="trailing" secondItem="chat-cell-my-text" secondAttribute="trailing" constant="15" id="DMS-gm-141"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bh2-h6-tkH" secondAttribute="trailing" id="Pbc-1Y-NE4"/>
+                                                                <constraint firstItem="chat-cell-my-text" firstAttribute="leading" secondItem="jYV-Tz-bOU" secondAttribute="leading" constant="15" id="YuY-Mz-fB3"/>
+                                                                <constraint firstAttribute="bottom" secondItem="bh2-h6-tkH" secondAttribute="bottom" id="dQs-IZ-QmH"/>
+                                                                <constraint firstItem="bh2-h6-tkH" firstAttribute="leading" secondItem="jYV-Tz-bOU" secondAttribute="leading" id="hhq-l0-8xP"/>
+                                                                <constraint firstAttribute="bottom" secondItem="chat-cell-my-text" secondAttribute="bottom" constant="10" id="uNO-cc-9S8"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="cell" destination="hWS-U9-GxK" id="Kgd-k9-z5l"/>
@@ -303,22 +321,23 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="contentLabel" destination="Hho-Df-Ng6" id="5b3-oU-J89"/>
+                                            <outlet property="contentBox" destination="KU8-Ne-8P8" id="jRb-GF-FN7"/>
+                                            <outlet property="contentLabel" destination="chat-cell-my-text" id="5b3-oU-J89"/>
                                             <outlet property="sizeView" destination="jYV-Tz-bOU" id="Q4d-Sp-rC1"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text" id="7gs-CP-DJ5" customClass="MessageTextCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246.5" width="400" height="72.5"/>
+                                        <rect key="frame" x="0.0" y="246" width="400" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7gs-CP-DJ5" id="9Pg-2i-QI8">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="72.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZA-tG-Cju" userLabel="Box">
-                                                    <rect key="frame" x="26" y="11" width="71.5" height="50.5"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZA-tG-Cju" userLabel="Box" customClass="MessageBoxView" customModule="B9ChatAI" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="11" width="71.5" height="50"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3q8-JE-me0" userLabel="BG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="71.5" height="50.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="71.5" height="50"/>
                                                             <color key="backgroundColor" name="Background/Box"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -329,18 +348,36 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xp-TC-kwL" customClass="MessageCellSizeView" customModule="B9ChatAI" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEXT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O19-0z-cwT" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEXT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-cell-assistant-text" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
                                                                     <rect key="frame" x="15" y="10" width="41.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <connections>
+                                                                        <outlet property="textView" destination="fir-BM-1hw" id="77d-xs-gpO"/>
+                                                                    </connections>
                                                                 </label>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fir-BM-1hw">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
+                                                                    <color key="textColor" name="Text/First"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="rect" keyPath="RFTextContainerInset">
+                                                                            <rect key="value" x="10" y="10" width="10" height="10"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </textView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="O19-0z-cwT" firstAttribute="leading" secondItem="1xp-TC-kwL" secondAttribute="leading" constant="15" id="2sl-6I-wHS"/>
-                                                                <constraint firstItem="O19-0z-cwT" firstAttribute="top" secondItem="1xp-TC-kwL" secondAttribute="top" constant="10" id="3xh-XO-8aL"/>
-                                                                <constraint firstAttribute="trailing" secondItem="O19-0z-cwT" secondAttribute="trailing" constant="15" id="4pY-2q-hqn"/>
-                                                                <constraint firstAttribute="bottom" secondItem="O19-0z-cwT" secondAttribute="bottom" constant="10" id="c2Y-Iu-wnq"/>
+                                                                <constraint firstItem="chat-cell-assistant-text" firstAttribute="leading" secondItem="1xp-TC-kwL" secondAttribute="leading" constant="15" id="2sl-6I-wHS"/>
+                                                                <constraint firstItem="chat-cell-assistant-text" firstAttribute="top" secondItem="1xp-TC-kwL" secondAttribute="top" constant="10" id="3xh-XO-8aL"/>
+                                                                <constraint firstAttribute="trailing" secondItem="chat-cell-assistant-text" secondAttribute="trailing" constant="15" id="4pY-2q-hqn"/>
+                                                                <constraint firstAttribute="trailing" secondItem="fir-BM-1hw" secondAttribute="trailing" id="F4X-qb-VM5"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fir-BM-1hw" secondAttribute="bottom" id="XEW-Jw-bnR"/>
+                                                                <constraint firstAttribute="bottom" secondItem="chat-cell-assistant-text" secondAttribute="bottom" constant="10" id="c2Y-Iu-wnq"/>
+                                                                <constraint firstItem="fir-BM-1hw" firstAttribute="leading" secondItem="1xp-TC-kwL" secondAttribute="leading" id="cwb-ud-x38"/>
+                                                                <constraint firstItem="fir-BM-1hw" firstAttribute="top" secondItem="1xp-TC-kwL" secondAttribute="top" id="mda-aP-by0"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="cell" destination="7gs-CP-DJ5" id="CMB-IX-6Oc"/>
@@ -359,7 +396,7 @@
                                                         <constraint firstAttribute="height" priority="800" constant="50" id="rYu-8b-P1e"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQ4-vF-ew8">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-cell-stop-response">
                                                     <rect key="frame" x="230" y="11" width="144" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="J0L-wN-JxR"/>
@@ -373,53 +410,53 @@
                                                         <action selector="onStop:" destination="7gs-CP-DJ5" eventType="touchUpInside" id="WLy-tL-X5Q"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wG2-jP-QCm">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-cell-retry">
                                                     <rect key="frame" x="309" y="11" width="65" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Dgd-JU-msC"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Retry"/>
+                                                    <buttonConfiguration key="configuration" style="gray" title="Retry"/>
                                                     <connections>
                                                         <action selector="onRetry:" destination="7gs-CP-DJ5" eventType="touchUpInside" id="ZVG-NP-659"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mQ4-vF-ew8" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="8yP-72-ufE"/>
-                                                <constraint firstItem="wG2-jP-QCm" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="GQl-8R-mBY"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="mQ4-vF-ew8" secondAttribute="trailing" constant="10" id="KDC-St-mrM"/>
+                                                <constraint firstItem="chat-cell-stop-response" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="8yP-72-ufE"/>
+                                                <constraint firstItem="chat-cell-retry" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="GQl-8R-mBY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="chat-cell-stop-response" secondAttribute="trailing" constant="10" id="KDC-St-mrM"/>
                                                 <constraint firstItem="gZA-tG-Cju" firstAttribute="top" secondItem="9Pg-2i-QI8" secondAttribute="topMargin" id="NY1-pU-p5e"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="mQ4-vF-ew8" secondAttribute="bottom" id="Nxp-iL-28X"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="chat-cell-stop-response" secondAttribute="bottom" id="Nxp-iL-28X"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gZA-tG-Cju" secondAttribute="bottom" id="Ohl-jL-yh6"/>
                                                 <constraint firstItem="gZA-tG-Cju" firstAttribute="leading" secondItem="9Pg-2i-QI8" secondAttribute="leadingMargin" constant="10" id="W5T-hE-z6H"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wG2-jP-QCm" secondAttribute="trailing" constant="10" id="Zyw-AB-TnC"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="chat-cell-retry" secondAttribute="trailing" constant="10" id="Zyw-AB-TnC"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="gZA-tG-Cju" secondAttribute="trailing" constant="30" id="gSF-G7-nkD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentBox" destination="gZA-tG-Cju" id="nuC-0Y-UwD"/>
-                                            <outlet property="contentLabel" destination="O19-0z-cwT" id="7nd-Kg-wyC"/>
-                                            <outlet property="retryButton" destination="wG2-jP-QCm" id="bdb-9H-Fqa"/>
+                                            <outlet property="contentLabel" destination="chat-cell-assistant-text" id="7nd-Kg-wyC"/>
+                                            <outlet property="retryButton" destination="chat-cell-retry" id="bdb-9H-Fqa"/>
                                             <outlet property="sizeView" destination="1xp-TC-kwL" id="acK-jl-SZH"/>
-                                            <outlet property="stopButton" destination="mQ4-vF-ew8" id="aeb-tn-PO4"/>
+                                            <outlet property="stopButton" destination="chat-cell-stop-response" id="aeb-tn-PO4"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Unsupported" textLabel="uEy-2O-bma" detailTextLabel="Ilr-CH-gMY" style="IBUITableViewCellStyleValue1" id="HHF-FR-ri8" customClass="MessageUnsupportedCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="319" width="400" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Unsupported" textLabel="chat-cell-unsupport-type" detailTextLabel="chat-cell-unsupport-detail" style="IBUITableViewCellStyleValue1" id="HHF-FR-ri8" customClass="MessageUnsupportedCell" customModule="B9ChatAI" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="318" width="400" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HHF-FR-ri8" id="fF8-vx-tRl">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uEy-2O-bma">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chat-cell-unsupport-type">
                                                     <rect key="frame" x="16" y="15" width="25" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ilr-CH-gMY">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chat-cell-unsupport-detail">
                                                     <rect key="frame" x="351" y="15" width="33" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -539,7 +576,7 @@
                             <constraint firstAttribute="trailing" secondItem="SLA-3h-j7D" secondAttribute="trailing" id="nFT-nm-C8n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="CHAT" id="l6b-3u-X3h">
+                    <navigationItem key="navigationItem" title="CHAT" id="chat-vc-navigation-title">
                         <barButtonItem key="rightBarButtonItem" title="Setting" image="slider.vertical.3" catalog="system" id="H5r-u7-O8f">
                             <connections>
                                 <action selector="toggleSetting:" destination="Y6W-OH-hqX" id="SsA-Qg-vs4"/>
