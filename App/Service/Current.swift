@@ -8,6 +8,8 @@
 import Foundation
 
 enum Current {
+    static let bundleID = "b9software.chat-ai"
+
     static var conversationManager: ConversationManager {
         Mocked.conversationManager ?? {
             let instance = ConversationManager()
@@ -42,7 +44,11 @@ enum Current {
 
     static var osBridge: MacInterface {
         Mocked.osBridge ?? {
+            #if targetEnvironment(macCatalyst)
             let instance = MockedMacInterface.load() ?? MockedMacInterface()
+            #else
+            let instance = MockedMacInterface()
+            #endif
             Mocked.osBridge = instance
             return instance
         }()

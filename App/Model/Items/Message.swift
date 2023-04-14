@@ -82,6 +82,7 @@ class Message {
         }
     }
     private(set) var time: Date
+    let isParent: Bool
 
     private init(entity: CDMessage) {
         id = entity.uid
@@ -89,6 +90,7 @@ class Message {
         role = entity.mRole
         state = entity.mState
         time = entity.time
+        isParent = entity.parent == nil
         self.entity = entity
         // 其他属性异步加载
     }
@@ -105,7 +107,6 @@ class Message {
     var senderState: SenderState? {
         didSet {
             if oldValue == senderState { return }
-            needsNoticeSendStateChange.set()
             Current.database.save { [self] _ in
                 if let err = senderState?.error {
                     AppLog().warning("Message send error: \(err.localizedDescription).")
@@ -120,14 +121,15 @@ class Message {
                     }
                     assert(entity.text != nil)
                 }
+                needsNoticeStateChange.set()
             }
         }
     }
 
     private(set) lazy var delegates = MulticastDelegate<MessageUpdating>()
-    private lazy var needsNoticeSendStateChange = DelayAction(Action { [weak self] in
+    private lazy var needsNoticeStateChange = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
-        sf.delegates.invoke { $0.messageSendStateChanged(sf) }
+        sf.delegates.invoke { $0.messageStateUpdate(sf) }
     })
     private lazy var needsNoticeDetailReady = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
@@ -144,6 +146,21 @@ extension Message {
             let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
             myEntity.mType = .text
             myEntity.text = sendText
+        }
+    }
+
+    var replySelectionTitle: String {
+        (cachedText ?? "Selected Message")
+            .trimming(toLength: 20)
+            .replacingOccurrences(of: "\n", with: " ")
+    }
+
+    func hasNext(_ callback: @escaping (Message, Bool) -> Void) {
+        entity.async { entity, _ in
+            let has = entity.next != nil
+            dispatch_async_on_main {
+                callback(self, has)
+            }
         }
     }
 
@@ -164,6 +181,12 @@ extension Message {
             switch type {
             case .text:
                 cachedText = entity.text
+                #if DEBUG
+                if AppDelegate().debug.debugMessageTime {
+                    let creatDesc = entity.createTime?.localTime ?? "No create"
+                    cachedText = "\(entity.text ?? "")\n\(entity.time.localTime)\n\(creatDesc)"
+                }
+                #endif
             default:
                 break
             }
@@ -274,14 +297,14 @@ extension Message {
 protocol MessageUpdating {
     /// 数据已从数据库加载完毕，可以显示了
     func messageDetailReady(_ item: Message)
-    /// 发送/接收状态更新
-    func messageSendStateChanged(_ item: Message)
+    /// 状态更新：包括发送/接收状态
+    func messageStateUpdate(_ item: Message)
     /// 接收到数据片段
     func messageReceiveDeltaReplay(_ item: Message, text: String)
 }
 
 extension MessageUpdating {
     func messageDetailReady(_: Message) {}
-    func messageSendStateChanged(_ item: Message) {}
+    func messageStateUpdate(_ item: Message) {}
     func messageReceiveDeltaReplay(_ item: Message, text: String) {}
 }

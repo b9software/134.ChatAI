@@ -13,6 +13,10 @@ class MacBridge: NSObject, MacInterface {
     required override init() {
     }
 
+    var isAppActive: Bool {
+        NSApp.isActive
+    }
+
     var theme: Int {
         get {
             guard let name = NSApp.appearance?.name else {
@@ -37,6 +41,10 @@ class MacBridge: NSObject, MacInterface {
                 NSApp.appearance = nil
             }
         }
+    }
+
+    func hideApp() {
+        NSApp.hide(nil)
     }
 
     func beep() {

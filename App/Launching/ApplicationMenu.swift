@@ -19,8 +19,12 @@ enum ApplicationMenu {
         var settingItem = builder.menu(for: .preferences) ?? UIMenu(title: L.Menu.setting, identifier: .preferences, options: .displayInline)
         settingItem = settingItem.replacingChildren([
             UIKeyCommand(title: L.Menu.setting, action: #selector(ApplicationDelegate.gotoSetting), input: ",", modifierFlags: [.command]),
-            UIKeyCommand(title: "Chat setting", action: #selector(StandardActions.gotoChatSetting), input: ",", modifierFlags: [.command, .shift]),
+            UIKeyCommand(title: L.Menu.settingChat, action: #selector(StandardActions.gotoChatSetting), input: ",", modifierFlags: [.command, .shift]),
         ])
+        builder.replace(menu: .help, with: UIMenu(title: "Help", children: [
+            UICommand(title: L.Menu.homePage, action: #selector(ApplicationDelegate.showHelp)),
+            UICommand(title: L.Menu.userManual, action: #selector(ApplicationDelegate.showUserManual)),
+        ]))
         builder.replace(menu: .preferences, with: settingItem)
         ApplicationDelegate().debug.setupMenu(builder: builder)
     }
@@ -36,7 +40,7 @@ enum ApplicationMenu {
 
 private extension ApplicationDelegate {
     @IBAction func gotoSetting(_ sender: Any) {
-        let activity = NSUserActivity(activityType: UserActivityType.setting.rawValue)
+        let activity = NSUserActivity(.setting)
         UIApplication.shared.requestSceneSessionActivation(nil, userActivity: activity, options: nil)
     }
 
@@ -47,7 +51,10 @@ private extension ApplicationDelegate {
 
 final class StandardActions {
     @IBAction func newConversation(_ sender: Any?) {}
+    @IBAction func gotoChatSetting(_ sender: Any?) {}
+
+    // NSApp
+    @IBAction func hide(_ sender: Any?) {}
     @IBAction func newWindow(_ sender: Any?) {}
     @IBAction func newWindowForTab(_ sender: Any?) {}
-    @IBAction func gotoChatSetting(_ sender: Any?) {}
 }

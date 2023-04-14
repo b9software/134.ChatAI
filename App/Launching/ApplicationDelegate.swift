@@ -78,19 +78,26 @@ class ApplicationDelegate: MBApplicationDelegate {
     private func setupUIAppearance() {
     }
 
+    override func applicationWillResignActive(_ application: UIApplication) {
+        super.applicationWillResignActive(application)
+    }
+
     override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         AppLog().info("App> Open \(url). \(options)")
+        assert(false)
         return super.application(app, open: url, options: options)
     }
 
     override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         AppLog().info("App> UserActivity will continue: \(userActivityType).")
+        assert(false)
         if isTesting { return false }
         return true
     }
 
     override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         AppLog().info("App> UserActivity continue: \(userActivity).")
+        assert(false)
         var hasHande = false
         enumerateEventListeners { listener in
             if listener.application?(application, continue: userActivity, restorationHandler: restorationHandler) ?? false {
@@ -106,10 +113,12 @@ class ApplicationDelegate: MBApplicationDelegate {
 
     override func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
         AppLog().error("App> UserActivity fail to continue: \(userActivityType) \(error).")
+        assert(false)
     }
 
     override func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         AppLog().error("App> Perform Action: \(shortcutItem).")
+        assert(false)
         completionHandler(false)
         // 似乎可以只启动不激活
     }
@@ -161,6 +170,10 @@ extension ApplicationDelegate {
     }
 
     @IBAction func showHelp(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://github.com/b9software")!)
+        UIApplication.shared.open(URL(string: L.App.homePage)!)
+    }
+
+    @IBAction func showUserManual(_ sender: Any) {
+        UIApplication.shared.open(URL(string: L.App.userManual)!)
     }
 }

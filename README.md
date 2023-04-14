@@ -32,6 +32,7 @@ brew install cocoapods
 
 接口
 
+* https://github.com/ading2210/poe-api
 * https://github.com/MacPaw/OpenAI 不支持流
 * https://github.com/dylanshine/openai-kit
 * https://github.com/FuturraGroup/OpenAI

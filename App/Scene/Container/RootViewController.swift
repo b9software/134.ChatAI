@@ -26,9 +26,14 @@ class RootViewController: B9RootViewController {
         super.viewDidLoad()
         split = children.first { $0 is SplitViewController } as? SplitViewController
         navigator = split.children.first { $0 is NavigationController } as? NavigationController
+        sidebar = split.children.first { $0 is SidebarViewController } as? SidebarViewController
         #if targetEnvironment(macCatalyst)
         navigator.setNavigationBarHidden(true, animated: false)
         #endif
+        navigator.onViewControllerChanged = { [weak self] in
+            self?.sidebar?.onNavigatorStackChanged($0)
+        }
+        restoreUserActivity()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,8 +49,44 @@ class RootViewController: B9RootViewController {
         adjustTraitCollection()
     }
 
-    func adjustTraitCollection() {
-        guard let vc = children.first else { return }
+    private func restoreUserActivity() {
+        guard let activity = userActivity,
+              let type = UserActivityType(rawValue: activity.activityType) else {
+            return
+        }
+        switch type {
+        case .setting:
+            gotoSetting(self)
+        case .guide:
+            gotoGuide(self)
+        case .conversation:
+            guard let id = activity.userInfo?["id"] as? StringID else {
+                AppLog().warning("Request conversation activity but no id.")
+                return
+            }
+            Conversation.load(id: id) { [weak self] result in
+                Do.try {
+                    guard let sf = self else { return }
+                    let item = try result.get()
+                    sf.gotoChatDetail(item: item)
+                }
+            }
+        case .newConversation:
+            assert(false, "todo")
+        }
+    }
+
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        super.restoreUserActivityState(activity)
+        debugPrint(activity.activityType)
+        debugPrint(activity.userInfo)
+    }
+
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        super.updateUserActivityState(activity)
+    }
+
+    private func adjustTraitCollection() {
         let size = view.bounds.size
 
         #if targetEnvironment(macCatalyst)
@@ -56,6 +97,8 @@ class RootViewController: B9RootViewController {
             }
         }
         #endif
+
+        guard let vc = children.first else { return }
 
         let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
         let hClass = size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact
@@ -70,6 +113,43 @@ class RootViewController: B9RootViewController {
         setOverrideTraitCollection(collection, forChild: vc)
     }
 
+    func focusSidebar() {
+        if let system = UIFocusSystem.focusSystem(for: self),
+           let element = sidebar?.preferredFocusEnvironments.first {
+            system.requestFocusUpdate(to: element)
+            sidebar?.becomeFirstResponder()
+        }
+    }
+
+    func focusSidebarDetail() {
+        if let system = UIFocusSystem.focusSystem(for: self),
+           let element = navigator?.visibleViewController?.preferredFocusEnvironments.first {
+            system.requestFocusUpdate(to: element)
+            var responder = element as? UIResponder
+            while responder != nil {
+                if responder?.becomeFirstResponder() == true {
+                    AppLog().debug("In focusSidebarDetail, \(responder!) did becomeFirstResponder.")
+                    break
+                }
+                responder = responder?.next
+            }
+        }
+    }
+
+    override var userActivity: NSUserActivity? {
+        didSet {
+            oldValue?.invalidate()
+            userActivity?.becomeCurrent()
+            if isViewLoaded,
+               let scene = view.window?.windowScene {
+                scene.userActivity = userActivity
+            }
+        }
+    }
+}
+
+// MARK: - Actions
+extension RootViewController {
     override func responds(to aSelector: Selector!) -> Bool {
         if aSelector == #selector(toolbarBack) {
             return navigator.viewControllers.count > 1
@@ -81,11 +161,36 @@ class RootViewController: B9RootViewController {
         navigator.popViewController(animated: true)
     }
 
+    // StandardActions
+    @IBAction func newConversation(_ sender: Any?) {
+        Current.conversationManager.createNew()
+    }
+
     func gotoWelcome() {
         navigator.setViewControllers([WelcomeViewController.newFromStoryboard()], animated: false)
     }
 
+    func tryActiveConversation(id: StringID?) {
+        guard let id = id else {
+            if navigator.visibleViewController is ConversationDetailViewController {
+                return
+            }
+            if let first = Current.conversationManager.listItems.first {
+                gotoChatDetail(item: first)
+            }
+            return
+        }
+        if let vc = navigator.visibleViewController as? ConversationDetailViewController,
+           vc.item.id == id {
+            return
+        }
+        if let item = Current.conversationManager.listItems.first(where: { $0.id == id }) {
+            gotoChatDetail(item: item)
+        }
+    }
+
     func gotoChatDetail(item: Conversation) {
+        userActivity = NSUserActivity(conversationID: item.id)
         if let vc = navigator.visibleViewController as? ConversationDetailViewController {
             if vc.item == item {
                 return
@@ -97,10 +202,12 @@ class RootViewController: B9RootViewController {
     }
 
     @IBAction private func gotoGuide(_ sender: Any) {
+        userActivity = NSUserActivity(.guide)
         navigator.setViewControllers([GuideViewController.newFromStoryboard()], animated: false)
     }
 
     @IBAction func gotoSetting(_ sender: Any) {
+        userActivity = NSUserActivity(.setting)
         if let _ = navigator.visibleViewController as? SettingViewController {
             return
         }
@@ -108,6 +215,7 @@ class RootViewController: B9RootViewController {
     }
 
     @IBAction private func pushEngineManage(_ sender: Any) {
+        userActivity = NSUserActivity(.setting)
         navigator.pushViewController(EngineManageViewController.newFromStoryboard(), animated: true)
     }
 

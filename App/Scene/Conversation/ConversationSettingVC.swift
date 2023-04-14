@@ -143,6 +143,7 @@ extension ConversationSettingViewController {
                     cfgEngine: cfgEngine
                 )
                 Task { @MainActor in
+                    RootViewController.of(view)?.userActivity?.addUserInfoEntries(from: ["id": item.id])
                     dismiss(animate: true)
                 }
             } catch {
@@ -190,6 +191,15 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
         nameField.text = item.title
         idField.placeholder = item.id
         setEngine(item.engine, allowNull: true)
+    }
+
+    @IBAction private func onCopyID(_ sender: UIButton) {
+        UIPasteboard.general.string = idField.text?.trimmed() ?? idField.placeholder
+        sender.isEnabled = false
+        dispatch_after_seconds(1) {
+            sender.isEnabled = true
+            sender.invalidateIntrinsicContentSize()
+        }
     }
 
     var selectedEngine: Engine? {

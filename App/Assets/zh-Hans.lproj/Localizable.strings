@@ -23,6 +23,15 @@
 "chat.loadingQueue" = "等待中…";
 
 /* (No Comment) */
+"chat.reply.dropContextWarning" = "⚠️ 从话题中间继续将覆盖现有后续内容";
+
+/* (No Comment) */
+"chat.reply.selectionContinue" = "继续 %@";
+
+/* (No Comment) */
+"chat.reply.wantContinue" = "继续选中话题？";
+
+/* (No Comment) */
 "chat.setting.badSameID" = "已存在相同的 ID";
 
 /* (No Comment) */
@@ -86,7 +95,7 @@
 "engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
 
 /* (No Comment) */
-"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-13";
+"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
 
 /* (No Comment) */
 "menu.archive" = "归档";
@@ -96,6 +105,12 @@
 
 /* (No Comment) */
 "menu.guide" = "指南";
+
+/* (No Comment) */
+"menu.help" = "帮助";
+
+/* (No Comment) */
+"menu.homePage" = "GitHub 项目页";
 
 /* (No Comment) */
 "menu.new" = "新建";
@@ -110,8 +125,14 @@
 "menu.new.window" = "窗口";
 
 /* (No Comment) */
+"menu.retry" = "重试";
+
+/* (No Comment) */
 "menu.setting" = "应用设置";
 
 /* (No Comment) */
 "menu.settingChat" = "会话设置";
+
+/* (No Comment) */
+"menu.userManual" = "用户手册";
 

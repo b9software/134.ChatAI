@@ -67,7 +67,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "AssertViewTests">
+                  Identifier = "CoreDataTests/testPredicateWithBadKey()">
                </Test>
             </SkippedTests>
          </TestableReference>

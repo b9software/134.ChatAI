@@ -29,7 +29,7 @@ class NSToolbarController {
 
         func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
             var ids: [NSToolbarItem.Identifier] = [
-                .toggleSidebar, .back, .test, .test2,
+                .toggleSidebar, .back, // .test, .test2,
                 .flexibleSpace, .space
             ]
             ids.append(contentsOf: additionalItemsID)
@@ -43,8 +43,8 @@ class NSToolbarController {
         func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
             switch itemIdentifier {
             case .back: return .back()
-            case .test: return .test()
-            case .test2: return .test2()
+//            case .test: return .test()
+//            case .test2: return .test2()
             default: break
             }
             if let index = additionalItemsID.firstIndex(of: itemIdentifier) {

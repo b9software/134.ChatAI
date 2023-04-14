@@ -196,7 +196,7 @@
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="systemThinMaterial"/>
+                                <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="T4P-sY-sny" customClass="ConversationListView" customModule="B9ChatAI" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24" width="200" height="274"/>
@@ -215,7 +215,7 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_list"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="onCreateNew:" destination="rPo-kp-4w0" eventType="touchUpInside" id="mma-pr-xx9"/>
+                                                <action selector="newConversation:" destination="rPo-kp-4w0" eventType="touchUpInside" id="HVM-dw-uQT"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -251,6 +251,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="Li5-Is-CBx" secondAttribute="bottom" constant="5" id="tpQ-HD-YpM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="focusGroupIdentifier" value="sidebar_list"/>
                                         </userDefinedRuntimeAttributes>
@@ -373,6 +374,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9gp-mx-29U"/>
+                        <color key="backgroundColor" name="Background/Sidebar"/>
                         <constraints>
                             <constraint firstItem="T4P-sY-sny" firstAttribute="leading" secondItem="9gp-mx-29U" secondAttribute="leading" id="3FL-VU-UGD"/>
                             <constraint firstAttribute="trailing" secondItem="Gbn-b1-m3B" secondAttribute="trailing" id="Cvg-jH-TEd"/>
@@ -680,6 +682,9 @@
         <image name="Icon/trash" width="24" height="24"/>
         <image name="cursors_resize_both" width="32" height="32"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="Background/Sidebar">
+            <color white="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
         <namedColor name="Button/StdBase">
             <color white="0.74509803921568629" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

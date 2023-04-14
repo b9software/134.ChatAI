@@ -14,12 +14,15 @@ class NavigationController: B9NavigationController {
         super.awakeFromNib()
     }
 
+    var onViewControllerChanged: ((NavigationController) -> Void)?
+
     override func handleViewControllersChanges() {
         super.handleViewControllersChanges()
         if let scene = view.window?.windowScene {
             scene.title = currentViewControllerTitle
         }
         updateToolbar()
+        onViewControllerChanged?(self)
     }
 
     var currentViewControllerTitle: String {

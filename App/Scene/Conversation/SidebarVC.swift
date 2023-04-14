@@ -6,6 +6,7 @@
 //
 
 import B9Action
+import HasItem
 import UIKit
 
 class SidebarViewController: UIViewController, ConversationListUpdating {
@@ -26,7 +27,6 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
         conversations(manager, listUpdated: manager.listItems)
         conversations(manager, hasArchived: manager.hasArchived)
         conversations(manager, hasDeleted: manager.hasDeleted)
-        RootViewController.of(view)?.sidebar = self
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -34,11 +34,6 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
         updateCommandButtonLayout()
     }
 
-    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        [newChatButton]
-    }
-
-    private var selectedConversation: Conversation?
     private weak var selectedTableView: UITableView?
 
     private lazy var listDataSource = GeneralSingleSectionListDataSource<Conversation>(tableView: listView, cellProvider: UITableView.cellProvider(_:indexPath:object:))
@@ -59,13 +54,55 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
     private lazy var needsReleaseListController = DelayAction(
         Action(target: self, selector: #selector(releaseListControllerIfNeeded)),
         delay: 10)
+
+    override var canBecomeFirstResponder: Bool { true }
+    override var canResignFirstResponder: Bool { true }
+
+//    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+//        [newChatButton]
+//    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        var commands = super.keyCommands ?? []
+        commands.append(.init(action: #selector(handleRightArrow), input: UIKeyCommand.inputRightArrow))
+        return commands
+    }
+
+    @objc func handleRightArrow() {
+        RootViewController.of(view)?.focusSidebarDetail()
+        resignFirstResponder()
+    }
+
+//    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+//
+//    }
 }
 
 extension SidebarViewController {
-    @IBAction private func onCreateNew(_ sender: UIButton) {
-        sender.isEnabled = false
-        dispatch_after_seconds(1) {
-            sender.isEnabled = true
+    func onNavigatorStackChanged(_ navigator: UINavigationController) {
+        var detailSelectedItem: Conversation?
+        if let vc = navigator.visibleViewController as? ConversationDetailViewController,
+           let item = vc.item {
+            detailSelectedItem = item
+        }
+        if let item = detailSelectedItem {
+            if listDataSource.selectedItems.contains(item) {
+                return
+            }
+            listDataSource.selectedItems = [item]
+        } else {
+            if selectedTableView == listView {
+                listView.setSelected(indexPaths: [], animated: true)
+            }
+        }
+    }
+
+    @IBAction func newConversation(_ sender: Any?) {
+        if let button = sender as? UIControl {
+            button.isEnabled = false
+            dispatch_after_seconds(1) {
+                button.isEnabled = true
+            }
         }
         Current.conversationManager.createNew()
     }

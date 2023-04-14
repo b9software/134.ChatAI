@@ -14,11 +14,13 @@ extension SceneDelegate {
     }
 }
 
+#if targetEnvironment(macCatalyst)
 extension NSToolbarController {
     static func of(_ view: UIView) -> NSToolbarController? {
         SceneDelegate.of(view)?.toolbarController
     }
 }
+#endif
 
 extension RootViewController {
     static func of(_ view: UIView) -> Self? {

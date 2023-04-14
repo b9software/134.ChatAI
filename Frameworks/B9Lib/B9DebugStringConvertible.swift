@@ -25,8 +25,20 @@ extension NSFetchedResultsChangeType: CustomDebugStringConvertible {
 
 #endif
 
-#if canImport(UIKey)
+#if canImport(UIKit)
 import UIKit
+
+extension UIApplication.State: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        switch self {
+        case .active: return ".active"
+        case .background: return ".background"
+        case .inactive: return ".inactive"
+        @unknown default:
+            return ".unknown(\(rawValue))"
+        }
+    }
+}
 
 extension UIGestureRecognizer.State: CustomDebugStringConvertible {
     public var debugDescription: String {

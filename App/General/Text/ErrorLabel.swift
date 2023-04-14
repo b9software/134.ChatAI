@@ -10,6 +10,16 @@ import UIKit
 
 class ErrorLabel: UILabel {
 
+    @IBInspectable var hideWhenNoContent: Bool = false
+
+    override var text: String? {
+        didSet {
+            if hideWhenNoContent {
+                isHidden = text?.isEmpty ?? true
+            }
+        }
+    }
+
     func set(error msg: String?) {
         text = msg
         isHighlighted = true

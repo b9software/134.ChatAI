@@ -4,6 +4,8 @@
  除 Array、Dictionary、Set 等顶层结构的扩展放到相应文件外，其余扩展都放这里
  */
 
+import Foundation
+
 extension Sequence where Iterator.Element: Hashable {
     /// 返回去重的序列
     func uniqued() -> [Iterator.Element] {

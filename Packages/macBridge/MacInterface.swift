@@ -12,9 +12,11 @@ import Foundation
 protocol MacInterface: NSObjectProtocol {
     init()
 
-    func sayHello()
+    var isAppActive: Bool { get }
 
     var theme: Int { get set }
+
+    func hideApp()
 
     /// Plays the system beep.
     func beep()
@@ -37,16 +39,18 @@ extension MacInterface {
     }
 }
 
+#endif
+
 class MockedMacInterface: NSObject, MacInterface {
     required override init() {
         super.init()
     }
 
+    var isAppActive = false
     var theme: Int = 0
 
+    func hideApp() {}
     func beep() {}
 
     func sayHello() {}
 }
-
-#endif

@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Conversation are available here for 30 days. After that time, conversations will be permanently deleted."; ObjectID = "chat-deleted-header-tip"; */
 "chat-deleted-header-tip.text" = "此处会话将会保留 30 天，之后会被永久删除";
 
+/* Class = "UIButton"; normalTitle = "Continue Selection?"; ObjectID = "chat-input-reply-action"; */
+"chat-input-reply-action.normalTitle" = "继续选中话题？";
+
 /* Class = "UIButton"; configuration.title = "SEND"; ObjectID = "chat-input-send-button"; Note = "<Pass>"; */
 "chat-input-send-button.configuration.title" = "发送";
 
@@ -64,6 +67,6 @@
 /* Class = "UILabel"; text = "Richness of words used."; ObjectID = "chat-setting-topp-tip"; */
 "chat-setting-topp-tip.text" = "用词丰富程度";
 
-/* Class = "UIBarButtonItem"; title = "Setting"; ObjectID = "H5r-u7-O8f"; */
-"H5r-u7-O8f.title" = "会话设置";
+/* Class = "UIBarButtonItem"; title = "Setting"; ObjectID = "chat-vc-nav-item-setting"; */
+"chat-vc-nav-item-setting.title" = "会话设置";
 

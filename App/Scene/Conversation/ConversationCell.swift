@@ -15,11 +15,8 @@ class ConversationCell:
 {
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectedBackgroundView = {
-            let bgView = UIView()
-            bgView.backgroundColor = .tintColor.withAlphaComponent(0.4)
-            return bgView
-        }()
+        selectedBackgroundView = TintBackgroundView().tintAlpha(0.4)
+        focusEffect = UIFocusHaloEffect()
     }
 
     var item: Conversation! {

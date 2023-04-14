@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Selectable
 class MessageBoxView: UIView {
     var isSelected = false {
         didSet {
@@ -15,9 +16,16 @@ class MessageBoxView: UIView {
         }
     }
 
+    var isParentFocused = false {
+        didSet {
+            if oldValue == isParentFocused { return }
+            updateUI()
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.cornerRadius = 5
+        layer.cornerRadius = 8
         layer.shadowOffset = .zero
         layer.shadowRadius = 3
     }
@@ -28,9 +36,12 @@ class MessageBoxView: UIView {
     }
 
     private func updateUI() {
-        layer.borderWidth = isSelected ? 2 : 0
+        var borderWidth: CGFloat = 0
+        if isSelected { borderWidth += 1.5 }
+        if isParentFocused { borderWidth += 0.5 }
+        layer.borderWidth = borderWidth
         layer.borderColor = tintColor.cgColor
-        if isSelected {
+        if isParentFocused {
             layer.shadowColor = tintColor.cgColor
             layer.shadowOpacity = 1
         } else {

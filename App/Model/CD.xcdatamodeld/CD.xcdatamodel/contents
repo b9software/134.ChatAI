@@ -59,6 +59,7 @@
         <fetchIndex name="byConversation">
             <fetchIndexElement property="conversation" type="Binary" order="ascending"/>
             <fetchIndexElement property="time" type="Binary" order="descending"/>
+            <fetchIndexElement property="createTime" type="Binary" order="descending"/>
         </fetchIndex>
     </entity>
     <configuration name="Cloud" usedWithCloudKit="YES">

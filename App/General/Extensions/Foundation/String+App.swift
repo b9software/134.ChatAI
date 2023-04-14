@@ -6,7 +6,7 @@ extension StringProtocol {
     // @MBDependency:4
     /// 应用级别行为，输入预处理
     func trimmed() -> String? {
-        let str = trimmingCharacters(in: .whitespaces)
+        let str = trimmingCharacters(in: .whitespacesAndNewlines)
         return str.isNotEmpty ? str : nil
     }
 
@@ -53,22 +53,13 @@ extension String {
         return numberOfLines
     }
 
-    // @MBDependency:2
-    /// 手机号/电话号打码
-    /// 支持任意长度
-    func phoneMasked(_ mask: Character = Character("*")) -> String {
-        guard !isEmpty else { return self }
-        // 用系数算可以支持任意长度的输入
-        // 系数是可以计算的，但这里写死的可读性好
-        let length = Double(count)
-        let maskCount = Int((length / 11.0 * 4.0).rounded())
-        guard maskCount > 0 else { return self }
-        let maskString = String(repeating: mask, count: maskCount)
-        let rangeStart = index(startIndex, offsetBy: Int((length * 0.29).rounded()))
-        let rangeEnd = index(rangeStart, offsetBy: maskCount - 1)
-        var str = self
-        str.replaceSubrange(rangeStart...rangeEnd, with: maskString)
-        return str
+    func trimming(toLength: Int, token: String = "...") -> String {
+        assert(toLength >= token.count)
+        if count <= toLength {
+            return self
+        }
+        let tmp = padding(toLength: toLength - token.count, withPad: "", startingAt: 0)
+        return tmp + token
     }
 
     func keyMasked(_ mask: Character = Character("*")) -> String {

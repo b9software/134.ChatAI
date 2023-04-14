@@ -67,7 +67,7 @@ class ChatArchivedListController:
                 input: "r",
                 propertyList: indexPath.row)
             let deleteCommand = UIKeyCommand(
-                title: L.Chat.deleteNow,
+                title: L.Menu.delete,
                 action: #selector(self.deleteFromMenu(sender:)),
                 input: "d",
                 propertyList: indexPath.row)
@@ -92,7 +92,7 @@ class ChatArchivedListController:
             assert(false)
             return
         }
-        item.undelete()
+        item.delete()
     }
 }
 

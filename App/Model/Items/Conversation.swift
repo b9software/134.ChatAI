@@ -76,6 +76,25 @@ class Conversation {
         return conversationPool.object(key: entity.id!, creator: Conversation(entity: entity))
     }
 
+    static func load(id: StringID, completion: @escaping (Result<Conversation, Error>) -> Void) {
+        let cb = Do.safe(callback: completion)
+        if let item = conversationPool[id] {
+            cb(.success(item))
+            return
+        }
+        Current.database.async { ctx in
+            do {
+                guard let entity = try ctx.fetch(CDConversation.request(id: id)).first else {
+                    throw AppError.message("No conversation with id: \(id).")
+                }
+                let item = Conversation.from(entity: entity)
+                cb(.success(item))
+            } catch {
+                cb(.failure(error))
+            }
+        }
+    }
+
     private lazy var needsListStateChanged = DelayAction(.init(target: self, selector: #selector(noticeListStateChanged)))
 
     enum UsableState {

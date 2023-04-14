@@ -67,6 +67,7 @@ extension CDMessage {
         let request = fetchRequest()
         request.sortDescriptors = [
             NSSortDescriptor(key: timeKey, ascending: false),
+            NSSortDescriptor(key: createTimeKey, ascending: false),
         ]
         request.fetchOffset = offset
         request.fetchLimit = limit
@@ -84,7 +85,11 @@ extension CDMessage {
         request.sortDescriptors = [
             NSSortDescriptor(key: timeKey, ascending: true),
         ]
-        request.predicate = NSPredicate(format: "%K == %d", stateKey, Message.MState.pend.rawValue)
+        request.predicate = NSPredicate(
+            format: "%K == %d AND %K == nil",
+            stateKey, Message.MState.pend.rawValue,
+            deleteTimeKey
+        )
         return request
     }
 
@@ -204,13 +209,15 @@ extension CDMessage: ModelValidate {
         myEntity.mState = .normal
         myEntity.conversation = safeChat
 
-        var parentEntity: CDMessage = myEntity
-        var replyEntity: CDMessage?
-        if let replyID = reply,
-           let entity = ctx.object(with: replyID) as? CDMessage {
-            parentEntity = entity.parent ?? entity
+        let replyEntity: CDMessage?
+        if let replyID = reply {
+            replyEntity = ctx.object(with: replyID) as? CDMessage
+        } else {
+            replyEntity = nil
+        }
+        let parentEntity: CDMessage = replyEntity?.parent ?? replyEntity ?? myEntity
+        if myEntity != parentEntity {
             myEntity.parent = parentEntity
-            replyEntity = entity
         }
 
         let newEntity = CDMessage(context: ctx)
@@ -219,12 +226,25 @@ extension CDMessage: ModelValidate {
         newEntity.mState = .pend
         newEntity.conversation = safeChat
         newEntity.parent = parentEntity
+        #if DEBUG
+        if AppDelegate().debug.debugMessageSkipSending {
+            newEntity.mState = .normal
+            newEntity.text = "Debug Skip \(Date.current.localTime)"
+            newEntity.content = try? CDMessageContent().encode()
+        }
+        #endif
 
-        var replyNextID = replyEntity?.next
+        myEntity.time = parentEntity.time
+        newEntity.time = parentEntity.time
+        parentEntity.updateTime = .current
+
+        let isReplyParent = replyEntity == parentEntity
+        var replyNextID = isReplyParent ? parentEntity.prev : replyEntity?.next
         while let id = replyNextID {
             let entity = entity(uuid: id, context: ctx)
             if let entity = entity {
                 ctx.delete(entity)
+                parentEntity.removeFromChild(entity)
                 AppLog().warning("Delete context message: \(entity.text ?? entity.time.localTime)")
             }
             replyNextID = entity?.next
@@ -233,9 +253,51 @@ extension CDMessage: ModelValidate {
         myEntity.prev = replyEntity?.uid ?? newEntity.uid
         myEntity.next = newEntity.uid
         newEntity.prev = myEntity.uid
+        if isReplyParent {
+            parentEntity.prev = myEntity.uid
+        }
         parentEntity.next = newEntity.uid
-        assert(parentEntity.next != nil)
-        assert(parentEntity.prev != nil)
+//        assert(parentEntity == myEntity)
+//        assert(parentEntity.next == newEntity.uid)
+//        assert(parentEntity.prev == newEntity.uid)
+//        assert(myEntity.next == newEntity.uid)
+//        assert(myEntity.prev == newEntity.uid)
+//        assert(newEntity.next == nil)
+//        assert(newEntity.prev == myEntity.uid)
+        assertParent(parentEntity, ctx)
         return myEntity
     }
+
+    #if DEBUG
+    static func assertParent(_ parent: CDMessage, _ ctx: NSManagedObjectContext) {
+        assert(parent.parent == nil)
+        assert(parent.next != nil)
+        assert(parent.prev != nil)
+        let count = parent.child?.count ?? 0
+        var uid = parent.prev
+        var linkCount = 0
+        while let entity = entity(uuid: uid, context: ctx) {
+            uid = entity.next
+            linkCount += 1
+            assert(linkCount < 30)
+        }
+        assert(linkCount == count)
+        uid = parent.next
+        linkCount = 0
+        while let entity = entity(uuid: uid, context: ctx) {
+            if entity == parent { break }
+            uid = entity.prev
+            linkCount += 1
+            assert(linkCount < 30)
+        }
+        assert(linkCount == count)
+        parent.child?.forEach {
+            // swiftlint:disable:next force_cast
+            assert(($0 as! CDMessage).parent == parent)
+        }
+    }
+    #else
+    @inline(__always)
+    static func assertParent(_ parentEntity: CDMessage, _ ctx: NSManagedObjectContext) {}
+    #endif
 }

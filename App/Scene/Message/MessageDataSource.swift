@@ -39,7 +39,7 @@ class MessageDataSource:
             let fetch = NSFetchedResultsController(
                 fetchRequest: CDMessage.conversationRequest(sf.conversation.entity, offset: 0, limit: sf.pageSize, ascending: false),
                 managedObjectContext: ctx,
-                sectionNameKeyPath: nil, cacheName: nil)
+                sectionNameKeyPath: CDMessage.timeKey, cacheName: nil)
             fetch.delegate = self
             sf.fetchController = fetch
             try fetch.performFetch()
@@ -84,7 +84,12 @@ class MessageDataSource:
         }
     }
 
+    // MARK: -
+
+    var shouldUpdateSelectionForNewMessageInContext = false
+
     func insertHistory(items: [Message]) {
+        /*
         if items.count < pageSize {
             historyReachEnd = true
         }
@@ -114,50 +119,83 @@ class MessageDataSource:
         dispatch_after_seconds(1) { [weak self] in
             self?.isLoading = false
         }
+         */
     }
 
-    func applyFetched(items: [Message]) {
-        assertDispatch(.onQueue(.main))
+    func applyFetched(items: [[Message]]) {
         if listItems.isEmpty {
-            listItems.append(contentsOf: items.reversed())
-            heightCache.append(contentsOf: [CGFloat?](repeating: nil, count: items.count))
-            view.reloadData()
-            dispatch_after_seconds(0) { [weak self] in
-                self?.view?.scrollToLastRow(animated: false)
-            }
+            resetList(items: items)
             return
         }
         if items.isEmpty {
             historyReachEnd = true
             return
         }
-        var lastIdxNotInList: Int?
-        for (idx, item) in items.enumerated() {
-            if listItems.contains(where: { $0 === item }) {
-                break
+        AppLog().debug("DS> Start partial refresh.")
+        if listItems.count != items.count {
+            guard let newLastSection = items.last else { fatalError() }
+            if listItems.last != newLastSection {
+                AppLog().debug("DS> Append new context.")
+                listItems.append(newLastSection)
+                heightCache.append([CGFloat?](repeating: nil, count: newLastSection.count))
+                view.insertSections(IndexSet(integer: listItems.count - 1), with: .fade)
+                dispatch_after_seconds(0) { [weak self] in
+                    self?.view?.scrollToLastRow(animated: false)
+                }
+            } else {
+                assert(false)
+                resetList(items: items)
             }
-            lastIdxNotInList = idx
-        }
-        guard let idx = lastIdxNotInList else {
-            AppLog().debug("DS> all in list, skip")
             return
+        } else {
+            for ((section, oldSection), newSection) in zip(listItems.enumerated(), items).reversed() {
+                if oldSection == newSection { continue }
+                applySectionChange(section: section, oldItems: oldSection, newItems: newSection)
+                return
+            }
+            AppLog().debug("DS> Update? Ignore")
         }
-        AppLog().debug("DS> insert 0...\(idx)")
-        guard let view = view else {
-            listItems.append(contentsOf: items[0...idx].reversed())
-            heightCache.append(contentsOf: [CGFloat?](repeating: nil, count: idx + 1))
-            return
-        }
+    }
 
-        let start = listItems.count
-        listItems.append(contentsOf: items[0...idx].reversed())
-        heightCache.append(contentsOf: [CGFloat?](repeating: nil, count: idx + 1))
-        let ips = (0...idx).map { IndexPath(row: start + $0, section: 0) }
-        view.performBatchUpdates({
-            view.insertRows(at: ips, with: .fade)
-        }, completion: {
-            view.scrollToLastRow(animated: $0)
-        })
+    private func applySectionChange(section: Int, oldItems: [Message], newItems: [Message]) {
+        listItems[section] = newItems
+        heightCache[section] = [CGFloat?](repeating: nil, count: newItems.count)
+        view.reloadSections(IndexSet(integer: section), with: .fade)
+        if shouldUpdateSelectionForNewMessageInContext {
+            shouldUpdateSelectionForNewMessageInContext = false
+            if newItems.isEmpty { return }
+            let ip = IndexPath(row: newItems.count - 1, section: section)
+            view.selectRow(at: ip, animated: true, scrollPosition: .middle)
+            view.next(type: UITableViewDelegate.self)?.tableView?(view, didSelectRowAt: ip)
+        }
+    }
+
+    private func resetList(items: [[Message]]) {
+        AppLog().debug("DS> Reset list.")
+        if items.isEmpty {
+            historyReachEnd = true
+            return
+        }
+        listItems = items
+        heightCache = items.map { sectionItems in
+            [CGFloat?](repeating: nil, count: sectionItems.count)
+        }
+        view.reloadData()
+        dispatch_after_seconds(0) { [weak self] in
+            self?.view?.scrollToLastRow(animated: false)
+        }
+    }
+
+    func scrollTo(item: Message?, selection: Bool, animated: Bool) {
+        guard let item = item,
+              let ip = indexPath(of: item) else {
+            return
+        }
+        if selection {
+            view.selectRow(at: ip, animated: animated, scrollPosition: .middle)
+        } else {
+            view.scrollToRow(at: ip, at: .middle, animated: animated)
+        }
     }
 
     // MARK: - Fetch
@@ -168,23 +206,31 @@ class MessageDataSource:
         assertDispatch(.notOnQueue(.main))
         // 插入直接会在结果里，而不会限制在最初的 fetch limit
 
-        let ctx = Current.database.backgroundContext
-        let items: [Message] = snapshot.itemIdentifiers
-            .compactMap {
-                guard let id = $0 as? NSManagedObjectID,
-                      let entity = ctx.object(with: id) as? CDMessage else {
-                    assert(false)
-                    return nil
+        let ctx = controller.managedObjectContext
+        let result = snapshot.sectionIdentifiers.reversed().map { section -> [Message] in
+            let items = snapshot.itemIdentifiersInSection(withIdentifier: section)
+                .compactMap {
+                    listItemFromSnap(identifier: $0, context: ctx)
                 }
-                do {
-                    try entity.validate()
-                    return Message.from(entity: entity)
-                } catch {
-                    return nil
-                }
-            }
+            return items.reversed()
+        }
         Task { @MainActor in
-            applyFetched(items: items)
+            applyFetched(items: result)
+        }
+    }
+
+    func listItemFromSnap(identifier: Any, context: NSManagedObjectContext) -> Message? {
+        guard let id = identifier as? NSManagedObjectID,
+              let entity = context.object(with: id) as? CDMessage else {
+            assert(false)
+            return nil
+        }
+        do {
+            try entity.validate()
+            return Message.from(entity: entity)
+        } catch {
+            AppLog().warning("DS> Ignore item: \(error).")
+            return nil
         }
     }
 
@@ -198,14 +244,45 @@ class MessageDataSource:
 
     // MARK: - List
 
-    var listItems = [Message]()
+    var listItems = [[Message]]()
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    var selectedItems: [Message] {
+        guard let ips = view.indexPathsForSelectedRows else {
+            return []
+        }
+        return ips.compactMap(item(at:))
+    }
+
+    func item(at ip: IndexPath) -> Message? {
+        listItems.element(at: ip.section)?.element(at: ip.row)
+    }
+
+    func indexPath(of item: Message) -> IndexPath? {
+        for (section, sectionItems) in listItems.enumerated().reversed() {
+            guard let sectionFirstItem = sectionItems.first else { continue }
+            if abs(sectionFirstItem.time.timeIntervalSince(item.time)) < 0.01 {
+                for (row, listItem) in sectionItems.enumerated()
+                where listItem == item {
+                    return IndexPath(row: row, section: section)
+                }
+            }
+        }
+        return nil
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         listItems.count
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        listItems[section].count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = listItems[indexPath.row]
+        guard let item = item(at: indexPath) else {
+            AppLog().critical("DS> Index out bounds!")
+            return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        }
         let cellID = item.cellIdentifier(for: tableView, indexPath: indexPath)
         guard var cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageBaseCell else {
             fatalError()
@@ -220,27 +297,31 @@ class MessageDataSource:
 
     // MARK: Cell Height
 
-    private var heightCache = [CGFloat?]()
+    private var heightCache = [[CGFloat?]]()
 
     func cachedHeight(at indexPath: IndexPath) -> CGFloat? {
-        heightCache.element(at: indexPath.row) ?? nil
+        heightCache.element(at: indexPath.section)?.element(at: indexPath.row) ?? nil
     }
+    private func setCachedHeight(indexPath: IndexPath, value: CGFloat?) {
+        var sectionItems = heightCache.element(at: indexPath.section) ?? {
+            heightCache.insert([], at: indexPath.section)
+            return []
+        }()
+        sectionItems[indexPath.row] = value
+        heightCache[indexPath.section] = sectionItems
+    }
+
     func updateHeight(_ height: CGFloat, for cell: UITableViewCell) {
         guard let ip = view.indexPath(for: cell) else {
             return
         }
-        if heightCache[ip.row] == height { return }
-        heightCache[ip.row] = height
-//        indexPathsCellHeight.append(ip)
+        if cachedHeight(at: ip) == height { return }
+        setCachedHeight(indexPath: ip, value: height)
         needsUpdateCellHeight.set()
-//        AppLog().debug("DS> update height at \(ip.row) to \(height).")
     }
-//    private var indexPathsCellHeight = [IndexPath]()
     private lazy var needsUpdateCellHeight = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
         sf.view.beginUpdates()
         sf.view.endUpdates()
-//        sf.view.reloadRows(at: sf.indexPathsCellHeight, with: .none)
-//        sf.indexPathsCellHeight = []
     })
 }

@@ -13,23 +13,40 @@ final class DebugManager {
 #if DEBUG
     func setupMenu(builder: UIMenuBuilder) {
         let menu = UIMenu(title: "Developer", children: [
-            UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
+            UIMenu(title: "Database", children: [
+                UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
+                UICommand(title: "Create Engine no key", action: #selector(ApplicationDelegate.debugEngineCreateWithNoKey)),
+                UICommand(title: "Create Engine invalid key", action: #selector(ApplicationDelegate.debugEngineCreateWithInvalidKey)),
+                UICommand(title: "Destroy All Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
+            ]),
+            UIMenu(title: "System UI", children: [
+                UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
+                UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
+                UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
+            ]),
             UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
-            UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
+            UICommand(title: "Message Skip Sending", action: #selector(ApplicationDelegate.debugMessageSkipSending), state: debugMessageSkipSending ? .on : .off),
+            UICommand(title: "Message Debug Time", action: #selector(ApplicationDelegate.debugMessageTime), state: debugMessageTime ? .on : .off),
             UICommand(title: "Dump Sender", action: #selector(ApplicationDelegate.debugLogSender)),
-            UICommand(title: "Engine no key", action: #selector(ApplicationDelegate.debugEngineCreateWithNoKey)),
-            UICommand(title: "Engine invalid key", action: #selector(ApplicationDelegate.debugEngineCreateWithInvalidKey)),
-            UICommand(title: "Destroy Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
-            UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
-            UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
             UICommand(title: "Listen Focus Update", action: #selector(ApplicationDelegate.debugListenFocus), state: debugListenFocus ? .on : .off),
+            UICommand(title: "Debug State Restoration", action: #selector(ApplicationDelegate.debugStateRestoration), state: debugStateRestoration ? .on : .off),
             UICommand(title: "Log Responder Chain", action: #selector(ApplicationDelegate.debugResponderChain)),
             UICommand(title: "Debug Action Target", action: #selector(ApplicationDelegate.debugResponderSwitch), state: debugResponder ? .on : .off),
         ])
         builder.insertSibling(menu, afterMenu: .window)
     }
 
-    var debugSystemUI: Bool {
+    var debugListenFocus: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
+    }
+
+    var debugMessageSkipSending: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
+    }
+
+    var debugMessageTime: Bool {
         get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
@@ -39,10 +56,19 @@ final class DebugManager {
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
 
-    var debugListenFocus: Bool {
+    var debugStateRestoration: Bool {
+        get { UserDefaults.standard.bool(forKey: "UIStateRestorationDebugLogging") }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "UIStateRestorationDebugLogging")
+            UserDefaults.standard.set(newValue, forKey: "UIStateRestorationDeveloperMode")
+        }
+    }
+
+    var debugSystemUI: Bool {
         get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
+
 #else
     func setupMenu(builder: UIMenuBuilder) {}
 
@@ -69,6 +95,23 @@ fileprivate extension ApplicationDelegate {
 //        var activity = NSUserActivity(activityType: "panel")
 //        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: activity, options: nil) { (error) in
 //        }
+    }
+
+    @objc func debugMessageSkipSending() {
+        debug.debugMessageSkipSending.toggle()
+        AppLog().warning("Debug> MessageSkipSending \(debug.debugMessageSkipSending).")
+        ApplicationMenu.setNeedsRebuild()
+    }
+
+    @objc func debugMessageTime() {
+        debug.debugMessageTime.toggle()
+        AppLog().warning("Debug> MessageTime: \(debug.debugMessageTime).")
+        ApplicationMenu.setNeedsRebuild()
+    }
+
+    @objc func debugStateRestoration() {
+        debug.debugStateRestoration.toggle()
+        ApplicationMenu.setNeedsRebuild()
     }
 
     @objc func debugSystemUISwitch() {

@@ -153,6 +153,7 @@ class MessageBaseCell:
         super.awakeFromNib()
         selectedBackgroundView = UIView()
         selectionView?.isHidden = true
+        focusEffect = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -161,7 +162,16 @@ class MessageBaseCell:
         contentBox?.isSelected = selected
     }
 
+    override var canBecomeFocused: Bool { true }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        contentBox?.isParentFocused = isFocused
+    }
+
     @IBOutlet private weak var selectionView: UIView?
+    @IBOutlet private weak var contextSeparator: UIView?
+    @IBOutlet private weak var contentTopMargin: NSLayoutConstraint?
     @IBOutlet weak var contentBox: MessageBoxView?
     @IBOutlet weak var sizeView: MessageCellSizeView?
 
@@ -174,13 +184,15 @@ class MessageBaseCell:
     }
 
     private func loadData() {
+        contextSeparator?.isHidden = !item.isParent
+        contentTopMargin?.constant = item.isParent ? 30 : 0
         if item.fetchDetail() {
             messageDetailReady(item)
         } else {
             prepareAsyncLoad()
             sizeView?.isEnable = false
         }
-        messageSendStateChanged(item)
+        messageStateUpdate(item)
     }
 
     func messageDetailReady(_ item: Message) {
@@ -190,7 +202,7 @@ class MessageBaseCell:
         }
     }
 
-    func messageSendStateChanged(_ item: Message) {
+    func messageStateUpdate(_ item: Message) {
         // overwrite
     }
 
@@ -222,21 +234,19 @@ class MessageTextCell: MessageBaseCell {
 
     override func updateUI(item: Message) {
         let couldRetry = item.state.couldRetry
-        retryButton.isHidden = !couldRetry
-        contentBox?.isHidden = couldRetry
-        if !retryButton.isHidden {
-            if let err = item.senderState?.error, !AppError.isCancel(err) {
-                retryButton.text = err.localizedDescription
-                retryButton.configuration?.baseForegroundColor = .systemRed
-            } else {
-                retryButton.text = L.Menu.retry
-                retryButton.configuration?.baseForegroundColor = .tintColor
-            }
-        }
         let isSending = item.senderState?.isSending == true
+        retryButton.isHidden = !couldRetry
+
+        if let err = item.senderState?.error, !AppError.isCancel(err) {
+            contentLabel.textColor = .systemRed
+            contentLabel.text = err.localizedDescription
+            contentLabel.layoutIfNeeded()
+            return
+        } else {
+            contentLabel.textColor = Asset.Text.first.color
+        }
         if let text = item.cachedText {
             contentLabel.text = text
-            contentBox?.isHidden = false
         } else if isSending {
             contentLabel.text = L.Chat.loading
         } else if item.state == .pend {
@@ -246,17 +256,15 @@ class MessageTextCell: MessageBaseCell {
         }
     }
 
-    override func messageSendStateChanged(_ item: Message) {
-        super.messageSendStateChanged(item)
+    override func messageStateUpdate(_ item: Message) {
+        super.messageStateUpdate(item)
         stopButton.isHidden = !(item.senderState?.isSending ?? false)
         if !stopButton.isHidden {
             // Fix indicator may not shown after cell recycling
             stopButton.configuration?.showsActivityIndicator = true
         }
         if let error = item.senderState?.error {
-            retryButton.text = error.localizedDescription
             updateUI(item: item)
-            assert(retryButton.isHidden == false)
         }
     }
 

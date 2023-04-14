@@ -14,12 +14,16 @@ internal enum L10n {
     }
   internal enum Localizable {
     internal enum App {
+      /// https://github.com/b9software/B9ChatAI
+      internal static let homePage = L10n.tr("Localizable", "app.homePage", fallback: "https://github.com/b9software/B9ChatAI")
       /// B9ChatAI
       internal static let name = L10n.tr("Localizable", "app.name", fallback: "B9ChatAI")
       /// B9ChatAI does not collect any of your data, and all data is under your control.
       /// 
       /// However, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.
       internal static let privacySort = L10n.tr("Localizable", "app.privacy-sort", fallback: "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.")
+      /// https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd
+      internal static let userManual = L10n.tr("Localizable", "app.userManual", fallback: "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd")
     }
     internal enum Chat {
       /// Archived
@@ -40,6 +44,16 @@ internal enum L10n {
       internal static let setupBeforeUseNotice = L10n.tr("Localizable", "chat.setupBeforeUseNotice", fallback: "You must set up the engine before you can chat.")
       /// Unarchive
       internal static let unArchive = L10n.tr("Localizable", "chat.unArchive", fallback: "Unarchive")
+      internal enum Reply {
+        /// ⚠️ You have selected a message in the middle of a context, continue send will drop all messages behind it.
+        internal static let dropContextWarning = L10n.tr("Localizable", "chat.reply.dropContextWarning", fallback: "⚠️ You have selected a message in the middle of a context, continue send will drop all messages behind it.")
+        /// Continue %@
+        internal static func selectionContinue(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "chat.reply.selectionContinue", String(describing: p1), fallback: "Continue %@")
+        }
+        /// Continue Selection?
+        internal static let wantContinue = L10n.tr("Localizable", "chat.reply.wantContinue", fallback: "Continue Selection?")
+      }
       internal enum Setting {
         /// The same ID already exists.
         internal static let badSameID = L10n.tr("Localizable", "chat.setting.badSameID", fallback: "The same ID already exists.")
@@ -96,7 +110,8 @@ internal enum L10n {
       /// 
       /// Please note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.
       /// 
-      /// For a list of known issues, please refer to the following link: <link>
+      /// For a list of known issues, please refer to the following link:
+      ///  https://github.com/b9software/B9ChatAI/issues/1
       /// 
       /// Thank you for your understanding and support.
       /// 
@@ -104,8 +119,8 @@ internal enum L10n {
       /// 
       /// BB9z
       /// 
-      /// 2023-04-13
-      internal static let text1st = L10n.tr("Localizable", "guide.text1st", fallback: "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link: <link>\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-13")
+      /// 2023-04-16
+      internal static let text1st = L10n.tr("Localizable", "guide.text1st", fallback: "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link:\n https://github.com/b9software/B9ChatAI/issues/1\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-16")
     }
     internal enum Menu {
       /// Archive
@@ -114,6 +129,10 @@ internal enum L10n {
       internal static let delete = L10n.tr("Localizable", "menu.delete", fallback: "Delete")
       /// Guide
       internal static let guide = L10n.tr("Localizable", "menu.guide", fallback: "Guide")
+      /// Help
+      internal static let help = L10n.tr("Localizable", "menu.help", fallback: "Help")
+      /// Project on GitHub
+      internal static let homePage = L10n.tr("Localizable", "menu.homePage", fallback: "Project on GitHub")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
       /// Retry
@@ -122,6 +141,8 @@ internal enum L10n {
       internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Application Settings")
       /// Conversation Settings
       internal static let settingChat = L10n.tr("Localizable", "menu.settingChat", fallback: "Conversation Settings")
+      /// Online User Manual
+      internal static let userManual = L10n.tr("Localizable", "menu.userManual", fallback: "Online User Manual")
       internal enum New {
         /// Conversation
         internal static let conversation = L10n.tr("Localizable", "menu.new.conversation", fallback: "Conversation")

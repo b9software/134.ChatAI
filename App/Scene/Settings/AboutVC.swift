@@ -18,7 +18,7 @@ class AboutViewController: UIViewController, StoryboardCreation {
     }
 
     @IBAction private func goGitHub(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://github.com/b9software")!)
+        UIApplication.shared.open(URL(string: L.App.homePage)!)
     }
 
     @IBAction private func gotoOpenAIPrivacy(_ sender: Any) {

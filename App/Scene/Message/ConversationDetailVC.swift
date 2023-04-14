@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import B9Action
 import HasItem
 import UIKit
 
@@ -28,6 +29,9 @@ class ConversationDetailViewController:
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isInputAllowed = false
+        inputActionContainer.isHidden = true
+        inputActionStateLabel.text = nil
         conversation(item, useState: item.usableState)
         listDataSource.conversation = item
         listView.allowsFocus = true
@@ -44,6 +48,7 @@ class ConversationDetailViewController:
         NotificationCenter.default.removeObserver(self, name: .selectableLabelOnEdit, object: nil)
     }
 
+    private weak var lastFocusedItem: UIFocusEnvironment?
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
 
     @IBOutlet private weak var listView: UITableView!
@@ -56,18 +61,25 @@ class ConversationDetailViewController:
     }
 
     @IBOutlet private weak var barLayoutContainer: UIView!
+    @IBOutlet private weak var barLayoutBottom: NSLayoutConstraint!
     @IBOutlet private weak var standardBar: UIView!
+    @IBOutlet private weak var inputActionContainer: UIView!
+    @IBOutlet private weak var inputActionStateLabel: UILabel!
     @IBOutlet private weak var inputTextView: UITextView!
     @IBOutlet private var inputTextHeight: NSLayoutConstraint!
     @IBOutlet private weak var inputSendButton: UIButton!
     private var isInputExpand = false
     private var isInputAllowed = false {
         didSet {
-            inputTextView.isEditable = isInputAllowed
-            inputSendButton.isEnabled = isInputAllowed
+            barLayoutContainer.isHidden = !isInputAllowed
+            barLayoutBottom.constant = isInputAllowed ? 0 : barLayoutContainer.height
         }
     }
-    private var inputReplyMessage: Message?
+
+    @IBOutlet private weak var replySelectionButton: UIButton!
+    private var shouldUpdateReplySelectionForNewMessage = false
+    private var inputReplyItems: [Message]?
+    private lazy var needsReplySelectionUpdate = DelayAction(Action(target: self, selector: #selector(updateReplyForSelectionChange)))
 }
 
 extension ConversationDetailViewController {
@@ -81,9 +93,20 @@ extension ConversationDetailViewController {
     }
 
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        [listView, inputTextView]
+        var items: [UIFocusEnvironment] = [listView, inputTextView]
+        if let item = lastFocusedItem {
+            items.insert(item, at: 0)
+        }
+        return items
     }
     override var canBecomeFirstResponder: Bool { true }
+    override var canResignFirstResponder: Bool { true }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        let item = context.nextFocusedItem
+        debugPrint("update focus in detail", item)
+        lastFocusedItem = context.nextFocusedItem
+    }
 
     override func becomeFirstResponder() -> Bool {
         ApplicationMenu.setNeedsRevalidate()
@@ -91,11 +114,18 @@ extension ConversationDetailViewController {
     }
 
     override var keyCommands: [UIKeyCommand]? {
-        var commands = [UIKeyCommand]()
+        var commands = super.keyCommands ?? []
         if isInputAllowed {
             commands.append(.init(input: "\r", modifierFlags: .command, action: #selector(onSend)))
         }
+        commands.append(
+            UIKeyCommand(action: #selector(handleLeftArrow), input: UIKeyCommand.inputLeftArrow)
+        )
         return commands
+    }
+
+    @objc func handleLeftArrow() {
+        RootViewController.of(view)?.focusSidebar()
     }
 }
 
@@ -130,6 +160,7 @@ extension ConversationDetailViewController {
         if let cell = tableView.cellForRow(at: indexPath) {
             UIFocusSystem.focusSystem(for: tableView)?.requestFocusUpdate(to: cell)
         }
+        needsReplySelectionUpdate.set()
     }
 
     @objc private func onSelectionLabelEdit(_ notice: Notification) {
@@ -170,9 +201,69 @@ extension ConversationDetailViewController {
     }
 }
 
+// MARK: - Reply Selection
+extension ConversationDetailViewController {
+    @objc func updateReplyForSelectionChange() {
+        let shouldHide = listDataSource.selectedItems.isEmpty
+        if inputActionContainer.isHidden != shouldHide {
+            inputActionContainer.isHidden = shouldHide
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        if replySelectionButton.isSelected {
+            inputReplyItems = listDataSource.selectedItems
+            updateForInputReplyItems()
+        }
+    }
+
+    @IBAction private func onReplySelectionConfirm() {
+        if replySelectionButton.isSelected {
+            listDataSource.scrollTo(
+                item: inputReplyItems?.last,
+                selection: true,
+                animated: true)
+            return
+        }
+        replySelectionButton.isSelected = true
+        inputReplyItems = listDataSource.selectedItems
+        updateForInputReplyItems()
+    }
+
+    private func updateForInputReplyItems() {
+        inputActionStateLabel.text = nil
+        if let last = inputReplyItems?.last {
+            let title = L.Chat.Reply.selectionContinue(last.replySelectionTitle)
+            replySelectionButton.setTitle(title, for: .selected)
+            last.hasNext { [weak self] item, hasNext in
+                guard let sf = self,
+                      item === last else { return }
+                if hasNext {
+                    sf.inputActionStateLabel.text = L.Chat.Reply.dropContextWarning
+                }
+            }
+        } else {
+            replySelectionButton.isSelected = false
+        }
+    }
+
+    @IBAction private func onDismissReplySelection(_ sender: Any) {
+        if replySelectionButton.isSelected {
+            replySelectionButton.isSelected = false
+            inputReplyItems = nil
+            updateForInputReplyItems()
+        } else {
+            UIFocusSystem.focusSystem(for: self)?.requestFocusUpdate(to: listView)
+            listView.deselectRows(false)
+            needsReplySelectionUpdate.set()
+        }
+    }
+}
+
 // MARK: - Input
 
 extension ConversationDetailViewController: UITextViewDelegate {
+
     // 可以 track +shift
 //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 //        debugPrint("begin", presses)
@@ -219,7 +310,8 @@ extension ConversationDetailViewController: UITextViewDelegate {
 
     @IBAction private func onSend() {
         if let text = inputTextView.text.trimmed() {
-            item.send(text: text, reply: inputReplyMessage)
+            item.send(text: text, reply: inputReplyItems?.last)
+            listDataSource.shouldUpdateSelectionForNewMessageInContext = true
         }
         inputTextView.text = nil
         setInputExpand(false, animate: true)

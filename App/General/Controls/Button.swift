@@ -17,6 +17,9 @@ class Button: MBButton {
 
         /// 圆弧线框，颜色随 tintColor 改变
         case round
+
+        /// 可高亮的选项用
+        case selection
     }
 
     var style: Style?
@@ -37,6 +40,9 @@ class Button: MBButton {
             setTitleColor(.white, for: .selected)
             setTitleColor(.white, for: .disabled)
             updateRoundStyleIfNeeded()
+
+        case .selection:
+            updateRoundStyleIfNeeded()
         }
     }
 
@@ -50,26 +56,9 @@ class Button: MBButton {
     }
 
     func updateRoundStyleIfNeeded() {
-        guard style == .round else { return }
-        let size = height
-        guard size > 0 else { return }
-        let roundInset = UIEdgeInsetsMakeWithSameMargin(size / 2)
-        let resizeInset = UIEdgeInsets(top: 0, left: size / 2 + 1, bottom: 0, right: size / 2 + 1)
-        let bgSize = CGSize(width: size + 3, height: size)
-        let normalBG = RFDrawImage.image(withRoundingCorners: roundInset, size: bgSize, fill: .white, stroke: tintColor, strokeWidth: 1, boxMargin: .zero, resizableCapInsets: resizeInset, scaleFactor: 0)
-        setBackgroundImage(normalBG, for: .normal)
-        setTitleColor(tintColor, for: .normal)
-
-        let highlghtColor = tintColor.rf_lighter()
-        let highlightBG = RFDrawImage.image(withRoundingCorners: roundInset, size: bgSize, fill: .white, stroke: highlghtColor, strokeWidth: 1, boxMargin: .zero, resizableCapInsets: resizeInset, scaleFactor: 0)
-        setBackgroundImage(highlightBG, for: .highlighted)
-        setTitleColor(highlghtColor, for: .highlighted)
-
-        let selectedBG = RFDrawImage.image(withRoundingCorners: roundInset, size: bgSize, fill: tintColor, stroke: nil, strokeWidth: 0, boxMargin: .zero, resizableCapInsets: resizeInset, scaleFactor: 0)
-        setBackgroundImage(selectedBG, for: .selected)
-
-        let disableBG = RFDrawImage.image(withRoundingCorners: roundInset, size: bgSize, fill: UIColor(named: "button_disabled")!, stroke: nil, strokeWidth: 0, boxMargin: .zero, resizableCapInsets: resizeInset, scaleFactor: 0)
-        setBackgroundImage(disableBG, for: .disabled)
+        if style == .selection {
+            layer.cornerRadius = height / 2
+        }
     }
 
     override func updateConfiguration() {
@@ -114,12 +103,16 @@ class Button: MBButton {
 
     override var isSelected: Bool {
         didSet {
-            guard boldWhenSelected || scaleWhenSelected > 0 else { return }
-            var size = normalFontSize
-            if isSelected && scaleWhenSelected > 0 {
-                size *= scaleWhenSelected
+            if boldWhenSelected || scaleWhenSelected > 0 {
+                var size = normalFontSize
+                if isSelected && scaleWhenSelected > 0 {
+                    size *= scaleWhenSelected
+                }
+                titleLabel?.font = UIFont.systemFont(ofSize: size, weight: isSelected ? .semibold : .regular)
             }
-            titleLabel?.font = UIFont.systemFont(ofSize: size, weight: isSelected ? .semibold : .regular)
+            if style == .selection {
+                backgroundColor = isSelected ? tintColor : Asset.Button.stdBase.color
+            }
         }
     }
 

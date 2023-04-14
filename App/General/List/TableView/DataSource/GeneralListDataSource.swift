@@ -50,8 +50,7 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
             if isItemSelectable {
                 fatalError("todo")
             } else {
-                let newIndexPaths = newValue.compactMap { indexPath(for: $0) }
-                tableView.setSelected(indexPaths: newIndexPaths, animated: false)
+                selectRows(items: newValue)
             }
         }
     }
@@ -90,6 +89,9 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
     func update(listItems: [ListItem]) {
         inputItems = listItems
         updateSnapshot()
+        if let items = itemSelectedNeedsRestore {
+            selectRows(items: items)
+        }
     }
 
     func item(at indexPath: IndexPath) -> ListItem? {
@@ -125,6 +127,18 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
     }
 
     // MARK: - 选中处理
+
+    private var itemSelectedNeedsRestore: [Item]?
+
+    private func selectRows(items: [Item]?) {
+        guard let tableView = tableView else { return }
+        if items?.isNotEmpty == true, inputItems.isEmpty {
+            itemSelectedNeedsRestore = items
+            return
+        }
+        let newIndexPaths = items?.compactMap { indexPath(for: $0) }
+        tableView.setSelected(indexPaths: newIndexPaths, animated: false)
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

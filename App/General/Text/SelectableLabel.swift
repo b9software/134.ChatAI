@@ -80,6 +80,8 @@ class SelectableLabel:
         }
         return size
     }
+
+    override var canBecomeFocused: Bool { false }
 }
 
 /*

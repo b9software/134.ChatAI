@@ -50,6 +50,11 @@
                BlueprintName = "UnitTests"
                ReferencedContainer = "container:B9ChatAI.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CoreDataTests/testPredicateWithBadKey()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

@@ -9,7 +9,7 @@
 @testable import B9ChatAI
 import XCTest
 
-// swiftlint:disable force_try
+// swiftlint:disable force_try nesting
 
 extension NSManagedObjectContext {
     func createEngine(id: String) {
@@ -27,6 +27,37 @@ extension NSManagedObjectContext {
             try! self.save()
             return item
         }
+    }
+
+    struct MessageCreateInfo {
+        var create: Date
+        var text: String?
+        var type: Message.MType = .text
+        var role: Message.MRole = .me
+        var state: Message.MState = .normal
+    }
+
+    func createMessages(in conversation: CDConversation, time: Date, _ children: [MessageCreateInfo]) -> [CDMessage] {
+        var result = [CDMessage]()
+        for cInfo in children {
+            let entity = CDMessage(context: self)
+            entity.time = time
+            entity.createTime = cInfo.create
+            entity.text = cInfo.text
+            entity.mType = cInfo.type
+            entity.mRole = cInfo.role
+            entity.mState = cInfo.state
+            entity.parent = result.first
+            entity.conversation = conversation
+            result.append(entity)
+        }
+        for (idx, entity) in result.enumerated() {
+            entity.next = result.element(at: idx + 1)?.uid
+            entity.prev = result.element(at: idx - 1)?.uid
+        }
+        result[0].prev = result[1].uid
+        result[0].next = result.last?.uid
+        return result
     }
 
     func assertIsFresh() {
@@ -58,5 +89,21 @@ extension DBManager {
         ctx.performAndWait {
             ctx.destroy()
         }
+    }
+}
+
+extension CDMessage {
+    var debugChildTexts: [String] {
+        child!.compactMap { ($0 as? CDMessage)?.text ?? "nil" }.sorted()
+    }
+
+    func linkChildTexts(_ ctx: NSManagedObjectContext) -> [String] {
+        var result = [String]()
+        var next = prev
+        while let entity = Self.entity(uuid: next, context: ctx) {
+            result.append(entity.text ?? "nil")
+            next = entity.next
+        }
+        return result
     }
 }

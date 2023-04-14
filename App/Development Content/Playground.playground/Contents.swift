@@ -9,34 +9,16 @@ import UIKit
  */
 
 extension String {
-    /// 手机号/电话号打码
-    /// 支持任意长度
-    func phoneMasked(_ mask: Character = Character("*")) -> String {
-        guard !isEmpty else { return self }
-        // 用系数算可以支持任意长度的输入
-        // 系数是可以计算的，但这里写死的可读性好
-        let length = Double(count)
-        let maskCount = Int((length / 11.0 * 4.0).rounded())
-        guard maskCount > 0 else { return self }
-        let maskString = String(repeating: mask, count: maskCount)
-        let rangeStart = index(startIndex, offsetBy: Int((length * 0.29).rounded()))
-        let rangeEnd = index(rangeStart, offsetBy: maskCount - 1)
-        var str = self
-        str.replaceSubrange(rangeStart...rangeEnd, with: maskString)
-        assert(str.count == self.count)
-        return str
+
+    func trimming(toLength: Int, token: String = "...") -> String {
+        assert(toLength >= token.count)
+        if count <= toLength {
+            return self
+        }
+        let tmp = padding(toLength: toLength - token.count, withPad: "", startingAt: 0)
+        return tmp + token
     }
 }
 
-"1".phoneMasked()
-"12".phoneMasked()
-"123".phoneMasked()
-"1234".phoneMasked()
-"12345".phoneMasked()
-"123456".phoneMasked()
-"1234567".phoneMasked()
-"12345678".phoneMasked()
-"123456789".phoneMasked()
-"1234567890".phoneMasked()
-"12345678901".phoneMasked()
-"123456789012".phoneMasked()
+
+"123456789012".trimming(toLength: 5)

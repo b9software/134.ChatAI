@@ -63,9 +63,7 @@ class ConversationManager: NSObject {
 
     func createNew() {
         context.perform {
-            let entity = CDConversation(context: self.context)
-            testCounter += 1
-            entity.title = "Chat \(testCounter)"
+            _ = CDConversation(context: self.context)
         }
     }
 
@@ -78,8 +76,6 @@ class ConversationManager: NSObject {
         AppLog().debug("CM> Did notice list change")
     })
 }
-
-private var testCounter = 0
 
 // MARK: - Change Tracking
 
