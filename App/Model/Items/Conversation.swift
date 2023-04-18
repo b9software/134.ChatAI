@@ -12,6 +12,7 @@ import CoreData
 private let conversationPool = ObjectPool<StringID, Conversation>()
 
 struct ChatConfig: Codable, Equatable {
+    var draft: String?
 }
 
 struct EngineConfig: Codable, Equatable {
@@ -74,6 +75,17 @@ class Conversation {
     static func from(entity: CDConversation) -> Conversation {
 //        assertDispatch(.notOnQueue(.main))
         return conversationPool.object(key: entity.id!, creator: Conversation(entity: entity))
+    }
+
+    static func load(id: StringID) async -> Conversation? {
+        if let item = conversationPool[id] { return item }
+        return await Current.database.read { ctx in
+            guard let entity = try? ctx.fetch(CDConversation.request(id: id)).first else {
+                return nil
+            }
+            let item = Conversation.from(entity: entity)
+            return item
+        }
     }
 
     static func load(id: StringID, completion: @escaping (Result<Conversation, Error>) -> Void) {
@@ -164,6 +176,22 @@ extension Conversation {
         return .normal
     }
 
+    func loadDraft(toView: UITextView) {
+        Current.database.async { [self] _ in
+            var config = chatConfig
+            guard let text = config.draft else {
+                return
+            }
+            config.draft = nil
+            chatConfig = config
+            Task { @MainActor in
+                if toView.text.trimmed() == nil {
+                    toView.text = text
+                }
+            }
+        }
+    }
+
     var chatConfig: ChatConfig {
         get {
             _chatConfig ?? {
@@ -228,6 +256,20 @@ extension Conversation {
     func undelete() {
         entity.modify { this, _ in this.deleteTime = nil }
         needsUpdateUsable.set()
+    }
+
+    func clearMessage() {
+        Current.database.save { [self] ctx in
+            entity.messages?.forEach {
+                if let mEntity = $0 as? CDMessage {
+                    ctx.delete(mEntity)
+                }
+            }
+            try ctx.save()
+        }
+        Current.database.async { [self] _ in
+            assert(entity.messages?.count == 0)
+        }
     }
 
     func send(text: String, reply: Message?) {

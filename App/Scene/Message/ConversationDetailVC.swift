@@ -41,14 +41,24 @@ class ConversationDetailViewController:
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(onSelectionLabelEdit), name: .selectableLabelOnEdit, object: nil)
+        item.loadDraft(toView: inputTextView)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: .selectableLabelOnEdit, object: nil)
+        saveDraft()
     }
 
     private weak var lastFocusedItem: UIFocusEnvironment?
+    @IBOutlet private weak var integrationBarItem: UIBarButtonItem! {
+        didSet {
+            integrationBarItem.menu = UIMenu(options: .displayInline, children: [
+                UICommand(title: L.Menu.integrationHelp, action: #selector(gotoAppIntegrationHelp)),
+                UICommand(title: L.Menu.integrationBookmark, action: #selector(onCopyJSBookmark))
+            ])
+        }
+    }
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
 
     @IBOutlet private weak var listView: UITableView!
@@ -151,6 +161,22 @@ extension ConversationDetailViewController {
             ConversationSettingViewController.showFrom(detail: self, animate: true)
         }
     }
+
+    @IBAction private func gotoAppIntegrationHelp(_ sender: Any) {
+        UIApplication.shared.open(URL(string: L.Guide.interCommunicationLink)!)
+    }
+
+    @IBAction private func onCopyJSBookmark(_ sender: Any) {
+        var comp = URLComponents()
+        comp.scheme = Bundle.main.bundleIdentifier ?? "b9chatai"
+        comp.host = "send"
+        comp.queryItems = [
+            .init(name: "id", value: item.id),
+            .init(name: "text", value: "")
+        ]
+        let urlPart = comp.url?.absoluteString ?? ""
+        UIPasteboard.general.string = "javascript:a=\"\(urlPart)\"+encodeURIComponent(window.getSelection().toString());window.location.href=a"
+    }
 }
 
 // MARK: -
@@ -173,16 +199,17 @@ extension ConversationDetailViewController {
         listView.selectRow(at: ip, animated: false, scrollPosition: .none)
     }
 
-    var isLastCellVisible: Bool {
-        let lastRow = listView.numberOfRows(inSection: 0) - 1
-        return listView.indexPathsForVisibleRows?.contains(IndexPath(row: lastRow, section: 0)) == true
-    }
+//    var isLastCellVisible: Bool {
+//        // fix: 空列表
+//        let lastRow = listView.numberOfRows(inSection: 0) - 1
+//        return listView.indexPathsForVisibleRows?.contains(IndexPath(row: lastRow, section: 0)) == true
+//    }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == listView {
-            isReadingHistory = !isLastCellVisible
-        }
-    }
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        if scrollView == listView {
+//            isReadingHistory = !isLastCellVisible
+//        }
+//    }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == listView {
@@ -315,5 +342,12 @@ extension ConversationDetailViewController: UITextViewDelegate {
         }
         inputTextView.text = nil
         setInputExpand(false, animate: true)
+    }
+
+    private func saveDraft() {
+        guard let text = inputTextView.text.trimmed() else { return }
+        var config = item.chatConfig
+        config.draft = text
+        item.chatConfig = config
     }
 }

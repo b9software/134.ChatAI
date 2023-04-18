@@ -13,6 +13,8 @@ internal enum L10n {
   internal enum InfoPlist {
     }
   internal enum Localizable {
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "cancel", fallback: "Cancel")
     internal enum App {
       /// https://github.com/b9software/B9ChatAI
       internal static let homePage = L10n.tr("Localizable", "app.homePage", fallback: "https://github.com/b9software/B9ChatAI")
@@ -61,6 +63,12 @@ internal enum L10n {
         internal static let choiceEngine = L10n.tr("Localizable", "chat.setting.choiceEngine", fallback: "Please choose a engine.")
         /// Please choose a model.
         internal static let choiceModel = L10n.tr("Localizable", "chat.setting.choiceModel", fallback: "Please choose a model.")
+        /// Clear
+        internal static let clearAlertConfirm = L10n.tr("Localizable", "chat.setting.clearAlertConfirm", fallback: "Clear")
+        /// This operation can't be undone.
+        internal static let clearAlertMessage = L10n.tr("Localizable", "chat.setting.clearAlertMessage", fallback: "This operation can't be undone.")
+        /// Clear all messages in this conversation?
+        internal static let clearAlertTitle = L10n.tr("Localizable", "chat.setting.clearAlertTitle", fallback: "Clear all messages in this conversation?")
         /// This engine is missing the API key, please update it or choose another one.
         internal static let engineMissingKey = L10n.tr("Localizable", "chat.setting.engineMissingKey", fallback: "This engine is missing the API key, please update it or choose another one.")
         /// Fetching models...
@@ -104,6 +112,8 @@ internal enum L10n {
       }
     }
     internal enum Guide {
+      /// https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication
+      internal static let interCommunicationLink = L10n.tr("Localizable", "guide.interCommunicationLink", fallback: "https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication")
       /// Dear user,
       /// 
       /// Thank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.
@@ -133,12 +143,18 @@ internal enum L10n {
       internal static let help = L10n.tr("Localizable", "menu.help", fallback: "Help")
       /// Project on GitHub
       internal static let homePage = L10n.tr("Localizable", "menu.homePage", fallback: "Project on GitHub")
+      /// Copy Browser Bookmark
+      internal static let integrationBookmark = L10n.tr("Localizable", "menu.integrationBookmark", fallback: "Copy Browser Bookmark")
+      /// What's this?
+      internal static let integrationHelp = L10n.tr("Localizable", "menu.integrationHelp", fallback: "What's this?")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
       /// Retry
       internal static let retry = L10n.tr("Localizable", "menu.retry", fallback: "Retry")
+      /// Settings
+      internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Settings")
       /// Application Settings
-      internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Application Settings")
+      internal static let settingApp = L10n.tr("Localizable", "menu.settingApp", fallback: "Application Settings")
       /// Conversation Settings
       internal static let settingChat = L10n.tr("Localizable", "menu.settingChat", fallback: "Conversation Settings")
       /// Online User Manual

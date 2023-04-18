@@ -150,11 +150,15 @@ extension SceneDelegate {
         }
         switch comp.host?.lowercased() {
         case "send":
-            var chatID = comp.queryItems?.first(where: { $0.name == "id" })?.value
+            let chatID = comp.queryItems?.first(where: { $0.name == "id" })?.value
             if activeSession(chatID: chatID, from: scene) {
-                return
+                //
+            } else {
+                rootViewController.tryActiveConversation(id: chatID)
             }
-            rootViewController.tryActiveConversation(id: chatID)
+            if let sendText = comp.queryItems?.first(where: { $0.name == "text" })?.value {
+                Current.conversationManager.send(text: sendText, toID: chatID)
+            }
         default:
             alertUnsupported()
         }

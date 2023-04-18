@@ -128,7 +128,9 @@
 "menu.retry" = "重试";
 
 /* (No Comment) */
-"menu.setting" = "应用设置";
+"menu.setting" = "设置";
+
+"menu.settingApp" = "应用设置";
 
 /* (No Comment) */
 "menu.settingChat" = "会话设置";

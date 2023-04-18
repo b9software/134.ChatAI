@@ -2,13 +2,6 @@
  应用级别的便捷方法：Codable 相关扩展
  */
 extension JSONDecoder {
-    /// 从服务器接收到的格式
-    static let server: JSONDecoder = {
-        let coder = JSONDecoder()
-        coder.dateDecodingStrategy = .server
-        return coder
-    }()
-
     /// 从字符串 JSON 解码
     func decode<T>(_ type: T.Type, from string: String) throws -> T where T: Decodable {
         let data = string.data(using: .utf8)!
@@ -17,14 +10,6 @@ extension JSONDecoder {
 }
 
 extension JSONEncoder {
-    /// 编码为发送给服务器的格式
-    static let server: JSONEncoder = {
-        let coder = JSONEncoder()
-        coder.dateEncodingStrategy = .server
-        coder.outputFormatting = []
-        return coder
-    }()
-
     /// 本地调试显示用
     static let display: JSONEncoder = {
         let coder = JSONEncoder()

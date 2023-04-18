@@ -56,11 +56,4 @@ extension Array where Self.Element: UIView {
             }
         })
     }
-
-    // @MBDependency:2
-    /// 按照 tag 值从小到大重新排序
-    /// bug(Xcode 10.2): 用于修正 IBOutletCollection 顺序错乱
-    mutating func sortByTag() {
-        self = sorted { $0.tag < $1.tag }
-    }
 }

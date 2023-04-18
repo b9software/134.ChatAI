@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
+
+    @IBAction func showHelp(_ sender: Any) {
+        let link = NSLocalizedString("guide.interCommunicationLink", comment: "App help link")
+        UIApplication.shared.open(URL(string: link)!)
+    }
 }
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

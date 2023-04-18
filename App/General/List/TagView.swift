@@ -129,7 +129,7 @@ public class TagView: UIView {
         if tagFrameCache.count != items.count {
             updateTagLayout(targetSize: bounds.size, force: true)
         }
-        items.enumerateElements { tag, idx, _ in
+        for (idx, tag) in items.enumerated() {
             let tagFrame = tagFrameCache[idx]
             if rect.intersects(tagFrame) {
                 let bgColor = (tag.backgroundColor as? UIColor) ?? defaultTintCellFillColor

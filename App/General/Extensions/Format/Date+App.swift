@@ -21,11 +21,6 @@ extension Date {
         (self as NSDate).dayEnd
     }
 
-    /// 后台专用日期格式
-    var dayIdentifier: MBDateDayIdentifier {
-        DateFormatter.dayIdentifier.string(from: self) as MBDateDayIdentifier
-    }
-
     /// "yyyy-MM-dd HH:mm:ss" in local time zone
     var localTime: String {
         DateFormatter.localDayTime.string(from: self)

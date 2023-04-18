@@ -32,10 +32,15 @@ class NavigationController: B9NavigationController {
     func updateToolbar() {
 #if targetEnvironment(macCatalyst)
         let toolItems: [NSToolbarItem] = topViewController?.navigationItem.rightBarButtonItems?.compactMap {
+
             let id = $0.action?.description ?? UUID().uuidString
-            return NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier(id), barButtonItem: $0)
+            let item = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier(id), barButtonItem: $0)
+            if $0.tag == 1 {
+                item.visibilityPriority = .low
+            }
+            return item
         } ?? []
-        NSToolbarController.of(view)?.update(additionalItems: toolItems)
+        NSToolbarController.of(view)?.update(additionalItems: toolItems.reversed())
 #endif
     }
 }

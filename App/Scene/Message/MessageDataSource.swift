@@ -36,6 +36,7 @@ class MessageDataSource:
     private func refresh() {
         Current.database.async { [weak self] ctx in
             guard let sf = self else { return }
+
             let fetch = NSFetchedResultsController(
                 fetchRequest: CDMessage.conversationRequest(sf.conversation.entity, offset: 0, limit: sf.pageSize, ascending: false),
                 managedObjectContext: ctx,
@@ -123,12 +124,8 @@ class MessageDataSource:
     }
 
     func applyFetched(items: [[Message]]) {
-        if listItems.isEmpty {
+        if listItems.isEmpty || items.isEmpty {
             resetList(items: items)
-            return
-        }
-        if items.isEmpty {
-            historyReachEnd = true
             return
         }
         AppLog().debug("DS> Start partial refresh.")
@@ -174,6 +171,12 @@ class MessageDataSource:
         AppLog().debug("DS> Reset list.")
         if items.isEmpty {
             historyReachEnd = true
+            if listItems.isNotEmpty {
+                let count = listItems.count
+                listItems = []
+                heightCache = []
+                view.deleteSections(IndexSet(0..<count), with: .fade)
+            }
             return
         }
         listItems = items

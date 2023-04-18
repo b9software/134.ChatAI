@@ -1,6 +1,5 @@
 
 #import "MBCollectionViewArrayDataSource.h"
-#import "NSArray+App.h"
 #import <RFKit/NSArray+RFKit.h>
 
 @interface MBCollectionViewArrayDataSource ()
@@ -121,16 +120,16 @@ RFInitializingRootForNSObject
     return YES;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    if ([self isFirstItemIndexPath:sourceIndexPath]
-        || [self isFirstItemIndexPath:destinationIndexPath]) {
-        return;
-    }
-    BOOL hasFirstItem = self.hasFirstItem;
-    NSMutableArray *items = self.items.mutableCopy;
-    [items moveObjectAtIndex:sourceIndexPath.item - !!hasFirstItem toIndex:destinationIndexPath.item - !!hasFirstItem];
-    _items = items;
-}
+//- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+//    if ([self isFirstItemIndexPath:sourceIndexPath]
+//        || [self isFirstItemIndexPath:destinationIndexPath]) {
+//        return;
+//    }
+//    BOOL hasFirstItem = self.hasFirstItem;
+//    NSMutableArray *items = self.items.mutableCopy;
+//    [items moveObjectAtIndex:sourceIndexPath.item - !!hasFirstItem toIndex:destinationIndexPath.item - !!hasFirstItem];
+//    _items = items;
+//}
 
 #pragma mark - Additional Item
 

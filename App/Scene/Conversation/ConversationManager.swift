@@ -174,3 +174,16 @@ extension ConversationListUpdating {
     func conversations(_ manager: ConversationManager, hasArchived: Bool) {}
     func conversations(_ manager: ConversationManager, hasDeleted: Bool) {}
 }
+
+// MARK: -
+
+extension ConversationManager {
+    func send(text: String, toID: StringID?) {
+        let chatID = toID ?? "default"
+        Task {
+            if let chat = await Conversation.load(id: chatID) ?? listItems.first {
+                Message.create(sendText: text, from: chat, reply: nil)
+            }
+        }
+    }
+}

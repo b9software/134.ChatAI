@@ -331,4 +331,14 @@ extension ConversationSettingViewController {
     @IBAction private func onTopPSliderChange() {
         updateTopP(topProbabilitySlider.value)
     }
+
+    @IBAction private func onDestroyMessages(_ sender: Any) {
+        let item = self.item
+        let alert = UIAlertController(title: L.Chat.Setting.clearAlertTitle, message: L.Chat.Setting.clearAlertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L.cancel, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: L.Chat.Setting.clearAlertConfirm, style: .destructive, handler: { _ in
+            item?.clearMessage()
+        }))
+        rfPresent(alert, animated: true)
+    }
 }

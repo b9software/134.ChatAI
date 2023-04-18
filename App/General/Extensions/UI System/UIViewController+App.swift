@@ -20,3 +20,43 @@ extension UIViewController {
         rfPresent(alert, animated: true, completion: nil)
     }
 }
+
+
+extension UIViewController {
+    // @MBDependency:4
+    /**
+     安全的 presentViewController，仅当当前 vc 是导航中可见的 vc 时才 present
+
+     - Parameters:
+        - viewControllerToPresent: 需要展示的 vc
+        - flag: 是否需要动画
+        - completion: presented 参数代表给定 vc 是否被弹出
+     */
+    func rfPresent(_ viewControllerToPresent: UIViewController, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        guard let nav = navigationController else {
+            assert(false, "当前 vc 不在导航中，RFPresent 只支持处于导航中的 vc 管理")
+            completion?(false)
+            return
+        }
+        guard let navVisible = nav.visibleViewController else {
+            completion?(false)
+            return
+        }
+        var isNavVisible = false
+        var vc = self
+        while let parent = vc.parent {
+            if parent == navVisible {
+                isNavVisible = true
+                break
+            }
+            vc = parent
+        }
+        if !isViewLoaded || !isNavVisible {
+            completion?(false)
+            return
+        }
+        nav.present(viewControllerToPresent, animated: animated) {
+            completion?(true)
+        }
+    }
+}

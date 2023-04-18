@@ -15,19 +15,19 @@ extension CATransaction {
 extension CAAnimation: CAAnimationDelegate {
 
     fileprivate class Delegate: NSObject, CAAnimationDelegate {
-        var complateBlock: ((Bool) -> Void)?
+        var completeBlock: ((Bool) -> Void)?
 
         func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-            if let cb = complateBlock {
+            if let cb = completeBlock {
                 cb(flag)
             }
         }
     }
 
     /// 设置动画完成回调
-    var complateBlock: ((Bool) -> Void)? {
+    var completeBlock: ((Bool) -> Void)? {
         get {
-            (delegate as? Delegate)?.complateBlock
+            (delegate as? Delegate)?.completeBlock
         }
         set {
             let obj: Delegate = (delegate as? Delegate) ?? {
@@ -35,7 +35,7 @@ extension CAAnimation: CAAnimationDelegate {
                 delegate = this
                 return this
             }()
-            obj.complateBlock = newValue
+            obj.completeBlock = newValue
         }
     }
 }
