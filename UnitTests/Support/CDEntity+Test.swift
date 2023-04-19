@@ -7,6 +7,7 @@
 //
 
 @testable import B9ChatAI
+import CoreData
 import XCTest
 
 // swiftlint:disable force_try nesting

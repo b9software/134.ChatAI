@@ -20,6 +20,8 @@ class Button: MBButton {
 
         /// 可高亮的选项用
         case selection
+
+        case action
     }
 
     var style: Style?
@@ -32,7 +34,6 @@ class Button: MBButton {
             if configuration == nil {
                 configuration = UIButton.Configuration.filled()
             }
-            configuration?.buttonSize = .large
             configuration?.baseForegroundColor = Asset.Text.first.color
             isHoverEnabled = true
 
@@ -41,8 +42,10 @@ class Button: MBButton {
             setTitleColor(.white, for: .disabled)
             updateRoundStyleIfNeeded()
 
-        case .selection:
+        case .selection, .action:
+            assert(configuration == nil)
             updateRoundStyleIfNeeded()
+            isHoverEnabled = true
         }
     }
 
@@ -50,13 +53,8 @@ class Button: MBButton {
         updateRoundStyleIfNeeded()
     }
 
-    override func tintColorDidChange() {
-        super.tintColorDidChange()
-        updateRoundStyleIfNeeded()
-    }
-
-    func updateRoundStyleIfNeeded() {
-        if style == .selection {
+    private func updateRoundStyleIfNeeded() {
+        if style == .selection || style == .action {
             layer.cornerRadius = height / 2
         }
     }
@@ -110,37 +108,29 @@ class Button: MBButton {
                 }
                 titleLabel?.font = UIFont.systemFont(ofSize: size, weight: isSelected ? .semibold : .regular)
             }
-            if style == .selection {
-                backgroundColor = isSelected ? tintColor : Asset.Button.stdBase.color
-            }
         }
     }
 
-    // MARK: - Hover
-    var isHover = false
-    var isHoverEnabled = false {
-        didSet {
-            if oldValue == isHoverEnabled { return }
-            if isHoverEnabled {
-                if hoverGesture == nil {
-                    let gesture = UIHoverGestureRecognizer(target: self, action: #selector(onHoverGesture))
-                    addGestureRecognizer(gesture)
-                    hoverGesture = gesture
-                }
+    override func updateUIForStateUpdate() {
+        super.updateUIForStateUpdate()
+        switch style {
+        case .selection:
+            if isSelected {
+                backgroundColor = tintColor
+            } else if isHover {
+                backgroundColor = Asset.Button.stdHover.color
+            } else {
+                backgroundColor = Asset.Button.stdBase.color
             }
-            hoverGesture?.isEnabled = isHoverEnabled
-        }
-    }
-    private var hoverGesture: UIGestureRecognizer?
-
-    @objc private func onHoverGesture(_ sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .began, .changed:
-            isHover = true
+        case .action:
+            if isHover || isHighlighted {
+                backgroundColor = Asset.Button.stdHover.color
+            } else {
+                backgroundColor = Asset.Button.stdBase.color
+            }
         default:
-            isHover = false
+            break
         }
-        setNeedsUpdateConfiguration()
     }
 
     override var canBecomeFocused: Bool { true }

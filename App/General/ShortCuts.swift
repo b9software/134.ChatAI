@@ -59,7 +59,4 @@ func AppInBackground() -> Bool {
     UIApplication.shared.applicationState == .background
 }
 
-/// 应用级别的配置项
-func AppUserDefaultsShared() -> UserDefaults {
-    UserDefaults.standard
-}
+// swiftlint:enable force_cast identifier_name

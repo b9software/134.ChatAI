@@ -135,8 +135,12 @@ internal enum L10n {
     internal enum Menu {
       /// Archive
       internal static let archive = L10n.tr("Localizable", "menu.archive", fallback: "Archive")
+      /// Continue Last Topic
+      internal static let continueLastTopic = L10n.tr("Localizable", "menu.continueLastTopic", fallback: "Continue Last Topic")
       /// Delete
       internal static let delete = L10n.tr("Localizable", "menu.delete", fallback: "Delete")
+      /// Focus on Input
+      internal static let focusInput = L10n.tr("Localizable", "menu.focusInput", fallback: "Focus on Input")
       /// Guide
       internal static let guide = L10n.tr("Localizable", "menu.guide", fallback: "Guide")
       /// Help
@@ -147,8 +151,12 @@ internal enum L10n {
       internal static let integrationBookmark = L10n.tr("Localizable", "menu.integrationBookmark", fallback: "Copy Browser Bookmark")
       /// What's this?
       internal static let integrationHelp = L10n.tr("Localizable", "menu.integrationHelp", fallback: "What's this?")
+      /// Go Back
+      internal static let navigationBack = L10n.tr("Localizable", "menu.navigationBack", fallback: "Go Back")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
+      /// Operation
+      internal static let operation = L10n.tr("Localizable", "menu.operation", fallback: "Operation")
       /// Retry
       internal static let retry = L10n.tr("Localizable", "menu.retry", fallback: "Retry")
       /// Settings

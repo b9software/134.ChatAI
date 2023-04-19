@@ -24,9 +24,9 @@ class ApplicationDelegate: MBApplicationDelegate {
     #endif
 
     override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        if isTesting {
-            return UISceneConfiguration()
-        }
+//        if isTesting {
+//            return UISceneConfiguration()
+//        }
         return UISceneConfiguration(name: "Main", sessionRole: .windowApplication)
     }
 
@@ -39,7 +39,7 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        AppUserDefaultsShared().applicationLastLaunchTime = Date()
+        Current.defualts.applicationLastLaunchTime = Date()
         _ = MBApp.status()
         _ = Current.database
         return true

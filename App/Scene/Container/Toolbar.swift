@@ -80,7 +80,7 @@ class NSToolbarController {
 
 extension NSToolbarItem {
     static func back() -> NSToolbarItem {
-        let button = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: nil, action: #selector(RootViewController.toolbarBack))
+        let button = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: nil, action: #selector(StandardActions.goBack))
         let item = NSToolbarItem(itemIdentifier: .back, barButtonItem: button)
         item.label = "Back"
         item.isNavigational = true
@@ -109,8 +109,36 @@ extension NSToolbarItem {
 
 extension NSToolbarItem.Identifier {
     static let back = NSToolbarItem.Identifier("app.back")
+    static let chatSetting = NSToolbarItem.Identifier("app.chat.setting")
+    static let chatIntegration = NSToolbarItem.Identifier("app.chat.integration")
     static let test = NSToolbarItem.Identifier("app.test")
     static let test2 = NSToolbarItem.Identifier("app.test2")
+}
+
+extension NSToolbarItem {
+    func config(with barItem: UIBarButtonItem) -> Self {
+        if let value = barItem.title {
+            label = value
+        }
+        image = barItem.image
+        target = barItem.target
+        action = barItem.action
+        isBordered = true
+        return self
+    }
+
+    func priority(_ visibility: NSToolbarItem.VisibilityPriority) -> Self {
+        visibilityPriority = visibility
+        return self
+    }
+}
+
+extension NSMenuToolbarItem {
+    func menu(_ menu: UIMenu) -> Self {
+        itemMenu = menu
+        showsIndicator = false
+        return self
+    }
 }
 
 extension NSToolbar.Identifier {
@@ -118,5 +146,28 @@ extension NSToolbar.Identifier {
         NSToolbar.Identifier("app.toolbar")
     }
 }
+
+protocol ToolbarItemProvider {
+    func additionalToolbarItems() -> [NSToolbarItem]
+}
+
+extension ToolbarItemProvider where Self: UIViewController {
+    func additionalToolbarItems() -> [NSToolbarItem] {
+        let toolItems: [NSToolbarItem] = navigationItem.rightBarButtonItems?.compactMap {
+
+            let id = $0.action?.description ?? UUID().uuidString
+            let item = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier(id), barButtonItem: $0)
+            if $0.tag == 1 {
+                item.visibilityPriority = .low
+            }
+            return item
+        } ?? []
+        return toolItems.reversed()
+    }
+}
+
+#else
+
+protocol ToolbarItemProvider {}
 
 #endif

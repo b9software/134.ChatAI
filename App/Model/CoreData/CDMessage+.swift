@@ -220,22 +220,10 @@ extension CDMessage: ModelValidate {
             myEntity.parent = parentEntity
         }
 
-        let newEntity = CDMessage(context: ctx)
-        newEntity.mType = .text
-        newEntity.mRole = .assistant
-        newEntity.mState = .pend
+        let newEntity = newTextEntity(parent: parentEntity, context: ctx)
         newEntity.conversation = safeChat
-        newEntity.parent = parentEntity
-        #if DEBUG
-        if AppDelegate().debug.debugMessageSkipSending {
-            newEntity.mState = .normal
-            newEntity.text = "Debug Skip \(Date.current.localTime)"
-            newEntity.content = try? CDMessageContent().encode()
-        }
-        #endif
 
         myEntity.time = parentEntity.time
-        newEntity.time = parentEntity.time
         parentEntity.updateTime = .current
 
         let isReplyParent = replyEntity == parentEntity
@@ -257,15 +245,47 @@ extension CDMessage: ModelValidate {
             parentEntity.prev = myEntity.uid
         }
         parentEntity.next = newEntity.uid
-//        assert(parentEntity == myEntity)
-//        assert(parentEntity.next == newEntity.uid)
-//        assert(parentEntity.prev == newEntity.uid)
-//        assert(myEntity.next == newEntity.uid)
-//        assert(myEntity.prev == newEntity.uid)
-//        assert(newEntity.next == nil)
-//        assert(newEntity.prev == myEntity.uid)
         assertParent(parentEntity, ctx)
         return myEntity
+    }
+
+    static func newTextEntity(parent: CDMessage, context: NSManagedObjectContext) -> CDMessage {
+        let newEntity = CDMessage(context: context)
+        newEntity.mType = .text
+        newEntity.mRole = .assistant
+        newEntity.mState = .pend
+        newEntity.parent = parent
+        #if DEBUG
+        if AppDelegate().debug.debugMessageSkipSending {
+            newEntity.mState = .normal
+            newEntity.text = "Debug Skip \(Date.current.localTime)"
+            newEntity.content = try? CDMessageContent().encode()
+        }
+        #endif
+
+        newEntity.time = parent.time
+        return newEntity
+    }
+
+    func appendContinue(context: NSManagedObjectContext) {
+        guard let parentEntity = parent else {
+            assert(false)
+            return
+        }
+        let newEntity = Self.newTextEntity(parent: parentEntity, context: context)
+        newEntity.conversation = conversation
+        parentEntity.updateTime = .current
+
+        if let oldNext = next {
+            newEntity.next = oldNext
+            let oldNextEntity = Self.entity(uuid: oldNext, context: context)
+            oldNextEntity?.prev = newEntity.uid
+        } else {
+            parentEntity.next = newEntity.uid
+        }
+        newEntity.prev = uid
+        next = newEntity.uid
+        Self.assertParent(parentEntity, context)
     }
 
     #if DEBUG

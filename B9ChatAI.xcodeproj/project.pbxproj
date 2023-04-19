@@ -74,7 +74,6 @@
 		D534461125924CE700F5FD80 /* UIViewController+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534460F25924CE700F5FD80 /* UIViewController+App.swift */; };
 		D53BB5FC27FC468300F60168 /* B9Foundation in Frameworks */ = {isa = PBXBuildFile; productRef = D53BB5FB27FC468300F60168 /* B9Foundation */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D53BB60027FC4EE600F60168 /* Debugger in Frameworks */ = {isa = PBXBuildFile; productRef = D53BB5FF27FC4EE600F60168 /* Debugger */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D544A396197CBE5300C65604 /* MBFormSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D544A395197CBE5300C65604 /* MBFormSelectButton.m */; };
 		D544A39E197D1E8600C65604 /* JSONValueTransformer+App.m in Sources */ = {isa = PBXBuildFile; fileRef = D544A39D197D1E8600C65604 /* JSONValueTransformer+App.m */; };
 		D54F0E4F2199A56E003370F4 /* DateFormatter+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54F0E4E2199A56E003370F4 /* DateFormatter+App.swift */; };
 		D54F0E542199BB22003370F4 /* UIButton+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54F0E532199BB22003370F4 /* UIButton+App.swift */; };
@@ -117,14 +116,13 @@
 		D582472729E05CA1008D8A26 /* CDDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = D582472129E05CA1008D8A26 /* CDDefines.swift */; };
 		D582472B29E0FD80008D8A26 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D582472A29E0FD80008D8A26 /* Message.swift */; };
 		D584C77B26EEC970004E434B /* GradientProgressViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D584C77A26EEC970004E434B /* GradientProgressViews.swift */; };
-		D584C78026F020A3004E434B /* MBTouchEffectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D584C77C26F020A3004E434B /* MBTouchEffectButton.m */; };
-		D584C78126F020A3004E434B /* MBLoadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D584C77F26F020A3004E434B /* MBLoadButton.m */; };
 		D584C78526F03768004E434B /* CoreAnimation+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D584C78426F03768004E434B /* CoreAnimation+App.swift */; };
 		D587D48829E967FF0085CFCE /* BoxViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D587D48729E967FF0085CFCE /* BoxViews.swift */; };
 		D588308D20CACB33002030C4 /* Array+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308820CACB32002030C4 /* Array+App.swift */; };
 		D588308F20CACB33002030C4 /* MBSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308A20CACB32002030C4 /* MBSwift.swift */; };
 		D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308C20CACB33002030C4 /* NSPointArray+App.swift */; };
 		D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */; };
+		D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C46DD29F1338200BEFAE8 /* MBButton.swift */; };
 		D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */; };
 		D5998CED29EC29A400E71167 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5998CEC29EC29A400E71167 /* UserActivity.swift */; };
 		D59E6E0229EC4C6200B9E0BB /* SchemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59E6E0129EC4C6200B9E0BB /* SchemeDelegate.swift */; };
@@ -363,8 +361,6 @@
 		D53BB5F927FC467700F60168 /* B9Foundation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = B9Foundation; sourceTree = "<group>"; };
 		D53BB5FD27FC473000F60168 /* Debugger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Debugger; sourceTree = "<group>"; };
 		D5420E60290F455200C30832 /* BuildSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildSystem; sourceTree = "<group>"; };
-		D544A394197CBE5300C65604 /* MBFormSelectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFormSelectButton.h; sourceTree = "<group>"; };
-		D544A395197CBE5300C65604 /* MBFormSelectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFormSelectButton.m; sourceTree = "<group>"; };
 		D544A39D197D1E8600C65604 /* JSONValueTransformer+App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONValueTransformer+App.m"; sourceTree = "<group>"; };
 		D546F50C2932D2EC00EB5F04 /* Debug */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Debug; sourceTree = "<group>"; };
 		D546F50D2932D2EC00EB5F04 /* Action */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Action; sourceTree = "<group>"; };
@@ -418,10 +414,6 @@
 		D582472129E05CA1008D8A26 /* CDDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDDefines.swift; sourceTree = "<group>"; };
 		D582472A29E0FD80008D8A26 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D584C77A26EEC970004E434B /* GradientProgressViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientProgressViews.swift; sourceTree = "<group>"; };
-		D584C77C26F020A3004E434B /* MBTouchEffectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTouchEffectButton.m; sourceTree = "<group>"; };
-		D584C77D26F020A3004E434B /* MBLoadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLoadButton.h; sourceTree = "<group>"; };
-		D584C77E26F020A3004E434B /* MBTouchEffectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTouchEffectButton.h; sourceTree = "<group>"; };
-		D584C77F26F020A3004E434B /* MBLoadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLoadButton.m; sourceTree = "<group>"; };
 		D584C78426F03768004E434B /* CoreAnimation+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreAnimation+App.swift"; sourceTree = "<group>"; };
 		D587D48729E967FF0085CFCE /* BoxViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViews.swift; sourceTree = "<group>"; };
 		D588307F20CA67A7002030C4 /* UICollectionViewFlowLayout+IBInspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewFlowLayout+IBInspectable.h"; sourceTree = "<group>"; };
@@ -429,6 +421,7 @@
 		D588308A20CACB32002030C4 /* MBSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBSwift.swift; sourceTree = "<group>"; };
 		D588308C20CACB33002030C4 /* NSPointArray+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPointArray+App.swift"; sourceTree = "<group>"; };
 		D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleSelectionControlGroup.swift; sourceTree = "<group>"; };
+		D58C46DD29F1338200BEFAE8 /* MBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBButton.swift; sourceTree = "<group>"; };
 		D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+App.swift"; sourceTree = "<group>"; };
 		D59066B520AD0C4500411410 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D5998CEC29EC29A400E71167 /* UserActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivity.swift; sourceTree = "<group>"; };
@@ -868,10 +861,10 @@
 		D52EADE32043B983007219E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D581F07929EEC5E5000653DE /* debug.m */,
 				D52EADE52043B983007219E0 /* alpha.entitlements */,
 				D52EADE92043B983007219E0 /* Common.h */,
 				D52EADE62043B983007219E0 /* debug.entitlements */,
+				D581F07929EEC5E5000653DE /* debug.m */,
 				D5197A4517EECAAF00CA387C /* Info.plist */,
 				D5D4CC6E2043A6ED002FE9F0 /* OCBridging-Header.h */,
 				D52EADEA2043B983007219E0 /* release.entitlements */,
@@ -1024,8 +1017,6 @@
 			children = (
 				D5EE51602043F5E5009148B3 /* Input */,
 				D5EE51702043F5E5009148B3 /* Picker */,
-				D544A394197CBE5300C65604 /* MBFormSelectButton.h */,
-				D544A395197CBE5300C65604 /* MBFormSelectButton.m */,
 				D5740B4624985CC1001CBCB2 /* MBFormSelectListViewController.h */,
 				D5740B4724985CC2001CBCB2 /* MBFormSelectListViewController.m */,
 			);
@@ -1072,10 +1063,10 @@
 		D59E6E0029EC4C6200B9E0BB /* SchemePlayground */ = {
 			isa = PBXGroup;
 			children = (
-				D55FB1BF29EE0AA500777EA2 /* Localizable.strings */,
 				D59E6E0A29EC4C6300B9E0BB /* Assets.xcassets */,
 				D59E6E0F29EC4C6300B9E0BB /* Info.plist */,
 				D59E6E0C29EC4C6300B9E0BB /* LaunchScreen.storyboard */,
+				D55FB1BF29EE0AA500777EA2 /* Localizable.strings */,
 				D59E6E0729EC4C6200B9E0BB /* Scheme.storyboard */,
 				D59E6E0129EC4C6200B9E0BB /* SchemeDelegate.swift */,
 				D59E6E1429EC4C7400B9E0BB /* SchemePlayground.entitlements */,
@@ -1456,12 +1447,9 @@
 				D50693D719495D9E0002BFCC /* MBControlGroup.m */,
 				D5EE52292043F7B9009148B3 /* MBLayoutButton.h */,
 				D5EE52312043F7B9009148B3 /* MBLayoutButton.m */,
-				D584C77D26F020A3004E434B /* MBLoadButton.h */,
-				D584C77F26F020A3004E434B /* MBLoadButton.m */,
 				D50B3E6228255A5800D0974E /* MBOptionSwitch.swift */,
-				D584C77E26F020A3004E434B /* MBTouchEffectButton.h */,
-				D584C77C26F020A3004E434B /* MBTouchEffectButton.m */,
 				D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */,
+				D58C46DD29F1338200BEFAE8 /* MBButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -1590,6 +1578,8 @@
 				D5E8FA7329CF088C00C3D753 /* PBXTargetDependency */,
 			);
 			name = UnitTests;
+			packageProductDependencies = (
+			);
 			productName = UnitTests;
 			productReference = D5E8FA6E29CF088C00C3D753 /* UnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1690,8 +1680,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D59E6E0B29EC4C6300B9E0BB /* Assets.xcassets in Resources */,
-				D55FB1C129EE0AA500777EA2 /* Localizable.strings in Resources */,
 				D59E6E0E29EC4C6300B9E0BB /* LaunchScreen.storyboard in Resources */,
+				D55FB1C129EE0AA500777EA2 /* Localizable.strings in Resources */,
 				D59E6E0929EC4C6200B9E0BB /* Scheme.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1791,7 +1781,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# 配置在代码中修改\n# Requires macOS 13+\nxcrun --sdk macosx swift run --package-path \"$SRCROOT/Packages/BuildSystem\"\n";
+			shellScript = "# 配置在代码中修改\n# Requires macOS 13+\n# xcrun --sdk macosx swift run --package-path \"$SRCROOT/Packages/BuildSystem\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D51B800429D0700B00DD825C /* SwiftGen */ = {
@@ -1846,6 +1836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D51B7FEA29CFD49200DD825C /* AboutVC.swift in Sources */,
+				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D5031C4425C04F8800C2849E /* AlertController.swift in Sources */,
 				D5F65F3424C1CAF20082FEC2 /* API.swift in Sources */,
 				D5E2DBFB24CEE54400CEB26D /* APIResponseSerializer.swift in Sources */,
@@ -1881,13 +1872,13 @@
 				D5B4C7B629C9DA1A005D4C3E /* ConversationListDisplayer.swift in Sources */,
 				D5810C7729D99C220073F8C8 /* ConversationManager.swift in Sources */,
 				D5EEF2DE29DD5CC800F3CF52 /* ConversationSettingVC.swift in Sources */,
-				D5F9375229EEDD0C00DDA282 /* MBCollectionViewArrayDataSource.m in Sources */,
 				D584C78526F03768004E434B /* CoreAnimation+App.swift in Sources */,
 				D50319D425BE518C00C2849E /* CornerRadius.swift in Sources */,
 				D5FA7D5929D8140E0011DA4E /* Current.swift in Sources */,
 				D5F9F47F208D921200427201 /* Date+App.swift in Sources */,
 				D54F0E4F2199A56E003370F4 /* DateFormatter+App.swift in Sources */,
 				D5E8FA6929CEEE0900C3D753 /* DBManager.swift in Sources */,
+				D581F07A29EEC5E5000653DE /* debug.m in Sources */,
 				D5EEE5A829C74DB0006759DE /* DebugManager.swift in Sources */,
 				D51B7FF229CFF6E400DD825C /* Dispatch+App.swift in Sources */,
 				D501845B20F881B6009481D4 /* DissolveTransitioning.swift in Sources */,
@@ -1922,6 +1913,7 @@
 				D5DB4C1C241E243900832A0A /* MBCollectionListDisplayer.m in Sources */,
 				D5B49F0B1C41133A00847925 /* MBCollectionRefreshFooterView.m in Sources */,
 				D5B49F071C41133A00847925 /* MBCollectionView.m in Sources */,
+				D5F9375229EEDD0C00DDA282 /* MBCollectionViewArrayDataSource.m in Sources */,
 				D5F9F47C208D8F8700427201 /* MBCollectionViewCarouselLayout.m in Sources */,
 				D5E6336D264BC77900C4EBE6 /* MBCollectionViewColumnLayout.swift in Sources */,
 				D5B49F031C41133A00847925 /* MBCollectionViewDataSource.m in Sources */,
@@ -1930,7 +1922,6 @@
 				D50693D819495D9E0002BFCC /* MBControlGroup.m in Sources */,
 				D5EE51862043F5E6009148B3 /* MBDatePickerViewController.m in Sources */,
 				D5031A1E25BEA95200C2849E /* MBDebugLiveCountChecker.swift in Sources */,
-				D581F07829EEBEB6000653DE /* PushManager.swift in Sources */,
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
 				D5B49F081C41133A00847925 /* MBEntitiesCollectionView.m in Sources */,
 				D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */,
@@ -1939,7 +1930,6 @@
 				D5A3312421527BA100B0FD5B /* MBFlipCollapsibleView.m in Sources */,
 				D5FCB68E23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift in Sources */,
 				D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */,
-				D544A396197CBE5300C65604 /* MBFormSelectButton.m in Sources */,
 				D5740B4824985CC2001CBCB2 /* MBFormSelectListViewController.m in Sources */,
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
 				D5DB4C1F241E27B800832A0A /* MBKeyboardAdjustScrollView.m in Sources */,
@@ -1947,7 +1937,6 @@
 				D5B49EC61C4111B600847925 /* MBLayoutConstraint.m in Sources */,
 				D5B49F0E1C41133A00847925 /* MBListDataSource.m in Sources */,
 				D5B49F0F1C41133A00847925 /* MBListDateItem.m in Sources */,
-				D584C78126F020A3004E434B /* MBLoadButton.m in Sources */,
 				D564D5D31970EE340032FEC3 /* MBModalPresentSegue.m in Sources */,
 				D50B3E6328255A5800D0974E /* MBOptionSwitch.swift in Sources */,
 				D5B49F171C41133A00847925 /* MBRefreshFooterView.m in Sources */,
@@ -1968,7 +1957,6 @@
 				D5B49F1B1C41133A00847925 /* MBTableViewPullToFetchControl.m in Sources */,
 				D5C3CBF9217EF0A10097CCD9 /* MBTextCountLabel.m in Sources */,
 				D5EE51812043F5E6009148B3 /* MBTextView.m in Sources */,
-				D584C78026F020A3004E434B /* MBTouchEffectButton.m in Sources */,
 				D501845620F86D75009481D4 /* MBValueMapPickerViewController.m in Sources */,
 				D5EE51F62043F613009148B3 /* MBVauleLabel.m in Sources */,
 				D582472B29E0FD80008D8A26 /* Message.swift in Sources */,
@@ -1980,7 +1968,6 @@
 				D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */,
 				D5EEE5DB29C8A4BB006759DE /* NavigationController.swift in Sources */,
 				D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */,
-				D581F07A29EEC5E5000653DE /* debug.m in Sources */,
 				D501844E20F865D3009481D4 /* Number+App.swift in Sources */,
 				D5FA7D5B29D827380011DA4E /* OAChatResponse.swift in Sources */,
 				D531420429D72422004EDCCA /* OAEngine.swift in Sources */,
@@ -1988,6 +1975,7 @@
 				D5FA7D5729D813B30011DA4E /* OANetwork.swift in Sources */,
 				D50CFA6525C90F22003329EE /* ObjectPool.swift in Sources */,
 				D5EEF2C129DC496900F3CF52 /* OpacityTouchView.swift in Sources */,
+				D581F07829EEBEB6000653DE /* PushManager.swift in Sources */,
 				D5031C2E25C044FF00C2849E /* ResizeObservableView.swift in Sources */,
 				D558FDF52046913B00A01EE6 /* RootViewController.swift in Sources */,
 				D5EEE5A529C73FF3006759DE /* SceneDelegate.swift in Sources */,

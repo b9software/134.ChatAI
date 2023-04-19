@@ -5,8 +5,10 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import B9Action
 import HasItem
 import UIKit
+
 
 // 未使用
 class MessageListView: UITableView {
@@ -129,7 +131,11 @@ class MessageCellSizeView: UIView {
               let table = cell.superview as? UITableView else {
             return
         }
-        (table.dataSource as? MessageDataSource)?.updateHeight(heightConstraint.constant, for: cell)
+//        if #available(macCatalyst 16.0, *) {
+//            cell.invalidateIntrinsicContentSize()
+//        } else {
+            (table.dataSource as? MessageDataSource)?.updateHeight(heightConstraint.constant, for: cell)
+//        }
     }
 }
 
@@ -228,6 +234,12 @@ class MessageMyTextCell: MessageBaseCell {
 class MessageTextCell: MessageBaseCell {
     static let id = "Text"
 
+    override var item: Message! {
+        didSet {
+            needsAppendReceive.cancel()
+        }
+    }
+
     override func prepareAsyncLoad() {
         contentLabel.text = "..."
     }
@@ -268,10 +280,13 @@ class MessageTextCell: MessageBaseCell {
         }
     }
 
+    private lazy var needsAppendReceive = DelayAction(Action { [weak self] in
+        guard let sf = self else { return }
+        sf.contentLabel.text = sf.item.cachedText
+        sf.setNeedsLayout()
+    }, delay: 0.2)
     override func messageReceiveDeltaReplay(_ item: Message, text: String) {
-        contentLabel.text = item.cachedText
-        setNeedsLayout()
-        AppLog().warning("\(contentLabel.text)")
+        needsAppendReceive.set()
     }
 
     @IBOutlet private weak var contentLabel: UILabel!

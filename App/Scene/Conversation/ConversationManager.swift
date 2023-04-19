@@ -62,8 +62,17 @@ class ConversationManager: NSObject {
     }
 
     func createNew() {
-        context.perform {
-            _ = CDConversation(context: self.context)
+        Current.database.save { ctx in
+            let chat = CDConversation(context: ctx)
+            guard let id = Current.defualts.lastEngine,
+            let engine = Engine.instanceOf(id: id) else {
+                return
+            }
+            chat.engine = engine.entity
+            if let model = engine.lastSelectedModel {
+                chat.eSetting = try? EngineConfig(model: model).encode()
+            }
+            ctx.trySave()
         }
     }
 

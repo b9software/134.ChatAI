@@ -51,7 +51,7 @@ class SelectableLabel:
             textView.font = font
             textView.selectAll(self)
         }
-        if AppUserDefaultsShared().chatSendClipboardWhenLabelEdit {
+        if Current.defualts.chatSendClipboardWhenLabelEdit {
             let pasteboard = UIPasteboard.general
             pasteboard.string = text
         }

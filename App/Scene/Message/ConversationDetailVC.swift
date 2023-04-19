@@ -14,6 +14,7 @@ class ConversationDetailViewController:
     ConversationUpdating,
     HasItem,
     StoryboardCreation,
+    ToolbarItemProvider,
     UITableViewDelegate
 {
     static var storyboardID: StoryboardID { .conversation }
@@ -34,8 +35,14 @@ class ConversationDetailViewController:
         inputActionStateLabel.text = nil
         conversation(item, useState: item.usableState)
         listDataSource.conversation = item
+        listDataSource.itemMayRemove = { [weak self] _ in
+            self?.deselectReplyItemForListChangeIfNeeded()
+        }
         listView.allowsFocus = true
         listView.selectionFollowsFocus = true
+//        if #available(macCatalyst 16.0, *) {
+//            listView.selfSizingInvalidation = .enabled
+//        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,10 +60,7 @@ class ConversationDetailViewController:
     private weak var lastFocusedItem: UIFocusEnvironment?
     @IBOutlet private weak var integrationBarItem: UIBarButtonItem! {
         didSet {
-            integrationBarItem.menu = UIMenu(options: .displayInline, children: [
-                UICommand(title: L.Menu.integrationHelp, action: #selector(gotoAppIntegrationHelp)),
-                UICommand(title: L.Menu.integrationBookmark, action: #selector(onCopyJSBookmark))
-            ])
+            integrationBarItem.menu = buildIntegrationMenu()
         }
     }
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
@@ -89,10 +93,32 @@ class ConversationDetailViewController:
     @IBOutlet private weak var replySelectionButton: UIButton!
     private var shouldUpdateReplySelectionForNewMessage = false
     private var inputReplyItems: [Message]?
-    private lazy var needsReplySelectionUpdate = DelayAction(Action(target: self, selector: #selector(updateReplyForSelectionChange)))
+
+    @IBOutlet private weak var tellMoreButton: UIButton!
+    private lazy var needsItemSelectionUpdate = DelayAction(Action(target: self, selector: #selector(updateItemSelectionChange)))
 }
 
 extension ConversationDetailViewController {
+    #if targetEnvironment(macCatalyst)
+    func additionalToolbarItems() -> [NSToolbarItem] {
+        [
+            NSMenuToolbarItem(itemIdentifier: .chatIntegration)
+                .menu(buildIntegrationMenu())
+                .priority(.low)
+                .config(with: integrationBarItem),
+            NSToolbarItem(itemIdentifier: .chatSetting)
+                .config(with: settingButtonItem),
+        ]
+    }
+    #endif
+
+    func buildIntegrationMenu() -> UIMenu {
+        UIMenu(title: "Integration", children: [
+            UICommand(title: L.Menu.integrationHelp, action: #selector(gotoAppIntegrationHelp)),
+            UICommand(title: L.Menu.integrationBookmark, action: #selector(onCopyJSBookmark))
+        ])
+    }
+
     func conversation(_ item: Conversation, useState: Conversation.UsableState) {
         if useState == .forceSetup {
             if !children.contains(where: { $0 is ConversationSettingViewController }) {
@@ -137,6 +163,10 @@ extension ConversationDetailViewController {
     @objc func handleLeftArrow() {
         RootViewController.of(view)?.focusSidebar()
     }
+
+    @IBAction func focusInputBox(_ sender: Any) {
+        inputTextView.becomeFirstResponder()
+    }
 }
 
 // MARK: - Setting
@@ -177,6 +207,13 @@ extension ConversationDetailViewController {
         let urlPart = comp.url?.absoluteString ?? ""
         UIPasteboard.general.string = "javascript:a=\"\(urlPart)\"+encodeURIComponent(window.getSelection().toString());window.location.href=a"
     }
+
+    func conversationListStateChanged(_ item: Conversation) {
+        if navigationItem.title != item.title {
+            navigationItem.title = item.title
+            view.window?.windowScene?.title = item.title
+        }
+    }
 }
 
 // MARK: -
@@ -186,7 +223,26 @@ extension ConversationDetailViewController {
         if let cell = tableView.cellForRow(at: indexPath) {
             UIFocusSystem.focusSystem(for: tableView)?.requestFocusUpdate(to: cell)
         }
-        needsReplySelectionUpdate.set()
+        needsItemSelectionUpdate.set()
+    }
+
+    @objc func updateItemSelectionChange() {
+        let selectedItems = listDataSource.selectedItems
+        let noItem = selectedItems.isEmpty
+        if inputActionContainer.isHidden != noItem {
+            inputActionContainer.isHidden = noItem
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        if let firstItem = selectedItems.first, selectedItems.count == 1 {
+            tellMoreButton.isHidden = firstItem.role == .me
+        }
+
+        if replySelectionButton.isSelected {
+            inputReplyItems = listDataSource.selectedItems
+            updateForInputReplyItems()
+        }
     }
 
     @objc private func onSelectionLabelEdit(_ notice: Notification) {
@@ -230,17 +286,18 @@ extension ConversationDetailViewController {
 
 // MARK: - Reply Selection
 extension ConversationDetailViewController {
-    @objc func updateReplyForSelectionChange() {
-        let shouldHide = listDataSource.selectedItems.isEmpty
-        if inputActionContainer.isHidden != shouldHide {
-            inputActionContainer.isHidden = shouldHide
-            UIView.animate(withDuration: 0.2) {
-                self.view.layoutIfNeeded()
-            }
+
+    @IBAction func toggleLastReply(_ sender: Any) {
+        guard let lastIndexPath = listView.lastRowIndexPath,
+              let lastItem = listDataSource.item(at: lastIndexPath) else {
+            return
         }
-        if replySelectionButton.isSelected {
-            inputReplyItems = listDataSource.selectedItems
-            updateForInputReplyItems()
+        if inputReplyItems == [lastItem] {
+            onDismissReplySelection(self)
+        } else {
+            replySelectionButton.isSelected = true
+            listView.selectRow(at: lastIndexPath, animated: true, scrollPosition: .middle)
+            tableView(listView, didSelectRowAt: lastIndexPath)
         }
     }
 
@@ -274,6 +331,7 @@ extension ConversationDetailViewController {
         }
     }
 
+    /// 取消选中，再点取消列表选中
     @IBAction private func onDismissReplySelection(_ sender: Any) {
         if replySelectionButton.isSelected {
             replySelectionButton.isSelected = false
@@ -282,7 +340,18 @@ extension ConversationDetailViewController {
         } else {
             UIFocusSystem.focusSystem(for: self)?.requestFocusUpdate(to: listView)
             listView.deselectRows(false)
-            needsReplySelectionUpdate.set()
+            needsItemSelectionUpdate.set()
+        }
+    }
+
+    func deselectReplyItemForListChangeIfNeeded() {
+        guard let oldItems = inputReplyItems else { return }
+        let newReplyItems = oldItems.filter { listDataSource.indexPath(of: $0) != nil }
+        if newReplyItems == oldItems { return }
+        if newReplyItems.isEmpty {
+            onDismissReplySelection(self)
+        } else {
+            updateForInputReplyItems()
         }
     }
 }
@@ -342,6 +411,16 @@ extension ConversationDetailViewController: UITextViewDelegate {
         }
         inputTextView.text = nil
         setInputExpand(false, animate: true)
+    }
+
+    @IBAction private func onTellMore(_ sender: Any) {
+        tellMoreButton.isEnabled = false
+        if let item = listDataSource.selectedItems.first {
+            Message.continueMessage(item)
+        }
+        dispatch_after_seconds(1) { [weak self] in
+            self?.tellMoreButton.isEnabled = true
+        }
     }
 
     private func saveDraft() {

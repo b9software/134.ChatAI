@@ -76,16 +76,6 @@ class RootViewController: B9RootViewController {
         }
     }
 
-    override func restoreUserActivityState(_ activity: NSUserActivity) {
-        super.restoreUserActivityState(activity)
-        debugPrint(activity.activityType)
-        debugPrint(activity.userInfo)
-    }
-
-    override func updateUserActivityState(_ activity: NSUserActivity) {
-        super.updateUserActivityState(activity)
-    }
-
     private func adjustTraitCollection() {
         let size = view.bounds.size
 
@@ -151,13 +141,27 @@ class RootViewController: B9RootViewController {
 // MARK: - Actions
 extension RootViewController {
     override func responds(to aSelector: Selector!) -> Bool {
-        if aSelector == #selector(toolbarBack) {
+        if aSelector == #selector(goBack) {
             return navigator.viewControllers.count > 1
         }
-        return super.responds(to: aSelector)
+        if super.responds(to: aSelector) { return true }
+        if navigator?.visibleViewController?.responds(to: aSelector) == true { return true }
+        return false
     }
 
-    @IBAction func toolbarBack(_ sender: Any) {
+    override func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+        if super.responds(to: aSelector) {
+            return super.perform(aSelector, with: object)
+        }
+        if let detail = navigator?.visibleViewController,
+           detail.responds(to: aSelector) {
+            return detail.perform(aSelector, with: object)
+        }
+        assert(false)
+        return nil
+    }
+
+    @IBAction func goBack(_ sender: Any) {
         navigator.popViewController(animated: true)
     }
 

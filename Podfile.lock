@@ -3,9 +3,6 @@ PODS:
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
   - JSONModel (1.8.0)
-  - MBAppKit/Button (0.13.0):
-    - RFInitializing
-    - RFKit/RFGeometry
   - MBAppKit/Core (0.13.0):
     - RFAlpha/RFSwizzle
     - RFAPI (~> 2.1.1)
@@ -21,9 +18,6 @@ PODS:
     - RFInitializing
     - RFKit/Category/UIResponder
     - RFKit/RFGeometry
-  - MBAppKit/Worker (0.13.0):
-    - MBAppKit/Core
-    - RFInitializing
   - RFAlpha/RFBlockSelectorPerform (0.7.2)
   - RFAlpha/RFButton (0.7.2):
     - RFInitializing (>= 1.1)
@@ -218,9 +212,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - MBAppKit/Button (from `https://github.com/RFUI/MBAppKit.git`)
   - MBAppKit/Input (from `https://github.com/RFUI/MBAppKit.git`)
-  - MBAppKit/Worker (from `https://github.com/RFUI/MBAppKit.git`)
   - RFAlpha/RFBlockSelectorPerform
   - RFAlpha/RFButton
   - RFAlpha/RFCallbackControl
@@ -267,7 +259,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/RFUI/MBAppKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   MBAppKit: be40a93b7463347c6b12c11ccee79cfa89c18e64
   RFAlpha: b903f1725ccadee2226ab34fd0b9009cffa364d2
@@ -280,6 +272,6 @@ SPEC CHECKSUMS:
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: a490b7e0bf095328faeb1470c1acadc87c438718
+PODFILE CHECKSUM: 601c433933ba332b7023e475057adf7d54ee5f1b
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

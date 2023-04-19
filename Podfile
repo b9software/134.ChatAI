@@ -8,7 +8,7 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 # https://github.com/fermoya/CatalystPodSupport
 
 target 'B9ChatAI' do
-    platform :ios, '13.0'
+    platform :ios, '15.0'
 
     pod 'RFKit', :subspecs => [
         'Category/NSFileManager',
@@ -38,9 +38,7 @@ target 'B9ChatAI' do
     pod 'RFMessageManager', :subspecs => ['SVProgressHUD']
     pod 'RFSegue', :subspecs => ['Async']
     pod 'MBAppKit', :git => 'https://github.com/RFUI/MBAppKit.git', :subspecs => [
-        'Button',
         'Input',
-        'Worker',
     ]
 end
 

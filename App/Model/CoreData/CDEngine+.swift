@@ -55,9 +55,8 @@ extension CDEngine {
 
     func save(oaEngine: OAEngine) {
         modify { this, _ in
-            Do.try { // Encode won't fail
-                this.raw = try oaEngine.encode()
-            }
+            // Encode won't fail
+            this.raw = try? oaEngine.encode()
         }
     }
 }

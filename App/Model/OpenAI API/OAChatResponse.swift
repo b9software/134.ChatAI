@@ -7,8 +7,6 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name nesting
-
 enum OAChatRole: RawRepresentable, Codable, Equatable {
     case assistant
     case system

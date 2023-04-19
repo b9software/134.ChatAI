@@ -9,6 +9,10 @@
 "menu.new.window" = "Window";
 "menu.settingApp" = "Application Settings";
 "menu.settingChat" = "Conversation Settings";
+"menu.operation" = "Operation";
+"menu.navigationBack" = "Go Back";
+"menu.continueLastTopic" = "Continue Last Topic";
+"menu.focusInput" = "Focus on Input";
 "menu.help" = "Help";
 "menu.homePage" = "Project on GitHub";
 "menu.userManual" = "Online User Manual";

@@ -26,6 +26,14 @@ enum Current {
         }()
     }
 
+    static var defualts: UserDefaults {
+        Mocked.defualts ?? {
+            let instance = UserDefaults.standard
+            Mocked.defualts = instance
+            return instance
+        }()
+    }
+
     static var identifierForVendor: String {
         Mocked.identifierForVendor ?? {
             let uuid = (UIDevice.current.identifierForVendor ?? UUID()).uuidString
@@ -74,6 +82,7 @@ enum Current {
 enum Mocked {
     static var conversationManager: ConversationManager?
     static var database: DBManager?
+    static var defualts: UserDefaults?
     static var identifierForVendor: String?
     static var messageSender: MessageSender?
     static var osBridge: MacInterface?
@@ -82,6 +91,7 @@ enum Mocked {
     static func reset() {
         conversationManager = nil
         database = nil
+        defualts = nil
         identifierForVendor = nil
         messageSender = nil
         osBridge = nil

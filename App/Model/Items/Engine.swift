@@ -67,6 +67,10 @@ class Engine {
         }
     }
 
+    static func instanceOf(id: String) -> Engine? {
+        enginePool[id]
+    }
+
     static func create(engine: OAEngine, logHandler log: LogHandler?, completion: @escaping (Result<Engine, Error>) -> Void) -> Task<Void, Never> {
         typealias L10 = L.Engine.Create
         let cb = Do.safe(callback: completion)

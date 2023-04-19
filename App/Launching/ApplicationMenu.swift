@@ -18,10 +18,17 @@ enum ApplicationMenu {
         ]))
         var settingItem = builder.menu(for: .preferences) ?? UIMenu(title: L.Menu.setting, identifier: .preferences, options: .displayInline)
         settingItem = settingItem.replacingChildren([
-            UIKeyCommand(title: L.Menu.setting, action: #selector(ApplicationDelegate.gotoSetting), input: ",", modifierFlags: [.command]),
+            UIKeyCommand(title: L.Menu.settingApp, action: #selector(ApplicationDelegate.gotoSetting), input: ",", modifierFlags: [.command]),
             UIKeyCommand(title: L.Menu.settingChat, action: #selector(StandardActions.gotoChatSetting), input: ",", modifierFlags: [.command, .shift]),
         ])
-        builder.replace(menu: .help, with: UIMenu(title: "Help", children: [
+        builder.insertSibling(UIMenu(title: L.Menu.operation, children: [
+            UIMenu(options: .displayInline, children: [
+                UIKeyCommand(title: L.Menu.navigationBack, action: #selector(StandardActions.goBack), input: "[", modifierFlags: [.command])
+            ]),
+            UIKeyCommand(title: L.Menu.continueLastTopic, action: #selector(ConversationDetailViewController.toggleLastReply), input: "K", modifierFlags: [.command]),
+            UIKeyCommand(title: L.Menu.focusInput, action: #selector(ConversationDetailViewController.focusInputBox), input: "L", modifierFlags: [.command]),
+        ]), afterMenu: .edit)
+        builder.replace(menu: .help, with: UIMenu(title: L.Menu.help, children: [
             UICommand(title: L.Menu.homePage, action: #selector(ApplicationDelegate.showHelp)),
             UICommand(title: L.Menu.userManual, action: #selector(ApplicationDelegate.showUserManual)),
         ]))
@@ -50,6 +57,7 @@ private extension ApplicationDelegate {
 }
 
 final class StandardActions {
+    @IBAction func goBack(_ sender: Any?) {}
     @IBAction func newConversation(_ sender: Any?) {}
     @IBAction func gotoChatSetting(_ sender: Any?) {}
 

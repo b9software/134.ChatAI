@@ -6,6 +6,7 @@
 //
 
 @testable import B9ChatAI
+import CoreData
 import XCTest
 
 class ConversationManagerTests:

@@ -142,6 +142,7 @@ extension ConversationSettingViewController {
                     cfgChat: cfgChat,
                     cfgEngine: cfgEngine
                 )
+                Current.defualts.lastEngine = engine.id
                 Task { @MainActor in
                     RootViewController.of(view)?.userActivity?.addUserInfoEntries(from: ["id": item.id])
                     dismiss(animate: true)

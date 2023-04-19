@@ -7,7 +7,7 @@
 
 import CoreData
 
-// swiftlint:disable extension_access_modifier missing_docs identifier_name
+// swiftlint:disable extension_access_modifier missing_docs
 
 @objc(CDEngine)
 public class CDEngine: NSManagedObject {
@@ -94,7 +94,7 @@ public class CDMessage: NSManagedObject {
     @NSManaged public var uid: UUID!
     /// 上下文创建时间，用于列表排序
     @NSManaged public var time: Date!
-    @NSManaged public var by: String!
+    @NSManaged public var by: String!  // swiftlint:disable:this identifier_name
 
     /// 类型
     @NSManaged public var type: Int16
@@ -137,3 +137,5 @@ public class CDMessage: NSManagedObject {
     @objc(removeChild:)
     @NSManaged public func removeFromChild(_ values: NSSet)
 }
+
+// swiftlint:enable extension_access_modifier missing_docs

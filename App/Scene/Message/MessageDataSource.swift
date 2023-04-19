@@ -31,6 +31,9 @@ class MessageDataSource:
         tableView.dataSource = self
     }
 
+    /// 列表中的某一对象可能被移除
+    var itemMayRemove: ((MessageDataSource) -> Void)?
+
     // MARK: - Loading
 
     private func refresh() {
@@ -124,6 +127,7 @@ class MessageDataSource:
     }
 
     func applyFetched(items: [[Message]]) {
+        if listItems == items { return }
         if listItems.isEmpty || items.isEmpty {
             resetList(items: items)
             return
@@ -155,6 +159,7 @@ class MessageDataSource:
     }
 
     private func applySectionChange(section: Int, oldItems: [Message], newItems: [Message]) {
+        AppLog().debug("DS> Apply Section\(section) Change")
         listItems[section] = newItems
         heightCache[section] = [CGFloat?](repeating: nil, count: newItems.count)
         view.reloadSections(IndexSet(integer: section), with: .fade)
@@ -176,6 +181,7 @@ class MessageDataSource:
                 listItems = []
                 heightCache = []
                 view.deleteSections(IndexSet(0..<count), with: .fade)
+                itemMayRemove?(self)
             }
             return
         }
@@ -184,6 +190,7 @@ class MessageDataSource:
             [CGFloat?](repeating: nil, count: sectionItems.count)
         }
         view.reloadData()
+        itemMayRemove?(self)
         dispatch_after_seconds(0) { [weak self] in
             self?.view?.scrollToLastRow(animated: false)
         }

@@ -54,6 +54,8 @@ public func LiveCount(check type: AnyClass, limit: Int, delay: TimeInterval = -1
     #endif
 }
 
+// swiftlint:enable identifier_name
+
 /**
  使用、实现极简的内存泄漏监测预防
 

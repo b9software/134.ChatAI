@@ -24,15 +24,15 @@ class SettingViewController: UIViewController, StoryboardCreation {
 
     @IBOutlet private weak var themeButton: UIButton!
     @IBAction private func onThemeSystem(_ sender: UICommand) {
-        AppUserDefaultsShared().preferredTheme = 0
+        Current.defualts.preferredTheme = 0
         Current.osBridge.theme = 0
     }
     @IBAction private func onThemeLight(_ sender: UICommand) {
-        AppUserDefaultsShared().preferredTheme = 1
+        Current.defualts.preferredTheme = 1
         Current.osBridge.theme = 1
     }
     @IBAction private func onThemeDark(_ sender: UICommand) {
-        AppUserDefaultsShared().preferredTheme = 2
+        Current.defualts.preferredTheme = 2
         Current.osBridge.theme = 2
     }
 }

@@ -108,7 +108,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-
     func scene(_ scene: UIScene, willContinueUserActivityWithType type: String) {
         AppLog().debug("Scene> UserActivity will continue: \(type).")
     }

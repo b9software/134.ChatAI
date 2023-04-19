@@ -46,7 +46,7 @@ final class MBOptionSwitch: UISwitch {
         guard let optionKey = optionKey else {
             return
         }
-        let defaults = AppUserDefaultsShared()
+        let defaults = Current.defualts
         var value = defaults.value(forKey: optionKey)
         if value != nil, !(value is NSNumber) {
             AppLog().error("Except \(optionKey) to be a NSNumber, got \(value as Any).")
@@ -57,7 +57,7 @@ final class MBOptionSwitch: UISwitch {
     }
 
     @objc private func onValueChanged() {
-        let defaults = AppUserDefaultsShared()
+        let defaults = Current.defualts
         if let key = optionKey {
             defaults.setValue((reversed ? !isOn : isOn), forKey: key)
             defaults.synchronize()

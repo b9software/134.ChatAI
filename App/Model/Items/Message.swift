@@ -149,6 +149,12 @@ extension Message {
         }
     }
 
+    static func continueMessage(_ message: Message) {
+        Current.database.save { ctx in
+            message.entity.appendContinue(context: ctx)
+        }
+    }
+
     var replySelectionTitle: String {
         (cachedText ?? "Selected Message")
             .trimming(toLength: 20)
@@ -291,7 +297,6 @@ extension Message: Hashable, ListItem, CustomDebugStringConvertible {
 // MARK: - 状态通知
 
 extension Message {
-
 }
 
 protocol MessageUpdating {

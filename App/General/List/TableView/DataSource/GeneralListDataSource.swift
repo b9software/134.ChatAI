@@ -177,8 +177,7 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
         }
         if let config = cellConfig {
             config(cell, item, indexPath)
-        }
-        else if var cell = cell as? AnyHasItem {
+        } else if var cell = cell as? AnyHasItem {
             cell.setItem(item)
         }
         if let selectableCell = cell as? CellSelectable {

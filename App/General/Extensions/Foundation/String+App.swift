@@ -41,7 +41,7 @@ extension String {
         return ""
     }
 
-    //! REF: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/TextLayout/Tasks/CountLines.html
+    // !REF: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/TextLayout/Tasks/CountLines.html
     var numberOfHardLineBreaks: Int {
         var numberOfLines = 0
         var index = startIndex

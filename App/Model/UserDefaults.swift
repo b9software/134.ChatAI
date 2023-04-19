@@ -59,6 +59,12 @@ extension UserDefaults {
         get { bool(forKey: #function) }
         set { set(newValue, forKey: #function) }
     }
+
+    /// 最近用户选择的引擎 ID
+    var lastEngine: StringID? {
+        get { string(forKey: #function) }
+        set { set(newValue, forKey: #function) }
+    }
 }
 
 // MARK: - 存储类型支持
