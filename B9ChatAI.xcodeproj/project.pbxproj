@@ -123,6 +123,7 @@
 		D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308C20CACB33002030C4 /* NSPointArray+App.swift */; };
 		D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */; };
 		D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C46DD29F1338200BEFAE8 /* MBButton.swift */; };
+		D58C46E029F171C100BEFAE8 /* B9Debug in Frameworks */ = {isa = PBXBuildFile; productRef = D58C46DF29F171C100BEFAE8 /* B9Debug */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */; };
 		D5998CED29EC29A400E71167 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5998CEC29EC29A400E71167 /* UserActivity.swift */; };
 		D59E6E0229EC4C6200B9E0BB /* SchemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59E6E0129EC4C6200B9E0BB /* SchemeDelegate.swift */; };
@@ -612,6 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C461D9A1836CC666DB28163 /* libPods-UnitTests.a in Frameworks */,
+				D58C46E029F171C100BEFAE8 /* B9Debug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,7 +967,6 @@
 			isa = PBXGroup;
 			children = (
 				D5EE52282043F7B9009148B3 /* Controls */,
-				D5BE295E2509CB9C00A9AA2F /* Data Flow */,
 				D5EE51942043F5F3009148B3 /* Effect */,
 				D5EE50DF2043DAA1009148B3 /* Extensions */,
 				D564CF39196D98E10087B179 /* Form */,
@@ -1287,13 +1288,6 @@
 			path = GPX;
 			sourceTree = "<group>";
 		};
-		D5BE295E2509CB9C00A9AA2F /* Data Flow */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Data Flow";
-			sourceTree = "<group>";
-		};
 		D5E8FA6F29CF088C00C3D753 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1579,6 +1573,7 @@
 			);
 			name = UnitTests;
 			packageProductDependencies = (
+				D58C46DF29F171C100BEFAE8 /* B9Debug */,
 			);
 			productName = UnitTests;
 			productReference = D5E8FA6E29CF088C00C3D753 /* UnitTests.xctest */;
@@ -1608,7 +1603,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = B9Software;
 				TargetAttributes = {
 					D59E6DFE29EC4C6200B9E0BB = {
@@ -2800,6 +2795,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D57FBB6F279D51BA003A0533 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		D58C46DF29F171C100BEFAE8 /* B9Debug */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = B9Debug;
 		};
 		D59E6E1529EC559600B9E0BB /* B9Action */ = {
 			isa = XCSwiftPackageProductDependency;

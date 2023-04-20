@@ -54,6 +54,16 @@ extension UserDefaults {
         set { set(newValue, forKey: #function) }
     }
 
+    var preferredContentSize: UIContentSizeCategory {
+        get {
+            guard let raw = string(forKey: #function) else {
+                return .unspecified
+            }
+            return UIContentSizeCategory(rawValue: raw)
+        }
+        set { set(newValue.rawValue, forKey: #function) }
+    }
+
     /// 双击选中文本后自动复制文本到剪贴板
     var chatSendClipboardWhenLabelEdit: Bool {
         get { bool(forKey: #function) }

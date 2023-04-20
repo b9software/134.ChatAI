@@ -1,6 +1,8 @@
-
 /* Class = "UILabel"; text = "Conversation ID"; ObjectID = "0N8-aw-dmw"; */
 "0N8-aw-dmw.text" = "Conversation ID";
+
+/* Class = "UILabel"; text = "Command"; ObjectID = "9Lh-Uy-Zak"; */
+"9Lh-Uy-Zak.text" = "Command";
 
 /* Class = "UIButton"; configuration.title = "Call"; ObjectID = "87t-lF-XrF"; */
 "87t-lF-XrF.configuration.title" = "Call";
@@ -8,23 +10,11 @@
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "87t-lF-XrF"; */
 "87t-lF-XrF.normalTitle" = "Button";
 
-/* Class = "UILabel"; text = "Command"; ObjectID = "9Lh-Uy-Zak"; */
-"9Lh-Uy-Zak.text" = "Command";
-
 /* Class = "UIButton"; configuration.title = "Copy"; ObjectID = "MER-dK-OM9"; */
 "MER-dK-OM9.configuration.title" = "Copy";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "MER-dK-OM9"; */
 "MER-dK-OM9.normalTitle" = "Button";
-
-/* Class = "UILabel"; text = "Send content"; ObjectID = "X3d-Ea-syD"; */
-"X3d-Ea-syD.text" = "Send content";
-
-/* Class = "UIButton"; configuration.title = "Copy"; ObjectID = "ZBn-3i-q4E"; */
-"ZBn-3i-q4E.configuration.title" = "Copy";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZBn-3i-q4E"; */
-"ZBn-3i-q4E.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Query feedback todo"; ObjectID = "rI4-94-0aG"; */
 "rI4-94-0aG.text" = "Query feedback todo";
@@ -37,3 +27,13 @@
 
 /* Class = "UILabel"; text = "JS Bookmark"; ObjectID = "vx0-G0-VgY"; */
 "vx0-G0-VgY.text" = "JS Bookmark";
+
+/* Class = "UILabel"; text = "Send content"; ObjectID = "X3d-Ea-syD"; */
+"X3d-Ea-syD.text" = "Send content";
+
+/* Class = "UIButton"; configuration.title = "Copy"; ObjectID = "ZBn-3i-q4E"; */
+"ZBn-3i-q4E.configuration.title" = "Copy";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZBn-3i-q4E"; */
+"ZBn-3i-q4E.normalTitle" = "Button";
+

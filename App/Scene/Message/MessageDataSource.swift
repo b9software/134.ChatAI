@@ -139,7 +139,7 @@ class MessageDataSource:
                 AppLog().debug("DS> Append new context.")
                 listItems.append(newLastSection)
                 heightCache.append([CGFloat?](repeating: nil, count: newLastSection.count))
-                view.insertSections(IndexSet(integer: listItems.count - 1), with: .fade)
+                view?.insertSections(IndexSet(integer: listItems.count - 1), with: .fade)
                 dispatch_after_seconds(0) { [weak self] in
                     self?.view?.scrollToLastRow(animated: false)
                 }
@@ -180,7 +180,7 @@ class MessageDataSource:
                 let count = listItems.count
                 listItems = []
                 heightCache = []
-                view.deleteSections(IndexSet(0..<count), with: .fade)
+                view?.deleteSections(IndexSet(0..<count), with: .fade)
                 itemMayRemove?(self)
             }
             return
@@ -189,7 +189,7 @@ class MessageDataSource:
         heightCache = items.map { sectionItems in
             [CGFloat?](repeating: nil, count: sectionItems.count)
         }
-        view.reloadData()
+        view?.reloadData()
         itemMayRemove?(self)
         dispatch_after_seconds(0) { [weak self] in
             self?.view?.scrollToLastRow(animated: false)
@@ -224,8 +224,8 @@ class MessageDataSource:
                 }
             return items.reversed()
         }
-        Task { @MainActor in
-            applyFetched(items: result)
+        dispatch_async_on_main { [weak self] in
+            self?.applyFetched(items: result)
         }
     }
 
@@ -310,7 +310,10 @@ class MessageDataSource:
     private var heightCache = [[CGFloat?]]()
 
     func cachedHeight(at indexPath: IndexPath) -> CGFloat? {
-        heightCache.element(at: indexPath.section)?.element(at: indexPath.row) ?? nil
+        guard let value = heightCache.element(at: indexPath.section)?.element(at: indexPath.row) else {
+            return nil
+        }
+        return value
     }
     private func setCachedHeight(indexPath: IndexPath, value: CGFloat?) {
         var sectionItems = heightCache.element(at: indexPath.section) ?? {

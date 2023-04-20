@@ -10,15 +10,28 @@ import UIKit
 class SettingViewController: UIViewController, StoryboardCreation {
     static var storyboardID: StoryboardID { .setting }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateUI()
     }
 
-    private func updateUI() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: UserDefaults.didChangeNotification, object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
+    }
+
+    @objc private func updateUI() {
         let selectIdx = Current.osBridge.theme
         for (idx, item) in themeButton.menu!.children.enumerated() {
             (item as? UICommand)?.state = selectIdx == idx ? .on : .off
+        }
+        if let idx = fontSizeCategoryMap.firstIndex(of: Current.defualts.preferredContentSize) {
+            fontSizeSlider.value = Float(idx)
         }
     }
 
@@ -34,5 +47,32 @@ class SettingViewController: UIViewController, StoryboardCreation {
     @IBAction private func onThemeDark(_ sender: UICommand) {
         Current.defualts.preferredTheme = 2
         Current.osBridge.theme = 2
+    }
+
+    @IBOutlet private weak var fontSizeSlider: UISlider! {
+        didSet {
+            fontSizeSlider.setThumbImage(Asset.GeneralUI.Control.tickSliderThumb.image, for: .normal)
+            fontSizeSlider.maximumValue = Float(fontSizeCategoryMap.count - 1)
+        }
+    }
+    @IBAction private func onFontSizeSliderChange(_ sender: Any) {
+        fontSizeSlider.value = fontSizeSlider.value.rounded()
+        let size = sizeCategory(value: Int(fontSizeSlider.value))
+        Current.defualts.preferredContentSize = size
+        NotificationCenter.default.post(name: UIContentSizeCategory.didChangeNotification, object: nil, userInfo: [UIContentSizeCategory.newValueUserInfoKey: size])
+    }
+    private let fontSizeCategoryMap: [UIContentSizeCategory] = [
+        .extraSmall,
+        .small,
+        .medium,
+        .large,
+        .extraLarge,
+        .extraExtraLarge,
+        .extraExtraExtraLarge,
+        .accessibilityMedium,
+        .accessibilityLarge,
+    ]
+    func sizeCategory(value: Int) -> UIContentSizeCategory {
+        return fontSizeCategoryMap.element(at: value) ?? .medium
     }
 }

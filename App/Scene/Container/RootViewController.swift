@@ -36,12 +36,14 @@ class RootViewController: B9RootViewController {
         restoreUserActivity()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustTraitCollection), name: UIContentSizeCategory.didChangeNotification, object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -76,7 +78,7 @@ class RootViewController: B9RootViewController {
         }
     }
 
-    private func adjustTraitCollection() {
+    @objc private func adjustTraitCollection() {
         let size = view.bounds.size
 
         #if targetEnvironment(macCatalyst)
@@ -88,19 +90,27 @@ class RootViewController: B9RootViewController {
         }
         #endif
 
-        guard let vc = children.first else { return }
+        guard children.isNotEmpty else { return }
 
-        let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
         let hClass = size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact
         let vClass = size.height > 500 ? UIUserInterfaceSizeClass.regular : .compact
-        if currentCollection.horizontalSizeClass == hClass,
-           currentCollection.verticalSizeClass == vClass {
-            return
+        let sizeCategory = Current.defualts.preferredContentSize
+
+        for vc in children {
+            let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
+            if currentCollection.horizontalSizeClass == hClass,
+               currentCollection.verticalSizeClass == vClass,
+               currentCollection.preferredContentSizeCategory == sizeCategory {
+                return
+            }
+            let collection = UITraitCollection(traitsFrom: [
+                currentCollection,
+                .init(horizontalSizeClass: hClass),
+                .init(verticalSizeClass: vClass),
+                .init(preferredContentSizeCategory: sizeCategory),
+            ])
+            setOverrideTraitCollection(collection, forChild: vc)
         }
-        let horizontal = UITraitCollection(horizontalSizeClass: hClass)
-        let vertical = UITraitCollection(verticalSizeClass: vClass)
-        let collection = UITraitCollection(traitsFrom: [currentCollection, horizontal, vertical])
-        setOverrideTraitCollection(collection, forChild: vc)
     }
 
     func focusSidebar() {

@@ -47,6 +47,7 @@ internal enum Asset {
       internal static let buttonRound44Frame = ImageAsset(name: "button_round44_frame")
       internal static let checkboxOff = ImageAsset(name: "checkbox_off")
       internal static let checkboxOn = ImageAsset(name: "checkbox_on")
+      internal static let tickSliderThumb = ImageAsset(name: "tick_slider_thumb")
     }
     internal enum Input {
       internal static let inputBox = ImageAsset(name: "input_box")

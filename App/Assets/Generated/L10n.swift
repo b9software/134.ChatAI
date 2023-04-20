@@ -24,8 +24,8 @@ internal enum L10n {
       /// 
       /// However, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.
       internal static let privacySort = L10n.tr("Localizable", "app.privacy-sort", fallback: "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.")
-      /// https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd
-      internal static let userManual = L10n.tr("Localizable", "app.userManual", fallback: "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd")
+      /// https://github.com/b9software/B9ChatAI/wiki/
+      internal static let userManual = L10n.tr("Localizable", "app.userManual", fallback: "https://github.com/b9software/B9ChatAI/wiki/")
     }
     internal enum Chat {
       /// Archived

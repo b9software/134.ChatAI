@@ -32,14 +32,15 @@ brew install cocoapods
 
 接口
 
-* https://github.com/ading2210/poe-api
-* https://github.com/MacPaw/OpenAI 不支持流
-* https://github.com/dylanshine/openai-kit
-* https://github.com/FuturraGroup/OpenAI
+* https://github.com/ading2210/poe-api POE 逆向接口，需要登录
+* https://github.com/MacPaw/OpenAI 接口库，不支持流
+* https://github.com/dylanshine/openai-kit 接口库
+* https://github.com/FuturraGroup/OpenAI 接口库
 * https://console.anthropic.com/docs/api/reference
 * https://platform.openai.com/docs/models/model-endpoint-compatibility 模型支持列表
 * https://github.com/openai/tiktoken token 数量计算
 * https://platform.openai.com/tokenizer 在线计算
+* https://api2d.com/ API 售卖，没备案？
 
 应用
 

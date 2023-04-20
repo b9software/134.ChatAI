@@ -61,6 +61,9 @@
 /* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
 "setting-engine-section.text" = "AI 引擎";
 
+/* Class = "UILabel"; text = "Font Size"; ObjectID = "setting-font-size-title"; */
+"setting-font-size-title.text" = "文字大小";
+
 /* Class = "UILabel"; text = "You can select cell content by double-clicking"; ObjectID = "setting-key-tip-auto-copy"; */
 "setting-key-tip-auto-copy.text" = "双击会话中的文字可以直接选中";
 
@@ -81,9 +84,6 @@
 
 /* Class = "UICommand"; title = "System"; ObjectID = "setting-theme-system"; */
 "setting-theme-system.title" = "跟随系统";
-
-/* Class = "UILabel"; text = "Since I always use dark mode, I am unsure about which colors would be suitable for the light mode.\nI welcome any discussion on this topic on GitHub."; ObjectID = "setting-theme-tip"; */
-"setting-theme-tip.text" = "因为我只用深色 UI，浅色模式不确定用什么颜色\n欢迎到 GitHub 上讨论下这个";
 
 /* Class = "UILabel"; text = "Theme"; ObjectID = "setting-theme-title"; */
 "setting-theme-title.text" = "主题";

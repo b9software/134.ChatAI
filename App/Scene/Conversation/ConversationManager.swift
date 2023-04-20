@@ -34,7 +34,7 @@ class ConversationManager: NSObject {
             }
             forceUpdateList()
             hasArchived = archivedController.fetchedObjects?.isNotEmpty ?? false
-            hasDeleted = deletedController.fetchedObjects?.isNotEmpty ?? false
+            processDelete()
             AppLog().info("CM> Init status")
         }
     }
@@ -169,6 +169,27 @@ extension ConversationManager: NSFetchedResultsControllerDelegate {
             return
         }
         AppLog().debug("CM> deleted change \(type)")
+    }
+
+    private func processDelete() {
+        guard let allItems = deletedController.fetchedObjects else {
+            hasDeleted = false
+            return
+        }
+        let listItems = allItems.filter {
+            let distance = -($0.deleteTime?.timeIntervalSinceNow ?? 0)
+            AppLog().info("\($0.deleteTime!.localTime), dis \(distance)")
+            if distance > 30 * 24 * 3600 {
+                AppLog().warning("CM> Auto delete conversation at \($0.deleteTime?.localTime ?? "-")")
+                context.delete($0)
+                return false
+            }
+            return true
+        }
+        hasDeleted = listItems.isNotEmpty
+        if context.deletedObjects.isNotEmpty {
+            context.trySave()
+        }
     }
 }
 

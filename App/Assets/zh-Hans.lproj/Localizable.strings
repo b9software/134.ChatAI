@@ -1,8 +1,11 @@
 /* (No Comment) */
 "app.privacy-sort" = "B9ChatAI 不会收集您的任何信息，所有数据都在您的掌控下。\n\n但在应用使用时，会调用第三方服务，这些服务可能会收集您的信息。虽然调用哪些服务由您掌控，但仍请您注意信息保护，仔细阅读并理解相关服务的隐私政策，尤其要小心第三方提供的代理服务器。";
 
-/* 取消 */
-"Cancel" = "取消";
+/* (No Comment) */
+"app.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
+
+/* (No Comment) */
+"cancel" = "取消";
 
 /* (No Comment) */
 "chat.archived" = "归档";
@@ -39,6 +42,15 @@
 
 /* (No Comment) */
 "chat.setting.choiceModel" = "请选择一个模型";
+
+/* (No Comment) */
+"chat.setting.clearAlertConfirm" = "清空";
+
+/* (No Comment) */
+"chat.setting.clearAlertMessage" = "操作无法撤销";
+
+/* (No Comment) */
+"chat.setting.clearAlertTitle" = "清空对话中的全部消息？";
 
 /* (No Comment) */
 "chat.setting.engineMissingKey" = "引擎的 API 密钥缺失，请更新引擎或选择另一个";
@@ -95,15 +107,24 @@
 "engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
 
 /* (No Comment) */
-"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
+"guide.interCommunicationLink" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd#SwWidyUSqoIMocxiUlncBspOnwd";
 
 /* (No Comment) */
+"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
+
+/* Sidebar Menu */
 "menu.archive" = "归档";
+
+/* (No Comment) */
+"menu.continueLastTopic" = "从最下方消息继续";
 
 /* (No Comment) */
 "menu.delete" = "删除";
 
 /* (No Comment) */
+"menu.focusInput" = "切换到输入框";
+
+/* Conversation Menu */
 "menu.guide" = "指南";
 
 /* (No Comment) */
@@ -113,6 +134,15 @@
 "menu.homePage" = "GitHub 项目页";
 
 /* (No Comment) */
+"menu.integrationBookmark" = "拷贝浏览器书签";
+
+/* (No Comment) */
+"menu.integrationHelp" = "跨应用调起指南";
+
+/* (No Comment) */
+"menu.navigationBack" = "返回";
+
+/* In Application Main Menu */
 "menu.new" = "新建";
 
 /* (No Comment) */
@@ -125,11 +155,15 @@
 "menu.new.window" = "窗口";
 
 /* (No Comment) */
+"menu.operation" = "操作";
+
+/* (No Comment) */
 "menu.retry" = "重试";
 
 /* (No Comment) */
 "menu.setting" = "设置";
 
+/* (No Comment) */
 "menu.settingApp" = "应用设置";
 
 /* (No Comment) */

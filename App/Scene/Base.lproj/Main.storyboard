@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RootViewController">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RootViewController">
     <device id="ipad7_9" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -176,28 +176,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="JgR-8z-8hC">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Cqm-tt-9ji">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuh-92-nzM">
-                                            <rect key="frame" x="0.0" y="0.0" width="1" height="471"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="E6F-Lr-wlD">
-                                                <rect key="frame" x="0.0" y="0.0" width="1" height="471"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="regular"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="systemUltraThinMaterial"/>
-                            </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="T4P-sY-sny" customClass="ConversationListView" customModule="B9ChatAI" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24" width="200" height="274"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -242,6 +220,9 @@
                                                     <attributedString key="userComments">
                                                         <fragment content="&lt;Pass&gt;"/>
                                                     </attributedString>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -426,83 +407,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSN-Jw-O6q" customClass="BottomStickyScrollview" customModule="B9ChatAI" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="300" height="516"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZRu-4J-RF9">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aK7-zN-n3t">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVA-ya-c0U">
-                                                <rect key="frame" x="0.0" y="100" width="300" height="100"/>
-                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYJ-rJ-YNb">
-                                                <rect key="frame" x="0.0" y="200" width="300" height="100"/>
-                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vr6-Kt-y9N">
-                                                <rect key="frame" x="0.0" y="300" width="300" height="100"/>
-                                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="400" id="KQw-wy-B3l"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="0CA-H4-X6K"/>
-                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="top" secondItem="WSN-Jw-O6q" secondAttribute="top" id="UOp-Ys-bYy"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZRu-4J-RF9" secondAttribute="trailing" id="e6C-dY-1UJ"/>
-                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="width" secondItem="WSN-Jw-O6q" secondAttribute="width" id="gJ8-un-nQv"/>
-                                    <constraint firstItem="ZRu-4J-RF9" firstAttribute="leading" secondItem="WSN-Jw-O6q" secondAttribute="leading" id="gNB-2b-ZER"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZRu-4J-RF9" secondAttribute="bottom" id="ppF-Qm-9df"/>
-                                </constraints>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBc-M5-e4W">
-                                <rect key="frame" x="348" y="50" width="53" height="49"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="prE-jm-9k0">
+                                <rect key="frame" x="57" y="104" width="281" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                <segments>
+                                    <segment title="System"/>
+                                    <segment title="Second"/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                </segments>
                                 <connections>
-                                    <action selector="onAdd:" destination="yC0-8D-e4p" eventType="touchUpInside" id="3oZ-yU-Qk6"/>
+                                    <action selector="onSegmentChanged:" destination="yC0-8D-e4p" eventType="valueChanged" id="9Z1-mu-jKn"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha1-7H-yba">
-                                <rect key="frame" x="348" y="120" width="53" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="-"/>
-                                <connections>
-                                    <action selector="onRemove:" destination="yC0-8D-e4p" eventType="touchUpInside" id="61m-N3-f9Y"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iu3-lC-qcz" customClass="SelectableLabel" customModule="B9ChatAI" customModuleProvider="target">
-                                <rect key="frame" x="353" y="236" width="155" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OzK-ys-XEM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="OzK-ys-XEM" firstAttribute="bottom" secondItem="WSN-Jw-O6q" secondAttribute="bottom" constant="20" id="0js-3y-tVu"/>
-                            <constraint firstItem="WSN-Jw-O6q" firstAttribute="leading" secondItem="OzK-ys-XEM" secondAttribute="leading" constant="20" id="866-gA-eFB"/>
-                            <constraint firstItem="WSN-Jw-O6q" firstAttribute="top" secondItem="OzK-ys-XEM" secondAttribute="top" constant="20" id="PeI-MC-N7L"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playground" id="JWd-zy-7Jh"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="label" destination="iu3-lC-qcz" id="UpG-IU-e6C"/>
-                        <outlet property="topDistance" destination="UOp-Ys-bYy" id="zD5-hS-kuO"/>
+                        <outlet property="segment" destination="prE-jm-9k0" id="dUH-Td-8Hl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P8k-5S-dVe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -519,7 +444,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="csS-Bd-1Sq" kind="relationship" relationship="rootViewController" id="zPK-BV-PZL"/>
+                        <segue destination="csS-Bd-1Sq" kind="relationship" relationship="rootViewController" id="QUi-Ht-a7d"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ern-R7-bBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -708,21 +633,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

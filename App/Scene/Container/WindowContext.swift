@@ -33,14 +33,18 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    @IBOutlet private weak var topDistance: NSLayoutConstraint!
+    @IBOutlet private weak var segment: UISegmentedControl!
 
-    @IBAction private func onAdd(_ sender: Any) {
-        topDistance.constant += 100
+    @IBAction private func onSegmentChanged(_ sender: Any) {
+        let category: UIContentSizeCategory
+        switch segment.selectedSegmentIndex {
+        case 1:
+            category = .extraSmall
+        case 2:
+            category = .extraLarge
+        default:
+            category = .medium
+        }
+        NotificationCenter.default.post(name: UIContentSizeCategory.didChangeNotification, object: nil, userInfo: [UIContentSizeCategory.newValueUserInfoKey: category])
     }
-    @IBAction private func onRemove(_ sender: Any) {
-        topDistance.constant -= 50
-    }
-
-    @IBOutlet private weak var label: SelectableLabel!
 }

@@ -19,17 +19,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" id="ZAw-OE-8mb">
-                                <rect key="frame" x="-1" y="0.0" width="301" height="599"/>
+                                <rect key="frame" x="-1" y="0.0" width="300" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YP9-00-8lo">
-                                    <rect key="frame" x="0.0" y="0.0" width="301" height="599"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="598"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pmd-fw-3Cg">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="470"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="97" height="469"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c4y-hX-ihX">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="470"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="97" height="469"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <vibrancyEffect>
@@ -55,6 +55,9 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" name="Text/Thrid"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -76,20 +79,23 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3hW-8e-NzE" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="131" width="300" height="53"/>
+                                        <rect key="frame" x="0.0" y="131" width="300" height="53.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hW-8e-NzE" id="Pqy-zi-ruw">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-deleted-list-cell-name">
-                                                    <rect key="frame" x="26" y="16" width="248" height="21"/>
+                                                    <rect key="frame" x="26" y="16" width="248" height="21.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <attributedString key="userComments">
                                                         <fragment content="&lt;Pass&gt;"/>
                                                     </attributedString>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -135,17 +141,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" id="1zl-Kp-f44">
-                                <rect key="frame" x="-1" y="0.0" width="301" height="599"/>
+                                <rect key="frame" x="-1" y="0.0" width="301" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gU0-7P-qma">
-                                    <rect key="frame" x="0.0" y="0.0" width="301" height="599"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="301" height="598"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqU-th-FL1">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="470"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="97" height="469"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ALK-pf-TAi">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="470"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="97" height="469"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <vibrancyEffect>
@@ -175,6 +181,9 @@
                                                     <attributedString key="userComments">
                                                         <fragment content="&lt;Pass&gt;"/>
                                                     </attributedString>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -287,6 +296,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <outlet property="textView" destination="bh2-h6-tkH" id="6OV-bn-2WV"/>
                                                                     </connections>
@@ -294,7 +306,7 @@
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bh2-h6-tkH">
                                                                     <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                                     <color key="textColor" name="Text/First"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="rect" keyPath="RFTextContainerInset">
@@ -393,6 +405,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <outlet property="textView" destination="fir-BM-1hw" id="77d-xs-gpO"/>
                                                                     </connections>
@@ -400,7 +415,7 @@
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fir-BM-1hw">
                                                                     <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                                     <color key="textColor" name="Text/First"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="rect" keyPath="RFTextContainerInset">
@@ -549,6 +564,7 @@
                                                 <color key="highlightedColor" systemColor="systemOrangeColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideWhenNoContent" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dg-tP-dy1">
@@ -572,6 +588,7 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="boldWhenSelected" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="selection"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="onReplySelectionConfirm" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tQp-sm-1FV"/>
@@ -593,7 +610,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fWw-jB-35t">
                                                                         <rect key="frame" x="0.0" y="0.0" width="108" height="44"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4M-HR-tm3" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-input-continue-action" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="6" width="108" height="32"/>
                                                                                 <color key="backgroundColor" name="Button/StdBase"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -607,6 +624,7 @@
                                                                                 </state>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="action"/>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                                 <connections>
                                                                                     <action selector="onTellMore:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8oe-Wy-Agd"/>
@@ -765,7 +783,7 @@
                         <outlet property="replySelectionButton" destination="chat-input-reply-action" id="hsl-kr-Ikm"/>
                         <outlet property="settingButtonItem" destination="chat-vc-nav-item-setting" id="Csw-bp-0k8"/>
                         <outlet property="standardBar" destination="GU1-cN-pVo" id="MUs-Fh-SvQ"/>
-                        <outlet property="tellMoreButton" destination="u4M-HR-tm3" id="KrF-kG-sND"/>
+                        <outlet property="tellMoreButton" destination="chat-input-continue-action" id="KrF-kG-sND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -809,7 +827,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="336" height="870"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mBK-g0-w09">
-                                                                <rect key="frame" x="0.0" y="20" width="320" height="807"/>
+                                                                <rect key="frame" x="0.0" y="20" width="320" height="847"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gx6-mn-idz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -819,6 +837,9 @@
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                 <color key="textColor" name="Text/First"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -829,19 +850,25 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBm-4F-V9O">
-                                                                        <rect key="frame" x="0.0" y="58" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="58" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="46.5" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="46.5" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="The title display in list and window" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-tip">
-                                                                                <rect key="frame" x="61.5" y="24" width="258.5" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="The title display in list and window" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-tip">
+                                                                                <rect key="frame" x="61.5" y="34" width="258.5" height="16"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -849,12 +876,12 @@
                                                                             <constraint firstItem="chat-setting-name-section" firstAttribute="leading" secondItem="uBm-4F-V9O" secondAttribute="leading" id="Oo2-b8-Nsi"/>
                                                                             <constraint firstItem="chat-setting-name-tip" firstAttribute="leading" secondItem="chat-setting-name-section" secondAttribute="trailing" constant="15" id="PV0-Uc-urx"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-name-section" secondAttribute="bottom" id="TzO-AB-85z"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="We9-vP-RBs"/>
+                                                                            <constraint firstItem="chat-setting-name-section" firstAttribute="top" secondItem="uBm-4F-V9O" secondAttribute="top" constant="18" id="g8b-85-c0i"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-name-tip" secondAttribute="bottom" id="wCA-BB-3PU"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Optional" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-field" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="106" width="320" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="116" width="320" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="e05-hT-WVd"/>
                                                                         </constraints>
@@ -865,32 +892,38 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wv0-P0-v0V">
-                                                                        <rect key="frame" x="0.0" y="164" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="174" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-id-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="17" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="17" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Used for inter-application interaction, it must be distinct." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-id-tip">
-                                                                                <rect key="frame" x="32" y="24" width="288" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Used for inter-application interaction, it must be distinct." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-id-tip">
+                                                                                <rect key="frame" x="32" y="34" width="288" height="16"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-id-tip" secondAttribute="bottom" id="0vR-22-pER"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-id-section" secondAttribute="bottom" id="HkT-hW-wS8"/>
                                                                             <constraint firstItem="chat-setting-id-tip" firstAttribute="leading" secondItem="chat-setting-id-section" secondAttribute="trailing" constant="15" id="TSf-Lj-Ae1"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="i1R-6s-rgO"/>
+                                                                            <constraint firstItem="chat-setting-id-section" firstAttribute="top" secondItem="Wv0-P0-v0V" secondAttribute="top" constant="18" id="Ybk-Sb-UZW"/>
                                                                             <constraint firstAttribute="trailing" secondItem="chat-setting-id-tip" secondAttribute="trailing" id="noi-aZ-GYN"/>
                                                                             <constraint firstItem="chat-setting-id-section" firstAttribute="leading" secondItem="Wv0-P0-v0V" secondAttribute="leading" id="wJq-SJ-x3g"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLb-Ps-TeD">
-                                                                        <rect key="frame" x="0.0" y="212" width="320" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="232" width="320" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vw-0O-nh6" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -927,32 +960,35 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-wF-psV">
-                                                                        <rect key="frame" x="0.0" y="270" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="290" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-engine-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="54.5" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="54.5" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X8i-qc-QRI">
-                                                                                <rect key="frame" x="69.5" y="40" width="250.5" height="0.0"/>
+                                                                                <rect key="frame" x="69.5" y="50" width="250.5" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="40" id="45d-cc-AZe"/>
                                                                             <constraint firstItem="chat-setting-engine-section" firstAttribute="leading" secondItem="OtB-wF-psV" secondAttribute="leading" id="IZu-gZ-Vhk"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-engine-section" secondAttribute="bottom" id="Key-dT-ZhP"/>
                                                                             <constraint firstAttribute="trailing" secondItem="X8i-qc-QRI" secondAttribute="trailing" id="OYH-Mi-6mm"/>
                                                                             <constraint firstAttribute="bottom" secondItem="X8i-qc-QRI" secondAttribute="bottom" id="jhG-Dn-LhI"/>
                                                                             <constraint firstItem="X8i-qc-QRI" firstAttribute="leading" secondItem="chat-setting-engine-section" secondAttribute="trailing" constant="15" id="lCD-r1-c64"/>
+                                                                            <constraint firstItem="chat-setting-engine-section" firstAttribute="top" secondItem="OtB-wF-psV" secondAttribute="top" constant="18" id="yEj-2D-dcQ"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NtM-EA-399">
-                                                                        <rect key="frame" x="0.0" y="318" width="320" height="125"/>
+                                                                        <rect key="frame" x="0.0" y="348" width="320" height="125"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="unv-g8-uhe">
                                                                                 <rect key="frame" x="26" y="20" width="268" height="85"/>
@@ -962,6 +998,9 @@
                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                                         <color key="textColor" name="Text/Thrid"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-engine-manage-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
                                                                                         <rect key="frame" x="59.5" y="50.5" width="149.5" height="34.5"/>
@@ -990,38 +1029,45 @@
                                                                             <constraint firstItem="unv-g8-uhe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NtM-EA-399" secondAttribute="leading" id="y7V-dd-as0"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-sb-L64" customClass="AutoListView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="451" width="320" height="150"/>
+                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-sb-L64" customClass="AutoListView" customModule="B9ChatAI" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="481" width="320" height="150"/>
                                                                         <color key="backgroundColor" name="Background/Box"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="175" id="f58-rP-dah"/>
                                                                         </constraints>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Srp-Io-HIh" customClass="GeneralListCell" customModule="B9ChatAI" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="50" width="320" height="49"/>
+                                                                                <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Srp-Io-HIh" id="ep3-7f-Qb4">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRq-5A-xTA" customClass="EngineCellView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                                            <rect key="frame" x="15" y="0.0" width="257" height="49"/>
+                                                                                            <rect key="frame" x="15" y="0.0" width="257" height="50"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-engine-type">
-                                                                                                    <rect key="frame" x="0.0" y="15" width="39.5" height="19.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="15" width="39.5" height="20"/>
                                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                                                     <color key="textColor" name="Text/Second"/>
                                                                                                     <nil key="highlightedColor"/>
+                                                                                                    <userDefinedRuntimeAttributes>
+                                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                                    </userDefinedRuntimeAttributes>
                                                                                                 </label>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-engine-name">
                                                                                                     <rect key="frame" x="49.5" y="17.5" width="207.5" height="16"/>
                                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                                     <color key="textColor" name="Text/Thrid"/>
                                                                                                     <nil key="highlightedColor"/>
+                                                                                                    <userDefinedRuntimeAttributes>
+                                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                                    </userDefinedRuntimeAttributes>
                                                                                                 </label>
                                                                                             </subviews>
                                                                                             <constraints>
                                                                                                 <constraint firstItem="chat-setting-engine-name" firstAttribute="firstBaseline" secondItem="chat-setting-engine-type" secondAttribute="firstBaseline" id="1b5-kN-gux"/>
+                                                                                                <constraint firstItem="chat-setting-engine-type" firstAttribute="top" secondItem="kRq-5A-xTA" secondAttribute="top" constant="15" id="D8U-V2-iwz"/>
                                                                                                 <constraint firstItem="chat-setting-engine-type" firstAttribute="leading" secondItem="kRq-5A-xTA" secondAttribute="leading" id="XP2-qY-3Kd"/>
                                                                                                 <constraint firstItem="chat-setting-engine-type" firstAttribute="centerY" secondItem="kRq-5A-xTA" secondAttribute="centerY" id="ePv-LO-ThC"/>
                                                                                                 <constraint firstItem="chat-setting-engine-name" firstAttribute="leading" secondItem="chat-setting-engine-type" secondAttribute="trailing" constant="10" id="v63-0j-vjJ"/>
@@ -1033,7 +1079,7 @@
                                                                                             </connections>
                                                                                         </view>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="checkbox_off" highlightedImage="checkbox_on" translatesAutoresizingMaskIntoConstraints="NO" id="diY-Yd-R3Q" customClass="MBHighlightTintImageView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                                            <rect key="frame" x="287" y="15.5" width="18" height="18"/>
+                                                                                            <rect key="frame" x="287" y="16" width="18" height="18"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="normalTintColor">
                                                                                                     <color key="value" name="Text/Thrid"/>
@@ -1068,16 +1114,19 @@
                                                                         </connections>
                                                                     </tableView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-RC-kBL">
-                                                                        <rect key="frame" x="0.0" y="609" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="639" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-model-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="49.5" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="49.5" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v9i-vt-fHn">
-                                                                                <rect key="frame" x="64.5" y="40" width="255.5" height="0.0"/>
+                                                                                <rect key="frame" x="64.5" y="50" width="255.5" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1087,13 +1136,13 @@
                                                                             <constraint firstItem="v9i-vt-fHn" firstAttribute="leading" secondItem="chat-setting-model-section" secondAttribute="trailing" constant="15" id="FNm-nn-Ewr"/>
                                                                             <constraint firstItem="chat-setting-model-section" firstAttribute="leading" secondItem="Vwh-RC-kBL" secondAttribute="leading" id="HdO-Xf-kqo"/>
                                                                             <constraint firstAttribute="trailing" secondItem="v9i-vt-fHn" secondAttribute="trailing" id="I3N-Ta-8cJ"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="UVG-bV-ccU"/>
+                                                                            <constraint firstItem="chat-setting-model-section" firstAttribute="top" secondItem="Vwh-RC-kBL" secondAttribute="top" constant="18" id="gy5-RK-DZo"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-model-section" secondAttribute="bottom" id="nXK-v9-aIt"/>
                                                                             <constraint firstAttribute="bottom" secondItem="v9i-vt-fHn" secondAttribute="bottom" id="vsF-JV-Npx"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tX-KF-P7l" customClass="ListStateView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="653" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="693" width="320" height="40"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="STATE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-model-fetch-state">
                                                                                 <rect key="frame" x="20" y="20" width="280" height="0.0"/>
@@ -1113,38 +1162,42 @@
                                                                             <outlet property="statesLabel" destination="chat-setting-model-fetch-state" id="i7n-Sb-DqJ"/>
                                                                         </connections>
                                                                     </view>
-                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rq8-Va-IcT" customClass="AutoListView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="657" width="320" height="150"/>
+                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="150" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rq8-Va-IcT" customClass="AutoListView" customModule="B9ChatAI" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="697" width="320" height="150"/>
                                                                         <color key="backgroundColor" name="Background/Box"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="175" id="ZwL-d6-0fm"/>
                                                                         </constraints>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="AeH-JM-yP9" customClass="ModelNameSelectionCell" customModule="B9ChatAI" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="50" width="320" height="49"/>
+                                                                                <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AeH-JM-yP9" id="emT-Hb-qeH">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndu-QT-UVP">
-                                                                                            <rect key="frame" x="15" y="0.0" width="257" height="49"/>
+                                                                                            <rect key="frame" x="15" y="0.0" width="257" height="50"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-model-cell-name">
-                                                                                                    <rect key="frame" x="0.0" y="15" width="257" height="19.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="15" width="257" height="20"/>
                                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                                                     <color key="textColor" name="Text/Second"/>
                                                                                                     <nil key="highlightedColor"/>
+                                                                                                    <userDefinedRuntimeAttributes>
+                                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                                    </userDefinedRuntimeAttributes>
                                                                                                 </label>
                                                                                             </subviews>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="trailing" secondItem="chat-setting-model-cell-name" secondAttribute="trailing" id="3Jl-Aq-acp"/>
+                                                                                                <constraint firstItem="chat-setting-model-cell-name" firstAttribute="top" secondItem="Ndu-QT-UVP" secondAttribute="top" constant="15" id="YGa-BD-J6N"/>
                                                                                                 <constraint firstItem="chat-setting-model-cell-name" firstAttribute="centerY" secondItem="Ndu-QT-UVP" secondAttribute="centerY" id="aoc-F4-Ibc"/>
                                                                                                 <constraint firstItem="chat-setting-model-cell-name" firstAttribute="leading" secondItem="Ndu-QT-UVP" secondAttribute="leading" id="oCA-WI-mQ8"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="checkbox_off" highlightedImage="checkbox_on" translatesAutoresizingMaskIntoConstraints="NO" id="xeD-Rb-a0u" customClass="MBHighlightTintImageView" customModule="B9ChatAI" customModuleProvider="target">
-                                                                                            <rect key="frame" x="287" y="15.5" width="18" height="18"/>
+                                                                                            <rect key="frame" x="287" y="16" width="18" height="18"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="normalTintColor">
                                                                                                     <color key="value" name="Text/Thrid"/>
@@ -1216,7 +1269,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="336" height="870"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qbA-2D-Xup">
-                                                                <rect key="frame" x="0.0" y="20" width="320" height="597"/>
+                                                                <rect key="frame" x="0.0" y="20" width="320" height="627"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JE2-gD-iMS">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -1226,6 +1279,9 @@
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                 <color key="textColor" name="Text/First"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -1236,19 +1292,25 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atg-f3-khN" userLabel="System">
-                                                                        <rect key="frame" x="0.0" y="58" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="58" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-system-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="60" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="60" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Helps set the behavior of the assistant." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-system-tip">
-                                                                                <rect key="frame" x="75" y="24" width="245" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Helps set the behavior of the assistant." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-system-tip">
+                                                                                <rect key="frame" x="75" y="34" width="245" height="16"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -1256,12 +1318,12 @@
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-system-section" secondAttribute="bottom" id="FEL-70-ooS"/>
                                                                             <constraint firstAttribute="trailing" secondItem="chat-setting-system-tip" secondAttribute="trailing" id="PTj-We-kSa"/>
                                                                             <constraint firstItem="chat-setting-system-tip" firstAttribute="leading" secondItem="chat-setting-system-section" secondAttribute="trailing" constant="15" id="VpP-eM-dPo"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="Vre-JU-upB"/>
+                                                                            <constraint firstItem="chat-setting-system-section" firstAttribute="top" secondItem="Atg-f3-khN" secondAttribute="top" constant="18" id="pOA-kB-QqH"/>
                                                                             <constraint firstItem="chat-setting-system-section" firstAttribute="leading" secondItem="Atg-f3-khN" secondAttribute="leading" id="yqu-VB-dei"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oax-Js-eZK">
-                                                                        <rect key="frame" x="0.0" y="106" width="320" height="200"/>
+                                                                        <rect key="frame" x="0.0" y="116" width="320" height="200"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input_box" translatesAutoresizingMaskIntoConstraints="NO" id="Q7N-ib-KBU">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -1296,32 +1358,38 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xt8-Dh-ztY" userLabel="Temperature">
-                                                                        <rect key="frame" x="0.0" y="314" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="324" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-temerature-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="102" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="102" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="How much variation in output." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-temperature-tip">
-                                                                                <rect key="frame" x="117" y="24" width="203" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="How much variation in output." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-temperature-tip">
+                                                                                <rect key="frame" x="117" y="34" width="203" height="16"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-temerature-section" secondAttribute="bottom" id="QXa-4A-aPN"/>
                                                                             <constraint firstItem="chat-setting-temerature-section" firstAttribute="leading" secondItem="Xt8-Dh-ztY" secondAttribute="leading" id="VSY-Ix-6XM"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="h7K-ou-Hpv"/>
+                                                                            <constraint firstItem="chat-setting-temerature-section" firstAttribute="top" secondItem="Xt8-Dh-ztY" secondAttribute="top" constant="18" id="cga-3V-STG"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-temperature-tip" secondAttribute="bottom" id="hJr-UC-V6x"/>
                                                                             <constraint firstAttribute="trailing" secondItem="chat-setting-temperature-tip" secondAttribute="trailing" id="min-VD-mUE"/>
                                                                             <constraint firstItem="chat-setting-temperature-tip" firstAttribute="leading" secondItem="chat-setting-temerature-section" secondAttribute="trailing" constant="15" id="z10-f4-UR4"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNP-VH-Er8">
-                                                                        <rect key="frame" x="0.0" y="362" width="320" height="89.5"/>
+                                                                        <rect key="frame" x="0.0" y="382" width="320" height="89.5"/>
                                                                         <subviews>
                                                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-F4-hYz">
                                                                                 <rect key="frame" x="-2" y="10" width="324" height="31"/>
@@ -1337,6 +1405,9 @@
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="&lt;Pass&gt;"/>
                                                                                 </attributedString>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -1350,24 +1421,30 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRw-Kg-CCj" userLabel="TopP">
-                                                                        <rect key="frame" x="0.0" y="459.5" width="320" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="479.5" width="320" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Probability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-topp-section">
-                                                                                <rect key="frame" x="0.0" y="19.5" width="119.5" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="18" width="119.5" height="32"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                 <color key="textColor" name="Text/Second"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Richness of words used." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-topp-tip">
-                                                                                <rect key="frame" x="134.5" y="24" width="185.5" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Richness of words used." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-topp-tip">
+                                                                                <rect key="frame" x="134.5" y="34" width="185.5" height="16"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstItem="chat-setting-topp-section" firstAttribute="top" secondItem="rRw-Kg-CCj" secondAttribute="top" constant="18" id="1zD-F6-TP4"/>
                                                                             <constraint firstAttribute="trailing" secondItem="chat-setting-topp-tip" secondAttribute="trailing" id="Nep-z5-xkO"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="Ovs-UI-nZs"/>
                                                                             <constraint firstItem="chat-setting-topp-section" firstAttribute="leading" secondItem="rRw-Kg-CCj" secondAttribute="leading" id="XbT-nx-iEJ"/>
                                                                             <constraint firstItem="chat-setting-topp-tip" firstAttribute="leading" secondItem="chat-setting-topp-section" secondAttribute="trailing" constant="15" id="v0b-bX-vYV"/>
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-topp-tip" secondAttribute="bottom" id="vTM-Xt-obZ"/>
@@ -1375,7 +1452,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6o-r9-Db2">
-                                                                        <rect key="frame" x="0.0" y="507.5" width="320" height="89.5"/>
+                                                                        <rect key="frame" x="0.0" y="537.5" width="320" height="89.5"/>
                                                                         <subviews>
                                                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xp4-AC-pzm">
                                                                                 <rect key="frame" x="-2" y="10" width="324" height="31"/>
@@ -1391,6 +1468,9 @@
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="&lt;Pass&gt;"/>
                                                                                 </attributedString>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
@@ -1434,18 +1514,21 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwu-gT-fIG">
                                                                         <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XA6-S5-iHU">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-other-header">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                 <color key="textColor" name="Text/First"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XA6-S5-iHU" secondAttribute="trailing" id="DwN-DG-fwd"/>
-                                                                            <constraint firstItem="XA6-S5-iHU" firstAttribute="top" secondItem="Wwu-gT-fIG" secondAttribute="top" id="JAp-8x-ys0"/>
-                                                                            <constraint firstItem="XA6-S5-iHU" firstAttribute="leading" secondItem="Wwu-gT-fIG" secondAttribute="leading" priority="500" id="XKg-Z7-oyV"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="XA6-S5-iHU" secondAttribute="bottom" id="dUT-Yy-ckW"/>
+                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="chat-setting-other-header" secondAttribute="trailing" id="DwN-DG-fwd"/>
+                                                                            <constraint firstItem="chat-setting-other-header" firstAttribute="top" secondItem="Wwu-gT-fIG" secondAttribute="top" id="JAp-8x-ys0"/>
+                                                                            <constraint firstItem="chat-setting-other-header" firstAttribute="leading" secondItem="Wwu-gT-fIG" secondAttribute="leading" priority="500" id="XKg-Z7-oyV"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="chat-setting-other-header" secondAttribute="bottom" id="dUT-Yy-ckW"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBu-Cf-bzH">
@@ -1454,10 +1537,10 @@
                                                                             <constraint firstAttribute="height" constant="1" id="H72-dp-FiH"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alX-1v-gvG">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-clear-message">
                                                                         <rect key="frame" x="0.0" y="67" width="272" height="46"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="46" id="hPh-yw-m1O"/>
+                                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="hPh-yw-m1O"/>
                                                                         </constraints>
                                                                         <color key="tintColor" systemColor="systemRedColor"/>
                                                                         <state key="normal" title="Button"/>
@@ -1522,6 +1605,9 @@
                                         <attributedString key="userComments">
                                             <fragment content="&lt;Pass&gt;"/>
                                         </attributedString>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-save-button">
                                         <rect key="frame" x="422" y="13" width="160" height="40"/>
