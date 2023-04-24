@@ -159,6 +159,8 @@ internal enum L10n {
       internal static let operation = L10n.tr("Localizable", "menu.operation", fallback: "Operation")
       /// Retry
       internal static let retry = L10n.tr("Localizable", "menu.retry", fallback: "Retry")
+      /// Send Input
+      internal static let send = L10n.tr("Localizable", "menu.send", fallback: "Send Input")
       /// Settings
       internal static let setting = L10n.tr("Localizable", "menu.setting", fallback: "Settings")
       /// Application Settings

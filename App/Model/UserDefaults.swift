@@ -69,6 +69,11 @@ extension UserDefaults {
         get { bool(forKey: #function) }
         set { set(newValue, forKey: #function) }
     }
+    
+    var preferredSendbyKey: Int {
+        get { integer(forKey: #function) }
+        set { set(newValue, forKey: #function) }
+    }
 
     /// 最近用户选择的引擎 ID
     var lastEngine: StringID? {

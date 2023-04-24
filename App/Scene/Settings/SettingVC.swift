@@ -33,6 +33,8 @@ class SettingViewController: UIViewController, StoryboardCreation {
         if let idx = fontSizeCategoryMap.firstIndex(of: Current.defualts.preferredContentSize) {
             fontSizeSlider.value = Float(idx)
         }
+        sendBySegment.selectedSegmentIndex = Current.defualts.preferredSendbyKey
+        updateSendbyTitle()
     }
 
     @IBOutlet private weak var themeButton: UIButton!
@@ -74,5 +76,26 @@ class SettingViewController: UIViewController, StoryboardCreation {
     ]
     func sizeCategory(value: Int) -> UIContentSizeCategory {
         return fontSizeCategoryMap.element(at: value) ?? .medium
+    }
+
+    @IBOutlet private weak var sendbyKeyLabel: UILabel!
+    @IBOutlet private weak var sendBySegment: UISegmentedControl!
+    @IBAction private func onSendBySegmentChange(_ sender: Any) {
+        Current.defualts.preferredSendbyKey = sendBySegment.selectedSegmentIndex
+        updateSendbyTitle()
+    }
+    private func updateSendbyTitle() {
+        let keyDesc: String
+        switch Current.defualts.preferredSendbyKey {
+        case 0:
+            keyDesc = "Command+Enter"
+        case 1:
+            keyDesc = "Shift+Enter"
+        case 2:
+            keyDesc = "Enter"
+        default:
+            keyDesc = "❓"
+        }
+        sendbyKeyLabel.text = keyDesc
     }
 }

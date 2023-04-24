@@ -29,6 +29,7 @@
 "menu.retry" = "Retry";
 "menu.integrationHelp" = "What's this?";
 "menu.integrationBookmark" = "Copy Browser Bookmark";
+"menu.send" = "Send Input";
 
 "chat.defaultTitle" = "New Chat";
 "chat.archived" = "Archived";

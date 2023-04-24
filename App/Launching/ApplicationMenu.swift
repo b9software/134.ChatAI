@@ -27,6 +27,7 @@ enum ApplicationMenu {
             ]),
             UIKeyCommand(title: L.Menu.continueLastTopic, action: #selector(ConversationDetailViewController.toggleLastReply), input: "K", modifierFlags: [.command]),
             UIKeyCommand(title: L.Menu.focusInput, action: #selector(ConversationDetailViewController.focusInputBox), input: "L", modifierFlags: [.command]),
+            sendbyCommand(),
         ]), afterMenu: .edit)
         builder.replace(menu: .help, with: UIMenu(title: L.Menu.help, children: [
             UICommand(title: L.Menu.homePage, action: #selector(ApplicationDelegate.showHelp)),
@@ -42,6 +43,23 @@ enum ApplicationMenu {
 
     static func setNeedsRevalidate() {
         UIMenuSystem.main.setNeedsRevalidate()
+    }
+    
+    static var sendbyKey = 0 {
+        didSet {
+            if oldValue == sendbyKey { return }
+            UIMenuSystem.main.setNeedsRebuild()
+        }
+    }
+    
+    static func sendbyCommand() -> UIKeyCommand {
+        var flags: UIKeyModifierFlags = [.command]
+        if sendbyKey == 1 {
+            flags = [.shift]
+        } else if sendbyKey == 2 {
+            flags = []
+        }
+        return UIKeyCommand(title: L.Menu.send, action: #selector(ConversationDetailViewController.onSend), input: "\r", modifierFlags: flags)
     }
 }
 

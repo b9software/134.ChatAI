@@ -41,6 +41,7 @@ brew install cocoapods
 * https://github.com/openai/tiktoken token 数量计算
 * https://platform.openai.com/tokenizer 在线计算
 * https://api2d.com/ API 售卖，没备案？
+* https://github.com/acheong08/EdgeGPT Python
 
 应用
 

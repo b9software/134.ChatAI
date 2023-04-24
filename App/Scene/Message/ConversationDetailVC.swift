@@ -49,6 +49,7 @@ class ConversationDetailViewController:
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(onSelectionLabelEdit), name: .selectableLabelOnEdit, object: nil)
         item.loadDraft(toView: inputTextView)
+        ApplicationMenu.sendbyKey = inputSendby
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -89,6 +90,10 @@ class ConversationDetailViewController:
             barLayoutBottom.constant = isInputAllowed ? 0 : barLayoutContainer.height
         }
     }
+    private var inputSendby: Int {
+        item?.chatConfig.sendbyKey ?? Current.defualts.preferredSendbyKey
+    }
+    private var sendbyTrackIsShiftPressed = false
 
     @IBOutlet private weak var replySelectionButton: UIButton!
     private var shouldUpdateReplySelectionForNewMessage = false
@@ -139,21 +144,25 @@ extension ConversationDetailViewController {
     override var canResignFirstResponder: Bool { true }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        let item = context.nextFocusedItem
-        debugPrint("update focus in detail", item)
+        AppLog().debug("update focus in detail, \(context.nextFocusedItem as Any? ?? "nil")")
         lastFocusedItem = context.nextFocusedItem
+        ApplicationMenu.sendbyKey = inputSendby
     }
 
     override func becomeFirstResponder() -> Bool {
         ApplicationMenu.setNeedsRevalidate()
         return super.becomeFirstResponder()
     }
+    
+    override func responds(to aSelector: Selector!) -> Bool {
+        if aSelector == #selector(onSend) {
+            return isInputAllowed
+        }
+        return super.responds(to: aSelector)
+    }
 
     override var keyCommands: [UIKeyCommand]? {
         var commands = super.keyCommands ?? []
-        if isInputAllowed {
-            commands.append(.init(input: "\r", modifierFlags: .command, action: #selector(onSend)))
-        }
         commands.append(
             UIKeyCommand(action: #selector(handleLeftArrow), input: UIKeyCommand.inputLeftArrow)
         )
@@ -360,17 +369,31 @@ extension ConversationDetailViewController {
 
 extension ConversationDetailViewController: UITextViewDelegate {
 
-    // 可以 track +shift
-//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-//        debugPrint("begin", presses)
-//        super.pressesBegan(presses, with: event)
-//    }
-//    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-//        debugPrint("end", presses)
-//        super.pressesEnded(presses, with: event)
-//    }
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        sendbyTrackIsShiftPressed = event?.modifierFlags == .shift
+        super.pressesBegan(presses, with: event)
+    }
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        sendbyTrackIsShiftPressed = false
+        super.pressesEnded(presses, with: event)
+    }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            if inputSendby == 1 {
+                if sendbyTrackIsShiftPressed {
+                    onSend()
+                    return false
+                }
+            } else if inputSendby == 2 {
+                if !sendbyTrackIsShiftPressed {
+                    onSend()
+                    return false
+                }
+            }
+        }
+
+        AppLog().debug("Textview change text: \(text)")
         if text == "\t" {
             textView.resignFirstResponder()
             return false
@@ -404,7 +427,7 @@ extension ConversationDetailViewController: UITextViewDelegate {
         })
     }
 
-    @IBAction private func onSend() {
+    @IBAction func onSend() {
         if let text = inputTextView.text.trimmed() {
             item.send(text: text, reply: inputReplyItems?.last)
             listDataSource.shouldUpdateSelectionForNewMessageInContext = true

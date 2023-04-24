@@ -70,11 +70,11 @@
 /* Class = "UILabel"; text = "Tips: You can navigate through UI elements using your keyboard.\nTry it now by pressing the Tab (+shift) key and arrow keys."; ObjectID = "setting-key-tip-navigation"; */
 "setting-key-tip-navigation.text" = "提示：你可以通过键盘与界面交互\n现在试试按 Tab (或+shift) 和方向键";
 
-/* Class = "UILabel"; text = "Tips: You can send text by pressing Command+Enter in the input box.\nI will add more key binding settings in future releases."; ObjectID = "setting-key-tip-send"; */
-"setting-key-tip-send.text" = "提示：会话输入框按 Command+Enter 可以发送文字\n未来版本会加更多按键设置";
-
 /* Class = "UILabel"; text = "Key Bindings"; ObjectID = "setting-keys-section"; */
 "setting-keys-section.text" = "按键配置";
+
+/* Class = "UILabel"; text = "Send By"; ObjectID = "setting-send-by-title"; */
+"setting-send-by-title.text" = "发送键";
 
 /* Class = "UICommand"; title = "Dark"; ObjectID = "setting-theme-dark"; */
 "setting-theme-dark.title" = "深色";

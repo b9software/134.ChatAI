@@ -39,6 +39,7 @@ class ConversationSettingViewController:
         systemField.text = item.engineConfig.system
         updateTemperature(item.engineConfig.temperature)
         updateTopP(item.engineConfig.topP)
+        sendbySegment.selectedSegmentIndex = (item.chatConfig.sendbyKey ?? -1) + 1
     }
 
     @IBOutlet private weak var contentContainer: UIView!
@@ -49,6 +50,8 @@ class ConversationSettingViewController:
     @IBOutlet private weak var temperatureDescribeLabel: UILabel!
     @IBOutlet private weak var topProbabilitySlider: UISlider!
     @IBOutlet private weak var topProbabilityDescribeLabel: UILabel!
+
+    @IBOutlet private weak var sendbySegment: UISegmentedControl!
 
     @IBOutlet private weak var barContainer: UIView!
     @IBOutlet private weak var stateLabel: ErrorLabel!
@@ -75,6 +78,7 @@ extension ConversationSettingViewController {
             barContainer.bounds = rect
             contentContainer.alpha = 0
             barContainer.alpha = 0
+            parent?.beginAppearanceTransition(false, animated: animate)
         }, animations: { [self] in
             var rect = contentContainer.bounds
             rect.origin.y = 0
@@ -84,13 +88,18 @@ extension ConversationSettingViewController {
             barContainer.bounds = rect
             contentContainer.alpha = 1
             barContainer.alpha = 1
+        }, completion: { [self] _ in
+            parent?.endAppearanceTransition()
         })
     }
 
     func dismiss(animate: Bool) {
+        let parentVc = parent
         if !animate {
+            parentVc?.beginAppearanceTransition(true, animated: false)
             removeFromParent()
             view.removeFromSuperview()
+            parentVc?.endAppearanceTransition()
             return
         }
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: { [self] in
@@ -102,9 +111,11 @@ extension ConversationSettingViewController {
             barContainer.bounds = rect
             contentContainer.alpha = 0
             barContainer.alpha = 0
+            parentVc?.beginAppearanceTransition(true, animated: true)
         }, completion: { [self] _ in
             removeFromParent()
             view.removeFromSuperview()
+            parentVc?.endAppearanceTransition()
         })
     }
 
@@ -125,8 +136,8 @@ extension ConversationSettingViewController {
             stateLabel.set(error: L.Chat.Setting.choiceModel)
             return
         }
-        let cfgChat = ChatConfig(
-        )
+        var cfgChat = item.chatConfig
+        cfgChat.sendbyKey = chatConfigSendbyValue()
         let cfgEngine = EngineConfig(
             model: model,
             system: systemField.text.trimmed(),
@@ -331,6 +342,11 @@ extension ConversationSettingViewController {
 
     @IBAction private func onTopPSliderChange() {
         updateTopP(topProbabilitySlider.value)
+    }
+    
+    func chatConfigSendbyValue() -> Int? {
+        let index = sendbySegment.selectedSegmentIndex
+        return index == 0 ? nil : index - 1
     }
 
     @IBAction private func onDestroyMessages(_ sender: Any) {

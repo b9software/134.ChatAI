@@ -64,6 +64,15 @@
 /* Class = "UIButton"; configuration.title = "Save"; ObjectID = "chat-setting-save-button"; */
 "chat-setting-save-button.configuration.title" = "保存";
 
+/* Class = "UILabel"; text = "Send By"; ObjectID = "chat-setting-send-by"; */
+"chat-setting-send-by.text" = "发送键";
+
+/* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[0] = "Default"; ObjectID = "chat-setting-send-segment"; */
+"chat-setting-send-segment.segmentTitles[0]" = "默认";
+
+/* Class = "UILabel"; text = "Send message with which key"; ObjectID = "chat-setting-send-tip"; */
+"chat-setting-send-tip.text" = "通过哪个按键发送输入";
+
 /* Class = "UILabel"; text = "System"; ObjectID = "chat-setting-system-section"; */
 "chat-setting-system-section.text" = "交聚的话题";
 

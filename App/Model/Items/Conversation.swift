@@ -13,6 +13,7 @@ private let conversationPool = ObjectPool<StringID, Conversation>()
 
 struct ChatConfig: Codable, Equatable {
     var draft: String?
+    var sendbyKey: Int?
 }
 
 struct EngineConfig: Codable, Equatable {
