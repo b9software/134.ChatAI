@@ -37,7 +37,7 @@ class Engine {
         case .openAI:
             oaEngine = try entity.loadOAEngine()
         case .openAIProxy:
-            fatalError("todo")
+            oaEngine = try entity.loadOAEngine()
         }
     }
 
@@ -75,7 +75,6 @@ class Engine {
         typealias L10 = L.Engine.Create
         let cb = Do.safe(callback: completion)
         return Task(priority: .utility) {
-            assertDispatch(.notOnQueue(.main))
             func failure(msg: String) {
                 log?.x(.error, msg)
                 cb(.failure(AppError.message(msg)))
@@ -134,6 +133,73 @@ class Engine {
         return item
     }
 
+    static func createProxy(engine: OAEngine, logHandler log: LogHandler?, completion: @escaping (Result<Engine, Error>) -> Void) -> Task<Void, Never> {
+        typealias L10 = L.Engine.Create
+        let cb = Do.safe(callback: completion)
+        return Task(priority: .utility) {
+            func failure(msg: String) {
+                log?.x(.error, msg)
+                cb(.failure(AppError.message(msg)))
+            }
+            do {
+                guard let baseURL = engine.baseURL else {
+                    failure(msg: "Base URL not set.")
+                    return
+                }
+                let api = OANetwork(proxy: baseURL, apiKey: engine.apiKey)
+                api.customCompletionURL = engine.customCompletionURL
+                api.customListModelURL = engine.customListModelURL
+                log?.x(.info, "POST \(api.completionURL.absoluteString)...")
+                let talk = try await api.verifyChat()
+                if talk.choices?.first?.message?.content == nil {
+                    log?.x(.warning, L10.unrecognizedChatWarning)
+                }
+
+                log?.x(.info, "GET \(api.modelsURL.absoluteString)...")
+                let models = try await api.listModel()
+                let gptIds = models.map { $0.root ?? $0.id }.filter { $0.hasPrefix("gpt-") }.uniqued().sorted()
+                let idDesc = gptIds.joined(separator: ", ")
+                log?.x(.info, L10.stepListGpt(idDesc))
+
+                log?.x(.info, L10.stepSaveData)
+                let item = try await makeItem(proxy: engine, models: models)
+                log?.x(.notice, L10.stepDone)
+                cb(.success(item))
+            } catch {
+                log?.x(.error, error.localizedDescription)
+                cb(.failure(error))
+            }
+        }
+    }
+
+    private static func makeItem(proxy: OAEngine, models: [OAModel]) async throws -> Engine {
+        guard let host = proxy.baseURL?.host,
+              let keyHash = B9Crypto.sha1(utf8: "OP-\(host)-\(proxy.apiKey ?? "")") else {
+            throw AppError.message(L.Engine.Create.Fail.hashKey)
+        }
+        let id = "OP-" + keyHash
+        if await CDEngine.fetch(id: id) != nil {
+            throw AppError.message(L.Engine.Create.Fail.existProxy)
+        }
+        if let key = proxy.apiKey {
+            try B9Keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
+        }
+
+        let oaData = try proxy.encode()
+        let item = await Current.database.read {
+            let entity = CDEngine(context: $0)
+            entity.id = id
+            entity.name = host
+            entity.type = EType.openAIProxy.rawValue
+            entity.createTime = .current
+            entity.usedTime = nil
+            entity.raw = oaData
+            $0.trySave()
+            return Engine(type: .openAIProxy, oaEngine: proxy, entity: entity)
+        }
+        return item
+    }
+
     private var oaEngine: OAEngine
     private var _oaNetwork: OANetwork?
 }
@@ -144,18 +210,30 @@ extension Engine {
         case .openAI:
             return oaEngine.apiKey?.isNotEmpty == true
         case .openAIProxy:
-            return false
+            return oaEngine.baseURL != nil
         }
     }
 
     private func getOANetworking() throws -> OANetwork {
         if let result = _oaNetwork { return result }
-        guard let key = oaEngine.apiKey else {
-            throw AppError.message("Engine is missing API key.")
+        switch type {
+        case .openAI:
+            guard let key = oaEngine.apiKey else {
+                throw AppError.message("Engine is missing API key.")
+            }
+            let result = OANetwork(apiKey: key)
+            _oaNetwork = result
+            return result
+        case .openAIProxy:
+            guard let base = oaEngine.baseURL else {
+                throw AppError.message("Engine is missing proxy URL.")
+            }
+            let result = OANetwork(proxy: base, apiKey: oaEngine.apiKey)
+            result.customCompletionURL = oaEngine.customCompletionURL
+            result.customListModelURL = oaEngine.customListModelURL
+            _oaNetwork = result
+            return result
         }
-        let result = OANetwork(apiKey: key)
-        _oaNetwork = result
-        return result
     }
 
     var lastSelectedModel: StringID? {
@@ -195,9 +273,6 @@ extension Engine {
     }
 
     func send(message: Message, config: EngineConfig) throws -> Task<Void, Error> {
-        if type != .openAI {
-            throw AppError.message("Only OpenAI API is supported.")
-        }
         let api = try getOANetworking()
         return api.steamChat(config: config, handler: message)
     }

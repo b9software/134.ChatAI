@@ -12,6 +12,8 @@ class OANetwork {
     var baseURL: URL = "https://api.openai.com/"
     let session: URLSession
     var acceptableContentTypes = ["application/json", "text/json"]
+    var customCompletionURL: URL?
+    var customListModelURL: URL?
 
     init(apiKey: String) {
         let config = URLSessionConfiguration.default
@@ -25,6 +27,22 @@ class OANetwork {
         session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
     }
 
+    init(proxy: URL, apiKey: String?) {
+        let config = URLSessionConfiguration.default
+        config.allowsExpensiveNetworkAccess = true
+        config.httpCookieAcceptPolicy = .always
+        var headers = [
+            "Content-Type": "application/json",
+            "User-Agent": Current.userAgent,
+        ]
+        if let apiKey = apiKey {
+            headers["Authorization"] = "Bearer \(apiKey)"
+        }
+        config.httpAdditionalHeaders = headers
+        baseURL = proxy
+        session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+    }
+
     func request(path: String) throws -> URLRequest {
         guard let url = URL(string: path, relativeTo: baseURL) else {
             throw AppError.message("Internal error: unable create url of path: \(path).")
@@ -34,8 +52,17 @@ class OANetwork {
         return request
     }
 
+    var completionURL: URL {
+        customCompletionURL
+        ?? URL(string: "/v1/chat/completions", relativeTo: baseURL)!
+    }
+    var modelsURL: URL {
+        customListModelURL
+        ?? URL(string: "/v1/models", relativeTo: baseURL)!
+    }
+
     func verifyChat() async throws -> OAChatCompletion {
-        var request = URLRequest(url: URL(string: "/v1/chat/completions", relativeTo: baseURL)!)
+        var request = URLRequest(url: completionURL)
         request.httpMethod = "POST"
         request.timeoutInterval = 20
         let body = #"{"model":"gpt-3.5-turbo","max_tokens":2,"messages":[{"role":"user","content":"hi"}]}"#
@@ -48,7 +75,8 @@ class OANetwork {
     }
 
     func listModel() async throws -> [OAModel] {
-        let request = URLRequest(url: URL(string: "/v1/models", relativeTo: baseURL)!)
+        let request = URLRequest(url: modelsURL)
+        AppLog().debug("Sending HTTP request: \(request.url!)")
         var (data, response) = try await session.data(for: request)
         data = try handleResponse(data: data, response: response)
         return try [OAModel].decode(data)
@@ -65,12 +93,12 @@ class OANetwork {
             param["user"] = Current.identifierForVendor
             param["stream"] = true
 
-            var request = URLRequest(url: URL(string: "/v1/chat/completions", relativeTo: baseURL)!)
+            var request = URLRequest(url: completionURL)
             request.httpMethod = "POST"
             request.timeoutInterval = 90
             request.httpBody = try JSONSerialization.data(withJSONObject: param)
 
-            AppLog().debug("Sending HTTP request")
+            AppLog().debug("Sending HTTP request: \(request.url!)")
             let (result, response) = try await session.bytes(for: request)
             try Task.checkCancellation()
             AppLog().debug("Got HTTP response")

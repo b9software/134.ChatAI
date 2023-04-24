@@ -19,6 +19,7 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        listView.allowsFocus = true
         setupCommandButtons()
     }
 

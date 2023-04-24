@@ -12,6 +12,7 @@ class LogLabel: UILabel, LogHandler {
 
     func clear() {
         text = nil
+        textColor = Asset.Text.thrid.color
     }
 
     func colorOf(level: Logger.Level) -> UIColor {
@@ -20,7 +21,7 @@ class LogLabel: UILabel, LogHandler {
         case .warning: return .systemOrange
         case .notice: return .systemGreen
         default:
-            return textColor ?? .secondaryLabel
+            return Asset.Text.thrid.color
         }
     }
 

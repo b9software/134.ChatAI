@@ -59,15 +59,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         AppLog().debug("Scene> Active: \(scene.title ?? "?"), activity:  \(scene.session.stateRestorationActivity?.activityType ?? "nil").")
         Self.hasApplicationEnterBackground = false
-        if let activity = window?.windowScene?.userActivity {
-            activity.becomeCurrent()
-        }
-        guard let activity = scene.session.stateRestorationActivity else {
-            return
-        }
-        if activity.activityType == UserActivityType.setting.rawValue {
-            rootViewController.gotoSetting(self)
-        }
+//        if let activity = window?.windowScene?.userActivity {
+//            activity.becomeCurrent()
+//        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

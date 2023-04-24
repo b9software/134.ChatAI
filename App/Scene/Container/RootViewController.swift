@@ -230,7 +230,7 @@ extension RootViewController {
 
     @IBAction private func pushEngineManage(_ sender: Any) {
         userActivity = NSUserActivity(.setting)
-        navigator.pushViewController(EngineManageViewController.newFromStoryboard(), animated: true)
+        navigator.pushViewController(EngineCreateTypeViewController.newFromStoryboard(), animated: true)
     }
 
     @IBAction func orderFrontStandardAboutPanel(_ sender: Any) {

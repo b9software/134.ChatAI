@@ -45,6 +45,8 @@ brew install cocoapods
 
 应用
 
+* https://github.com/bhaskatripathi/pdfGPT 
+
 * https://github.com/chenxi92/ChatGPT
 * https://github.com/Yoddikko/yoddChatGPT
 * https://github.com/KittenYang/charming-chatgpt Raycast 插件

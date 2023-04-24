@@ -166,6 +166,7 @@
 		D5B8A39B251217C900C84CB1 /* Collections+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8A39A251217C900C84CB1 /* Collections+App.swift */; };
 		D5B8A39E251221A300C84CB1 /* IdentifierEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8A39D251221A300C84CB1 /* IdentifierEquatable.swift */; };
 		D5B9669C2501CFCB009D77A0 /* SearchHighlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B9669B2501CFCA009D77A0 /* SearchHighlight.swift */; };
+		D5BC897829F783BB00D4DF56 /* EngineCreateVCs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC897729F783BB00D4DF56 /* EngineCreateVCs.swift */; };
 		D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE29682509F39B00A9AA2F /* MBHightlightTintImageView.swift */; };
 		D5C36B8E2815173300C09A26 /* ShortCuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C36B8D2815173300C09A26 /* ShortCuts.swift */; };
 		D5C3CBEF217ED20F0097CCD9 /* Geometry+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C3CBEE217ED20F0097CCD9 /* Geometry+App.swift */; };
@@ -488,6 +489,7 @@
 		D5B8A3AB251343AF00C84CB1 /* Run.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Run.gpx; sourceTree = "<group>"; };
 		D5B8A3AE251343AF00C84CB1 /* SignificantChanges.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SignificantChanges.gpx; sourceTree = "<group>"; };
 		D5B9669B2501CFCA009D77A0 /* SearchHighlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHighlight.swift; sourceTree = "<group>"; };
+		D5BC897729F783BB00D4DF56 /* EngineCreateVCs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineCreateVCs.swift; sourceTree = "<group>"; };
 		D5BE29682509F39B00A9AA2F /* MBHightlightTintImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBHightlightTintImageView.swift; sourceTree = "<group>"; };
 		D5C36B8D2815173300C09A26 /* ShortCuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortCuts.swift; sourceTree = "<group>"; };
 		D5C3CBEE217ED20F0097CCD9 /* Geometry+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Geometry+App.swift"; sourceTree = "<group>"; };
@@ -612,8 +614,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C461D9A1836CC666DB28163 /* libPods-UnitTests.a in Frameworks */,
 				D58C46E029F171C100BEFAE8 /* B9Debug in Frameworks */,
+				8C461D9A1836CC666DB28163 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,7 +1265,6 @@
 			children = (
 				D5FA7D6029D87BC30011DA4E /* Engine */,
 				D51B7FE929CFD49200DD825C /* AboutVC.swift */,
-				D5D006D129D273F50063B366 /* EngineManageVC.swift */,
 				D5B4C7B129C9D946005D4C3E /* SettingVC.swift */,
 			);
 			path = Settings;
@@ -1437,13 +1438,13 @@
 			children = (
 				D52A04E420F85F2600F535ED /* Button.swift */,
 				D584C77A26EEC970004E434B /* GradientProgressViews.swift */,
+				D58C46DD29F1338200BEFAE8 /* MBButton.swift */,
 				D50693D619495D9E0002BFCC /* MBControlGroup.h */,
 				D50693D719495D9E0002BFCC /* MBControlGroup.m */,
 				D5EE52292043F7B9009148B3 /* MBLayoutButton.h */,
 				D5EE52312043F7B9009148B3 /* MBLayoutButton.m */,
 				D50B3E6228255A5800D0974E /* MBOptionSwitch.swift */,
 				D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */,
-				D58C46DD29F1338200BEFAE8 /* MBButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -1494,7 +1495,9 @@
 			isa = PBXGroup;
 			children = (
 				D5FA7D6329D881400011DA4E /* EngineCellView.swift */,
+				D5BC897729F783BB00D4DF56 /* EngineCreateVCs.swift */,
 				D5FA7D6129D87BD90011DA4E /* EngineListView.swift */,
+				D5D006D129D273F50063B366 /* EngineManageVC.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -1831,7 +1834,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D51B7FEA29CFD49200DD825C /* AboutVC.swift in Sources */,
-				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D5031C4425C04F8800C2849E /* AlertController.swift in Sources */,
 				D5F65F3424C1CAF20082FEC2 /* API.swift in Sources */,
 				D5E2DBFB24CEE54400CEB26D /* APIResponseSerializer.swift in Sources */,
@@ -1880,6 +1882,7 @@
 				D527917F27B558D600522240 /* Do.swift in Sources */,
 				D51B7FF029CFE45800DD825C /* Engine.swift in Sources */,
 				D5FA7D6429D881400011DA4E /* EngineCellView.swift in Sources */,
+				D5BC897829F783BB00D4DF56 /* EngineCreateVCs.swift in Sources */,
 				D5FA7D6229D87BD90011DA4E /* EngineListView.swift in Sources */,
 				D5D006D229D273F50063B366 /* EngineManageVC.swift in Sources */,
 				D5B1905A24026DB90076CD61 /* EnumListView.swift in Sources */,
@@ -1903,6 +1906,7 @@
 				D5EE51E32043F613009148B3 /* MBAutoFadeoutView.m in Sources */,
 				D5C3CBF3217EEEA20097CCD9 /* MBBadgeLabel.m in Sources */,
 				D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */,
+				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D53141FF29D6E28A004EDCCA /* MBCellStackView.swift in Sources */,
 				D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */,
 				D5DB4C1C241E243900832A0A /* MBCollectionListDisplayer.m in Sources */,
@@ -2300,7 +2304,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
@@ -2344,7 +2348,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2450,7 +2454,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -89,6 +89,10 @@ internal enum L10n {
     }
     internal enum Engine {
       internal enum Create {
+        /// Please input a valid API key.
+        internal static let noKeyGiven = L10n.tr("Localizable", "engine.create.no-key-given", fallback: "Please input a valid API key.")
+        /// Please input a valid proxy address.
+        internal static let noProxyAddressGiven = L10n.tr("Localizable", "engine.create.no-proxy-address-given", fallback: "Please input a valid proxy address.")
         /// [OK]
         internal static let stepDone = L10n.tr("Localizable", "engine.create.step-done", fallback: "[OK]")
         /// Available GPT models: %@
@@ -106,9 +110,29 @@ internal enum L10n {
         internal enum Fail {
           /// Engine with the given key already exist.
           internal static let existKey = L10n.tr("Localizable", "engine.create.fail.exist-key", fallback: "Engine with the given key already exist.")
+          /// Engine with the same proxy config already exist.
+          internal static let existProxy = L10n.tr("Localizable", "engine.create.fail.exist-proxy", fallback: "Engine with the same proxy config already exist.")
           /// Unable to generate secure data for key.
           internal static let hashKey = L10n.tr("Localizable", "engine.create.fail.hash-key", fallback: "Unable to generate secure data for key.")
         }
+        internal enum TypeOpenai {
+          /// Use offical OpenAI API
+          internal static let detail = L10n.tr("Localizable", "engine.create.type-openai.detail", fallback: "Use offical OpenAI API")
+          /// ChatGPT / OpenAI
+          internal static let title = L10n.tr("Localizable", "engine.create.type-openai.title", fallback: "ChatGPT / OpenAI")
+        }
+        internal enum TypeOpenaiProxy {
+          /// Use a proxy server foward requests to OpenAI API
+          internal static let detail = L10n.tr("Localizable", "engine.create.type-openai-proxy.detail", fallback: "Use a proxy server foward requests to OpenAI API")
+          /// ChatGPT / API Proxy
+          internal static let title = L10n.tr("Localizable", "engine.create.type-openai-proxy.title", fallback: "ChatGPT / API Proxy")
+        }
+      }
+    }
+    internal enum GenralError {
+      /// "%@" is not a valid URL.
+      internal static func invalidUrl(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "genral-error.invalid-url", String(describing: p1), fallback: "\"%@\" is not a valid URL.")
       }
     }
     internal enum Guide {
