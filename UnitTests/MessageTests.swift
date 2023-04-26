@@ -1,5 +1,5 @@
 //
-//  MessageBuildTests.swift
+//  MessageTests.swift
 //  UnitTests
 //
 //  Copyright © 2023 B9Software. All rights reserved.
@@ -8,9 +8,11 @@
 @testable import B9ChatAI
 import XCTest
 
-// swiftlint:disable identifier_name function_body_length closure_body_length
+// swiftlint:disable blanket_disable_command
+// swiftlint:disable identifier_name function_body_length closure_body_length type_body_length
+// swiftlint:enable blanket_disable_command
 
-class MessageBuildTests: TestCase {
+class MessageTests: TestCase {
     override class var mockResetPoint: TestCase.ResetPoint { [ .tearDown] }
 
     override class var coverUserDefaultsKeys: [String] {

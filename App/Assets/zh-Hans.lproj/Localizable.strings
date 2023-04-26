@@ -50,7 +50,7 @@
 "chat.setting.clearAlertMessage" = "操作无法撤销";
 
 /* (No Comment) */
-"chat.setting.clearAlertTitle" = "清空对话中的全部消息？";
+"chat.setting.clearAlertTitle" = "清空会话中的全部消息？";
 
 /* (No Comment) */
 "chat.setting.engineMissingKey" = "引擎的 API 密钥缺失，请更新引擎或选择另一个";
@@ -86,7 +86,16 @@
 "engine.create.fail.exist-key" = "这个 API Key 已经添加过了";
 
 /* (No Comment) */
+"engine.create.fail.exist-proxy" = "相同配置的代理引擎已存在";
+
+/* (No Comment) */
 "engine.create.fail.hash-key" = "无法生成密钥数据";
+
+/* (No Comment) */
+"engine.create.no-key-given" = "请输入有效的 API key";
+
+/* (No Comment) */
+"engine.create.no-proxy-address-given" = "请输入有效的代理服务器地址";
 
 /* (No Comment) */
 "engine.create.step-done" = "[OK]";
@@ -104,7 +113,16 @@
 "engine.create.step-verify" = "检查中....";
 
 /* (No Comment) */
+"engine.create.type-openai-proxy.detail" = "使用代理服务中转 OpenAI 请求";
+
+/* (No Comment) */
+"engine.create.type-openai.detail" = "使用 OpenAI 官方接口";
+
+/* (No Comment) */
 "engine.create.unrecognized-chat-warning" = "似乎不能正确读取会话内容，请检查应用是否有新版本";
+
+/* (No Comment) */
+"genral-error.invalid-url" = "\"%@\" 不是合法的 URL";
 
 /* (No Comment) */
 "guide.interCommunicationLink" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd#SwWidyUSqoIMocxiUlncBspOnwd";
@@ -120,6 +138,18 @@
 
 /* (No Comment) */
 "menu.delete" = "删除";
+
+/* (No Comment) */
+"menu.floatMode" = "浮窗模式";
+
+/* (No Comment) */
+"menu.floatModeCollapse" = "收起浮窗";
+
+/* (No Comment) */
+"menu.floatModeExit" = "退出浮窗模式";
+
+/* (No Comment) */
+"menu.floatModeExpand" = "展开浮窗";
 
 /* (No Comment) */
 "menu.focusInput" = "切换到输入框";

@@ -177,7 +177,7 @@ extension Conversation {
         return .normal
     }
 
-    func loadDraft(toView: UITextView) {
+    func loadDraft(toView: ChatTextView) {
         Current.database.async { [self] _ in
             var config = chatConfig
             guard let text = config.draft else {
@@ -187,7 +187,7 @@ extension Conversation {
             chatConfig = config
             Task { @MainActor in
                 if toView.text.trimmed() == nil {
-                    toView.text = text
+                    toView.draftText = text
                 }
             }
         }

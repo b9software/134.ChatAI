@@ -10,6 +10,14 @@ extension URL {
         guard let aScheme = scheme?.lowercased() else { return false }
         return aScheme == "https" || aScheme == "http"
     }
+
+    static func open(link: String) {
+        guard let url = URL(string: link) else {
+            assert(false)
+            return
+        }
+        UIApplication.shared.open(url)
+    }
 }
 
 extension URL: ExpressibleByStringLiteral {

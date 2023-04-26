@@ -43,13 +43,26 @@ brew install cocoapods
 * https://api2d.com/ API 售卖，没备案？
 * https://github.com/acheong08/EdgeGPT Python
 
+引擎
+
+* https://chat.lmsys.org
+* https://huggingface.co/chat/
+* https://open-assistant.io/chat/
+
 应用
 
 * https://github.com/bhaskatripathi/pdfGPT 
+PDFKit 读取
 
 * https://github.com/chenxi92/ChatGPT
 * https://github.com/Yoddikko/yoddChatGPT
 * https://github.com/KittenYang/charming-chatgpt Raycast 插件
+
+插件发现
+* https://www.getit.ai/gpt-plugins
+* https://www.wellknown.ai
+* https://github.com/LAION-AI/Open-Assistant/pull/2765/files OA 插件 PR
+* https://platform.openai.com/docs/plugins/introduction
 
 Chrome插件Web Chat GPT，可让你网络联通并实时搜索ChatGPT
 a i p r m是一款Chrome插件，提供预设好的各种prompt；
@@ -60,6 +73,7 @@ Open AI Translator 提供高质量的华词翻译，配有API。
 PDF助手 Chi PDF，可协助在文献中搜索关键内容，并快速进行对此的总结。
 Software Client 为Windows，Mac以及Linux系统提供了额外的ChatGPT客户端，包含Awesome Tragibility Prompt的指令；
 
+https://developer.apple.com/contact/app-store/?topic=expedite
 
 ## License
 

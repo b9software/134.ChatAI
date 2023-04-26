@@ -8,10 +8,8 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: B9WindowSceneDelegate {
     static var hasApplicationEnterBackground = false
-
-    var window: UIWindow?
 
     var rootViewController: RootViewController! {
         window?.rootViewController as? RootViewController
@@ -19,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     #if targetEnvironment(macCatalyst)
     private(set) lazy var toolbarController = NSToolbarController()
+    private(set) lazy var touchbarController = TouchbarController()
     #endif
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -42,10 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 200)
     }
 
-    override func updateUserActivityState(_ activity: NSUserActivity) {
-        super.updateUserActivityState(activity)
-    }
-
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -62,6 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        if let activity = window?.windowScene?.userActivity {
 //            activity.becomeCurrent()
 //        }
+        rootViewController.hasBecomeActive = true
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -79,30 +75,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         AppLog().debug("Scene> WillEnterForeground: \(scene.title ?? "?")")
     }
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+    override func sceneDidEnterBackground(_ scene: UIScene) {
+        super.sceneDidEnterBackground(scene)
         AppLog().debug("Scene> Background: \(scene.title ?? "?")")
         dispatch_after_seconds(0) {
             if !Current.osBridge.isAppActive {
                 Self.hasApplicationEnterBackground = true
             }
         }
+        rootViewController.hasBecomeActive = false
     }
 
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        AppLog().debug("Scene> Open url \(URLContexts)")
-        debugPrint(UIApplication.shared.applicationState.debugDescription)
-        for context in URLContexts {
-            handleURL(context.url, scene: scene)
+#if targetEnvironment(macCatalyst)
+    private var toolbarStyle: UITitlebarToolbarStyle = .automatic {
+        didSet {
+            if let titleBar = window?.windowScene?.titlebar {
+                if titleBar.toolbarStyle != toolbarStyle {
+                    titleBar.toolbarStyle = toolbarStyle
+                }
+            }
         }
-//        if Self.hasApplicationEnterBackground {
-//            Current.osBridge.hideApp()
-//        }
     }
+#endif
+}
 
+// MARK: -
 
+extension SceneDelegate {
+#if targetEnvironment(macCatalyst)
+    func setPreferedToolbarStyleDueToLayout(style: UITitlebarToolbarStyle) {
+        toolbarStyle = style
+    }
+#endif
+}
+
+// MARK: - Activity
+
+extension SceneDelegate {
     func scene(_ scene: UIScene, willContinueUserActivityWithType type: String) {
         AppLog().debug("Scene> UserActivity will continue: \(type).")
     }
@@ -130,7 +139,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+// MARK: - URL
+
 extension SceneDelegate {
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        AppLog().debug("Scene> Open url \(URLContexts)")
+        debugPrint(UIApplication.shared.applicationState.debugDescription)
+        for context in URLContexts {
+            handleURL(context.url, scene: scene)
+        }
+//        if Self.hasApplicationEnterBackground {
+//            Current.osBridge.hideApp()
+//        }
+    }
+
     private func handleURL(_ url: URL, scene: UIScene) {
         func alertUnsupported() {
             let urlContent = url.absoluteString.trimming(toLength: 100)
@@ -174,4 +196,7 @@ extension SceneDelegate {
         UIApplication.shared.requestSceneSessionActivation(chatScene.session, userActivity: NSUserActivity(conversationID: chatID), options: options)
         return true
     }
+}
+
+protocol SceneEvent {
 }

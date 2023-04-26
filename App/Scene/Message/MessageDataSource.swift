@@ -31,7 +31,7 @@ class MessageDataSource:
         tableView.dataSource = self
     }
 
-    /// 列表中的某一对象可能被移除
+    /// 列表中的某一对象可能被移除，通知 vc 更新
     var itemMayRemove: ((MessageDataSource) -> Void)?
 
     // MARK: - Loading
@@ -101,7 +101,7 @@ class MessageDataSource:
         AppLog().debug("DS> insert \(items)")
         let ips = (0..<items.count).map { IndexPath(row: $0, section: 0) }
 
-        let list = view as! MessageListView  // swiftlint:disable:this force_cast
+        let list = view as! MessageListView  // swift lint:disable:this force_cast
 //        list.beginKeepBottom(rule: false)
 
 //        let visibleIndex: IndexPath = view.indexPathsForVisibleRows?.min() ?? IndexPath(row: 0, section: 0)
@@ -126,6 +126,20 @@ class MessageDataSource:
          */
     }
 
+    private var fetchController: NSFetchedResultsController<CDMessage>?
+
+    private var listItems = [[Message]]()
+    private var heightCache = [[CGFloat?]]()
+    private lazy var needsUpdateCellHeight = DelayAction(Action { [weak self] in
+        guard let sf = self else { return }
+        sf.view.beginUpdates()
+        sf.view.endUpdates()
+    })
+}
+
+// MARK: - Update Logic
+
+extension MessageDataSource {
     func applyFetched(items: [[Message]]) {
         if listItems == items { return }
         if listItems.isEmpty || items.isEmpty {
@@ -144,7 +158,6 @@ class MessageDataSource:
                     self?.view?.scrollToLastRow(animated: false)
                 }
             } else {
-                assert(false)
                 resetList(items: items)
             }
             return
@@ -196,6 +209,37 @@ class MessageDataSource:
         }
     }
 
+    func deleteFromCell(_ cell: MessageBaseCell) {
+        guard let indexPath = view?.indexPath(for: cell) else { return }
+        let isSelected = cell.isSelected
+        let isSectionRemoved = deleteItem(at: indexPath)
+        if isSectionRemoved {
+            view.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+        } else {
+            view.deleteRows(at: [indexPath], with: .automatic)
+            if indexPath.row == 0 {
+                view.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
+        itemMayRemove?(self)
+
+        // Update selection
+        guard isSelected else { return }
+        var nextSelectIP = indexPath
+        if isSectionRemoved {
+            nextSelectIP.row = 0
+        }
+        if let _ = item(at: nextSelectIP) {
+            view.selectRow(at: nextSelectIP, animated: true, scrollToVisible: true)
+            return
+        }
+        nextSelectIP.row = indexPath.row - 1
+        if let _ = item(at: nextSelectIP) {
+            view.selectRow(at: nextSelectIP, animated: true, scrollToVisible: true)
+            return
+        }
+    }
+
     func scrollTo(item: Message?, selection: Bool, animated: Bool) {
         guard let item = item,
               let ip = indexPath(of: item) else {
@@ -207,11 +251,110 @@ class MessageDataSource:
             view.scrollToRow(at: ip, at: .middle, animated: animated)
         }
     }
+}
 
-    // MARK: - Fetch
+// MARK: - List
 
-    private var fetchController: NSFetchedResultsController<CDMessage>?
+extension MessageDataSource {
+    var selectedItems: [Message] {
+        guard let ips = view.indexPathsForSelectedRows else {
+            return []
+        }
+        return ips.compactMap(item(at:))
+    }
 
+    func item(at ip: IndexPath) -> Message? {
+        listItems.element(at: ip.section)?.element(at: ip.row)
+    }
+
+    func indexPath(of item: Message) -> IndexPath? {
+        for (section, sectionItems) in listItems.enumerated().reversed() {
+            guard let sectionFirstItem = sectionItems.first else { continue }
+            if abs(sectionFirstItem.time.timeIntervalSince(item.time)) < 0.01 {
+                for (row, listItem) in sectionItems.enumerated()
+                where listItem == item {
+                    return IndexPath(row: row, section: section)
+                }
+            }
+        }
+        return nil
+    }
+
+    /// return: is section removed
+    private func deleteItem(at indexPath: IndexPath) -> Bool {
+        let section = indexPath.section
+        var sectionItems = listItems[section]
+        sectionItems.remove(at: indexPath.row)
+        let isSectionRemoved = sectionItems.isEmpty
+        if isSectionRemoved {
+            listItems.remove(at: section)
+            heightCache.remove(at: section)
+        } else {
+            listItems[section] = sectionItems
+            var heightItems = heightCache[section]
+            heightItems.remove(at: indexPath.row)
+            heightCache[section] = heightItems
+        }
+        return isSectionRemoved
+    }
+
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        listItems.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        listItems[section].count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let item = item(at: indexPath) else {
+            AppLog().critical("DS> Index out bounds!")
+            return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        }
+        let cellID = item.cellIdentifier(for: tableView, indexPath: indexPath)
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageBaseCell else {
+            fatalError()
+        }
+        cell.indexPath = indexPath
+        cell.setItem(item.cellItem())
+        if let sizeView = cell.sizeView,
+           let height = cachedHeight(at: indexPath) {
+            sizeView.heightConstraint.constant = height
+        }
+        return cell
+    }
+
+    // MARK: Cell Height
+
+    func cachedHeight(at indexPath: IndexPath) -> CGFloat? {
+        guard let value = heightCache.element(at: indexPath.section)?.element(at: indexPath.row) else {
+            return nil
+        }
+        return value
+    }
+    private func setCachedHeight(indexPath: IndexPath, value: CGFloat?) {
+        var sectionItems = heightCache.element(at: indexPath.section) ?? {
+            heightCache.insert([], at: indexPath.section)
+            return []
+        }()
+        sectionItems[indexPath.row] = value
+        heightCache[indexPath.section] = sectionItems
+    }
+
+    func updateHeight(_ height: CGFloat, for cell: UITableViewCell) {
+        guard let ip = view.indexPath(for: cell) else {
+            return
+        }
+        if cachedHeight(at: ip) == height { return }
+        setCachedHeight(indexPath: ip, value: height)
+        needsUpdateCellHeight.set()
+    }
+}
+
+// MARK: - Fetch
+
+extension MessageDataSource {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
         assertDispatch(.notOnQueue(.main))
         // 插入直接会在结果里，而不会限制在最初的 fetch limit
@@ -251,90 +394,4 @@ class MessageDataSource:
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         AppLog().debug("DS> messages did change")
     }
-
-    // MARK: - List
-
-    var listItems = [[Message]]()
-
-    var selectedItems: [Message] {
-        guard let ips = view.indexPathsForSelectedRows else {
-            return []
-        }
-        return ips.compactMap(item(at:))
-    }
-
-    func item(at ip: IndexPath) -> Message? {
-        listItems.element(at: ip.section)?.element(at: ip.row)
-    }
-
-    func indexPath(of item: Message) -> IndexPath? {
-        for (section, sectionItems) in listItems.enumerated().reversed() {
-            guard let sectionFirstItem = sectionItems.first else { continue }
-            if abs(sectionFirstItem.time.timeIntervalSince(item.time)) < 0.01 {
-                for (row, listItem) in sectionItems.enumerated()
-                where listItem == item {
-                    return IndexPath(row: row, section: section)
-                }
-            }
-        }
-        return nil
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        listItems.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        listItems[section].count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = item(at: indexPath) else {
-            AppLog().critical("DS> Index out bounds!")
-            return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        }
-        let cellID = item.cellIdentifier(for: tableView, indexPath: indexPath)
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageBaseCell else {
-            fatalError()
-        }
-        cell.setItem(item.cellItem())
-        if let sizeView = cell.sizeView,
-           let height = cachedHeight(at: indexPath) {
-            sizeView.heightConstraint.constant = height
-        }
-        return cell
-    }
-
-    // MARK: Cell Height
-
-    private var heightCache = [[CGFloat?]]()
-
-    func cachedHeight(at indexPath: IndexPath) -> CGFloat? {
-        guard let value = heightCache.element(at: indexPath.section)?.element(at: indexPath.row) else {
-            return nil
-        }
-        return value
-    }
-    private func setCachedHeight(indexPath: IndexPath, value: CGFloat?) {
-        var sectionItems = heightCache.element(at: indexPath.section) ?? {
-            heightCache.insert([], at: indexPath.section)
-            return []
-        }()
-        sectionItems[indexPath.row] = value
-        heightCache[indexPath.section] = sectionItems
-    }
-
-    func updateHeight(_ height: CGFloat, for cell: UITableViewCell) {
-        guard let ip = view.indexPath(for: cell) else {
-            return
-        }
-        if cachedHeight(at: ip) == height { return }
-        setCachedHeight(indexPath: ip, value: height)
-        needsUpdateCellHeight.set()
-    }
-    private lazy var needsUpdateCellHeight = DelayAction(Action { [weak self] in
-        guard let sf = self else { return }
-        sf.view.beginUpdates()
-        sf.view.endUpdates()
-    })
 }

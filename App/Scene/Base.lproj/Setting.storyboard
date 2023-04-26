@@ -42,22 +42,22 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-b0-InC" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="34.333333333333329" width="340" height="145.66666666666669"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQt-Eq-0kP" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="setting-engine-add-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
                                                                 <rect key="frame" x="15" y="14.999999999999989" width="310" height="50.333333333333343"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" title="Add new" buttonSize="large"/>
+                                                                <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" title="Add new" imagePadding="8" buttonSize="large"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <segue destination="Saw-8Q-LnK" kind="show" id="Ytd-Ow-lsW"/>
+                                                                    <segue destination="engine-create-type-vc" kind="show" id="Ytd-Ow-lsW"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="setting-engine-config-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
                                                                 <rect key="frame" x="15" y="80.333333333333314" width="310" height="50.333333333333343"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                <state key="normal" title="Configuration"/>
-                                                                <buttonConfiguration key="configuration" style="filled" title="Configuration" buttonSize="large"/>
+                                                                <buttonConfiguration key="configuration" style="filled" title="Management" imagePadding="7" buttonSize="large">
+                                                                    <imageReference key="image" image="aqi.medium" catalog="system" symbolScale="medium"/>
+                                                                </buttonConfiguration>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
                                                                 </userDefinedRuntimeAttributes>
@@ -71,10 +71,10 @@
                                                             <constraint firstAttribute="bottom" secondItem="setting-engine-config-button" secondAttribute="bottom" constant="15" id="B9y-qa-uqm"/>
                                                             <constraint firstAttribute="trailing" secondItem="setting-engine-config-button" secondAttribute="trailing" constant="15" id="MtR-dH-oAW"/>
                                                             <constraint firstItem="setting-engine-config-button" firstAttribute="leading" secondItem="bwd-b0-InC" secondAttribute="leading" constant="15" id="NOr-ip-GpI"/>
-                                                            <constraint firstItem="yQt-Eq-0kP" firstAttribute="leading" secondItem="bwd-b0-InC" secondAttribute="leading" constant="15" id="hTQ-2e-ViN"/>
-                                                            <constraint firstItem="setting-engine-config-button" firstAttribute="top" secondItem="yQt-Eq-0kP" secondAttribute="bottom" constant="15" id="jkp-Pc-vjI"/>
-                                                            <constraint firstAttribute="trailing" secondItem="yQt-Eq-0kP" secondAttribute="trailing" constant="15" id="kH9-2M-bnW"/>
-                                                            <constraint firstItem="yQt-Eq-0kP" firstAttribute="top" secondItem="bwd-b0-InC" secondAttribute="top" constant="15" id="sJ8-BS-E3G"/>
+                                                            <constraint firstItem="setting-engine-add-button" firstAttribute="leading" secondItem="bwd-b0-InC" secondAttribute="leading" constant="15" id="hTQ-2e-ViN"/>
+                                                            <constraint firstItem="setting-engine-config-button" firstAttribute="top" secondItem="setting-engine-add-button" secondAttribute="bottom" constant="15" id="jkp-Pc-vjI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="setting-engine-add-button" secondAttribute="trailing" constant="15" id="kH9-2M-bnW"/>
+                                                            <constraint firstItem="setting-engine-add-button" firstAttribute="top" secondItem="bwd-b0-InC" secondAttribute="top" constant="15" id="sJ8-BS-E3G"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwp-BJ-EKR" userLabel="Space">
@@ -130,8 +130,8 @@
                                                                 </menu>
                                                                 <buttonConfiguration key="configuration" style="gray"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-font-size-title">
-                                                                <rect key="frame" x="15" y="64.666666666666686" width="67.333333333333329" height="19.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-font-size-title">
+                                                                <rect key="frame" x="15" y="64.666666666666686" width="65.333333333333329" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <color key="textColor" name="Text/Second"/>
                                                                 <nil key="highlightedColor"/>
@@ -256,8 +256,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nka-2x-iTk" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="561.33333333333337" width="340" height="140.66666666666663"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Send By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-title">
-                                                                <rect key="frame" x="15.000000000000004" y="15.333333333333256" width="60.333333333333343" height="19.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Default send key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-title">
+                                                                <rect key="frame" x="15" y="15.333333333333256" width="121" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <color key="textColor" name="Text/Second"/>
                                                                 <nil key="highlightedColor"/>
@@ -266,7 +266,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="KEY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-key">
-                                                                <rect key="frame" x="83.333333333333329" y="18.333333333333258" width="0.0" height="15.666666666666664"/>
+                                                                <rect key="frame" x="144" y="18.333333333333258" width="0.0" height="15.666666666666664"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                 <nil key="highlightedColor"/>
@@ -275,7 +275,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-segment">
-                                                                <rect key="frame" x="93.333333333333329" y="10" width="231.66666666666669" height="32"/>
+                                                                <rect key="frame" x="154" y="10" width="171" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" priority="750" constant="240" id="1aO-Cf-lio"/>
                                                                 </constraints>
@@ -398,22 +398,26 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-manage-add-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="20.000000000000004" width="260" height="50.333333333333343"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="640" id="QeY-XX-r3B"/>
+                                                    </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" title="Add new" buttonSize="large"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <segue destination="Saw-8Q-LnK" kind="show" id="sPJ-Ys-2fk"/>
+                                                        <segue destination="engine-create-type-vc" kind="show" id="sPJ-Ys-2fk"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <viewLayoutGuide key="safeArea" id="fu4-Mx-jIc"/>
                                             <constraints>
-                                                <constraint firstItem="fu4-Mx-jIc" firstAttribute="trailing" secondItem="engine-manage-add-button" secondAttribute="trailing" constant="20" id="E1g-M3-vXI"/>
-                                                <constraint firstItem="engine-manage-add-button" firstAttribute="leading" secondItem="fu4-Mx-jIc" secondAttribute="leading" constant="20" id="Hs4-GM-87v"/>
+                                                <constraint firstItem="engine-manage-add-button" firstAttribute="leading" secondItem="fu4-Mx-jIc" secondAttribute="leading" priority="500" constant="20" id="Hs4-GM-87v"/>
                                                 <constraint firstItem="fu4-Mx-jIc" firstAttribute="bottom" secondItem="engine-manage-add-button" secondAttribute="bottom" constant="20" id="Jt4-Vk-VGz"/>
                                                 <constraint firstItem="engine-manage-add-button" firstAttribute="top" secondItem="fu4-Mx-jIc" secondAttribute="top" constant="20" id="PPV-WX-nkW"/>
+                                                <constraint firstItem="engine-manage-add-button" firstAttribute="centerX" secondItem="058-lK-zN5" secondAttribute="centerX" id="QfH-MF-HUH"/>
+                                                <constraint firstItem="engine-manage-add-button" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fu4-Mx-jIc" secondAttribute="leading" constant="20" id="mYM-21-8Dw"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -436,10 +440,10 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScO-d3-sox">
-                                                    <rect key="frame" x="10" y="5" width="280" height="72.333333333333329"/>
+                                                    <rect key="frame" x="20" y="5" width="260" height="72.333333333333329"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" id="y5y-Bo-XvI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="72"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="72"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" name="Background/Box"/>
                                                             <userDefinedRuntimeAttributes>
@@ -449,13 +453,13 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afw-vd-8L1" customClass="EngineCellView" customModule="B9ChatAI" customModuleProvider="target">
-                                                            <rect key="frame" x="20" y="15.000000000000004" width="240" height="42.333333333333343"/>
+                                                            <rect key="frame" x="20" y="15.000000000000004" width="220" height="42.333333333333343"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-gW-ZGs">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="42.333333333333336"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="220" height="42.333333333333336"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-name">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="18.666666666666668"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-name">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="220" height="18.666666666666668"/>
                                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                                             <color key="textColor" name="Text/First"/>
                                                                             <nil key="highlightedColor"/>
@@ -467,7 +471,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-type">
-                                                                            <rect key="frame" x="0.0" y="26.666666666666668" width="240" height="15.666666666666668"/>
+                                                                            <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" name="Text/Second"/>
                                                                             <nil key="highlightedColor"/>
@@ -504,10 +508,10 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             </subviews>
                                             <viewLayoutGuide key="safeArea" id="HCS-XO-Xq5"/>
                                             <constraints>
-                                                <constraint firstItem="ScO-d3-sox" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HCS-XO-Xq5" secondAttribute="leading" constant="10" id="Hgd-9o-8MK"/>
+                                                <constraint firstItem="ScO-d3-sox" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HCS-XO-Xq5" secondAttribute="leading" constant="20" id="Hgd-9o-8MK"/>
                                                 <constraint firstItem="ScO-d3-sox" firstAttribute="top" secondItem="2Jf-9R-6jR" secondAttribute="top" constant="5" id="OUn-mT-95K"/>
                                                 <constraint firstAttribute="bottom" secondItem="ScO-d3-sox" secondAttribute="bottom" constant="5" id="kG2-KL-u8a"/>
-                                                <constraint firstItem="ScO-d3-sox" firstAttribute="leading" secondItem="HCS-XO-Xq5" secondAttribute="leading" priority="500" constant="10" id="uId-pA-6Z3"/>
+                                                <constraint firstItem="ScO-d3-sox" firstAttribute="leading" secondItem="HCS-XO-Xq5" secondAttribute="leading" priority="500" constant="20" id="uId-pA-6Z3"/>
                                                 <constraint firstItem="ScO-d3-sox" firstAttribute="centerX" secondItem="2Jf-9R-6jR" secondAttribute="centerX" id="wNi-wr-cak"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -542,12 +546,12 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
         <!--Create New Engine-->
         <scene sceneID="nKa-CR-kR1">
             <objects>
-                <viewController storyboardIdentifier="EngineCreateTypeViewController" title="Create New Engine" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Saw-8Q-LnK" customClass="EngineCreateTypeViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EngineCreateTypeViewController" title="Create New Engine" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="engine-create-type-vc" customClass="EngineCreateTypeViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kr9-4P-bxT">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZg-wa-K14">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-header">
                                 <rect key="frame" x="20" y="30" width="260" height="26.333333333333329"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
@@ -588,7 +592,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wvz-c9-3Pt">
                                                     <rect key="frame" x="20" y="14.000000000000004" width="220" height="42.333333333333343"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kt4-a7-4Pc">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&lt;NAME&gt;" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-api-name">
                                                             <rect key="frame" x="0.0" y="0.0" width="220" height="18.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                             <color key="textColor" name="Text/First"/>
@@ -600,7 +604,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DETAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVP-i0-MLS">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-api-detail">
                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" name="Text/Second"/>
@@ -622,9 +626,9 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="detailLabel" destination="uVP-i0-MLS" id="72L-hI-hFy"/>
-                                            <outlet property="nameLabel" destination="Kt4-a7-4Pc" id="5Vj-LI-ltQ"/>
-                                            <segue destination="yP6-Jt-vEM" kind="custom" customClass="RFNavigationPushReplaceSegue" id="D3V-zP-hRC"/>
+                                            <outlet property="detailLabel" destination="engine-create-type-cell-api-detail" id="72L-hI-hFy"/>
+                                            <outlet property="nameLabel" destination="engine-create-type-cell-api-name" id="5Vj-LI-ltQ"/>
+                                            <segue destination="engine-create-api-vc" kind="custom" customClass="RFNavigationPushReplaceSegue" id="D3V-zP-hRC"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OpenAI Proxy" id="V5g-Ix-cug" customClass="EngineCreateTypeCell" customModule="B9ChatAI" customModuleProvider="target">
@@ -642,7 +646,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-ie-DXG">
                                                     <rect key="frame" x="20" y="14.000000000000004" width="220" height="42.333333333333343"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.81000000000000005" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uz4-Ec-o7l">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;NAME&gt;" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.81000000000000005" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-name">
                                                             <rect key="frame" x="0.0" y="0.0" width="220" height="18.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                             <color key="textColor" name="Text/First"/>
@@ -654,7 +658,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DETAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.79000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lnt-1g-Q20">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.79000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-detail">
                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" name="Text/Second"/>
@@ -676,15 +680,15 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="detailLabel" destination="Lnt-1g-Q20" id="6hE-Ku-Q8R"/>
-                                            <outlet property="nameLabel" destination="uz4-Ec-o7l" id="dDl-tk-lZ7"/>
-                                            <segue destination="vQW-BX-Sp3" kind="custom" customClass="RFNavigationPushReplaceSegue" id="4E7-uK-C1r"/>
+                                            <outlet property="detailLabel" destination="engine-create-type-cell-proxy-detail" id="6hE-Ku-Q8R"/>
+                                            <outlet property="nameLabel" destination="engine-create-type-cell-proxy-name" id="dDl-tk-lZ7"/>
+                                            <segue destination="engine-create-proxy-vc" kind="custom" customClass="RFNavigationPushReplaceSegue" id="4E7-uK-C1r"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="Saw-8Q-LnK" id="cWa-Vu-BZx"/>
-                                    <outlet property="delegate" destination="Saw-8Q-LnK" id="KtQ-vg-y2c"/>
+                                    <outlet property="dataSource" destination="engine-create-type-vc" id="cWa-Vu-BZx"/>
+                                    <outlet property="delegate" destination="engine-create-type-vc" id="KtQ-vg-y2c"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -692,11 +696,11 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                         <color key="backgroundColor" name="Background/SettingPage"/>
                         <constraints>
                             <constraint firstItem="wWx-Fz-3EP" firstAttribute="leading" secondItem="3va-Bu-YY2" secondAttribute="leading" id="Exh-0f-i9Q"/>
-                            <constraint firstItem="3va-Bu-YY2" firstAttribute="trailing" secondItem="SZg-wa-K14" secondAttribute="trailing" constant="20" id="FH9-do-SU8"/>
-                            <constraint firstItem="SZg-wa-K14" firstAttribute="top" secondItem="Kr9-4P-bxT" secondAttribute="topMargin" constant="30" id="K8S-87-wTs"/>
-                            <constraint firstItem="wWx-Fz-3EP" firstAttribute="top" secondItem="SZg-wa-K14" secondAttribute="bottom" constant="15" id="KlR-yF-isD"/>
+                            <constraint firstItem="3va-Bu-YY2" firstAttribute="trailing" secondItem="engine-create-type-header" secondAttribute="trailing" constant="20" id="FH9-do-SU8"/>
+                            <constraint firstItem="engine-create-type-header" firstAttribute="top" secondItem="Kr9-4P-bxT" secondAttribute="topMargin" constant="30" id="K8S-87-wTs"/>
+                            <constraint firstItem="wWx-Fz-3EP" firstAttribute="top" secondItem="engine-create-type-header" secondAttribute="bottom" constant="15" id="KlR-yF-isD"/>
                             <constraint firstAttribute="bottom" secondItem="wWx-Fz-3EP" secondAttribute="bottom" id="jgA-Yh-f4A"/>
-                            <constraint firstItem="SZg-wa-K14" firstAttribute="leading" secondItem="3va-Bu-YY2" secondAttribute="leading" constant="20" id="uJg-hn-XLf"/>
+                            <constraint firstItem="engine-create-type-header" firstAttribute="leading" secondItem="3va-Bu-YY2" secondAttribute="leading" constant="20" id="uJg-hn-XLf"/>
                             <constraint firstItem="3va-Bu-YY2" firstAttribute="trailing" secondItem="wWx-Fz-3EP" secondAttribute="trailing" id="uQG-7z-Jbb"/>
                         </constraints>
                     </view>
@@ -713,7 +717,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
         <!--New OpenAI Engine-->
         <scene sceneID="sYZ-oj-Arz">
             <objects>
-                <viewController title="New OpenAI Engine" modalPresentationStyle="fullScreen" id="yP6-Jt-vEM" customClass="EngineCreateOpenAIViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New OpenAI Engine" modalPresentationStyle="fullScreen" id="engine-create-api-vc" customClass="EngineCreateOpenAIViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6y-69-8tO">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -729,26 +733,26 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="one-time-code"/>
                                         <connections>
-                                            <outlet property="nextField" destination="3yL-k3-k7c" id="dGc-vO-aJj"/>
+                                            <outlet property="nextField" destination="engine-create-api-submit" id="dGc-vO-aJj"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yL-k3-k7c">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-submit">
                                         <rect key="frame" x="210.66666666666666" y="0.0" width="49.333333333333343" height="46"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.right" catalog="system"/>
                                         <connections>
-                                            <action selector="onSubmit:" destination="yP6-Jt-vEM" eventType="touchUpInside" id="i6f-fB-hw5"/>
+                                            <action selector="onSubmit:" destination="engine-create-api-vc" eventType="touchUpInside" id="i6f-fB-hw5"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="engine-create-api-key" firstAttribute="top" secondItem="C6k-is-ius" secondAttribute="top" id="Da1-AL-XLZ"/>
-                                    <constraint firstItem="3yL-k3-k7c" firstAttribute="leading" secondItem="engine-create-api-key" secondAttribute="trailing" id="TjA-Ka-yKI"/>
-                                    <constraint firstItem="3yL-k3-k7c" firstAttribute="top" secondItem="engine-create-api-key" secondAttribute="top" id="Ymp-4h-RKG"/>
+                                    <constraint firstItem="engine-create-api-submit" firstAttribute="leading" secondItem="engine-create-api-key" secondAttribute="trailing" id="TjA-Ka-yKI"/>
+                                    <constraint firstItem="engine-create-api-submit" firstAttribute="top" secondItem="engine-create-api-key" secondAttribute="top" id="Ymp-4h-RKG"/>
                                     <constraint firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fas-Ce-Wm9"/>
-                                    <constraint firstItem="3yL-k3-k7c" firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fvD-Bs-T2E"/>
+                                    <constraint firstItem="engine-create-api-submit" firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fvD-Bs-T2E"/>
                                     <constraint firstItem="engine-create-api-key" firstAttribute="leading" secondItem="C6k-is-ius" secondAttribute="leading" id="hFL-wM-iBN"/>
-                                    <constraint firstAttribute="trailing" secondItem="3yL-k3-k7c" secondAttribute="trailing" id="jYy-cD-N79"/>
+                                    <constraint firstAttribute="trailing" secondItem="engine-create-api-submit" secondAttribute="trailing" id="jYy-cD-N79"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;LOG&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-log" customClass="LogLabel" customModule="B9ChatAI" customModuleProvider="target">
@@ -776,7 +780,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                     <size key="freeformSize" width="300" height="600"/>
                     <connections>
                         <outlet property="apiKeyField" destination="engine-create-api-key" id="El7-cR-7Mj"/>
-                        <outlet property="apiKeySubmitButton" destination="3yL-k3-k7c" id="8QY-4A-wMs"/>
+                        <outlet property="apiKeySubmitButton" destination="engine-create-api-submit" id="8QY-4A-wMs"/>
                         <outlet property="logLabel" destination="engine-create-api-log" id="l95-Tu-faN"/>
                     </connections>
                 </viewController>
@@ -804,7 +808,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZK-iV-0FV">
                                                         <rect key="frame" x="0.0" y="0.0" width="209" height="50"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B9ChatAI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="about-app-title">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B9ChatAI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="about-app-title">
                                                                 <rect key="frame" x="0.0" y="0.0" width="143" height="50"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                                 <color key="textColor" name="Text/Second"/>
@@ -813,7 +817,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="about-version">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="about-version">
                                                                 <rect key="frame" x="153" y="20" width="56" height="15.666666666666664"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <color key="textColor" name="Text/Thrid"/>
@@ -832,7 +836,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <constraint firstItem="about-version" firstAttribute="leading" secondItem="about-app-title" secondAttribute="trailing" constant="10" id="YTT-7w-J9F"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2023 BB9z." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="about-copyright">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2023 BB9z." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="about-copyright">
                                                         <rect key="frame" x="0.0" y="57.999999999999993" width="149.66666666666666" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="Text/Thrid"/>
@@ -883,7 +887,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <constraint firstAttribute="height" constant="20" id="IVS-yG-wFE"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="about-privacy">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="about-privacy">
                                                         <rect key="frame" x="0.0" y="167.66666666666666" width="55.666666666666664" height="20.333333333333343"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <color key="textColor" name="Text/Second"/>
@@ -892,7 +896,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTENT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="about-privacy-content">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTENT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="about-privacy-content">
                                                         <rect key="frame" x="0.0" y="196" width="62.333333333333336" height="15.666666666666657"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="Text/Thrid"/>
@@ -981,7 +985,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
         <!--New OpenAI Proxy Engine-->
         <scene sceneID="JMt-VI-f4l">
             <objects>
-                <viewController title="New OpenAI Proxy Engine" modalPresentationStyle="fullScreen" id="vQW-BX-Sp3" customClass="EngineCreateProxyViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New OpenAI Proxy Engine" modalPresentationStyle="fullScreen" id="engine-create-proxy-vc" customClass="EngineCreateProxyViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QZm-ar-YQu">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1000,7 +1004,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="one-time-code"/>
                                                 <connections>
-                                                    <action selector="onAddressChanged:" destination="vQW-BX-Sp3" eventType="editingChanged" id="pfq-y3-tlE"/>
+                                                    <action selector="onAddressChanged:" destination="engine-create-proxy-vc" eventType="editingChanged" id="pfq-y3-tlE"/>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wxx-4B-5X7">
@@ -1018,7 +1022,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fli-qQ-9l8">
                                                         <rect key="frame" x="211" y="0.0" width="51" height="31"/>
                                                         <connections>
-                                                            <action selector="onSendKeySwitchChanged:" destination="vQW-BX-Sp3" eventType="valueChanged" id="3Fe-DZ-H2k"/>
+                                                            <action selector="onSendKeySwitchChanged:" destination="engine-create-proxy-vc" eventType="valueChanged" id="3Fe-DZ-H2k"/>
                                                         </connections>
                                                     </switch>
                                                 </subviews>
@@ -1032,7 +1036,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                     <constraint firstAttribute="bottom" secondItem="engine-create-proxy-sendkey-label" secondAttribute="bottom" id="xo9-cN-XVN"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your API key" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BgB-YU-rd1" customClass="MBTextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your API key" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-key" customClass="MBTextField">
                                                 <rect key="frame" x="0.0" y="93" width="260" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="nsy-Tb-8QY"/>
@@ -1040,7 +1044,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="one-time-code"/>
                                                 <connections>
-                                                    <outlet property="nextField" destination="3yL-k3-k7c" id="Pfx-zx-Rvw"/>
+                                                    <outlet property="nextField" destination="engine-create-api-submit" id="Pfx-zx-Rvw"/>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKP-k1-5fB" userLabel="Space">
@@ -1049,7 +1053,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                     <constraint firstAttribute="height" constant="10" id="9Ti-Po-U01"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dX6-7v-z1e">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-advanced">
                                                 <rect key="frame" x="0.0" y="165" width="260" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="tintColor" name="Text/First"/>
@@ -1062,7 +1066,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                     <imageReference key="image" image="arrowtriangle.down.fill" catalog="system" symbolScale="small"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="onAdvancedButtonTapped:" destination="vQW-BX-Sp3" eventType="touchUpInside" id="9ca-vj-HpL"/>
+                                                    <action selector="onAdvancedButtonTapped:" destination="engine-create-proxy-vc" eventType="touchUpInside" id="9ca-vj-HpL"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-BT-p1r">
@@ -1074,7 +1078,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <constraint firstAttribute="height" constant="1" id="nUp-a6-glF"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Completions endpoint" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcC-cd-ihF">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Completions endpoint" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-completion-label">
                                                         <rect key="frame" x="0.0" y="9" width="260" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="Text/Thrid"/>
@@ -1083,7 +1087,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="14" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pzQ-sR-NmN" customClass="MBTextField">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="14" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-completion-field" customClass="MBTextField">
                                                         <rect key="frame" x="0.0" y="32.666666666666657" width="260" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="7On-HK-6hf"/>
@@ -1097,7 +1101,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <constraint firstAttribute="height" constant="1" id="YgZ-ek-tIo"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Models endpoint" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rWZ-LR-pao">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Models endpoint" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-model-label">
                                                         <rect key="frame" x="0.0" y="93.666666666666686" width="260" height="15.666666666666671"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                         <color key="textColor" name="Text/Thrid"/>
@@ -1106,7 +1110,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="14" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-ev-egN" customClass="MBTextField">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="14" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-model-field" customClass="MBTextField">
                                                         <rect key="frame" x="0.0" y="117.33333333333331" width="260" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="Tne-aR-rsn"/>
@@ -1125,7 +1129,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MW6-zm-1sO">
                                                 <rect key="frame" x="0.0" y="376.33333333333331" width="260" height="48"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fng-RE-vSe">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-submit">
                                                         <rect key="frame" x="100" y="0.0" width="160" height="48"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" priority="750" constant="160" id="NjC-EI-lun"/>
@@ -1133,19 +1137,19 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="Create"/>
                                                         <connections>
-                                                            <action selector="onSubmit:" destination="vQW-BX-Sp3" eventType="touchUpInside" id="jT1-qY-Whb"/>
+                                                            <action selector="onSubmit:" destination="engine-create-proxy-vc" eventType="touchUpInside" id="jT1-qY-Whb"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="1kg-zr-WZg"/>
-                                                    <constraint firstItem="fng-RE-vSe" firstAttribute="top" secondItem="MW6-zm-1sO" secondAttribute="top" id="NHf-eF-9KE"/>
-                                                    <constraint firstItem="fng-RE-vSe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MW6-zm-1sO" secondAttribute="leading" id="WJ7-s6-scR"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fng-RE-vSe" secondAttribute="trailing" id="ma3-XC-EMh"/>
-                                                    <constraint firstAttribute="bottom" secondItem="fng-RE-vSe" secondAttribute="bottom" id="rTx-oa-bLy"/>
+                                                    <constraint firstItem="engine-create-proxy-submit" firstAttribute="top" secondItem="MW6-zm-1sO" secondAttribute="top" id="NHf-eF-9KE"/>
+                                                    <constraint firstItem="engine-create-proxy-submit" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MW6-zm-1sO" secondAttribute="leading" id="WJ7-s6-scR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="engine-create-proxy-submit" secondAttribute="trailing" id="ma3-XC-EMh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="engine-create-proxy-submit" secondAttribute="bottom" id="rTx-oa-bLy"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;LOG&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K4-jA-Uo2" customClass="LogLabel" customModule="B9ChatAI" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;LOG&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-log" customClass="LogLabel" customModule="B9ChatAI" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="432.33333333333331" width="260" height="15.666666666666686"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="Text/Thrid"/>
@@ -1179,15 +1183,15 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                     <size key="freeformSize" width="300" height="600"/>
                     <connections>
                         <outlet property="addressField" destination="engine-create-proxy-address" id="SoW-nm-T01"/>
-                        <outlet property="advancedButton" destination="dX6-7v-z1e" id="d3f-YA-hnd"/>
+                        <outlet property="advancedButton" destination="engine-create-proxy-advanced" id="d3f-YA-hnd"/>
                         <outlet property="advancedContainer" destination="fbd-BT-p1r" id="Df8-OP-YU5"/>
-                        <outlet property="completionEndpointField" destination="pzQ-sR-NmN" id="hya-Xv-Myz"/>
+                        <outlet property="completionEndpointField" destination="engine-create-proxy-completion-field" id="hya-Xv-Myz"/>
                         <outlet property="content" destination="oX3-O6-0at" id="AGW-MD-it1"/>
-                        <outlet property="keyField" destination="BgB-YU-rd1" id="ZEF-2s-jt0"/>
-                        <outlet property="logLabel" destination="6K4-jA-Uo2" id="fns-O0-9zJ"/>
-                        <outlet property="modelEndpointField" destination="ihI-ev-egN" id="pwS-pD-PmI"/>
+                        <outlet property="keyField" destination="engine-create-proxy-key" id="ZEF-2s-jt0"/>
+                        <outlet property="logLabel" destination="engine-create-proxy-log" id="fns-O0-9zJ"/>
+                        <outlet property="modelEndpointField" destination="engine-create-proxy-model-field" id="pwS-pD-PmI"/>
                         <outlet property="sendKeySwitch" destination="fli-qQ-9l8" id="QDV-mt-cTE"/>
-                        <outlet property="submitButton" destination="fng-RE-vSe" id="2ef-CY-sLU"/>
+                        <outlet property="submitButton" destination="engine-create-proxy-submit" id="2ef-CY-sLU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDN-yK-hkh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1199,6 +1203,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
         <segue reference="Ytd-Ow-lsW"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="aqi.medium" catalog="system" width="128" height="120"/>
         <image name="arrow.right" catalog="system" width="128" height="95"/>
         <image name="arrowtriangle.down.fill" catalog="system" width="128" height="120"/>
         <image name="arrowtriangle.forward.fill" catalog="system" width="128" height="113"/>

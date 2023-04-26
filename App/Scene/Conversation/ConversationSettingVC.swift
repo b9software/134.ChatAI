@@ -343,7 +343,7 @@ extension ConversationSettingViewController {
     @IBAction private func onTopPSliderChange() {
         updateTopP(topProbabilitySlider.value)
     }
-    
+
     func chatConfigSendbyValue() -> Int? {
         let index = sendbySegment.selectedSegmentIndex
         return index == 0 ? nil : index - 1

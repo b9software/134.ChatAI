@@ -5,7 +5,8 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import Foundation
+import Logging
+import UIKit
 
 enum Current {
     static let bundleID = "b9software.chat-ai"
@@ -34,11 +35,26 @@ enum Current {
         }()
     }
 
+    static var focusLog: Logger {
+        Mocked.focusLog ?? {
+            let instance = Logger(label: "app.focusSystem")
+            Mocked.focusLog = instance
+            return instance
+        }()
+    }
+
     static var identifierForVendor: String {
         Mocked.identifierForVendor ?? {
             let uuid = (UIDevice.current.identifierForVendor ?? UUID()).uuidString
             Mocked.identifierForVendor = uuid
             return uuid
+        }()
+    }
+
+    static var keyWindow: UIWindow? {
+        Mocked.keyWindow ?? {
+            (UIResponder.firstResponder as? UIView)?.window
+            ?? (UIApplication.shared as DeprecatedKeyWindow).keyWindow
         }()
     }
 
@@ -58,6 +74,14 @@ enum Current {
             let instance = MockedMacInterface()
             #endif
             Mocked.osBridge = instance
+            return instance
+        }()
+    }
+
+    static var responderLog: Logger {
+        Mocked.responderLog ?? {
+            let instance = Logger(label: "app.responder")
+            Mocked.responderLog = instance
             return instance
         }()
     }
@@ -83,18 +107,30 @@ enum Mocked {
     static var conversationManager: ConversationManager?
     static var database: DBManager?
     static var defualts: UserDefaults?
+    static var focusLog: Logger?
     static var identifierForVendor: String?
+    static var keyWindow: UIWindow?
     static var messageSender: MessageSender?
     static var osBridge: MacInterface?
+    static var responderLog: Logger?
     static var userAgent: String?
 
     static func reset() {
         conversationManager = nil
         database = nil
         defualts = nil
+        focusLog = nil
         identifierForVendor = nil
+        keyWindow = nil
         messageSender = nil
         osBridge = nil
+        responderLog = nil
         userAgent = nil
     }
+}
+
+private protocol DeprecatedKeyWindow {
+    var keyWindow: UIWindow? { get }
+}
+extension UIApplication: DeprecatedKeyWindow {
 }

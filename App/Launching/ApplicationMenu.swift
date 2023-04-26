@@ -27,8 +27,11 @@ enum ApplicationMenu {
             ]),
             UIKeyCommand(title: L.Menu.continueLastTopic, action: #selector(ConversationDetailViewController.toggleLastReply), input: "K", modifierFlags: [.command]),
             UIKeyCommand(title: L.Menu.focusInput, action: #selector(ConversationDetailViewController.focusInputBox), input: "L", modifierFlags: [.command]),
-            sendbyCommand(),
+            UIKeyCommand(title: L.Menu.send, action: #selector(ConversationDetailViewController.onSend), input: "\r", modifierFlags: sendbyKey.keyModifierFlags),
         ]), afterMenu: .edit)
+        #if targetEnvironment(macCatalyst)
+        builder.insertSibling(AppDelegate().buildFloatModeMenu(), beforeMenu: .minimizeAndZoom)
+        #endif
         builder.replace(menu: .help, with: UIMenu(title: L.Menu.help, children: [
             UICommand(title: L.Menu.homePage, action: #selector(ApplicationDelegate.showHelp)),
             UICommand(title: L.Menu.userManual, action: #selector(ApplicationDelegate.showUserManual)),
@@ -38,28 +41,19 @@ enum ApplicationMenu {
     }
 
     static func setNeedsRebuild() {
+        AppLog().debug("Rebuild menu.")
         UIMenuSystem.main.setNeedsRebuild()
     }
 
     static func setNeedsRevalidate() {
         UIMenuSystem.main.setNeedsRevalidate()
     }
-    
-    static var sendbyKey = 0 {
+
+    static var sendbyKey: Sendby = .command {
         didSet {
             if oldValue == sendbyKey { return }
             UIMenuSystem.main.setNeedsRebuild()
         }
-    }
-    
-    static func sendbyCommand() -> UIKeyCommand {
-        var flags: UIKeyModifierFlags = [.command]
-        if sendbyKey == 1 {
-            flags = [.shift]
-        } else if sendbyKey == 2 {
-            flags = []
-        }
-        return UIKeyCommand(title: L.Menu.send, action: #selector(ConversationDetailViewController.onSend), input: "\r", modifierFlags: flags)
     }
 }
 

@@ -12,6 +12,7 @@ import UIKit
 class ConversationDetailViewController:
     UIViewController,
     ConversationUpdating,
+    GeneralSceneActivation,
     HasItem,
     StoryboardCreation,
     ToolbarItemProvider,
@@ -47,15 +48,12 @@ class ConversationDetailViewController:
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(onSelectionLabelEdit), name: .selectableLabelOnEdit, object: nil)
-        item.loadDraft(toView: inputTextView)
-        ApplicationMenu.sendbyKey = inputSendby
+        hasBecomeActive = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .selectableLabelOnEdit, object: nil)
-        saveDraft()
+        hasBecomeActive = false
     }
 
     private weak var lastFocusedItem: UIFocusEnvironment?
@@ -65,6 +63,18 @@ class ConversationDetailViewController:
         }
     }
     @IBOutlet private weak var settingButtonItem: UIBarButtonItem!
+#if targetEnvironment(macCatalyst)
+    private lazy var templateSlider: NSSliderTouchBarItem = {
+        let item = NSSliderTouchBarItem(identifier: .chatTemperature)
+        item.label = "Temperature"
+        item.minimumSliderWidth = 60
+        item.maximumSliderWidth = 160
+        item.doubleValue = Double(self.item.engineConfig.temperature)
+        item.target = self
+        item.action = #selector(onTemperatureSliderChanged)
+        return item
+    }()
+#endif
 
     @IBOutlet private weak var listView: UITableView!
     private lazy var listDataSource = MessageDataSource(tableView: listView)
@@ -80,7 +90,7 @@ class ConversationDetailViewController:
     @IBOutlet private weak var standardBar: UIView!
     @IBOutlet private weak var inputActionContainer: UIView!
     @IBOutlet private weak var inputActionStateLabel: UILabel!
-    @IBOutlet private weak var inputTextView: UITextView!
+    @IBOutlet private weak var inputTextView: ChatTextView!
     @IBOutlet private var inputTextHeight: NSLayoutConstraint!
     @IBOutlet private weak var inputSendButton: UIButton!
     private var isInputExpand = false
@@ -90,9 +100,15 @@ class ConversationDetailViewController:
             barLayoutBottom.constant = isInputAllowed ? 0 : barLayoutContainer.height
         }
     }
-    private var inputSendby: Int {
-        item?.chatConfig.sendbyKey ?? Current.defualts.preferredSendbyKey
+    private var inputSendby: Sendby {
+        let current = Sendby(item?.chatConfig.sendbyKey) ?? Current.defualts.preferredSendbyKey
+        if lastSendby != current {
+            lastSendby = current
+            updateSendButton(sendby: current)
+        }
+        return current
     }
+    private var lastSendby: Sendby?
     private var sendbyTrackIsShiftPressed = false
 
     @IBOutlet private weak var replySelectionButton: UIButton!
@@ -115,6 +131,22 @@ extension ConversationDetailViewController {
                 .config(with: settingButtonItem),
         ]
     }
+
+    override func makeTouchBar() -> NSTouchBar? {
+        TouchbarController.of(view)?.makeTouchbar(
+            items: [.chatSettingBar, .otherItemsProxy],
+            template: [templateSlider]
+        )
+    }
+
+    @objc private func onTemperatureSliderChanged(_ sender: NSSliderTouchBarItem) {
+        let value = Float(sender.doubleValue)
+        var engineCfg = item.engineConfig
+        if abs(engineCfg.temperature - value) < 0.02 { return }
+        engineCfg.temperature = value
+        item.engineConfig = engineCfg
+    }
+
     #endif
 
     func buildIntegrationMenu() -> UIMenu {
@@ -134,9 +166,15 @@ extension ConversationDetailViewController {
     }
 
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        var items: [UIFocusEnvironment] = [listView, inputTextView]
+        var items = [UIFocusEnvironment]()
         if let item = lastFocusedItem {
-            items.insert(item, at: 0)
+            items.append(item)
+        }
+        if !items.contains(where: { $0 === listView }) {
+            items.append(listView)
+        }
+        if !items.contains(where: { $0 === inputTextView }) {
+            items.append(inputTextView)
         }
         return items
     }
@@ -144,8 +182,25 @@ extension ConversationDetailViewController {
     override var canResignFirstResponder: Bool { true }
 
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        AppLog().debug("update focus in detail, \(context.nextFocusedItem as Any? ?? "nil")")
-        lastFocusedItem = context.nextFocusedItem
+        super.didUpdateFocus(in: context, with: coordinator)
+        guard let nextFocusedItem = context.nextFocusedItem else {
+            if let ip = listView.lastRowIndexPath {
+//                listView.selectRow(at: ip, animated: true, scrollPosition: .middle)
+//                lastFocusedItem = listView.cellForRow(at: ip)
+//                setNeedsFocusUpdate()
+//                Current.focusLog.debug("Detail update focus to last cell.")
+            } else {
+                dispatch_async_on_main {
+                    self.handleLeftArrow()
+                }
+                Current.focusLog.debug("Detail update focus to side bar.")
+            }
+            return
+        }
+        Current.focusLog.debug("Detail update focus to: \(nextFocusedItem).")
+        if nextFocusedItem.isChildren(of: self) {
+            lastFocusedItem = nextFocusedItem
+        }
         ApplicationMenu.sendbyKey = inputSendby
     }
 
@@ -153,7 +208,7 @@ extension ConversationDetailViewController {
         ApplicationMenu.setNeedsRevalidate()
         return super.becomeFirstResponder()
     }
-    
+
     override func responds(to aSelector: Selector!) -> Bool {
         if aSelector == #selector(onSend) {
             return isInputAllowed
@@ -174,7 +229,18 @@ extension ConversationDetailViewController {
     }
 
     @IBAction func focusInputBox(_ sender: Any) {
-        inputTextView.becomeFirstResponder()
+        _ = inputTextView.becomeFirstResponder()
+    }
+
+    func didBecomeActive() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onSelectionLabelEdit), name: .selectableLabelOnEdit, object: nil)
+        item.loadDraft(toView: inputTextView)
+        ApplicationMenu.sendbyKey = inputSendby
+    }
+
+    func didBecomeHidden() {
+        NotificationCenter.default.removeObserver(self, name: .selectableLabelOnEdit, object: nil)
+        saveDraft()
     }
 }
 
@@ -202,7 +268,7 @@ extension ConversationDetailViewController {
     }
 
     @IBAction private func gotoAppIntegrationHelp(_ sender: Any) {
-        UIApplication.shared.open(URL(string: L.Guide.interCommunicationLink)!)
+        URL.open(link: L.Guide.interCommunicationLink)
     }
 
     @IBAction private func onCopyJSBookmark(_ sender: Any) {
@@ -380,12 +446,12 @@ extension ConversationDetailViewController: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            if inputSendby == 1 {
+            if inputSendby == .shift {
                 if sendbyTrackIsShiftPressed {
                     onSend()
                     return false
                 }
-            } else if inputSendby == 2 {
+            } else if inputSendby == .enter {
                 if !sendbyTrackIsShiftPressed {
                     onSend()
                     return false
@@ -396,9 +462,14 @@ extension ConversationDetailViewController: UITextViewDelegate {
         AppLog().debug("Textview change text: \(text)")
         if text == "\t" {
             textView.resignFirstResponder()
+            handleLeftArrow()
             return false
         }
         return true
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        setInputExpand(false, animate: true)
     }
 
     func textViewDidChange(_ textView: UITextView) {
@@ -417,7 +488,7 @@ extension ConversationDetailViewController: UITextViewDelegate {
         }
     }
 
-    private func setInputExpand(_ expand: Bool, animate: Bool) {
+    func setInputExpand(_ expand: Bool, animate: Bool) {
         if isInputExpand == expand { return }
         isInputExpand = expand
         UIView.animate(withDuration: 0.3, delay: 0, animated: animate, beforeAnimations: nil, animations: { [self] in
@@ -425,6 +496,10 @@ extension ConversationDetailViewController: UITextViewDelegate {
             inputTextHeight.constant = expand ? 300 : 46
             view.layoutIfNeeded()
         })
+    }
+
+    private func updateSendButton(sendby: Sendby) {
+        inputSendButton.text = sendby.symbolDescription
     }
 
     @IBAction func onSend() {
@@ -447,9 +522,12 @@ extension ConversationDetailViewController: UITextViewDelegate {
     }
 
     private func saveDraft() {
-        guard let text = inputTextView.text.trimmed() else { return }
+        let text = inputTextView.draftText?.trimmed()
         var config = item.chatConfig
-        config.draft = text
-        item.chatConfig = config
+        if config.draft != text {
+            config.draft = text
+            AppLog().debug("Draft> Save: \(text ?? "nil").")
+            item.chatConfig = config
+        }
     }
 }

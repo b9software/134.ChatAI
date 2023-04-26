@@ -33,8 +33,9 @@ class SettingViewController: UIViewController, StoryboardCreation {
         if let idx = fontSizeCategoryMap.firstIndex(of: Current.defualts.preferredContentSize) {
             fontSizeSlider.value = Float(idx)
         }
-        sendBySegment.selectedSegmentIndex = Current.defualts.preferredSendbyKey
-        updateSendbyTitle()
+        let sendby = Current.defualts.preferredSendbyKey
+        sendBySegment.selectedSegmentIndex = sendby.rawValue
+        sendbyKeyLabel.text = sendby.keyDescription
     }
 
     @IBOutlet private weak var themeButton: UIButton!
@@ -81,21 +82,11 @@ class SettingViewController: UIViewController, StoryboardCreation {
     @IBOutlet private weak var sendbyKeyLabel: UILabel!
     @IBOutlet private weak var sendBySegment: UISegmentedControl!
     @IBAction private func onSendBySegmentChange(_ sender: Any) {
-        Current.defualts.preferredSendbyKey = sendBySegment.selectedSegmentIndex
-        updateSendbyTitle()
-    }
-    private func updateSendbyTitle() {
-        let keyDesc: String
-        switch Current.defualts.preferredSendbyKey {
-        case 0:
-            keyDesc = "Command+Enter"
-        case 1:
-            keyDesc = "Shift+Enter"
-        case 2:
-            keyDesc = "Enter"
-        default:
-            keyDesc = "❓"
-        }
-        sendbyKeyLabel.text = keyDesc
+        let value = Sendby(rawValue: sendBySegment.selectedSegmentIndex) ?? {
+            assert(false)
+            return .command
+        }()
+        Current.defualts.preferredSendbyKey = value
+        sendbyKeyLabel.text = value.keyDescription
     }
 }

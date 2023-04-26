@@ -2,7 +2,6 @@
 //  Toolbar.swift
 //  B9ChatAI
 //
-//  Created by BB9z on 2023/3/20.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
@@ -80,7 +79,7 @@ class NSToolbarController {
 
 extension NSToolbarItem {
     static func back() -> NSToolbarItem {
-        let button = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: nil, action: #selector(StandardActions.goBack))
+        let button = UIBarButtonItem(image: Asset.GeneralUI.Navigation.navBack.image, style: .plain, target: nil, action: #selector(StandardActions.goBack))
         let item = NSToolbarItem(itemIdentifier: .back, barButtonItem: button)
         item.label = "Back"
         item.isNavigational = true

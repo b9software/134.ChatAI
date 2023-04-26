@@ -3,6 +3,7 @@
 //  App
 //
 
+import B9Action
 import B9Condition
 import Debugger
 import UIKit
@@ -52,6 +53,7 @@ class ApplicationDelegate: MBApplicationDelegate {
             // https://github.com/BB9z/iOS-Project-Template/wiki/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B#tools-implement-faster
             Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle")?.load()
             dispatch_after_seconds(0, setupDebugger)
+            debugUpdateFlags()
 #endif
         }
 //        MBEnvironment.registerWorkers()
@@ -59,6 +61,7 @@ class ApplicationDelegate: MBApplicationDelegate {
         setupUIAppearance()
         if isTesting { return true }
         Current.messageSender.startIfNeeded()
+        dispatch_after_seconds(0, setupFloatModeObservation)
         return true
     }
 
@@ -78,58 +81,101 @@ class ApplicationDelegate: MBApplicationDelegate {
     private func setupUIAppearance() {
     }
 
-    override func applicationWillResignActive(_ application: UIApplication) {
-        super.applicationWillResignActive(application)
-    }
-
-    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        AppLog().info("App> Open \(url). \(options)")
-        assert(false)
-        return super.application(app, open: url, options: options)
-    }
-
-    override func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
-        AppLog().info("App> UserActivity will continue: \(userActivityType).")
-        assert(false)
-        if isTesting { return false }
-        return true
-    }
-
-    override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        AppLog().info("App> UserActivity continue: \(userActivity).")
-        assert(false)
-        var hasHande = false
-        enumerateEventListeners { listener in
-            if listener.application?(application, continue: userActivity, restorationHandler: restorationHandler) ?? false {
-                hasHande = true
-            }
-        }
-        return hasHande
-    }
-
     override func application(_ application: UIApplication, didUpdate userActivity: NSUserActivity) {
         AppLog().info("App> UserActivity did update: \(userActivity).")
     }
 
-    override func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
-        AppLog().error("App> UserActivity fail to continue: \(userActivityType) \(error).")
-        assert(false)
+    private var keyWindowFloatModeState = FloatModeState.normal
+    private lazy var needsUpdateFloatModeState = DelayAction(.init(updateFloatModeState))
+}
+
+// MARK: - Float Window
+enum FloatModeState: Equatable {
+    case normal
+    case floatExpand
+    case floatCollapse
+}
+
+extension ApplicationDelegate {
+
+
+    private func setupFloatModeObservation() {
+        Current.osBridge.keyWindowChangeObserver = {
+            self.needsUpdateFloatModeState.set()
+        }
     }
 
-    override func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        AppLog().error("App> Perform Action: \(shortcutItem).")
-        assert(false)
-        completionHandler(false)
-        // 似乎可以只启动不激活
+    private func updateFloatModeState() {
+        var state: FloatModeState = .normal
+        if Current.osBridge.keyWindowIsInFloatMode {
+            state = Current.osBridge.keyWindowIsFloatExpand ? .floatExpand : .floatCollapse
+        }
+        if keyWindowFloatModeState == state { return }
+        keyWindowFloatModeState = state
+        AppLog().debug("App> Key window float state: \(state).")
+        ApplicationMenu.setNeedsRebuild()
+    }
+
+    func buildFloatModeMenu() -> UIMenu {
+        let children: [UIKeyCommand]
+        switch keyWindowFloatModeState {
+        case .normal:
+            children = [
+                UIKeyCommand(title: L.Menu.floatMode, action: #selector(ApplicationDelegate.enterFloatMode(_:)), input: "Y", modifierFlags: [.command]),
+            ]
+        case .floatExpand:
+            children = [
+//                UIKeyCommand(title: L.Menu.floatModeCollapse, action: #selector(ApplicationDelegate.floatWindowCollapse(_:)), input: "Y", modifierFlags: [.command]),
+                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
+            ]
+        case .floatCollapse:
+            children = [
+//                UIKeyCommand(title: L.Menu.floatModeExpand, action: #selector(ApplicationDelegate.floatWindowExpand(_:)), input: "Y", modifierFlags: [.command]),
+                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
+            ]
+        }
+        return UIMenu(options: .displayInline, children: children)
+    }
+
+    @IBAction func enterFloatMode(_ sender: Any) {
+        Current.osBridge.floatWindow()
+        debugPrint("Float", keyScene()?.title)
+        needsUpdateFloatModeState.set()
+    }
+
+    @IBAction func exitFloatMode(_ sender: Any) {
+        Current.osBridge.unfloatWindow()
+        debugPrint("Un Float", keyScene()?.title)
+        needsUpdateFloatModeState.set()
+    }
+
+    @IBAction func floatWindowExpand(_ sender: Any) {
+        assert(Current.osBridge.keyWindowIsInFloatMode)
+        Current.osBridge.keyWindowIsFloatExpand = true
+        needsUpdateFloatModeState.set()
+    }
+
+    @IBAction func floatWindowCollapse(_ sender: Any) {
+        assert(Current.osBridge.keyWindowIsInFloatMode)
+        Current.osBridge.keyWindowIsFloatExpand = false
+        needsUpdateFloatModeState.set()
+    }
+
+    private func keyScene() -> UIWindowScene? {
+        Current.keyWindow?.windowScene
+    }
+
+    private func keySceneDelegate() -> SceneDelegate? {
+        Current.keyWindow?.windowScene?.delegate as? SceneDelegate
     }
 }
 
 // MARK: - Responder Chain
+#if DEBUG
 private var lastCanPerformAction: Selector?
 private var lastTargetAction: Selector?
 
 extension ApplicationDelegate {
-#if DEBUG
     override func validate(_ command: UICommand) {
         super.validate(command)
         if debug.debugSystemUI {
@@ -139,27 +185,23 @@ extension ApplicationDelegate {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         let result = super.canPerformAction(action, withSender: sender)
-        if debug.debugResponder {
-            if lastCanPerformAction != action {
-                lastCanPerformAction = action
-                AppLog().debug("Responder> Can perform \(action) = \(result)")
-            }
+        if lastCanPerformAction != action {
+            lastCanPerformAction = action
+            Current.responderLog.debug("Responder> Can perform \(action) = \(result)")
         }
         return result
     }
 
     override func target(forAction action: Selector, withSender sender: Any?) -> Any? {
         let target = super.target(forAction: action, withSender: sender)
-        if debug.debugResponder {
-            if lastTargetAction != action {
-                lastTargetAction = action
-                AppLog().debug("Responder> action: \(action), sender: \(sender.debugDescription), target: \(target.debugDescription)")
-            }
+        if lastTargetAction != action {
+            lastTargetAction = action
+            Current.responderLog.debug("Responder> action: \(action), sender: \(sender.debugDescription), target: \(target.debugDescription)")
         }
         return target
     }
-#endif // End debug
 }
+#endif // End debug
 
 // MARK: - Menu
 extension ApplicationDelegate {
@@ -170,10 +212,10 @@ extension ApplicationDelegate {
     }
 
     @IBAction func showHelp(_ sender: Any) {
-        UIApplication.shared.open(URL(string: L.App.homePage)!)
+        URL.open(link: L.App.homePage)
     }
 
     @IBAction func showUserManual(_ sender: Any) {
-        UIApplication.shared.open(URL(string: L.App.userManual)!)
+        URL.open(link: L.App.userManual)
     }
 }

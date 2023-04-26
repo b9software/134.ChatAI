@@ -82,12 +82,7 @@ class RootViewController: B9RootViewController {
         let size = view.bounds.size
 
         #if targetEnvironment(macCatalyst)
-        if let titleBar = view.window?.windowScene?.titlebar {
-            let style: UITitlebarToolbarStyle = size.height > 500 ? .unified : .unifiedCompact
-            if titleBar.toolbarStyle != style {
-                titleBar.toolbarStyle = style
-            }
-        }
+        SceneDelegate.of(view)?.setPreferedToolbarStyleDueToLayout(style: size.height > 500 ? .unified : .unifiedCompact)
         #endif
 
         guard children.isNotEmpty else { return }
@@ -114,6 +109,7 @@ class RootViewController: B9RootViewController {
     }
 
     func focusSidebar() {
+        if split.isCollapsed { return }
         if let system = UIFocusSystem.focusSystem(for: self),
            let element = sidebar?.preferredFocusEnvironments.first {
             system.requestFocusUpdate(to: element)
@@ -146,6 +142,12 @@ class RootViewController: B9RootViewController {
             }
         }
     }
+
+    var floatModeState = FloatModeState.normal {
+        didSet {
+            AppLog().debug("RootVC> Float mode: \(floatModeState)")
+        }
+    }
 }
 
 // MARK: - Actions
@@ -159,16 +161,12 @@ extension RootViewController {
         return false
     }
 
-    override func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-        if super.responds(to: aSelector) {
-            return super.perform(aSelector, with: object)
-        }
+    override func forwardingTarget(for aSelector: Selector!) -> Any? {
         if let detail = navigator?.visibleViewController,
            detail.responds(to: aSelector) {
-            return detail.perform(aSelector, with: object)
+            return detail
         }
-        assert(false)
-        return nil
+        return super.forwardingTarget(for: aSelector)
     }
 
     @IBAction func goBack(_ sender: Any) {

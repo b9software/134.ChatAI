@@ -182,6 +182,9 @@ extension CDMessage: ModelValidate {
             debugPrint(messages.map { $0.text ?? "nil" })
             debugPrint(messages.map { $0.createTime?.localTime ?? "nil" })
             let result: [OAChatMessage] = messages.compactMap { entity in
+                guard entity.deleteTime == nil else {
+                    return nil
+                }
                 guard entity.mType == .text,
                       let value = entity.text else {
                     return nil

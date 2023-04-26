@@ -20,6 +20,14 @@ protocol MacInterface: NSObjectProtocol {
 
     /// Plays the system beep.
     func beep()
+
+    var keyWindowIsInFloatMode: Bool { get }
+    var keyWindowIsFloatExpand: Bool { get set }
+
+    var keyWindowChangeObserver: (() -> Void)? { get set }
+
+    func floatWindow()
+    func unfloatWindow()
 }
 
 #if targetEnvironment(macCatalyst)
@@ -42,15 +50,20 @@ extension MacInterface {
 #endif
 
 class MockedMacInterface: NSObject, MacInterface {
+
     required override init() {
         super.init()
     }
 
     var isAppActive = false
     var theme: Int = 0
+    var keyWindowIsInFloatMode = false
+    var keyWindowIsFloatExpand = false
+    var keyWindowChangeObserver: (() -> Void)?
 
     func hideApp() {}
     func beep() {}
 
-    func sayHello() {}
+    func floatWindow() {}
+    func unfloatWindow() {}
 }

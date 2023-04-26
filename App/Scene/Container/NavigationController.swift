@@ -40,10 +40,3 @@ class NavigationController: B9NavigationController {
 #endif
     }
 }
-
-/**
- 与 vc 绑定的工具栏按钮，为导航当前 vc 时显示
- */
-extension UIViewController {
-    @objc func operationMenu() -> UIMenu? { nil }
-}

@@ -16,14 +16,14 @@
 /* Class = "UIButton"; normalTitle = "Continue Selection?"; ObjectID = "chat-input-reply-action"; */
 "chat-input-reply-action.normalTitle" = "继续选中话题？";
 
-/* Class = "UIButton"; configuration.title = "SEND"; ObjectID = "chat-input-send-button"; Note = "<Pass>"; */
+/* Class = "UIButton"; configuration.title = "<KEY>"; ObjectID = "chat-input-send-button"; */
 "chat-input-send-button.configuration.title" = "发送";
 
 /* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "chat-setting-cancel-button"; */
 "chat-setting-cancel-button.configuration.title" = "取消";
 
 /* Class = "UIButton"; configuration.title = "Clear Conversation"; ObjectID = "chat-setting-clear-message"; */
-"chat-setting-clear-message.configuration.title" = "清空对话";
+"chat-setting-clear-message.configuration.title" = "清空会话";
 
 /* Class = "UILabel"; text = "No engine. You need create one first."; ObjectID = "chat-setting-engine-empty"; */
 "chat-setting-engine-empty.text" = "你需要先创建一个引擎";
@@ -70,7 +70,7 @@
 /* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[0] = "Default"; ObjectID = "chat-setting-send-segment"; */
 "chat-setting-send-segment.segmentTitles[0]" = "默认";
 
-/* Class = "UILabel"; text = "Send message with which key"; ObjectID = "chat-setting-send-tip"; */
+/* Class = "UILabel"; text = "Send input with which key"; ObjectID = "chat-setting-send-tip"; */
 "chat-setting-send-tip.text" = "通过哪个按键发送输入";
 
 /* Class = "UILabel"; text = "System"; ObjectID = "chat-setting-system-section"; */

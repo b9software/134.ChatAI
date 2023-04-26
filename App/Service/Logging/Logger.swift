@@ -3,11 +3,11 @@
 //  App
 //
 
+import B9Debug
+
 #if canImport(Logging)
 // https://github.com/apple/swift-log
 import Logging
-
-import B9Debug
 
 /// Logger 单例
 func AppLog() -> Logger {  // swiftlint:disable:this identifier_name

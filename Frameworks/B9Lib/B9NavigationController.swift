@@ -10,7 +10,11 @@
 
 import UIKit
 
-class B9NavigationController: UINavigationController, UINavigationControllerDelegate {
+class B9NavigationController:
+    UINavigationController,
+    GeneralSceneActivation,
+    UINavigationControllerDelegate
+{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         delegate = self
@@ -37,12 +41,10 @@ class B9NavigationController: UINavigationController, UINavigationControllerDele
 
     /// 处理新增，默认什么也不做
     func handleViewControllers(add vcs: [UIViewController]) {
-        AppLog().info("vc add \(vcs)")
     }
 
     /// 处理移除，默认什么也不做
     func handleViewControllers(remove vcs: [UIViewController]) {
-        AppLog().info("vc remove \(vcs)")
     }
 
     /// 堆栈变化时调用，需调用 super
@@ -55,5 +57,13 @@ class B9NavigationController: UINavigationController, UINavigationControllerDele
 
     @IBAction func navigationPop(_ sender: Any) {
         popViewController(animated: true)
+    }
+
+    func didBecomeActive() {
+        (visibleViewController as? GeneralSceneActivation)?.hasBecomeActive = true
+    }
+
+    func didBecomeHidden() {
+        (visibleViewController as? GeneralSceneActivation)?.hasBecomeActive = false
     }
 }

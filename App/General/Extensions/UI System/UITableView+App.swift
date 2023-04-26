@@ -11,6 +11,14 @@ extension UITableView {
         }
     }
 
+    func selectRow(at indexPath: IndexPath, animated: Bool, scrollToVisible: Bool) {
+        selectRow(at: indexPath, animated: animated, scrollPosition: .none)
+        if scrollToVisible {
+            let frame = rectForRow(at: indexPath)
+            scrollRectToVisible(frame, animated: animated)
+        }
+    }
+
     // @MBDependency:2
     /// 反选某一 section 的全部 cell
     func deselectRows(ofSection section: Int, animated: Bool) {
@@ -19,6 +27,7 @@ extension UITableView {
         }
     }
 
+    /// Update list selection with new indexPaths
     func setSelected(indexPaths: [IndexPath]?, animated: Bool) {
         let oldIndexPaths = indexPathsForSelectedRows ?? []
         let newIndexPaths = indexPaths ?? []

@@ -7,20 +7,20 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name
-
 /// 模型列表的响应
 struct OAModel:
     Codable,
     Hashable,
     ModelValidate
 {
+    // swiftlint:disable identifier_name
     private(set) var id: StringID
     private(set) var object: String = "model"
     private(set) var created: Timestamp?
     private(set) var owned_by: String?
     private(set) var root: StringID?
     private(set) var parent: StringID?
+    // swiftlint:enable identifier_name
 
     func validate() throws {
         if object != "model" {

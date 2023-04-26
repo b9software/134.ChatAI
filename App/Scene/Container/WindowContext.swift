@@ -20,6 +20,12 @@ extension NSToolbarController {
         SceneDelegate.of(view)?.toolbarController
     }
 }
+
+extension TouchbarController {
+    static func of(_ view: UIView) -> TouchbarController? {
+        SceneDelegate.of(view)?.touchbarController
+    }
+}
 #endif
 
 extension RootViewController {

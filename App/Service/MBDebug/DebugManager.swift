@@ -6,6 +6,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import Logging
 import Security
 import UIKit
 
@@ -20,23 +21,36 @@ final class DebugManager {
                 UICommand(title: "Destroy All Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
             ]),
             UIMenu(title: "System UI", children: [
-                UICommand(title: "Rebuild Menu", action: #selector(ApplicationDelegate.debugRebuildMenu)),
                 UICommand(title: "Debug Menu & Toolbar", action: #selector(ApplicationDelegate.debugSystemUISwitch), state: debugSystemUI ? .on : .off),
                 UICommand(title: "Debug Window", action: #selector(ApplicationDelegate.debugWindow)),
             ]),
-            UICommand(title: "Test 2", action: #selector(ApplicationDelegate.onTest2)),
+            UIMenu(title: "Logger", children: [
+                UICommand(title: "Responder: Action/Target", action: #selector(ApplicationDelegate.debugLogResponder), state: debugLogResponder ? .on : .off),
+                UICommand(title: "Focus System", action: #selector(ApplicationDelegate.debugLogFocusSystem), state: debugLogFocusSystem ? .on : .off),
+                UICommand(title: "State Restoration", action: #selector(ApplicationDelegate.debugLogStateRestoration), state: debugLogStateRestoration ? .on : .off),
+            ]),
             UICommand(title: "Message Skip Sending", action: #selector(ApplicationDelegate.debugMessageSkipSending), state: debugMessageSkipSending ? .on : .off),
             UICommand(title: "Message Debug Time", action: #selector(ApplicationDelegate.debugMessageTime), state: debugMessageTime ? .on : .off),
             UICommand(title: "Dump Sender", action: #selector(ApplicationDelegate.debugLogSender)),
             UICommand(title: "Listen Focus Update", action: #selector(ApplicationDelegate.debugListenFocus), state: debugListenFocus ? .on : .off),
-            UICommand(title: "Debug State Restoration", action: #selector(ApplicationDelegate.debugStateRestoration), state: debugStateRestoration ? .on : .off),
             UICommand(title: "Log Responder Chain", action: #selector(ApplicationDelegate.debugResponderChain)),
-            UICommand(title: "Debug Action Target", action: #selector(ApplicationDelegate.debugResponderSwitch), state: debugResponder ? .on : .off),
+            UICommand(title: "debugWindowFloat", action: #selector(ApplicationDelegate.debugWindowFloat)),
+            UICommand(title: "debugWindowUnFloat", action: #selector(ApplicationDelegate.debugWindowUnFloat)),
         ])
         builder.insertSibling(menu, afterMenu: .window)
     }
 
     var debugListenFocus: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
+    }
+
+    var debugLogFocusSystem: Bool {
+        get { UserDefaults.standard.bool(forKey: #function) }
+        set { UserDefaults.standard.set(newValue, forKey: #function) }
+    }
+
+    var debugLogResponder: Bool {
         get { UserDefaults.standard.bool(forKey: #function) }
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
@@ -51,12 +65,7 @@ final class DebugManager {
         set { UserDefaults.standard.set(newValue, forKey: #function) }
     }
 
-    var debugResponder: Bool {
-        get { UserDefaults.standard.bool(forKey: #function) }
-        set { UserDefaults.standard.set(newValue, forKey: #function) }
-    }
-
-    var debugStateRestoration: Bool {
+    var debugLogStateRestoration: Bool {
         get { UserDefaults.standard.bool(forKey: "UIStateRestorationDebugLogging") }
         set {
             UserDefaults.standard.set(newValue, forKey: "UIStateRestorationDebugLogging")
@@ -77,14 +86,32 @@ final class DebugManager {
 }
 
 #if DEBUG
+extension ApplicationDelegate {
+    func debugUpdateFlags() {
+        _ = Current.focusLog
+        Mocked.focusLog!.logLevel = debug.debugLogFocusSystem ? .debug : .info
+        _ = Current.responderLog
+        Mocked.responderLog!.logLevel = debug.debugLogResponder ? .debug : .info
+    }
+}
+
 private var focusSystemUpdateObserver: NSObjectProtocol?
 fileprivate extension ApplicationDelegate {
-    @objc func debugRebuildMenu() {
+    @objc func debugLogFocusSystem() {
+        debug.debugLogFocusSystem.toggle()
+        debugUpdateFlags()
         ApplicationMenu.setNeedsRebuild()
     }
 
-    @objc func onTest2() {
-//        debugPrint(UIApplication.shared.connectedScenes)
+    @objc func debugLogResponder() {
+        debug.debugLogResponder.toggle()
+        debugUpdateFlags()
+        ApplicationMenu.setNeedsRebuild()
+    }
+
+    @objc func debugLogStateRestoration() {
+        debug.debugLogStateRestoration.toggle()
+        ApplicationMenu.setNeedsRebuild()
     }
 
     @objc func debugWindow() {
@@ -97,6 +124,21 @@ fileprivate extension ApplicationDelegate {
 //        }
     }
 
+    @objc func debugWindowFloat() {
+        guard let scene = UIResponder.firstResponder?.next(type: UIWindowScene.self) else { return }
+//        scene.t
+        scene.titlebar?.toolbarStyle = .unifiedCompact
+        scene.titlebar?.titleVisibility = .hidden
+        Current.osBridge.floatWindow()
+    }
+
+    @objc func debugWindowUnFloat() {
+        if let scene = UIResponder.firstResponder?.next(type: UIWindowScene.self) {
+            scene.titlebar?.titleVisibility = .visible
+        }
+        Current.osBridge.unfloatWindow()
+    }
+
     @objc func debugMessageSkipSending() {
         debug.debugMessageSkipSending.toggle()
         AppLog().warning("Debug> MessageSkipSending \(debug.debugMessageSkipSending).")
@@ -106,11 +148,6 @@ fileprivate extension ApplicationDelegate {
     @objc func debugMessageTime() {
         debug.debugMessageTime.toggle()
         AppLog().warning("Debug> MessageTime: \(debug.debugMessageTime).")
-        ApplicationMenu.setNeedsRebuild()
-    }
-
-    @objc func debugStateRestoration() {
-        debug.debugStateRestoration.toggle()
         ApplicationMenu.setNeedsRebuild()
     }
 
@@ -130,11 +167,6 @@ fileprivate extension ApplicationDelegate {
         } else {
             NotificationCenter.default.removeObserver(focusSystemUpdateObserver as Any)
         }
-    }
-
-    @objc func debugResponderSwitch() {
-        debug.debugResponder.toggle()
-        ApplicationMenu.setNeedsRebuild()
     }
 
     @objc func debugResponderChain() {

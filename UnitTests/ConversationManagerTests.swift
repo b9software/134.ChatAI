@@ -147,17 +147,23 @@ class ConversationManagerTests:
 
     func conversations(_ manager: ConversationManager, listUpdated: [Conversation]) {
         print("Test> Receive list update.")
-        waitListUpdateExp?.fulfill()
-        waitListUpdateExp = nil
+        dispatch_after_seconds(0) { [self] in
+            waitListUpdateExp?.fulfill()
+            waitListUpdateExp = nil
+        }
     }
 
     func conversations(_ manager: ConversationManager, hasArchived: Bool) {
-        waitArchivedUpdateExp?.fulfill()
-        waitArchivedUpdateExp = nil
+        dispatch_after_seconds(0) { [self] in
+            waitArchivedUpdateExp?.fulfill()
+            waitArchivedUpdateExp = nil
+        }
     }
 
     func conversations(_ manager: ConversationManager, hasDeleted: Bool) {
-        waitDeletedUpdateExp?.fulfill()
-        waitDeletedUpdateExp = nil
+        dispatch_after_seconds(0) { [self] in
+            waitDeletedUpdateExp?.fulfill()
+            waitDeletedUpdateExp = nil
+        }
     }
 }

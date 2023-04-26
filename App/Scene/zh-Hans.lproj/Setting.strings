@@ -13,29 +13,41 @@
 /* Class = "UIViewController"; title = "About"; ObjectID = "about-vc"; */
 "about-vc.title" = "关于";
 
-/* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "engine-create-cancel"; */
-"engine-create-cancel.configuration.title" = "取消";
+/* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-create-api-key"; */
+"engine-create-api-key.placeholder" = "请输入 OpenAI API key";
 
-/* Class = "UICommand"; title = "Choose Type"; ObjectID = "engine-create-type-0"; */
-"engine-create-type-0.title" = "选择类型";
+/* Class = "UIViewController"; title = "New OpenAI Engine"; ObjectID = "engine-create-api-vc"; */
+"engine-create-api-vc.title" = "新 OpenAI 引擎";
 
-/* Class = "UICommand"; discoverabilityTitle = "Use offical OpenAI API"; ObjectID = "engine-create-type-1"; */
-"engine-create-type-1.discoverabilityTitle" = "使用 OpenAI 官方的 API";
+/* Class = "UIButton"; normalTitle = "Advanced"; ObjectID = "engine-create-proxy-advanced"; */
+"engine-create-proxy-advanced.normalTitle" = "进阶设置";
 
-/* Class = "UICommand"; discoverabilityTitle = "Use a proxy server foward requests to OpenAI API"; ObjectID = "engine-create-type-2"; */
-"engine-create-type-2.discoverabilityTitle" = "使用第三方中转代理服务器访问 OpenAI 的接口";
+/* Class = "UILabel"; text = "Completions endpoint"; ObjectID = "engine-create-proxy-completion-label"; */
+"engine-create-proxy-completion-label.text" = "Completions 接口地址";
+
+/* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-create-proxy-key"; */
+"engine-create-proxy-key.placeholder" = "请输入 OpenAI API key";
+
+/* Class = "UILabel"; text = "Models endpoint"; ObjectID = "engine-create-proxy-model-label"; */
+"engine-create-proxy-model-label.text" = "Models 接口地址";
+
+/* Class = "UILabel"; text = "Send your key?"; ObjectID = "engine-create-proxy-sendkey-label"; */
+"engine-create-proxy-sendkey-label.text" = "需要发送自己的 Key";
+
+/* Class = "UIButton"; configuration.title = "Create"; ObjectID = "engine-create-proxy-submit"; */
+"engine-create-proxy-submit.configuration.title" = "创建";
+
+/* Class = "UIViewController"; title = "New OpenAI Proxy Engine"; ObjectID = "engine-create-proxy-vc"; */
+"engine-create-proxy-vc.title" = "新 OpenAI 代理服务";
+
+/* Class = "UILabel"; text = "Choose Type"; ObjectID = "engine-create-type-header"; */
+"engine-create-type-header.text" = "选择类型";
+
+/* Class = "UIViewController"; title = "Create New Engine"; ObjectID = "engine-create-type-vc"; */
+"engine-create-type-vc.title" = "创建新引擎";
 
 /* Class = "UIButton"; configuration.title = "Add new"; ObjectID = "engine-manage-add-button"; */
 "engine-manage-add-button.configuration.title" = "添加新引擎";
-
-/* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-manage-api-key-field"; */
-"engine-manage-api-key-field.placeholder" = "请输入你的 API Key";
-
-/* Class = "UILabel"; text = "⬆️ Choose a type first"; ObjectID = "engine-manage-choose-type-first"; */
-"engine-manage-choose-type-first.text" = "⬆️ 请先选择引擎类型";
-
-/* Class = "UIButton"; configuration.title = "Choose Type"; ObjectID = "engine-manage-type-no-selection"; */
-"engine-manage-type-no-selection.configuration.title" = "引擎类型";
 
 /* Class = "UIViewController"; title = "Engine Manage"; ObjectID = "engine-manage-vc"; */
 "engine-manage-vc.title" = "引擎管理";
@@ -52,16 +64,16 @@
 /* Class = "UILabel"; text = "Behaviours"; ObjectID = "setting-behaviour-section"; */
 "setting-behaviour-section.text" = "行为调整";
 
-/* Class = "UIButton"; configuration.title = "Configuration"; ObjectID = "setting-engine-config-button"; */
-"setting-engine-config-button.configuration.title" = "配置引擎";
+/* Class = "UIButton"; configuration.title = "Add new"; ObjectID = "setting-engine-add-button"; */
+"setting-engine-add-button.configuration.title" = "添加新引擎";
 
-/* Class = "UIButton"; normalTitle = "Configuration"; ObjectID = "setting-engine-config-button"; */
-"setting-engine-config-button.normalTitle" = "配置引擎";
+/* Class = "UIButton"; configuration.title = "Management"; ObjectID = "setting-engine-config-button"; */
+"setting-engine-config-button.configuration.title" = "管理引擎";
 
 /* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
 "setting-engine-section.text" = "AI 引擎";
 
-/* Class = "UILabel"; text = "Font Size"; ObjectID = "setting-font-size-title"; */
+/* Class = "UILabel"; text = "Font size"; ObjectID = "setting-font-size-title"; */
 "setting-font-size-title.text" = "文字大小";
 
 /* Class = "UILabel"; text = "You can select cell content by double-clicking"; ObjectID = "setting-key-tip-auto-copy"; */
@@ -73,8 +85,8 @@
 /* Class = "UILabel"; text = "Key Bindings"; ObjectID = "setting-keys-section"; */
 "setting-keys-section.text" = "按键配置";
 
-/* Class = "UILabel"; text = "Send By"; ObjectID = "setting-send-by-title"; */
-"setting-send-by-title.text" = "发送键";
+/* Class = "UILabel"; text = "Default send key"; ObjectID = "setting-send-by-title"; */
+"setting-send-by-title.text" = "默认发送键";
 
 /* Class = "UICommand"; title = "Dark"; ObjectID = "setting-theme-dark"; */
 "setting-theme-dark.title" = "深色";

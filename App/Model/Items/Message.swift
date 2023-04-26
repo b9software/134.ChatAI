@@ -82,7 +82,6 @@ class Message {
         }
     }
     private(set) var time: Date
-    let isParent: Bool
 
     private init(entity: CDMessage) {
         id = entity.uid
@@ -90,7 +89,6 @@ class Message {
         role = entity.mRole
         state = entity.mState
         time = entity.time
-        isParent = entity.parent == nil
         self.entity = entity
         // 其他属性异步加载
     }
@@ -152,6 +150,18 @@ extension Message {
     static func continueMessage(_ message: Message) {
         Current.database.save { ctx in
             message.entity.appendContinue(context: ctx)
+        }
+    }
+
+    func delete() {
+        if senderState?.isSending == true {
+            stopResponse()
+        }
+        Current.database.save { [self] ctx in
+            if state == .pend {
+                state = .froze
+            }
+            entity.deleteTime = .current
         }
     }
 

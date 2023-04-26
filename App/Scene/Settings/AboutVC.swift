@@ -31,14 +31,14 @@ class AboutViewController: UIViewController, StoryboardCreation {
     }
 
     @IBAction private func goGitHub(_ sender: Any) {
-        UIApplication.shared.open(URL(string: L.App.homePage)!)
+        URL.open(link: L.App.homePage)
     }
 
     @IBAction private func gotoOpenAIPrivacy(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://openai.com/policies/privacy-policy")!)
+        URL.open(link: L.Link.Openai.privacy)
     }
 
     @IBAction private func gotoOpenAITerms(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://openai.com/policies/terms-of-use")!)
+        URL.open(link: L.Link.Openai.tos)
     }
 }

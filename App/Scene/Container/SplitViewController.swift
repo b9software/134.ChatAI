@@ -8,7 +8,10 @@
 
 import UIKit
 
-class SplitViewController: UIViewController {
+class SplitViewController:
+    UIViewController,
+    GeneralSceneActivationAutoForward
+{
     @IBOutlet private weak var sidebarContainer: UIView!
     @IBOutlet private weak var detailContainer: UIView!
 
@@ -46,9 +49,6 @@ class SplitViewController: UIViewController {
         if next.focusGroupIdentifier == "sidebar_cmd" {
             sidebarFocusGuide.preferredFocusEnvironments = [next]
         }
-//        AppLog().debug("Next: \(next)")
-//        AppLog().debug("  parent: \(next.parentFocusEnvironment)")
-//        AppLog().debug("  Container: \(next.focusItemContainer)")
     }
 
     // MARK: - Collapsed

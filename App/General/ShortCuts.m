@@ -8,7 +8,7 @@ id AppDelegate(void) {
     return [UIApplication sharedApplication].delegate;
 }
 
-UINavigationController *__nullable AppNavigationController() {
+UINavigationController *__nullable AppNavigationController(void) {
     return [MBApp status].globalNavigationController;
 }
 

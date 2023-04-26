@@ -154,6 +154,18 @@ class MessageBaseCell:
             }
         }
     }
+    var indexPath: IndexPath!
+
+    var listDataSource: MessageDataSource? {
+        cachedListDataSource ?? {
+            if let result = (superview as? UITableView)?.dataSource as? MessageDataSource? {
+                cachedListDataSource = result
+                return result
+            }
+            return nil
+        }()
+    }
+    private weak var cachedListDataSource: MessageDataSource?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -166,6 +178,21 @@ class MessageBaseCell:
         super.setSelected(selected, animated: animated)
         selectionView?.isHidden = !selected
         contentBox?.isSelected = selected
+    }
+
+    override var canBecomeFirstResponder: Bool { true }
+
+    override var keyCommands: [UIKeyCommand]? {
+        var commands = super.keyCommands ?? []
+        commands.append(
+            UIKeyCommand(input: UIKeyCommand.inputDelete, modifierFlags: [], action: #selector(delete))
+        )
+        return commands
+    }
+
+    override func delete(_ sender: Any?) {
+        item.delete()
+        listDataSource?.deleteFromCell(self)
     }
 
     override var canBecomeFocused: Bool { true }
@@ -190,8 +217,9 @@ class MessageBaseCell:
     }
 
     private func loadData() {
-        contextSeparator?.isHidden = !item.isParent
-        contentTopMargin?.constant = item.isParent ? 30 : 0
+        let isParent = indexPath.row == 0
+        contextSeparator?.isHidden = !isParent
+        contentTopMargin?.constant = isParent ? 30 : 0
         if item.fetchDetail() {
             messageDetailReady(item)
         } else {

@@ -69,10 +69,13 @@ extension UserDefaults {
         get { bool(forKey: #function) }
         set { set(newValue, forKey: #function) }
     }
-    
-    var preferredSendbyKey: Int {
-        get { integer(forKey: #function) }
-        set { set(newValue, forKey: #function) }
+
+    var preferredSendbyKey: Sendby {
+        get {
+            let value = integer(forKey: #function)
+            return Sendby(rawValue: value) ?? .command
+        }
+        set { set(newValue.rawValue, forKey: #function) }
     }
 
     /// 最近用户选择的引擎 ID

@@ -14,6 +14,10 @@
 "menu.navigationBack" = "Go Back";
 "menu.continueLastTopic" = "Continue Last Topic";
 "menu.focusInput" = "Focus on Input";
+"menu.floatMode" = "Float Mode";
+"menu.floatModeExpand" = "Expand Float Window";
+"menu.floatModeCollapse" = "Collapse Float Window";
+"menu.floatModeExit" = "Exit Float Mode";
 "menu.help" = "Help";
 "menu.homePage" = "Project on GitHub";
 "menu.userManual" = "Online User Manual";
@@ -84,3 +88,7 @@
 
 "guide.text1st" = "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link:\n https://github.com/b9software/B9ChatAI/issues/1\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-16";
 "guide.interCommunicationLink" = "https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication";
+
+"link.huggingChat.privacy" = "https://huggingface.co/chat/privacy";
+"link.openai.privacy" = "https://openai.com/policies/privacy-policy";
+"link.openai.tos" = "https://openai.com/policies/terms-of-use";
