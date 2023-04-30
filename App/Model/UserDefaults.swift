@@ -43,6 +43,8 @@ extension UserDefaults {
         set { set(newValue, forKey: #function) }
     }
 
+    // MARK: -
+
     var iCloudEnable: Bool {
         get { bool(forKey: #function) }
         set { set(newValue, forKey: #function) }
@@ -66,7 +68,12 @@ extension UserDefaults {
 
     /// 双击选中文本后自动复制文本到剪贴板
     var chatSendClipboardWhenLabelEdit: Bool {
-        get { bool(forKey: #function) }
+        get { value(forKey: #function) as? Bool ?? true }
+        set { set(newValue, forKey: #function) }
+    }
+
+    var floatWindowAlpha: Float {
+        get { value(forKey: #function) as? Float ?? 0.2 }
         set { set(newValue, forKey: #function) }
     }
 

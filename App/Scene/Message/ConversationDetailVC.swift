@@ -492,7 +492,7 @@ extension ConversationDetailViewController: UITextViewDelegate {
         if isInputExpand == expand { return }
         isInputExpand = expand
         UIView.animate(withDuration: 0.3, delay: 0, animated: animate, beforeAnimations: nil, animations: { [self] in
-            inputTextView.font = UIFont.preferredFont(forTextStyle: expand ? .callout : .body)
+            inputTextView.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: expand ? 14 : 18), compatibleWith: traitCollection)
             inputTextHeight.constant = expand ? 300 : 46
             view.layoutIfNeeded()
         })

@@ -34,8 +34,6 @@ final class DebugManager {
             UICommand(title: "Dump Sender", action: #selector(ApplicationDelegate.debugLogSender)),
             UICommand(title: "Listen Focus Update", action: #selector(ApplicationDelegate.debugListenFocus), state: debugListenFocus ? .on : .off),
             UICommand(title: "Log Responder Chain", action: #selector(ApplicationDelegate.debugResponderChain)),
-            UICommand(title: "debugWindowFloat", action: #selector(ApplicationDelegate.debugWindowFloat)),
-            UICommand(title: "debugWindowUnFloat", action: #selector(ApplicationDelegate.debugWindowUnFloat)),
         ])
         builder.insertSibling(menu, afterMenu: .window)
     }
@@ -122,21 +120,6 @@ fileprivate extension ApplicationDelegate {
 //        var activity = NSUserActivity(activityType: "panel")
 //        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: activity, options: nil) { (error) in
 //        }
-    }
-
-    @objc func debugWindowFloat() {
-        guard let scene = UIResponder.firstResponder?.next(type: UIWindowScene.self) else { return }
-//        scene.t
-        scene.titlebar?.toolbarStyle = .unifiedCompact
-        scene.titlebar?.titleVisibility = .hidden
-        Current.osBridge.floatWindow()
-    }
-
-    @objc func debugWindowUnFloat() {
-        if let scene = UIResponder.firstResponder?.next(type: UIWindowScene.self) {
-            scene.titlebar?.titleVisibility = .visible
-        }
-        Current.osBridge.unfloatWindow()
     }
 
     @objc func debugMessageSkipSending() {

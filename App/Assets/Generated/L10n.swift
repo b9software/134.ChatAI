@@ -157,6 +157,8 @@ internal enum L10n {
       internal static let text1st = L10n.tr("Localizable", "guide.text1st", fallback: "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link:\n https://github.com/b9software/B9ChatAI/issues/1\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-16")
     }
     internal enum Link {
+      /// https://github.com/b9software/B9ChatAI/discussions
+      internal static let feedback = L10n.tr("Localizable", "link.feedback", fallback: "https://github.com/b9software/B9ChatAI/discussions")
       internal enum HuggingChat {
         /// https://huggingface.co/chat/privacy
         internal static let privacy = L10n.tr("Localizable", "link.huggingChat.privacy", fallback: "https://huggingface.co/chat/privacy")
@@ -175,6 +177,8 @@ internal enum L10n {
       internal static let continueLastTopic = L10n.tr("Localizable", "menu.continueLastTopic", fallback: "Continue Last Topic")
       /// Delete
       internal static let delete = L10n.tr("Localizable", "menu.delete", fallback: "Delete")
+      /// Feedback
+      internal static let feedback = L10n.tr("Localizable", "menu.feedback", fallback: "Feedback")
       /// Float Mode
       internal static let floatMode = L10n.tr("Localizable", "menu.floatMode", fallback: "Float Mode")
       /// Collapse Float Window

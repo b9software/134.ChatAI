@@ -1,0 +1,11 @@
+//
+//  Shared.xcconfig
+//  B9ChatAI
+//
+//  Copyright © 2023 B9Software. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+MARKETING_VERSION = 0.4;

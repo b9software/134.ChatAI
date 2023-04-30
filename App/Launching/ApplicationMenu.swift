@@ -30,11 +30,12 @@ enum ApplicationMenu {
             UIKeyCommand(title: L.Menu.send, action: #selector(ConversationDetailViewController.onSend), input: "\r", modifierFlags: sendbyKey.keyModifierFlags),
         ]), afterMenu: .edit)
         #if targetEnvironment(macCatalyst)
-        builder.insertSibling(AppDelegate().buildFloatModeMenu(), beforeMenu: .minimizeAndZoom)
+        builder.insertSibling(buildFloatModeMenu(), beforeMenu: .minimizeAndZoom)
         #endif
         builder.replace(menu: .help, with: UIMenu(title: L.Menu.help, children: [
             UICommand(title: L.Menu.homePage, action: #selector(ApplicationDelegate.showHelp)),
             UICommand(title: L.Menu.userManual, action: #selector(ApplicationDelegate.showUserManual)),
+            UICommand(title: L.Menu.feedback, action: #selector(ApplicationDelegate.showFeedback)),
         ]))
         builder.replace(menu: .preferences, with: settingItem)
         ApplicationDelegate().debug.setupMenu(builder: builder)
@@ -52,8 +53,36 @@ enum ApplicationMenu {
     static var sendbyKey: Sendby = .command {
         didSet {
             if oldValue == sendbyKey { return }
-            UIMenuSystem.main.setNeedsRebuild()
+            setNeedsRebuild()
         }
+    }
+
+    static var keyWindowFloatModeState = FloatModeState.normal {
+        didSet {
+            if oldValue == keyWindowFloatModeState { return }
+            setNeedsRebuild()
+        }
+    }
+
+    static func buildFloatModeMenu() -> UIMenu {
+        let children: [UIKeyCommand]
+        switch keyWindowFloatModeState {
+        case .normal:
+            children = [
+                UIKeyCommand(title: L.Menu.floatMode, action: #selector(ApplicationDelegate.enterFloatMode(_:)), input: "Y", modifierFlags: [.command]),
+            ]
+        case .floatExpand:
+            children = [
+                UIKeyCommand(title: L.Menu.floatModeCollapse, action: #selector(ApplicationDelegate.floatWindowCollapse(_:)), input: "Y", modifierFlags: [.command]),
+                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
+            ]
+        case .floatCollapse:
+            children = [
+                UIKeyCommand(title: L.Menu.floatModeExpand, action: #selector(ApplicationDelegate.floatWindowExpand(_:)), input: "Y", modifierFlags: [.command]),
+                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
+            ]
+        }
+        return UIMenu(options: .displayInline, children: children)
     }
 }
 

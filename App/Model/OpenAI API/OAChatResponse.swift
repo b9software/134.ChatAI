@@ -93,4 +93,13 @@ struct OAError: Codable, LocalizedError {
     var isInvalidApiKey: Bool {
         error?.code == "invalid_api_key"
     }
+
+    static func badString() -> OAError {
+        OAError(error: OAErrorDetail(message: "Unknow error with bad content.", type: "bad_content"))
+    }
+
+    static func badContext(_ str: String) -> OAError {
+        let context = str.trimming(toLength: 100)
+        return OAError(error: OAErrorDetail(message: "Bad content: \(context)", type: "bad_content"))
+    }
 }

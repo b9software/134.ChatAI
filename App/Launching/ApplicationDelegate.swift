@@ -85,80 +85,55 @@ class ApplicationDelegate: MBApplicationDelegate {
         AppLog().info("App> UserActivity did update: \(userActivity).")
     }
 
-    private var keyWindowFloatModeState = FloatModeState.normal
     private lazy var needsUpdateFloatModeState = DelayAction(.init(updateFloatModeState))
 }
 
 // MARK: - Float Window
-enum FloatModeState: Equatable {
-    case normal
-    case floatExpand
-    case floatCollapse
-}
 
 extension ApplicationDelegate {
-
-
     private func setupFloatModeObservation() {
         Current.osBridge.keyWindowChangeObserver = {
-            self.needsUpdateFloatModeState.set()
+            if let state = FloatModeState(rawValue: Current.osBridge.keyWindowFloatMode) {
+                ApplicationMenu.keyWindowFloatModeState = state
+            }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(onFloatModeChanged(notice:)), name: .floatModeDidChange, object: nil)
+    }
+
+    @objc func onFloatModeChanged(notice: Notification) {
+        updateFloatModeState()
     }
 
     private func updateFloatModeState() {
-        var state: FloatModeState = .normal
-        if Current.osBridge.keyWindowIsInFloatMode {
-            state = Current.osBridge.keyWindowIsFloatExpand ? .floatExpand : .floatCollapse
+        guard let state = FloatModeState(rawValue: Current.osBridge.keyWindowFloatMode) else {
+            return
         }
-        if keyWindowFloatModeState == state { return }
-        keyWindowFloatModeState = state
+        keySceneDelegate()?.floatModeState = state
+        ApplicationMenu.keyWindowFloatModeState = state
         AppLog().debug("App> Key window float state: \(state).")
-        ApplicationMenu.setNeedsRebuild()
-    }
-
-    func buildFloatModeMenu() -> UIMenu {
-        let children: [UIKeyCommand]
-        switch keyWindowFloatModeState {
-        case .normal:
-            children = [
-                UIKeyCommand(title: L.Menu.floatMode, action: #selector(ApplicationDelegate.enterFloatMode(_:)), input: "Y", modifierFlags: [.command]),
-            ]
-        case .floatExpand:
-            children = [
-//                UIKeyCommand(title: L.Menu.floatModeCollapse, action: #selector(ApplicationDelegate.floatWindowCollapse(_:)), input: "Y", modifierFlags: [.command]),
-                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
-            ]
-        case .floatCollapse:
-            children = [
-//                UIKeyCommand(title: L.Menu.floatModeExpand, action: #selector(ApplicationDelegate.floatWindowExpand(_:)), input: "Y", modifierFlags: [.command]),
-                UIKeyCommand(title: L.Menu.floatModeExit, action: #selector(ApplicationDelegate.exitFloatMode(_:)), input: "Y", modifierFlags: [.command, .shift]),
-            ]
-        }
-        return UIMenu(options: .displayInline, children: children)
     }
 
     @IBAction func enterFloatMode(_ sender: Any) {
-        Current.osBridge.floatWindow()
-        debugPrint("Float", keyScene()?.title)
-        needsUpdateFloatModeState.set()
+        AppLog().debug("Enter float mode: \(keyScene()?.title)")
+        keySceneDelegate()?.floatModeState = .floatExpand
+        Current.osBridge.keyWindowFloatMode = FloatModeState.floatExpand.rawValue
     }
 
     @IBAction func exitFloatMode(_ sender: Any) {
-        Current.osBridge.unfloatWindow()
-        debugPrint("Un Float", keyScene()?.title)
-        needsUpdateFloatModeState.set()
+        AppLog().debug("Exit float mode: \(keyScene()?.title)")
+        Current.osBridge.keyWindowFloatMode = FloatModeState.normal.rawValue
     }
 
     @IBAction func floatWindowExpand(_ sender: Any) {
-        assert(Current.osBridge.keyWindowIsInFloatMode)
-        Current.osBridge.keyWindowIsFloatExpand = true
-        needsUpdateFloatModeState.set()
+        assert(Current.osBridge.keyWindowFloatMode > 1)
+        keySceneDelegate()?.floatModeState = .floatExpand
+        Current.osBridge.keyWindowFloatMode = FloatModeState.floatExpand.rawValue
     }
 
     @IBAction func floatWindowCollapse(_ sender: Any) {
-        assert(Current.osBridge.keyWindowIsInFloatMode)
-        Current.osBridge.keyWindowIsFloatExpand = false
-        needsUpdateFloatModeState.set()
+        assert(Current.osBridge.keyWindowFloatMode > 1)
+        keySceneDelegate()?.floatModeState = .floatCollapse
+        Current.osBridge.keyWindowFloatMode = FloatModeState.floatCollapse.rawValue
     }
 
     private func keyScene() -> UIWindowScene? {
@@ -217,5 +192,9 @@ extension ApplicationDelegate {
 
     @IBAction func showUserManual(_ sender: Any) {
         URL.open(link: L.App.userManual)
+    }
+
+    @IBAction func showFeedback(_ sender: Any) {
+        URL.open(link: L.Link.feedback)
     }
 }

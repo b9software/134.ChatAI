@@ -58,6 +58,7 @@
 /* (No Comment) */
 "chat.setting.modelFetching" = "获取模型中…";
 
+
 /* (No Comment) */
 "chat.setting.selectBadEngine" = "引擎数据异常";
 
@@ -205,3 +206,4 @@
 /* (No Comment) */
 "menu.userManual" = "用户手册";
 
+"link.feedback" = "https://support.qq.com/product/592777";

@@ -88,6 +88,8 @@
 		D55FB1C129EE0AA500777EA2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D55FB1BF29EE0AA500777EA2 /* Localizable.strings */; };
 		D564D5D31970EE340032FEC3 /* MBModalPresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = D564D5D21970EE340032FEC3 /* MBModalPresentSegue.m */; };
 		D568290F29E74A5900E5A02D /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568290E29E74A5900E5A02D /* MessageTests.swift */; };
+		D56902A32A0475DA00970371 /* FloatWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56902A12A04756100970371 /* FloatWindow.swift */; };
+		D56902A52A05CA8300970371 /* Notification+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56902A42A05CA8300970371 /* Notification+App.swift */; };
 		D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = D569C9EF21AE908100211E36 /* MBErrorCode.m */; };
 		D5740B4824985CC2001CBCB2 /* MBFormSelectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4724985CC2001CBCB2 /* MBFormSelectListViewController.m */; };
 		D5740B4A24985E93001CBCB2 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4924985E92001CBCB2 /* AppError.swift */; };
@@ -391,6 +393,9 @@
 		D564D5D11970EE340032FEC3 /* MBModalPresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBModalPresentSegue.h; sourceTree = "<group>"; };
 		D564D5D21970EE340032FEC3 /* MBModalPresentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBModalPresentSegue.m; sourceTree = "<group>"; };
 		D568290E29E74A5900E5A02D /* MessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
+		D56902A12A04756100970371 /* FloatWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindow.swift; sourceTree = "<group>"; };
+		D56902A42A05CA8300970371 /* Notification+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+App.swift"; sourceTree = "<group>"; };
+		D56902A62A0690BF00970371 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		D569C9E521AE906900211E36 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D569C9EE21AE907F00211E36 /* MBErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBErrorCode.h; sourceTree = "<group>"; };
 		D569C9EF21AE908100211E36 /* MBErrorCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBErrorCode.m; sourceTree = "<group>"; };
@@ -768,6 +773,7 @@
 				D5B8A39A251217C900C84CB1 /* Collections+App.swift */,
 				D51B7FF129CFF6E400DD825C /* Dispatch+App.swift */,
 				D5C3CBEE217ED20F0097CCD9 /* Geometry+App.swift */,
+				D56902A42A05CA8300970371 /* Notification+App.swift */,
 				D588308C20CACB33002030C4 /* NSPointArray+App.swift */,
 				D5F9F47E208D921200427201 /* String+App.swift */,
 				D5EE51172043DAA1009148B3 /* UIKit+App.h */,
@@ -801,10 +807,10 @@
 				D534460E25924CE700F5FD80 /* UIApplication+App.swift */,
 				D54F0E532199BB22003370F4 /* UIButton+App.swift */,
 				D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */,
+				D544CBDE29FB5AF700A4F6F6 /* UIFocus+App.swift */,
 				D5EEF2E329DEBE8000F3CF52 /* UIScrollView+App.swift */,
 				D501844D20F865D3009481D4 /* UITableView+App.swift */,
 				D534460F25924CE700F5FD80 /* UIViewController+App.swift */,
-				D544CBDE29FB5AF700A4F6F6 /* UIFocus+App.swift */,
 			);
 			path = "UI System";
 			sourceTree = "<group>";
@@ -884,6 +890,7 @@
 				D5197A4517EECAAF00CA387C /* Info.plist */,
 				D5D4CC6E2043A6ED002FE9F0 /* OCBridging-Header.h */,
 				D52EADEA2043B983007219E0 /* release.entitlements */,
+				D56902A62A0690BF00970371 /* Shared.xcconfig */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1483,6 +1490,7 @@
 		D5EEF2CB29DC563400F3CF52 /* macBridge */ = {
 			isa = PBXGroup;
 			children = (
+				D56902A12A04756100970371 /* FloatWindow.swift */,
 				D5EEF2DB29DC5C8700F3CF52 /* MacBridge.swift */,
 				D5EEF2D829DC5C6B00F3CF52 /* MacInterface.swift */,
 			);
@@ -1864,6 +1872,7 @@
 				D5D7BCD829D4611100AF6DF5 /* B9Keychain.swift in Sources */,
 				D57D784E29C8B28C003099D6 /* B9NavigationController.swift in Sources */,
 				D507BC3929CCA12A001E2298 /* B9RootViewController.swift in Sources */,
+				D544CBDD29FA3A0A00A4F6F6 /* B9WindowSceneDelegate.swift in Sources */,
 				D57CAD1F29E28B6400F4FF60 /* BottomStickyScrollview.swift in Sources */,
 				D587D48829E967FF0085CFCE /* BoxViews.swift in Sources */,
 				D52A04E520F85F2600F535ED /* Button.swift in Sources */,
@@ -1944,7 +1953,6 @@
 				D533C4E6259235E200590FBA /* MBFlexInterface.m in Sources */,
 				D5A3312421527BA100B0FD5B /* MBFlipCollapsibleView.m in Sources */,
 				D5FCB68E23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift in Sources */,
-				D544CBDF29FB5AF700A4F6F6 /* UIFocus+App.swift in Sources */,
 				D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */,
 				D5740B4824985CC2001CBCB2 /* MBFormSelectListViewController.m in Sources */,
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
@@ -1963,7 +1971,6 @@
 				D5EE51872043F5E6009148B3 /* MBSearchViewController.m in Sources */,
 				D5EE521A2043F693009148B3 /* MBSingleSectionCollectionView.m in Sources */,
 				D53141FD29D6DB14004EDCCA /* MBStateMachineView.swift in Sources */,
-				D544CBDD29FA3A0A00A4F6F6 /* B9WindowSceneDelegate.swift in Sources */,
 				D588308F20CACB33002030C4 /* MBSwift.swift in Sources */,
 				D5FA7D5D29D86A9D0011DA4E /* MBTableHeaderFooterView.swift in Sources */,
 				D5B49F131C41133A00847925 /* MBTableListDisplayer.m in Sources */,
@@ -1984,6 +1991,7 @@
 				D5A4F4DD29E81B22007319D6 /* MessageViews.swift in Sources */,
 				D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */,
 				D5EEE5DB29C8A4BB006759DE /* NavigationController.swift in Sources */,
+				D56902A52A05CA8300970371 /* Notification+App.swift in Sources */,
 				D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */,
 				D501844E20F865D3009481D4 /* Number+App.swift in Sources */,
 				D5FA7D5B29D827380011DA4E /* OAChatResponse.swift in Sources */,
@@ -2020,6 +2028,7 @@
 				D5031BFC25C03EA800C2849E /* UIButton+FontShrink.swift in Sources */,
 				D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */,
 				D579495F21788D67002E1C4A /* UIDevice+App.swift in Sources */,
+				D544CBDF29FB5AF700A4F6F6 /* UIFocus+App.swift in Sources */,
 				D5BC898029F909EF00D4DF56 /* UIImage+.swift in Sources */,
 				D5EE520D2043F61D009148B3 /* UIImageView+MBRenderingMode.m in Sources */,
 				D5DB4C22241E39EA00832A0A /* UIKit+DynamicType.m in Sources */,
@@ -2070,6 +2079,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D56902A32A0475DA00970371 /* FloatWindow.swift in Sources */,
 				D5EEF2DC29DC5C8700F3CF52 /* MacBridge.swift in Sources */,
 				D5EEF2DA29DC5C6B00F3CF52 /* MacInterface.swift in Sources */,
 			);
@@ -2167,6 +2177,7 @@
 /* Begin XCBuildConfiguration section */
 		D5197A6D17EECAAF00CA387C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D56902A62A0690BF00970371 /* Shared.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2236,6 +2247,7 @@
 		};
 		D5197A6E17EECAAF00CA387C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D56902A62A0690BF00970371 /* Shared.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2325,7 +2337,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
@@ -2369,7 +2380,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2385,6 +2395,7 @@
 		};
 		D564D5D41970EF290032FEC3 /* Alpha */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D56902A62A0690BF00970371 /* Shared.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2475,7 +2486,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2506,7 +2516,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.SchemePlayground";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2534,7 +2543,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.SchemePlayground";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2562,7 +2570,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.SchemePlayground";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2580,7 +2587,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.UnitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2599,7 +2605,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.UnitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2618,7 +2623,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "b9software.chat-ai.UnitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2640,7 +2644,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 B9Software. All rights reserved.";
 				INFOPLIST_KEY_NSPrincipalClass = MacBridge;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = b9software.macBridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2662,7 +2665,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 B9Software. All rights reserved.";
 				INFOPLIST_KEY_NSPrincipalClass = MacBridge;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = b9software.macBridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2683,7 +2685,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 B9Software. All rights reserved.";
 				INFOPLIST_KEY_NSPrincipalClass = MacBridge;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = b9software.macBridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

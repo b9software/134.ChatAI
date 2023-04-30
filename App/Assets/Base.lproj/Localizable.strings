@@ -21,6 +21,7 @@
 "menu.help" = "Help";
 "menu.homePage" = "Project on GitHub";
 "menu.userManual" = "Online User Manual";
+"menu.feedback" = "Feedback";
 
 // Sidebar Menu
 
@@ -92,3 +93,4 @@
 "link.huggingChat.privacy" = "https://huggingface.co/chat/privacy";
 "link.openai.privacy" = "https://openai.com/policies/privacy-policy";
 "link.openai.tos" = "https://openai.com/policies/terms-of-use";
+"link.feedback" = "https://github.com/b9software/B9ChatAI/discussions";

@@ -7,10 +7,13 @@
 //
 
 import AppKit
+import ObjectiveC
 
 @objc(MacBridge)
 final class MacBridge: NSObject, MacInterface {
+
     required override init() {
+        NSWindow.swizzle = true
     }
 
     var isAppActive: Bool {
@@ -62,105 +65,17 @@ final class MacBridge: NSObject, MacInterface {
 
     // MARK: - Float Window
 
-    var floatWindowDeactivateAlpha: CGFloat = 0.2
-
-    var keyWindowIsInFloatMode: Bool {
-        NSApp.keyWindow?.level == .floating
-    }
-
-    func floatWindow() {
-        guard let window = NSApp.keyWindow else {
-            return
-        }
-        if window.tabGroup?.isOverviewVisible == true {
-            NSAnimationContext.runAnimationGroup({ context in
-                context.duration = 0
-                window.animator().toggleTabOverview(nil)
-            }, completionHandler: {
-                if let window = NSApp.keyWindow {
-                    self.makeFloat(window: window)
-                }
-            })
-            return
-        }
-        makeFloat(window: window)
-    }
-
-    private func makeFloat(window: NSWindow) {
-        if window.tabbedWindows?.count ?? 0 > 1 {
-            window.moveTabToNewWindow(nil)
-        }
-        if window.tabGroup?.isTabBarVisible == true {
-            window.toggleTabBar(nil)
-        }
-        window.tabbingMode = .disallowed
-
-        if window.styleMask.contains(.fullScreen) {
-            window.toggleFullScreen(nil)
-        }
-        window.styleMask = [.resizable, .titled, .closable]
-        window.level = .floating
-        window.collectionBehavior.insert(.fullScreenNone)
-        floatWindowStates[window] = FloatWindowState()
-
-        guard let screen = window.screen else {
-            assert(false)
-            return
-        }
-        debugPrint("screen.frame", screen.frame)
-        debugPrint("screen.visibleFrame", screen.visibleFrame)
-        debugPrint(window.contentView)
-        debugPrint(window.contentViewController)
-        var frame = window.frame
-        floatWindowStates[window]?.originalFrame = frame
-        frame.size = NSSize(width: 300, height: 500)
-        window.setFrame(frame, display: true, animate: true)
-    }
-
-    func unfloatWindow() {
-        guard let window = NSApp.keyWindow else {
-            return
-        }
-        window.styleMask = defaultWindowStyle
-        window.level = .normal
-        let state = floatWindowStates.removeValue(forKey: window)
-        if let frame = state?.originalFrame {
-            window.setFrame(frame, display: true, animate: true)
-        }
-        window.tabbingMode = .automatic
-        window.collectionBehavior.remove(.fullScreenNone)
-    }
-
-    private class FloatWindowState {
-        var isExpand = true
-        var originalFrame: NSRect = .null
-    }
-
-    private var floatWindowStates = [NSWindow: FloatWindowState]()
-
-    var keyWindowIsFloatExpand: Bool {
+    var keyWindowFloatMode: Int {
         get {
-            guard let window = NSApp.keyWindow else {
-                return false
-            }
-            return floatWindowStates[window]?.isExpand ?? false
+            NSApp.keyWindow?.floatState.rawValue ?? 0
         }
         set {
-            guard let window = NSApp.keyWindow else {
-                assert(false)
+            guard let state = FloatModeState(rawValue: newValue),
+                  let window = NSApp.keyWindow else {
                 return
             }
-            let state = floatWindowStates[window] ?? {
-                let newState = FloatWindowState()
-                floatWindowStates[window] = newState
-                return newState
-            }()
-            state.isExpand = newValue
+            window.setFloatMode(state, animated: true)
         }
-    }
-
-    private var defaultWindowStyle: NSWindow.StyleMask {
-        [.borderless, .closable, .fullSizeContentView, .miniaturizable, .resizable, .titled]
     }
 
     var keyWindowChangeObserver: (() -> Void)? {
@@ -191,32 +106,21 @@ final class MacBridge: NSObject, MacInterface {
     @objc private func windowDidBecomeKey(notice: Notification) {
         debugPrint(notice)
         keyWindowChangeObserver?()
+        (notice.object as? NSWindow)?.updateFloatDeactivceAplha()
     }
     @objc private func windowDidResignKey(notice: Notification) {
         debugPrint(notice)
         keyWindowChangeObserver?()
-        if let window = notice.object as? NSWindow,
-           window.level == .floating,
-           let location = NSApp.currentEvent?.locationInWindow {
-            if !window.frame.contains(location) {
-                window.animator().alphaValue = floatWindowDeactivateAlpha
-            }
-        }
+        (notice.object as? NSWindow)?.updateFloatDeactivceAplha()
     }
     private func handleMouseEvent(event: NSEvent) -> NSEvent? {
-        if let window = event.window,
-           window.level == .floating {
-            if event.type == .mouseExited {
-                if !window.isKeyWindow {
-                    window.animator().alphaValue = floatWindowDeactivateAlpha
-                }
-            } else if event.type == .mouseEntered {
-                window.animator().alphaValue = 1
-            }
-        }
+        event.window?.updateFloatDeactivceAplha()
         return event
     }
 }
+
+// MARK: - Float Mode
+
 
 extension NSWindow.StyleMask: CustomDebugStringConvertible {
     public var debugDescription: String {

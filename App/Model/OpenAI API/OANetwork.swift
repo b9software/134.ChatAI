@@ -197,6 +197,29 @@ extension OANetwork {
         guard let data = data, !data.isEmpty else {
             return nil
         }
-        return try? OAError.decode(data)
+        if let result = try? OAError.decode(data),
+           result.error != nil {
+            return result
+        }
+        // 尝试解析第三方接口
+        guard let info = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            if let context = String(data: data, encoding: .utf8) {
+                return OAError.badContext(context)
+            }
+            return OAError.badString()
+        }
+        var message: String?
+        var code: String?
+        var type: String?
+        if let messageField = info["message"] ?? info["msg"] {
+            message = "\(messageField)"
+        }
+        if let codeField = info["code"] {
+            code = "\(codeField)"
+        }
+        if let typeField = info["type"] {
+            type = "\(typeField)"
+        }
+        return OAError(error: OAErrorDetail(message: message, type: type, code: code))
     }
 }

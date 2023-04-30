@@ -87,24 +87,18 @@ class RootViewController: B9RootViewController {
 
         guard children.isNotEmpty else { return }
 
-        let hClass = size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact
-        let vClass = size.height > 500 ? UIUserInterfaceSizeClass.regular : .compact
-        let sizeCategory = Current.defualts.preferredContentSize
+        let newTrait = UITraitCollection(traitsFrom: [
+            .current,
+            .init(horizontalSizeClass: size.width > 500 ? UIUserInterfaceSizeClass.regular : .compact),
+            .init(verticalSizeClass: size.height > 500 ? UIUserInterfaceSizeClass.regular : .compact),
+            .init(preferredContentSizeCategory: Current.defualts.preferredContentSize),
+        ])
 
         for vc in children {
-            let currentCollection = overrideTraitCollection(forChild: vc) ?? .current
-            if currentCollection.horizontalSizeClass == hClass,
-               currentCollection.verticalSizeClass == vClass,
-               currentCollection.preferredContentSizeCategory == sizeCategory {
+            if overrideTraitCollection(forChild: vc) == newTrait {
                 return
             }
-            let collection = UITraitCollection(traitsFrom: [
-                currentCollection,
-                .init(horizontalSizeClass: hClass),
-                .init(verticalSizeClass: vClass),
-                .init(preferredContentSizeCategory: sizeCategory),
-            ])
-            setOverrideTraitCollection(collection, forChild: vc)
+            setOverrideTraitCollection(newTrait, forChild: vc)
         }
     }
 
@@ -146,6 +140,7 @@ class RootViewController: B9RootViewController {
     var floatModeState = FloatModeState.normal {
         didSet {
             AppLog().debug("RootVC> Float mode: \(floatModeState)")
+            adjustTraitCollection()
         }
     }
 }

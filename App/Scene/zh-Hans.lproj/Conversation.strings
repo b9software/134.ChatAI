@@ -73,7 +73,7 @@
 /* Class = "UILabel"; text = "Send input with which key"; ObjectID = "chat-setting-send-tip"; */
 "chat-setting-send-tip.text" = "通过哪个按键发送输入";
 
-/* Class = "UILabel"; text = "System"; ObjectID = "chat-setting-system-section"; */
+/* Class = "UILabel"; text = "System (Prompts)"; ObjectID = "chat-setting-system-section"; */
 "chat-setting-system-section.text" = "交聚的话题";
 
 /* Class = "UILabel"; text = "Helps set the behavior of the assistant."; ObjectID = "chat-setting-system-tip"; */

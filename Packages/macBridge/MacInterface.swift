@@ -2,11 +2,20 @@
 //  MacInterface.swift
 //  B9ChatAI
 //
-//  Created by Joseph Zhao on 2023/4/4.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
 import Foundation
+
+enum FloatModeState: Int {
+    case normal = 1
+    case floatExpand = 2
+    case floatCollapse = 3
+
+    var isFloat: Bool {
+        self != .normal
+    }
+}
 
 @objc(MacInterface)
 protocol MacInterface: NSObjectProtocol {
@@ -21,13 +30,14 @@ protocol MacInterface: NSObjectProtocol {
     /// Plays the system beep.
     func beep()
 
-    var keyWindowIsInFloatMode: Bool { get }
-    var keyWindowIsFloatExpand: Bool { get set }
+    /// Values:
+    /// - 0 no key window
+    /// - 1 has key normal
+    /// - 2 float expand
+    /// - 3 float collapse
+    var keyWindowFloatMode: Int { get set }
 
     var keyWindowChangeObserver: (() -> Void)? { get set }
-
-    func floatWindow()
-    func unfloatWindow()
 }
 
 #if targetEnvironment(macCatalyst)
@@ -49,21 +59,21 @@ extension MacInterface {
 
 #endif
 
-class MockedMacInterface: NSObject, MacInterface {
+extension Notification.Name {
+    static let floatModeWillChange = Notification.Name("app.window.floatModeWillChange")
+    static let floatModeDidChange = Notification.Name("app.window.floatModeChanged")
+}
 
+class MockedMacInterface: NSObject, MacInterface {
     required override init() {
         super.init()
     }
 
     var isAppActive = false
     var theme: Int = 0
-    var keyWindowIsInFloatMode = false
-    var keyWindowIsFloatExpand = false
+    var keyWindowFloatMode = 0
     var keyWindowChangeObserver: (() -> Void)?
 
     func hideApp() {}
     func beep() {}
-
-    func floatWindow() {}
-    func unfloatWindow() {}
 }

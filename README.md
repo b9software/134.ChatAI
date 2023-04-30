@@ -33,14 +33,11 @@ brew install cocoapods
 接口
 
 * https://github.com/ading2210/poe-api POE 逆向接口，需要登录
-* https://github.com/MacPaw/OpenAI 接口库，不支持流
-* https://github.com/dylanshine/openai-kit 接口库
-* https://github.com/FuturraGroup/OpenAI 接口库
+* https://github.com/xtekky/gpt4free 逆向接口
 * https://console.anthropic.com/docs/api/reference
 * https://platform.openai.com/docs/models/model-endpoint-compatibility 模型支持列表
 * https://github.com/openai/tiktoken token 数量计算
 * https://platform.openai.com/tokenizer 在线计算
-* https://api2d.com/ API 售卖，没备案？
 * https://github.com/acheong08/EdgeGPT Python
 
 引擎
@@ -48,10 +45,16 @@ brew install cocoapods
 * https://chat.lmsys.org
 * https://huggingface.co/chat/
 * https://open-assistant.io/chat/
+* https://xinghuo.xfyun.cn 也可以考虑讯飞的普通 API
+* https://llava.hliu.cc 视觉识别 LLM
 
 应用
 
-* https://github.com/bhaskatripathi/pdfGPT 
+* https://github.com/hwchase17/langchain
+* https://github.com/hwchase17/langchain-hub
+* https://github.com/bhaskatripathi/pdfGPT
+* https://chat.okisdev.com 网页端看着不错
+
 PDFKit 读取
 
 * https://github.com/chenxi92/ChatGPT
@@ -59,6 +62,7 @@ PDFKit 读取
 * https://github.com/KittenYang/charming-chatgpt Raycast 插件
 
 插件发现
+
 * https://www.getit.ai/gpt-plugins
 * https://www.wellknown.ai
 * https://github.com/LAION-AI/Open-Assistant/pull/2765/files OA 插件 PR
@@ -74,6 +78,11 @@ PDF助手 Chi PDF，可协助在文献中搜索关键内容，并快速进行对
 Software Client 为Windows，Mac以及Linux系统提供了额外的ChatGPT客户端，包含Awesome Tragibility Prompt的指令；
 
 https://developer.apple.com/contact/app-store/?topic=expedite
+
+社区
+
+* https://afdian.net/feed
+* https://www.buzzing.cc
 
 ## License
 

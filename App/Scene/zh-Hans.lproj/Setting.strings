@@ -73,6 +73,12 @@
 /* Class = "UILabel"; text = "Engines"; ObjectID = "setting-engine-section"; */
 "setting-engine-section.text" = "AI 引擎";
 
+/* Class = "UILabel"; text = "Transparency of the window in floating mode when it is not active"; ObjectID = "setting-float-window-alpha-tip"; */
+"setting-float-window-alpha-tip.text" = "非激活状态的浮窗透明度";
+
+/* Class = "UILabel"; text = "Float Window Alpha"; ObjectID = "setting-float-window-alpha-title"; */
+"setting-float-window-alpha-title.text" = "浮窗透明度";
+
 /* Class = "UILabel"; text = "Font size"; ObjectID = "setting-font-size-title"; */
 "setting-font-size-title.text" = "文字大小";
 

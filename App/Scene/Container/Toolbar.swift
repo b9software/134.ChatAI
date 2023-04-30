@@ -10,15 +10,23 @@ import UIKit
 
 class NSToolbarController {
     private class ToolbarStates: NSObject, NSToolbarDelegate {
+        let fixItems: [NSToolbarItem.Identifier]?
         let additionalItems: [NSToolbarItem]
         private var additionalItemsID = [NSToolbarItem.Identifier]()
 
+        init(items: [NSToolbarItem.Identifier]) {
+            self.fixItems = items
+            self.additionalItems = []
+        }
+
         init(additionalItems: [NSToolbarItem]) {
+            self.fixItems = nil
             self.additionalItems = additionalItems
             additionalItemsID = additionalItems.map { $0.itemIdentifier }
         }
 
         func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+            if let ids = fixItems { return ids }
             var ids: [NSToolbarItem.Identifier] = [
                 .toggleSidebar, .back, .flexibleSpace
             ]
@@ -27,6 +35,7 @@ class NSToolbarController {
         }
 
         func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+            if let ids = fixItems { return ids }
             var ids: [NSToolbarItem.Identifier] = [
                 .toggleSidebar, .back, // .test, .test2,
                 .flexibleSpace, .space
@@ -36,12 +45,15 @@ class NSToolbarController {
         }
 
         func toolbarImmovableItemIdentifiers(_ toolbar: NSToolbar) -> Set<NSToolbarItem.Identifier> {
-            [.toggleSidebar, .back]
+            if let ids = fixItems { return Set(ids) }
+            return [.toggleSidebar, .back]
         }
 
         func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
             switch itemIdentifier {
             case .back: return .back()
+            case .floatCollapse: return .floatCollapse()
+            case .floatExpand: return .floatExpand()
 //            case .test: return .test()
 //            case .test2: return .test2()
             default: break
@@ -63,6 +75,10 @@ class NSToolbarController {
                 return
             }
         }
+        if floatModeState.isFloat {
+            additionalItems = newItems
+            return
+        }
         // Due to system bug, have to create a new toolbar every time.
         // When there are multiple windows, removeItem(at:) may go out of bounds.
         let newStatus = ToolbarStates(additionalItems: newItems)
@@ -75,13 +91,60 @@ class NSToolbarController {
         toolbarStatus = newStatus
         windowTitleBar.toolbar = newToolbar
     }
+
+    var floatModeState = FloatModeState.normal {
+        didSet {
+            if oldValue == floatModeState { return }
+            if floatModeState.isFloat {
+                setFloatToolbar()
+            } else {
+                if let items = additionalItems {
+                    additionalItems = nil
+                    update(additionalItems: items)
+                }
+            }
+        }
+    }
+
+    private func setFloatToolbar() {
+        let newStatus = ToolbarStates(items: [floatModeState == .floatExpand ? .floatCollapse : .floatExpand])
+        let newToolbar = NSToolbar(identifier: .appFloat)
+        newToolbar.delegate = newStatus
+        newToolbar.displayMode = .iconOnly
+        newToolbar.allowsUserCustomization = false
+        newToolbar.showsBaselineSeparator = false
+        toolbarStatus = newStatus
+        windowTitleBar.toolbar = newToolbar
+    }
 }
 
 extension NSToolbarItem {
     static func back() -> NSToolbarItem {
         let button = UIBarButtonItem(image: Asset.GeneralUI.Navigation.navBack.image, style: .plain, target: nil, action: #selector(StandardActions.goBack))
         let item = NSToolbarItem(itemIdentifier: .back, barButtonItem: button)
-        item.label = "Back"
+        item.label = L.Menu.navigationBack
+        item.isNavigational = true
+        return item
+    }
+
+    static func floatCollapse() -> NSToolbarItem {
+        let item = NSToolbarItem(itemIdentifier: .floatCollapse)
+        item.image = UIImage(systemName: "arrow.down.forward.and.arrow.up.backward")
+        item.label = L.Menu.floatModeCollapse
+        item.action = #selector(ApplicationDelegate.floatWindowCollapse)
+        item.target = AppDelegate()
+        item.visibilityPriority = .high
+//        item.isNavigational = true
+        return item
+    }
+
+    static func floatExpand() -> NSToolbarItem {
+        let item = NSToolbarItem(itemIdentifier: .floatExpand)
+        item.image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
+        item.label = L.Menu.floatModeExpand
+        item.action = #selector(ApplicationDelegate.floatWindowExpand)
+        item.target = AppDelegate()
+        item.visibilityPriority = .high
         item.isNavigational = true
         return item
     }
@@ -110,6 +173,8 @@ extension NSToolbarItem.Identifier {
     static let back = NSToolbarItem.Identifier("app.back")
     static let chatSetting = NSToolbarItem.Identifier("app.chat.setting")
     static let chatIntegration = NSToolbarItem.Identifier("app.chat.integration")
+    static let floatExpand = NSToolbarItem.Identifier("app.floatMode.expand")
+    static let floatCollapse = NSToolbarItem.Identifier("app.floatMode.collapse")
     static let test = NSToolbarItem.Identifier("app.test")
     static let test2 = NSToolbarItem.Identifier("app.test2")
 }
@@ -142,7 +207,11 @@ extension NSMenuToolbarItem {
 
 extension NSToolbar.Identifier {
     static var appMain: Self {
-        NSToolbar.Identifier("app.toolbar")
+        NSToolbar.Identifier("app.toolbar.main")
+    }
+
+    static var appFloat: Self {
+        NSToolbar.Identifier("app.toolbar.float")
     }
 }
 

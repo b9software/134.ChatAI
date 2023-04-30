@@ -11,9 +11,7 @@ import UIKit
 class SceneDelegate: B9WindowSceneDelegate {
     static var hasApplicationEnterBackground = false
 
-    var rootViewController: RootViewController! {
-        window?.rootViewController as? RootViewController
-    }
+    var rootViewController: RootViewController!
 
     #if targetEnvironment(macCatalyst)
     private(set) lazy var toolbarController = NSToolbarController()
@@ -29,6 +27,8 @@ class SceneDelegate: B9WindowSceneDelegate {
         }
         #endif
         AppLog().debug("Scene> Will connect, \(connectionOptions.userActivities).")
+        rootViewController = window?.rootViewController as? RootViewController
+        assert(rootViewController != nil)
         if let activity = connectionOptions.userActivities.first ?? session.stateRestorationActivity {
             AppLog().debug("Scene> Choose activity: \(activity.activityType).")
             scene.userActivity = activity
@@ -38,7 +38,7 @@ class SceneDelegate: B9WindowSceneDelegate {
                 assert(false)
             }
         }
-        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 200)
+        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 200, height: 180)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -96,6 +96,29 @@ class SceneDelegate: B9WindowSceneDelegate {
             }
         }
     }
+
+    var floatModeState = FloatModeState.normal {
+        didSet {
+            AppLog().debug("Scene> \(window?.windowScene?.title ?? "?") Float mode: \(floatModeState)")
+            if oldValue == floatModeState { return }
+            rootViewController.floatModeState = floatModeState
+            toolbarController.floatModeState = floatModeState
+            if let size = window?.windowScene?.sizeRestrictions {
+                size.minimumSize = floatModeState.isFloat ? .zero : CGSize(width: 200, height: 180)
+            }
+            switch floatModeState {
+            case .normal:
+                break
+            case .floatExpand:
+                window?.rootViewController = rootViewController
+            case .floatCollapse:
+                let vc = UIViewController()
+                vc.view.backgroundColor = nil
+                vc.view.isUserInteractionEnabled = false
+                window?.rootViewController = vc
+            }
+        }
+    }
 #endif
 }
 
@@ -104,7 +127,12 @@ class SceneDelegate: B9WindowSceneDelegate {
 extension SceneDelegate {
 #if targetEnvironment(macCatalyst)
     func setPreferedToolbarStyleDueToLayout(style: UITitlebarToolbarStyle) {
-        toolbarStyle = style
+        var newStyle = style
+        if floatModeState != .normal {
+            newStyle = .unifiedCompact
+        }
+        if toolbarStyle == newStyle { return }
+        toolbarStyle = newStyle
     }
 #endif
 }
