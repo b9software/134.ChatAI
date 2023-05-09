@@ -61,7 +61,9 @@ class ApplicationDelegate: MBApplicationDelegate {
         setupUIAppearance()
         if isTesting { return true }
         Current.messageSender.startIfNeeded()
+        #if targetEnvironment(macCatalyst)
         dispatch_after_seconds(0, setupFloatModeObservation)
+        #endif
         return true
     }
 
@@ -85,11 +87,13 @@ class ApplicationDelegate: MBApplicationDelegate {
         AppLog().info("App> UserActivity did update: \(userActivity).")
     }
 
+    #if targetEnvironment(macCatalyst)
     private lazy var needsUpdateFloatModeState = DelayAction(.init(updateFloatModeState))
+    #endif
 }
 
 // MARK: - Float Window
-
+#if targetEnvironment(macCatalyst)
 extension ApplicationDelegate {
     private func setupFloatModeObservation() {
         Current.osBridge.keyWindowChangeObserver = {
@@ -144,6 +148,7 @@ extension ApplicationDelegate {
         Current.keyWindow?.windowScene?.delegate as? SceneDelegate
     }
 }
+#endif
 
 // MARK: - Responder Chain
 #if DEBUG
@@ -187,11 +192,11 @@ extension ApplicationDelegate {
     }
 
     @IBAction func showHelp(_ sender: Any) {
-        URL.open(link: L.App.homePage)
+        URL.open(link: L.Link.homePage)
     }
 
     @IBAction func showUserManual(_ sender: Any) {
-        URL.open(link: L.App.userManual)
+        URL.open(link: L.Link.userManual)
     }
 
     @IBAction func showFeedback(_ sender: Any) {

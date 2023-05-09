@@ -216,4 +216,10 @@ extension ConversationManager {
             }
         }
     }
+
+    func waitSend(text: String, to chat: Conversation) async throws -> Message {
+        let newMessage = try await Message.createMessage(sendText: text, from: chat, reply: nil, noSteam: true)
+        try await newMessage.waitSendFinshed()
+        return newMessage
+    }
 }

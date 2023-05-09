@@ -5,7 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class AboutViewController: UIViewController, StoryboardCreation {
     static var storyboardID: StoryboardID { .setting }
@@ -31,7 +31,7 @@ class AboutViewController: UIViewController, StoryboardCreation {
     }
 
     @IBAction private func goGitHub(_ sender: Any) {
-        URL.open(link: L.App.homePage)
+        URL.open(link: L.Link.homePage)
     }
 
     @IBAction private func gotoOpenAIPrivacy(_ sender: Any) {

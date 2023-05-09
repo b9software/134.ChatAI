@@ -68,6 +68,7 @@ class OANetwork {
         let body = #"{"model":"gpt-3.5-turbo","max_tokens":2,"messages":[{"role":"user","content":"hi"}]}"#
         request.httpBody = body.data(using: .utf8)
 
+        AppLog().debug("Sending HTTP request: \(request.url!)")
         var (data, response) = try await session.data(for: request)
         data = try handleResponse(data: data, response: response)
         let talk = try OAChatCompletion.decode(data)
@@ -82,7 +83,7 @@ class OANetwork {
         return try [OAModel].decode(data)
     }
 
-    func steamChat(config: EngineConfig, handler: Message) -> Task<Void, Error> {
+    func steamChat(config: EngineConfig, steam: Bool, handler: Message) -> Task<Void, Error> {
         Task {
             var param = try config.toOpenAIParameters()
             var pMsg: [OAChatMessage] = try await handler.entity.buildContext()
@@ -91,7 +92,9 @@ class OANetwork {
             }
             param["messages"] = pMsg.map { ["role": $0.role?.rawValue, "content": $0.content] }
             param["user"] = Current.identifierForVendor
-            param["stream"] = true
+            if steam {
+                param["stream"] = true
+            }
 
             var request = URLRequest(url: completionURL)
             request.httpMethod = "POST"
@@ -99,6 +102,13 @@ class OANetwork {
             request.httpBody = try JSONSerialization.data(withJSONObject: param)
 
             AppLog().debug("Sending HTTP request: \(request.url!)")
+            if !steam {
+                var (data, response) = try await session.data(for: request)
+                data = try handleResponse(data: data, response: response)
+                let talk = try OAChatCompletion.decode(data)
+                try handler.onResponse(oaEntity: talk)
+                return
+            }
             let (result, response) = try await session.bytes(for: request)
             try Task.checkCancellation()
             AppLog().debug("Got HTTP response")

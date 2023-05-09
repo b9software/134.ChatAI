@@ -10,10 +10,12 @@ import CoreData
 struct SenderState: Equatable {
     var isSending: Bool
     var error: Error?
+    var noSteam = false
 
     static func == (lhs: SenderState, rhs: SenderState) -> Bool {
         lhs.isSending == rhs.isSending
         && lhs.error?.localizedDescription == rhs.error?.localizedDescription
+        && lhs.noSteam == rhs.noSteam
     }
 }
 
@@ -145,7 +147,8 @@ class MessageOperation: Operation {
     override func main() {
         AppLog().warning("Task start")
         super.main()
-        message.senderState = SenderState(isSending: true)
+        let noSteam = message.senderState?.noSteam ?? false
+        message.senderState = SenderState(isSending: true, noSteam: noSteam)
 
         let semaphore = DispatchSemaphore(value: 0)
         Task {

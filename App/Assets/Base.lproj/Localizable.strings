@@ -2,7 +2,7 @@
 "cancel" = "Cancel";
 "genral-error.invalid-url" = "\"%@\" is not a valid URL.";
 
-// In Application Main Menu
+// MARK: In Application Main Menu
 
 "menu.new" = "New";
 "menu.new.conversation" = "Conversation";
@@ -23,19 +23,21 @@
 "menu.userManual" = "Online User Manual";
 "menu.feedback" = "Feedback";
 
-// Sidebar Menu
+// MARK: Sidebar Menu
 
 "menu.archive" = "Archive";
 "menu.delete" = "Delete";
 "menu.setting" = "Settings";
 
-// Conversation Menu
+// MARK: Conversation Menu
 
 "menu.guide" = "Guide";
 "menu.retry" = "Retry";
 "menu.integrationHelp" = "What's this?";
 "menu.integrationBookmark" = "Copy Browser Bookmark";
 "menu.send" = "Send Input";
+
+// MARK: - Chat
 
 "chat.defaultTitle" = "New Chat";
 "chat.archived" = "Archived";
@@ -65,6 +67,11 @@
 "chat.setting.clearAlertMessage" = "This operation can't be undone.";
 "chat.setting.clearAlertConfirm" = "Clear";
 
+"chat.send.engineNotSet" = "Conversation engine has not been set.";
+"chat.send.engineNoLoad" = "Unable load conversation engine.";
+
+// MARK: Engine
+
 "engine.create.type-openai.title" = "ChatGPT / OpenAI";
 "engine.create.type-openai.detail" = "Use offical OpenAI API";
 "engine.create.type-openai-proxy.title" = "ChatGPT / API Proxy";
@@ -82,14 +89,16 @@
 "engine.create.fail.exist-key" = "Engine with the given key already exist.";
 "engine.create.fail.exist-proxy" = "Engine with the same proxy config already exist.";
 
+// MARK: App
+
 "app.name" = "B9ChatAI";
 "app.privacy-sort" = "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.";
-"app.homePage" = "https://github.com/b9software/B9ChatAI";
-"app.userManual" = "https://github.com/b9software/B9ChatAI/wiki/";
 
 "guide.text1st" = "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link:\n https://github.com/b9software/B9ChatAI/issues/1\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-16";
 "guide.interCommunicationLink" = "https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication";
 
+"link.homePage" = "https://github.com/b9software/B9ChatAI";
+"link.userManual" = "https://github.com/b9software/B9ChatAI/wiki/";
 "link.huggingChat.privacy" = "https://huggingface.co/chat/privacy";
 "link.openai.privacy" = "https://openai.com/policies/privacy-policy";
 "link.openai.tos" = "https://openai.com/policies/terms-of-use";

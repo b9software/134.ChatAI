@@ -123,6 +123,31 @@ class Message {
             }
         }
     }
+    func setNoSteamSending() {
+        var state = senderState ?? SenderState(isSending: false, noSteam: true)
+        senderState = state
+    }
+    func waitSendFinshed() async throws {
+        assert(senderState != nil)
+        let task = Task {
+            let start = Date()
+            while true {
+                AppLog().debug("waitSendFinshed")
+                debugPrint(senderState)
+                if let err = senderState?.error {
+                    throw err
+                }
+                if senderState?.isSending == false || senderState == nil {
+                    return
+                }
+                if start.timeIntervalSinceNow < -25 {
+                    throw AppError.message("Wait message finish timeout.")
+                }
+                try await Task.sleep(nanoseconds: 100_000_000)
+            }
+        }
+        try await task.value
+    }
 
     private(set) lazy var delegates = MulticastDelegate<MessageUpdating>()
     private lazy var needsNoticeStateChange = DelayAction(Action { [weak self] in
@@ -141,9 +166,25 @@ extension Message {
         Current.database.save { ctx in
             let chatID = chatItem.entity.objectID
             let replyID = reply?.entity.objectID
-            let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
+            let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID).0
             myEntity.mType = .text
             myEntity.text = sendText
+        }
+    }
+
+    static func createMessage(sendText: String, from chatItem: Conversation, reply: Message?, noSteam: Bool) async throws -> Message {
+        try await Current.database.read { ctx in
+            let chatID = chatItem.entity.objectID
+            let replyID = reply?.entity.objectID
+            let (myEntity, newEntity) = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
+            myEntity.mType = .text
+            myEntity.text = sendText
+            let item = Message.from(entity: newEntity)
+            if noSteam {
+                item.setNoSteamSending()
+            }
+            try ctx.save()
+            return item
         }
     }
 
@@ -223,6 +264,29 @@ extension Message {
         }
     }
 
+    func onResponse(oaEntity: OAChatCompletion) throws {
+        assertDispatch(.notOnQueue(.main))
+        assert(senderState?.isSending == true)
+        guard let choice = oaEntity.choices?.first else {
+            throw AppError.message("Bad response: choices field is empty.")
+        }
+        guard let text = choice.message?.content else {
+            throw AppError.message("Bad response: No message.content.")
+        }
+        cachedText = text
+        entity.modify { this, _ in
+            var content = CDMessageContent()
+            if choice.finishReason == "length" {
+                content.isEnd = false
+            }
+            this.text = text
+            this.mContent = content
+        }
+        Task { @MainActor in
+            self.delegates.invoke { $0.messageReceiveDeltaReplay(self, text: text) }
+        }
+    }
+
     func onSteamResponse(_ choice: OAChatCompletion.Choice) {
         assertDispatch(.notOnQueue(.main))
         assert(senderState?.isSending == true)
@@ -239,7 +303,7 @@ extension Message {
             assert(cachedText != nil)
             cachedText?.append(contentsOf: content)
             AppLog().debug("Reviving in message: \(content).")
-            dispatch_sync_on_main {
+            Task { @MainActor in
                 self.delegates.invoke { $0.messageReceiveDeltaReplay(self, text: content) }
             }
         }

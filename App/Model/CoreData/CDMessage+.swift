@@ -203,7 +203,7 @@ extension CDMessage: ModelValidate {
     }
 
     /// 返回未设置内容的我的消息，
-    static func createEntities(_ ctx: NSManagedObjectContext, conversation: NSManagedObjectID, reply: NSManagedObjectID?) throws -> CDMessage {
+    static func createEntities(_ ctx: NSManagedObjectContext, conversation: NSManagedObjectID, reply: NSManagedObjectID?) throws -> (CDMessage, CDMessage) {
         guard let safeChat = ctx.object(with: conversation) as? CDConversation else {
             throw AppError.message("Unable get conversation entity.")
         }
@@ -249,7 +249,7 @@ extension CDMessage: ModelValidate {
         }
         parentEntity.next = newEntity.uid
         assertParent(parentEntity, ctx)
-        return myEntity
+        return (myEntity, newEntity)
     }
 
     static func newTextEntity(parent: CDMessage, context: NSManagedObjectContext) -> CDMessage {

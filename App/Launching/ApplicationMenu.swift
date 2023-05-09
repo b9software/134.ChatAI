@@ -64,6 +64,7 @@ enum ApplicationMenu {
         }
     }
 
+#if targetEnvironment(macCatalyst)
     static func buildFloatModeMenu() -> UIMenu {
         let children: [UIKeyCommand]
         switch keyWindowFloatModeState {
@@ -84,6 +85,7 @@ enum ApplicationMenu {
         }
         return UIMenu(options: .displayInline, children: children)
     }
+#endif
 }
 
 private extension ApplicationDelegate {

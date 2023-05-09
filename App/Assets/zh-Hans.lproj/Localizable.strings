@@ -2,7 +2,7 @@
 "app.privacy-sort" = "B9ChatAI 不会收集您的任何信息，所有数据都在您的掌控下。\n\n但在应用使用时，会调用第三方服务，这些服务可能会收集您的信息。虽然调用哪些服务由您掌控，但仍请您注意信息保护，仔细阅读并理解相关服务的隐私政策，尤其要小心第三方提供的代理服务器。";
 
 /* (No Comment) */
-"app.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
+"link.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
 
 /* (No Comment) */
 "cancel" = "取消";

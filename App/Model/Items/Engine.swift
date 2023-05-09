@@ -274,7 +274,7 @@ extension Engine {
 
     func send(message: Message, config: EngineConfig) throws -> Task<Void, Error> {
         let api = try getOANetworking()
-        return api.steamChat(config: config, handler: message)
+        return api.steamChat(config: config, steam: message.senderState?.noSteam != true, handler: message)
     }
 }
 

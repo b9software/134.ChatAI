@@ -136,10 +136,10 @@ extension Conversation {
         }
         return try await ctx.perform(schedule: .enqueued) {
             guard let eEntity = self.entity.engine else {
-                throw AppError.message("Conversation no engine.")
+                throw AppError.message(L.Chat.Send.engineNotSet)
             }
             guard let eItem = Engine.from(entity: eEntity) else {
-                throw AppError.message("Unable create engine.")
+                throw AppError.message(L.Chat.Send.engineNoLoad)
             }
             self.engine = eItem
             return eItem

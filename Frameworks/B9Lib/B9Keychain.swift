@@ -64,7 +64,8 @@ enum B9Keychain {
     }
 
     private static func query(account: String, service: String?) -> [CFString: Any] {
-        [
+        assertDispatch(.notOnQueue(.main))
+        return [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: account,
             kSecAttrService: service ?? Self.defaultService,

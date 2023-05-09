@@ -16,16 +16,12 @@ internal enum L10n {
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "cancel", fallback: "Cancel")
     internal enum App {
-      /// https://github.com/b9software/B9ChatAI
-      internal static let homePage = L10n.tr("Localizable", "app.homePage", fallback: "https://github.com/b9software/B9ChatAI")
       /// B9ChatAI
       internal static let name = L10n.tr("Localizable", "app.name", fallback: "B9ChatAI")
       /// B9ChatAI does not collect any of your data, and all data is under your control.
       /// 
       /// However, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.
       internal static let privacySort = L10n.tr("Localizable", "app.privacy-sort", fallback: "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.")
-      /// https://github.com/b9software/B9ChatAI/wiki/
-      internal static let userManual = L10n.tr("Localizable", "app.userManual", fallback: "https://github.com/b9software/B9ChatAI/wiki/")
     }
     internal enum Chat {
       /// Archived
@@ -55,6 +51,12 @@ internal enum L10n {
         }
         /// Continue Selection?
         internal static let wantContinue = L10n.tr("Localizable", "chat.reply.wantContinue", fallback: "Continue Selection?")
+      }
+      internal enum Send {
+        /// Unable load conversation engine.
+        internal static let engineNoLoad = L10n.tr("Localizable", "chat.send.engineNoLoad", fallback: "Unable load conversation engine.")
+        /// Conversation engine has not been set.
+        internal static let engineNotSet = L10n.tr("Localizable", "chat.send.engineNotSet", fallback: "Conversation engine has not been set.")
       }
       internal enum Setting {
         /// The same ID already exists.
@@ -159,6 +161,10 @@ internal enum L10n {
     internal enum Link {
       /// https://github.com/b9software/B9ChatAI/discussions
       internal static let feedback = L10n.tr("Localizable", "link.feedback", fallback: "https://github.com/b9software/B9ChatAI/discussions")
+      /// https://github.com/b9software/B9ChatAI
+      internal static let homePage = L10n.tr("Localizable", "link.homePage", fallback: "https://github.com/b9software/B9ChatAI")
+      /// https://github.com/b9software/B9ChatAI/wiki/
+      internal static let userManual = L10n.tr("Localizable", "link.userManual", fallback: "https://github.com/b9software/B9ChatAI/wiki/")
       internal enum HuggingChat {
         /// https://huggingface.co/chat/privacy
         internal static let privacy = L10n.tr("Localizable", "link.huggingChat.privacy", fallback: "https://huggingface.co/chat/privacy")
