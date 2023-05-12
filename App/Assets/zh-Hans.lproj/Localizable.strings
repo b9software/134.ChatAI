@@ -2,9 +2,6 @@
 "app.privacy-sort" = "B9ChatAI 不会收集您的任何信息，所有数据都在您的掌控下。\n\n但在应用使用时，会调用第三方服务，这些服务可能会收集您的信息。虽然调用哪些服务由您掌控，但仍请您注意信息保护，仔细阅读并理解相关服务的隐私政策，尤其要小心第三方提供的代理服务器。";
 
 /* (No Comment) */
-"link.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
-
-/* (No Comment) */
 "cancel" = "取消";
 
 /* (No Comment) */
@@ -35,6 +32,12 @@
 "chat.reply.wantContinue" = "继续选中话题？";
 
 /* (No Comment) */
+"chat.send.engineNoLoad" = "引擎加载失败";
+
+/* (No Comment) */
+"chat.send.engineNotSet" = "会话的引擎未设置";
+
+/* (No Comment) */
 "chat.setting.badSameID" = "已存在相同的 ID";
 
 /* (No Comment) */
@@ -57,7 +60,6 @@
 
 /* (No Comment) */
 "chat.setting.modelFetching" = "获取模型中…";
-
 
 /* (No Comment) */
 "chat.setting.selectBadEngine" = "引擎数据异常";
@@ -131,7 +133,13 @@
 /* (No Comment) */
 "guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
 
-/* Sidebar Menu */
+/* (No Comment) */
+"link.feedback" = "https://support.qq.com/product/592777";
+
+/* (No Comment) */
+"link.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
+
+/* Sidebar Archive */
 "menu.archive" = "归档";
 
 /* (No Comment) */
@@ -139,6 +147,9 @@
 
 /* (No Comment) */
 "menu.delete" = "删除";
+
+/* (No Comment) */
+"menu.feedback" = "建议与反馈";
 
 /* (No Comment) */
 "menu.floatMode" = "浮窗模式";
@@ -155,7 +166,7 @@
 /* (No Comment) */
 "menu.focusInput" = "切换到输入框";
 
-/* Conversation Menu */
+/* (No Comment) */
 "menu.guide" = "指南";
 
 /* (No Comment) */
@@ -173,7 +184,7 @@
 /* (No Comment) */
 "menu.navigationBack" = "返回";
 
-/* In Application Main Menu */
+/* File -> New */
 "menu.new" = "新建";
 
 /* (No Comment) */
@@ -206,4 +217,36 @@
 /* (No Comment) */
 "menu.userManual" = "用户手册";
 
-"link.feedback" = "https://support.qq.com/product/592777";
+/* (No Comment) */
+"sendIntent.category" = "聊天";
+
+/* (No Comment) */
+"sendIntent.conversationDesc" = "发送内容到哪一会话";
+
+/* (No Comment) */
+"sendIntent.conversationInvalid" = "选中会话已失效";
+
+/* (No Comment) */
+"sendIntent.conversationTitle" = "会话";
+
+/* (No Comment) */
+"sendIntent.desc" = "发送文本到指定会话，AI 处理后返回";
+
+/* (No Comment) */
+"sendIntent.searchKeyword" = "text,AI,chat,文本,发送,会话";
+
+/* (No Comment) */
+"sendIntent.textDesc" = "发送给 AI 的内容";
+
+/* (No Comment) */
+"sendIntent.textRequest" = "空文本，请输入新文本";
+
+/* (No Comment) */
+"sendIntent.textTitle" = "文本";
+
+/* (No Comment) */
+"sendIntent.title" = "从 AI 返回文本";
+
+"Send ${text} to ${conversation}" = "发送 ${text} 到 ${conversation}";
+"Send text to ${applicationName}" = "发送文本到 ${applicationName}";
+"Proccess text with ${applicationName}" = "用 ${applicationName} 处理文本";

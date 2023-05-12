@@ -4,6 +4,7 @@
 
 // MARK: In Application Main Menu
 
+// File -> New
 "menu.new" = "New";
 "menu.new.conversation" = "Conversation";
 "menu.new.tab" = "Window Tab";
@@ -25,12 +26,14 @@
 
 // MARK: Sidebar Menu
 
+// Sidebar Archive
 "menu.archive" = "Archive";
 "menu.delete" = "Delete";
 "menu.setting" = "Settings";
 
 // MARK: Conversation Menu
 
+//
 "menu.guide" = "Guide";
 "menu.retry" = "Retry";
 "menu.integrationHelp" = "What's this?";
@@ -39,6 +42,7 @@
 
 // MARK: - Chat
 
+//
 "chat.defaultTitle" = "New Chat";
 "chat.archived" = "Archived";
 "chat.unArchive" = "Unarchive";
@@ -72,6 +76,7 @@
 
 // MARK: Engine
 
+//
 "engine.create.type-openai.title" = "ChatGPT / OpenAI";
 "engine.create.type-openai.detail" = "Use offical OpenAI API";
 "engine.create.type-openai-proxy.title" = "ChatGPT / API Proxy";
@@ -89,8 +94,27 @@
 "engine.create.fail.exist-key" = "Engine with the given key already exist.";
 "engine.create.fail.exist-proxy" = "Engine with the same proxy config already exist.";
 
+// MARK: Intent
+
+//
+"sendIntent.title" = "Get Response from AI";
+"sendIntent.desc" = "Send text to speifiy conversation. Returns AI response after a while.";
+"sendIntent.category" = "Chat";
+"sendIntent.searchKeyword" = "text,AI,chat,conversation";
+"sendIntent.conversationTitle" = "Conversation";
+"sendIntent.conversationDesc" = "Which conversation the text send to.";
+"sendIntent.conversationInvalid" = "Choosed conversation is invaild.";
+"sendIntent.textTitle" = "Text";
+"sendIntent.textDesc" = "The content send to the conversation.";
+"sendIntent.textRequest" = "Input is empty. Input some new text";
+
+"Send ${text} to ${conversation}" = "Send ${text} to ${conversation}";
+"Send text to ${applicationName}" = "Send text to ${applicationName}";
+"Proccess text with ${applicationName}" = "Proccess text with ${applicationName}";
+
 // MARK: App
 
+//
 "app.name" = "B9ChatAI";
 "app.privacy-sort" = "B9ChatAI does not collect any of your data, and all data is under your control.\n\nHowever, when using the application, third-party services may be called upon, which may collect your information. While you have control over which services are called upon, it is still important for you to be vigilant about protecting your information, carefully read and understand the privacy policies of related services, and be especially cautious when using proxy servers provided by third parties.";
 

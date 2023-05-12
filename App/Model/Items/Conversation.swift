@@ -47,6 +47,9 @@ struct EngineConfig: Codable, Equatable {
         if !(0.495...0.505).contains(frequencyP) {
             result["frequency_penalty"] = frequencyP * 4 - 2
         }
+        if maxTokens > 0 {
+            result["max_tokens"] = maxTokens
+        }
         return result
     }
 }

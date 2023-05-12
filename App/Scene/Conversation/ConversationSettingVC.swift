@@ -36,9 +36,7 @@ class ConversationSettingViewController:
             stateLabel.set(normal: L.Chat.setupBeforeUseNotice)
         }
         basicInfo.updateUI(item: item)
-        systemField.text = item.engineConfig.system
-        updateTemperature(item.engineConfig.temperature)
-        updateTopP(item.engineConfig.topP)
+        updateEngine(config: item.engineConfig)
         sendbySegment.selectedSegmentIndex = (item.chatConfig.sendbyKey ?? -1) + 1
     }
 
@@ -50,6 +48,7 @@ class ConversationSettingViewController:
     @IBOutlet private weak var temperatureDescribeLabel: UILabel!
     @IBOutlet private weak var topProbabilitySlider: UISlider!
     @IBOutlet private weak var topProbabilityDescribeLabel: UILabel!
+    @IBOutlet private weak var maxTokenField: IntegerTextField!
 
     @IBOutlet private weak var sendbySegment: UISegmentedControl!
 
@@ -138,12 +137,15 @@ extension ConversationSettingViewController {
         }
         var cfgChat = item.chatConfig
         cfgChat.sendbyKey = chatConfigSendbyValue()
-        let cfgEngine = EngineConfig(
+        var cfgEngine = EngineConfig(
             model: model,
             system: systemField.text.trimmed(),
             temperature: temperatureSlider.value,
             topP: topProbabilitySlider.value
         )
+        if let maxToken = maxTokenField.value {
+            cfgEngine.maxTokens = maxToken
+        }
         Task {
             do {
                 try await item.save(
@@ -310,6 +312,13 @@ class ModelNameSelectionCell: GeneralListCell {
 }
 
 extension ConversationSettingViewController {
+    private func updateEngine(config: EngineConfig) {
+        systemField.text = config.system
+        updateTemperature(config.temperature)
+        updateTopP(config.topP)
+        maxTokenField.value = config.maxTokens > 0 ? config.maxTokens : nil
+    }
+
     private func updateTemperature(_ value: FloatParameter) {
         if abs(temperatureSlider.value - value) > 0.01 {
             temperatureSlider.value = value

@@ -15,6 +15,12 @@ internal enum L10n {
   internal enum Localizable {
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "cancel", fallback: "Cancel")
+    /// Proccess text with ${applicationName}
+    internal static let proccessTextWithApplicationName = L10n.tr("Localizable", "Proccess text with ${applicationName}", fallback: "Proccess text with ${applicationName}")
+    /// Send ${text} to ${conversation}
+    internal static let sendTextToConversation = L10n.tr("Localizable", "Send ${text} to ${conversation}", fallback: "Send ${text} to ${conversation}")
+    /// Send text to ${applicationName}
+    internal static let sendTextToApplicationName = L10n.tr("Localizable", "Send text to ${applicationName}", fallback: "Send text to ${applicationName}")
     internal enum App {
       /// B9ChatAI
       internal static let name = L10n.tr("Localizable", "app.name", fallback: "B9ChatAI")
@@ -231,6 +237,28 @@ internal enum L10n {
         /// Window
         internal static let window = L10n.tr("Localizable", "menu.new.window", fallback: "Window")
       }
+    }
+    internal enum SendIntent {
+      /// Chat
+      internal static let category = L10n.tr("Localizable", "sendIntent.category", fallback: "Chat")
+      /// Which conversation the text send to.
+      internal static let conversationDesc = L10n.tr("Localizable", "sendIntent.conversationDesc", fallback: "Which conversation the text send to.")
+      /// Choosed conversation is invaild.
+      internal static let conversationInvalid = L10n.tr("Localizable", "sendIntent.conversationInvalid", fallback: "Choosed conversation is invaild.")
+      /// Conversation
+      internal static let conversationTitle = L10n.tr("Localizable", "sendIntent.conversationTitle", fallback: "Conversation")
+      /// Send text to speifiy conversation. Returns AI response after a while.
+      internal static let desc = L10n.tr("Localizable", "sendIntent.desc", fallback: "Send text to speifiy conversation. Returns AI response after a while.")
+      /// text,AI,chat,conversation
+      internal static let searchKeyword = L10n.tr("Localizable", "sendIntent.searchKeyword", fallback: "text,AI,chat,conversation")
+      /// The content send to the conversation.
+      internal static let textDesc = L10n.tr("Localizable", "sendIntent.textDesc", fallback: "The content send to the conversation.")
+      /// Input is empty. Input some new text
+      internal static let textRequest = L10n.tr("Localizable", "sendIntent.textRequest", fallback: "Input is empty. Input some new text")
+      /// Text
+      internal static let textTitle = L10n.tr("Localizable", "sendIntent.textTitle", fallback: "Text")
+      /// Get Response from AI
+      internal static let title = L10n.tr("Localizable", "sendIntent.title", fallback: "Get Response from AI")
     }
   }
 }

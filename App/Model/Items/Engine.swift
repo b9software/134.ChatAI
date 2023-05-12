@@ -254,7 +254,7 @@ extension Engine {
 
     func refreshModels() -> Task<[StringID], Error> {
         Task {
-            if Date.isRecent(oaEngine.modelLastFetchTime, range: 20) {
+            if Date.isRecent(oaEngine.modelLastFetchTime, range: 60) {
                 return listModel() ?? []
             }
             let api = try getOANetworking()

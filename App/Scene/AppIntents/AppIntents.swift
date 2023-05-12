@@ -20,33 +20,27 @@ struct ShortcutsProvider: AppShortcutsProvider {
 
 @available(macCatalyst 16.0, *)
 struct TextIntent: AppIntent {
-    static var title: LocalizedStringResource = "Send text"
+    static var title = LocalizedStringResource("sendIntent.title", defaultValue: "Send Text to AI")
 
     static var description = IntentDescription(
-"""
-Send text to speifiy conversation.
-""",
-        categoryName: "Chat",
-        searchKeywords: [
-            "text",
-            "ai",
-            "chat",
-        ]
+        LocalizedStringResource("sendIntent.desc", defaultValue: "Send text to speifiy conversation. Returns the AI response after a while."),
+        categoryName: LocalizedStringResource("sendIntent.category", defaultValue: "Chat"),
+        searchKeywords: L.SendIntent.searchKeyword.split(separator: ",").map { LocalizedStringResource(stringLiteral: String($0)) }
     )
 
     @Parameter(
-        title: "Conversation",
-        description: "Which conversation the text send to."
+        title: LocalizedStringResource("sendIntent.conversationTitle", defaultValue: "Conversation"),
+        description: LocalizedStringResource("sendIntent.conversationDesc", defaultValue: "Which conversation the text send to.")
     )
     var conversation: ITConversation
 
     @Parameter(
-        title: "Text",
-        description: "The content send to the conversation.",
+        title: LocalizedStringResource("sendIntent.textTitle", defaultValue: "Text"),
+        description: LocalizedStringResource("sendIntent.textDesc", defaultValue: "The content send to the conversation."),
         inputOptions: .init(
             multiline: true
         ),
-        requestValueDialog: IntentDialog("Input some text")
+        requestValueDialog: IntentDialog(stringLiteral: L.SendIntent.textRequest)
     )
     var text: String
 
@@ -56,10 +50,10 @@ Send text to speifiy conversation.
 
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
         guard let content = text.trimmed() else {
-            throw $text.needsValueError("Input is empty. Input some new text:")
+            throw $text.needsValueError(IntentDialog(stringLiteral: L.SendIntent.textRequest))
         }
         guard let chat = await Conversation.load(id: conversation.id) else {
-            throw $conversation.needsValueError("Choosed conversation is invaild.")
+            throw $conversation.needsValueError(IntentDialog(stringLiteral: L.SendIntent.conversationInvalid))
         }
         let msg = try await Current.conversationManager.waitSend(text: content, to: chat)
         return .result(value: msg.cachedText ?? "❓")

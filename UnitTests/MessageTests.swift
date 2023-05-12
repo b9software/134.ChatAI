@@ -94,7 +94,7 @@ class MessageTests: TestCase {
 
         let m6 = try await Current.database.read { [self] ctx in
             let chatID = m1.conversation!.objectID
-            let entity = try CDMessage.createEntities(ctx, conversation: chatID, reply: m4.objectID)
+            let entity = try CDMessage.createEntities(ctx, conversation: chatID, reply: m4.objectID).0
             entity.text = "my"
             entity.mType = .text
             ctx.trySave()
@@ -146,7 +146,7 @@ class MessageTests: TestCase {
             ctx.assertIsFresh()
 
             let chat = CDConversation(context: ctx)
-            let m1 = try CDMessage.createEntities(ctx, conversation: chat.objectID, reply: nil)
+            let m1 = try CDMessage.createEntities(ctx, conversation: chat.objectID, reply: nil).0
             m1.text = "my"
             m1.mType = .text
             try ctx.save()
@@ -185,7 +185,7 @@ class MessageTests: TestCase {
             let chatID = m1.conversation!.objectID
             assertEqual(m1.debugChildTexts, ["m2"])
             assertEqual(m1.linkChildTexts(ctx), ["m2"])
-            let my1 = try CDMessage.createEntities(ctx, conversation: chatID, reply: m1.objectID)
+            let my1 = try CDMessage.createEntities(ctx, conversation: chatID, reply: m1.objectID).0
             my1.text = "my1"
             my1.mType = .text
             try ctx.save()
@@ -209,7 +209,7 @@ class MessageTests: TestCase {
             let chatID = parent.conversation!.objectID
 
             assertEqual(parent.text, "m1")
-            let my = try CDMessage.createEntities(ctx, conversation: chatID, reply: parent.objectID)
+            let my = try CDMessage.createEntities(ctx, conversation: chatID, reply: parent.objectID).0
             my.text = "my2"
             my.mType = .text
             try ctx.save()
@@ -264,7 +264,7 @@ class MessageTests: TestCase {
             setNow("2020-02-20 03:00:00")
 
             // Reply at middle
-            let entity = try CDMessage.createEntities(ctx, conversation: chat.objectID, reply: m2.objectID)
+            let entity = try CDMessage.createEntities(ctx, conversation: chat.objectID, reply: m2.objectID).0
             entity.text = "my"
             entity.mType = .text
 

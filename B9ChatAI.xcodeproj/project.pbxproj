@@ -185,6 +185,7 @@
 		D5C636A72047CC5900851CF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5C636A62047CC5900851CF4 /* LaunchScreen.storyboard */; };
 		D5D006D229D273F50063B366 /* EngineManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D006D129D273F50063B366 /* EngineManageVC.swift */; };
 		D5D1859C280D7331009B5476 /* B9Condition in Frameworks */ = {isa = PBXBuildFile; productRef = D5D1859B280D7331009B5476 /* B9Condition */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D5D641452A0E18A200921E98 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D641442A0E18A200921E98 /* NumberTextField.swift */; };
 		D5D7BCD829D4611100AF6DF5 /* B9Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */; };
 		D5D932F12515EDC300E1C4B6 /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D932F02515EDC300E1C4B6 /* CalloutView.swift */; };
 		D5DB4C1C241E243900832A0A /* MBCollectionListDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DB4C1B241E243900832A0A /* MBCollectionListDisplayer.m */; };
@@ -533,6 +534,7 @@
 		D5D006D129D273F50063B366 /* EngineManageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineManageVC.swift; sourceTree = "<group>"; };
 		D5D1859A280D72B5009B5476 /* Condition */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Condition; sourceTree = "<group>"; };
 		D5D4CC6E2043A6ED002FE9F0 /* OCBridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCBridging-Header.h"; sourceTree = "<group>"; };
+		D5D641442A0E18A200921E98 /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9Keychain.swift; sourceTree = "<group>"; };
 		D5D932F02515EDC300E1C4B6 /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
 		D5DB4C1A241E243900832A0A /* MBCollectionListDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCollectionListDisplayer.h; sourceTree = "<group>"; };
@@ -1379,6 +1381,7 @@
 				D5FCB68D23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift */,
 				D5F9F484208DC26500427201 /* MBFormFieldVerifyControl.h */,
 				D5F9F485208DC26600427201 /* MBFormFieldVerifyControl.m */,
+				D5D641442A0E18A200921E98 /* NumberTextField.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -1983,6 +1986,7 @@
 				D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */,
 				D5740B4824985CC2001CBCB2 /* MBFormSelectListViewController.m in Sources */,
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
+				D5D641452A0E18A200921E98 /* NumberTextField.swift in Sources */,
 				D5DB4C1F241E27B800832A0A /* MBKeyboardAdjustScrollView.m in Sources */,
 				D5EE523D2043F7B9009148B3 /* MBLayoutButton.m in Sources */,
 				D5B49EC61C4111B600847925 /* MBLayoutConstraint.m in Sources */,

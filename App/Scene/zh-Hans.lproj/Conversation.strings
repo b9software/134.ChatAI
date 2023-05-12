@@ -17,7 +17,10 @@
 "chat-input-reply-action.normalTitle" = "继续选中话题？";
 
 /* Class = "UIButton"; configuration.title = "<KEY>"; ObjectID = "chat-input-send-button"; */
-"chat-input-send-button.configuration.title" = "发送";
+"chat-input-send-button.configuration.title" = "";
+
+/* Class = "UIButton"; ibShadowedToolTip = "Send Message"; ObjectID = "chat-input-send-button"; */
+"chat-input-send-button.ibShadowedToolTip" = "发送消息";
 
 /* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "chat-setting-cancel-button"; */
 "chat-setting-cancel-button.configuration.title" = "取消";
@@ -46,6 +49,15 @@
 /* Class = "UILabel"; text = "Basic Info"; ObjectID = "chat-setting-info"; */
 "chat-setting-info.text" = "基本信息";
 
+/* Class = "UITextField"; placeholder = "Unlimited"; ObjectID = "chat-setting-max-token-field"; */
+"chat-setting-max-token-field.placeholder" = "无限制";
+
+/* Class = "UILabel"; text = "Limit return length"; ObjectID = "chat-setting-max-token-tip"; */
+"chat-setting-max-token-tip.text" = "限制返回的长度";
+
+/* Class = "UILabel"; text = "MAX Token"; ObjectID = "chat-setting-max-token-title"; */
+"chat-setting-max-token-title.text" = "MAX Token";
+
 /* Class = "UILabel"; text = "Model"; ObjectID = "chat-setting-model-section"; */
 "chat-setting-model-section.text" = "模型";
 
@@ -58,17 +70,29 @@
 /* Class = "UILabel"; text = "The title display in list and window"; ObjectID = "chat-setting-name-tip"; */
 "chat-setting-name-tip.text" = "显示在列表和窗口上";
 
+/* Class = "UILabel"; text = "Others"; ObjectID = "chat-setting-other-header"; */
+"chat-setting-other-header.text" = "其它";
+
 /* Class = "UILabel"; text = "Parameters"; ObjectID = "chat-setting-parameters"; */
 "chat-setting-parameters.text" = "参数";
 
 /* Class = "UIButton"; configuration.title = "Save"; ObjectID = "chat-setting-save-button"; */
 "chat-setting-save-button.configuration.title" = "保存";
 
-/* Class = "UILabel"; text = "Send By"; ObjectID = "chat-setting-send-by"; */
+/* Class = "UILabel"; text = "Send Key"; ObjectID = "chat-setting-send-by"; */
 "chat-setting-send-by.text" = "发送键";
 
 /* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[0] = "Default"; ObjectID = "chat-setting-send-segment"; */
 "chat-setting-send-segment.segmentTitles[0]" = "默认";
+
+/* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[1] = "⌘⏎"; ObjectID = "chat-setting-send-segment"; */
+"chat-setting-send-segment.segmentTitles[1]" = "⌘⏎";
+
+/* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[2] = "⇧⏎"; ObjectID = "chat-setting-send-segment"; */
+"chat-setting-send-segment.segmentTitles[2]" = "⇧⏎";
+
+/* Class = "UISegmentedControl"; chat-setting-send-segment.segmentTitles[3] = "⏎"; ObjectID = "chat-setting-send-segment"; */
+"chat-setting-send-segment.segmentTitles[3]" = "⏎";
 
 /* Class = "UILabel"; text = "Send input with which key"; ObjectID = "chat-setting-send-tip"; */
 "chat-setting-send-tip.text" = "通过哪个按键发送输入";
@@ -79,8 +103,14 @@
 /* Class = "UILabel"; text = "Helps set the behavior of the assistant."; ObjectID = "chat-setting-system-tip"; */
 "chat-setting-system-tip.text" = "控制 AI 输出";
 
+/* Class = "UILabel"; text = "Temperature"; ObjectID = "chat-setting-temerature-section"; */
+"chat-setting-temerature-section.text" = "Temperature";
+
 /* Class = "UILabel"; text = "How much variation in output."; ObjectID = "chat-setting-temperature-tip"; */
 "chat-setting-temperature-tip.text" = "输出的随机性";
+
+/* Class = "UILabel"; text = "Top Probability"; ObjectID = "chat-setting-topp-section"; */
+"chat-setting-topp-section.text" = "Top Probability";
 
 /* Class = "UILabel"; text = "Richness of words used."; ObjectID = "chat-setting-topp-tip"; */
 "chat-setting-topp-tip.text" = "用词丰富程度";

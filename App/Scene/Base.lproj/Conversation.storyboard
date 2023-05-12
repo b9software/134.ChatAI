@@ -79,14 +79,14 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3hW-8e-NzE" customClass="ConversationCell" customModule="B9ChatAI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="131" width="300" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="131" width="300" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3hW-8e-NzE" id="Pqy-zi-ruw">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-deleted-list-cell-name">
-                                                    <rect key="frame" x="26" y="16" width="248" height="21.5"/>
+                                                    <rect key="frame" x="26" y="16" width="248" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -303,7 +303,7 @@
                                                                         <outlet property="textView" destination="bh2-h6-tkH" id="6OV-bn-2WV"/>
                                                                     </connections>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bh2-h6-tkH">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" layoutManager="textKit2" translatesAutoresizingMaskIntoConstraints="NO" id="bh2-h6-tkH">
                                                                     <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -412,7 +412,7 @@
                                                                         <outlet property="textView" destination="fir-BM-1hw" id="77d-xs-gpO"/>
                                                                     </connections>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fir-BM-1hw">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" layoutManager="textKit2" translatesAutoresizingMaskIntoConstraints="NO" id="fir-BM-1hw">
                                                                     <rect key="frame" x="0.0" y="0.0" width="71.5" height="40.5"/>
                                                                     <color key="textColor" name="Text/First"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -673,14 +673,14 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="input_box" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-Ks-ovg">
                                                 <rect key="frame" x="20" y="10" width="269" height="46"/>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ggl-9E-kbV" customClass="ChatTextView" customModule="B9ChatAI" customModuleProvider="target">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" layoutManager="textKit2" translatesAutoresizingMaskIntoConstraints="NO" id="ggl-9E-kbV" customClass="ChatTextView" customModule="B9ChatAI" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="10" width="269" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="46" id="Dlz-qq-wiC"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="send"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="send" smartQuotesType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="rect" keyPath="RFTextContainerInset">
                                                         <rect key="value" x="12" y="10" width="10" height="10"/>
@@ -879,7 +879,7 @@
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-name-tip" secondAttribute="bottom" id="wCA-BB-3PU"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Optional" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-field" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Optional" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-name-field" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="116" width="432" height="50"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="e05-hT-WVd"/>
@@ -924,7 +924,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLb-Ps-TeD">
                                                                         <rect key="frame" x="0.0" y="232" width="432" height="50"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Vw-0O-nh6" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="5Vw-0O-nh6" customClass="TextField" customModule="B9ChatAI" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="432" height="50"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="username"/>
@@ -1268,7 +1268,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="448" height="870"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qbA-2D-Xup">
-                                                                <rect key="frame" x="0.0" y="20" width="432" height="627"/>
+                                                                <rect key="frame" x="0.0" y="20" width="432" height="743"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JE2-gD-iMS">
                                                                         <rect key="frame" x="0.0" y="0.0" width="432" height="50"/>
@@ -1482,6 +1482,48 @@
                                                                             <constraint firstAttribute="bottom" secondItem="chat-setting-topp-desc" secondAttribute="bottom" constant="15" id="weU-g4-bxR"/>
                                                                         </constraints>
                                                                     </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACF-0x-R8G">
+                                                                        <rect key="frame" x="0.0" y="635" width="432" height="50"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAX Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-max-token-title">
+                                                                                <rect key="frame" x="0.0" y="18" width="90" height="32"/>
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                                <color key="textColor" name="Text/Second"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Limit return length" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-max-token-tip">
+                                                                                <rect key="frame" x="105" y="34" width="327" height="16"/>
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                                                <color key="textColor" name="Text/Thrid"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="chat-setting-max-token-title" firstAttribute="top" secondItem="ACF-0x-R8G" secondAttribute="top" constant="18" id="CvH-WN-BfR"/>
+                                                                            <constraint firstItem="chat-setting-max-token-title" firstAttribute="leading" secondItem="ACF-0x-R8G" secondAttribute="leading" id="TLs-BT-Ets"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="chat-setting-max-token-tip" secondAttribute="bottom" id="bTP-70-22c"/>
+                                                                            <constraint firstItem="chat-setting-max-token-tip" firstAttribute="leading" secondItem="chat-setting-max-token-title" secondAttribute="trailing" constant="15" id="daB-7L-8Ow"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="chat-setting-max-token-tip" secondAttribute="trailing" id="h8z-0E-GeO"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="chat-setting-max-token-title" secondAttribute="bottom" id="uq7-0y-zyi"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Unlimited" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="chat-setting-max-token-field" customClass="IntegerTextField" customModule="B9ChatAI" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="693" width="432" height="50"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="50" id="db9-A0-8kE"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="invalidPlaceholder" value="Number Only"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </textField>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -1716,6 +1758,7 @@
                         <outlet property="basicInfo" destination="Dob-eQ-tFM" id="9Mi-Py-Zku"/>
                         <outlet property="cancelButton" destination="chat-setting-cancel-button" id="xFE-0b-OP5"/>
                         <outlet property="contentContainer" destination="cla-ye-waH" id="YuJ-oS-NDd"/>
+                        <outlet property="maxTokenField" destination="chat-setting-max-token-field" id="s7C-F1-RNL"/>
                         <outlet property="sendbySegment" destination="chat-setting-send-segment" id="j2p-TU-caH"/>
                         <outlet property="stateLabel" destination="chat-setting-state-label" id="Lan-tQ-SB8"/>
                         <outlet property="submitButton" destination="chat-setting-save-button" id="90i-j2-6ky"/>

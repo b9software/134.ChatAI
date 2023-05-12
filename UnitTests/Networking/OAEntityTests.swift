@@ -39,11 +39,13 @@ class OAEntityTests: TestCase {
         sut.topP = 1
         sut.presenceP = 1
         sut.frequencyP = 1
+        sut.maxTokens = 999
         assertEqual(try sut.toOpenAIParameters() as NSDictionary, [
             "model": "test",
             "frequency_penalty": 2,
             "presence_penalty": 2,
             "temperature": 2,
+            "max_tokens": 999,
         ] as NSDictionary)
 
         // Test default
@@ -51,6 +53,7 @@ class OAEntityTests: TestCase {
         sut.topP = 1
         sut.presenceP = 0.5
         sut.frequencyP = 0.5
+        sut.maxTokens = 0
         assertEqual(try sut.toOpenAIParameters() as NSDictionary, [
             "model": "test",
         ] as NSDictionary)
