@@ -102,6 +102,10 @@ class EngineCreateOpenAIViewController: UIViewController {
     }
 
     private var createTask: Task<Void, Never>?
+
+    @IBAction private func openKeyURL(_ sender: Any) {
+        URL.open(link: L.Link.Openai.apiKeys)
+    }
 }
 
 
@@ -116,6 +120,9 @@ class EngineCreateProxyViewController:
         advancedContainer.isHidden = true
         logLabel.clear()
         onAddressChanged(self)
+        if L.Link.Openai.knownProxy.isEmpty {
+            knownLinkContianer.isHidden = true
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -223,4 +230,9 @@ class EngineCreateProxyViewController:
     }
 
     private var createTask: Task<Void, Never>?
+
+    @IBOutlet private weak var knownLinkContianer: UIView!
+    @IBAction private func onOpenKnownURL(_ sender: Any) {
+        URL.open(link: L.Link.Openai.knownProxy)
+    }
 }

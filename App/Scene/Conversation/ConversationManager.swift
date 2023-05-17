@@ -76,11 +76,26 @@ class ConversationManager: NSObject {
         }
     }
 
+    func changeListOrder(by: ConversationSortBy) {
+        Current.defualts.conversationSortBy = by
+        listController = NSFetchedResultsController(fetchRequest: CDConversation.chatListRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "cn.chat")
+        listController.delegate = self
+        context.perform { [self] in
+            Do.try {
+                try listController.performFetch()
+            }
+            forceUpdateList()
+        }
+    }
+
     private var needsReloadListAfterChangeEnd = false
     private lazy var needsNoticeListChange = DelayAction(Action { [weak self] in
         guard let sf = self else { return }
         sf.delegates.invoke {
             $0.conversations(sf, listUpdated: sf.listItems)
+        }
+        if #available(macCatalyst 16.0, *) {
+            ShortcutsProvider.updateAppShortcutParameters()
         }
         AppLog().debug("CM> Did notice list change")
     })

@@ -13,8 +13,11 @@
 /* Class = "UIViewController"; title = "About"; ObjectID = "about-vc"; */
 "about-vc.title" = "关于";
 
+/* Class = "UIButton"; configuration.title = "View your API keys"; ObjectID = "engine-create-api-bottom-link"; */
+"engine-create-api-bottom-link.configuration.title" = "查看你的 API 密钥";
+
 /* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-create-api-key"; */
-"engine-create-api-key.placeholder" = "请输入 OpenAI API key";
+"engine-create-api-key.placeholder" = "请输入 OpenAI API 密钥";
 
 /* Class = "UIViewController"; title = "New OpenAI Engine"; ObjectID = "engine-create-api-vc"; */
 "engine-create-api-vc.title" = "新 OpenAI 引擎";
@@ -26,13 +29,16 @@
 "engine-create-proxy-completion-label.text" = "Completions 接口地址";
 
 /* Class = "UITextField"; placeholder = "Enter your API key"; ObjectID = "engine-create-proxy-key"; */
-"engine-create-proxy-key.placeholder" = "请输入 OpenAI API key";
+"engine-create-proxy-key.placeholder" = "请输入 OpenAI API 密钥";
+
+/* Class = "UIButton"; configuration.title = "Known Service"; ObjectID = "engine-create-proxy-known-link"; */
+"engine-create-proxy-known-link.configuration.title" = "已知的第三方服务";
 
 /* Class = "UILabel"; text = "Models endpoint"; ObjectID = "engine-create-proxy-model-label"; */
 "engine-create-proxy-model-label.text" = "Models 接口地址";
 
 /* Class = "UILabel"; text = "Send your key?"; ObjectID = "engine-create-proxy-sendkey-label"; */
-"engine-create-proxy-sendkey-label.text" = "需要发送自己的 Key";
+"engine-create-proxy-sendkey-label.text" = "需要发送自己的密钥";
 
 /* Class = "UIButton"; configuration.title = "Create"; ObjectID = "engine-create-proxy-submit"; */
 "engine-create-proxy-submit.configuration.title" = "创建";
@@ -76,7 +82,7 @@
 /* Class = "UILabel"; text = "Transparency of the window in floating mode when it is not active"; ObjectID = "setting-float-window-alpha-tip"; */
 "setting-float-window-alpha-tip.text" = "非激活状态的浮窗透明度";
 
-/* Class = "UILabel"; text = "Float Window Alpha"; ObjectID = "setting-float-window-alpha-title"; */
+/* Class = "UILabel"; text = "Float window alpha"; ObjectID = "setting-float-window-alpha-title"; */
 "setting-float-window-alpha-title.text" = "浮窗透明度";
 
 /* Class = "UILabel"; text = "Font size"; ObjectID = "setting-font-size-title"; */

@@ -86,7 +86,7 @@
 "chat.unArchive" = "还原归档";
 
 /* (No Comment) */
-"engine.create.fail.exist-key" = "这个 API Key 已经添加过了";
+"engine.create.fail.exist-key" = "这个 API 密钥已经添加过了";
 
 /* (No Comment) */
 "engine.create.fail.exist-proxy" = "相同配置的代理引擎已存在";
@@ -95,7 +95,7 @@
 "engine.create.fail.hash-key" = "无法生成密钥数据";
 
 /* (No Comment) */
-"engine.create.no-key-given" = "请输入有效的 API key";
+"engine.create.no-key-given" = "请输入有效的 API 密钥";
 
 /* (No Comment) */
 "engine.create.no-proxy-address-given" = "请输入有效的代理服务器地址";
@@ -128,7 +128,7 @@
 "genral-error.invalid-url" = "\"%@\" 不是合法的 URL";
 
 /* (No Comment) */
-"guide.interCommunicationLink" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd#SwWidyUSqoIMocxiUlncBspOnwd";
+"guide.interCommunicationLink" = "https://docs.qq.com/doc/DUXNFa2NGTU51cXBP";
 
 /* (No Comment) */
 "guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
@@ -137,7 +137,10 @@
 "link.feedback" = "https://support.qq.com/product/592777";
 
 /* (No Comment) */
-"link.userManual" = "https://bb9z.feishu.cn/docx/WTmZdvBE7ovHUzxxSK5cQBIHnYd";
+"link.openai.known-proxy" = "https://docs.qq.com/doc/DUXhrS2ZCSUZJZGdv";
+
+/* (No Comment) */
+"link.userManual" = "https://docs.qq.com/doc/DUVVvdVhyaEdZYUxT";
 
 /* Sidebar Archive */
 "menu.archive" = "归档";
@@ -218,6 +221,15 @@
 "menu.userManual" = "用户手册";
 
 /* (No Comment) */
+"Proccess text with ${applicationName}" = "用 ${applicationName} 处理文本";
+
+/* (No Comment) */
+"Send ${text} to ${conversation}" = "发送 ${text} 到 ${conversation}";
+
+/* (No Comment) */
+"Send text to ${applicationName}" = "发送文本到 ${applicationName}";
+
+/* (No Comment) */
 "sendIntent.category" = "聊天";
 
 /* (No Comment) */
@@ -247,6 +259,3 @@
 /* (No Comment) */
 "sendIntent.title" = "从 AI 返回文本";
 
-"Send ${text} to ${conversation}" = "发送 ${text} 到 ${conversation}";
-"Send text to ${applicationName}" = "发送文本到 ${applicationName}";
-"Proccess text with ${applicationName}" = "用 ${applicationName} 处理文本";

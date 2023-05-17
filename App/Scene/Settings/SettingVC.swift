@@ -26,12 +26,16 @@ class SettingViewController: UIViewController, StoryboardCreation {
     }
 
     @objc private func updateUI() {
-        let selectIdx = Current.osBridge.theme
+        var selectIdx = Current.osBridge.theme
         for (idx, item) in themeButton.menu!.children.enumerated() {
             (item as? UICommand)?.state = selectIdx == idx ? .on : .off
         }
         if let idx = fontSizeCategoryMap.firstIndex(of: Current.defualts.preferredContentSize) {
             fontSizeSlider.value = Float(idx)
+        }
+        selectIdx = Current.defualts.conversationSortBy.rawValue
+        for (idx, item) in conversationOrderButton.menu!.children.enumerated() {
+            (item as? UICommand)?.state = selectIdx == idx ? .on : .off
         }
         let sendby = Current.defualts.preferredSendbyKey
         sendBySegment.selectedSegmentIndex = sendby.rawValue
@@ -77,6 +81,14 @@ class SettingViewController: UIViewController, StoryboardCreation {
     ]
     func sizeCategory(value: Int) -> UIContentSizeCategory {
         return fontSizeCategoryMap.element(at: value) ?? .medium
+    }
+
+    @IBOutlet private weak var conversationOrderButton: UIButton!
+    @IBAction private func onConversationOrderCreate(_ sender: UICommand) {
+        Current.conversationManager.changeListOrder(by: .createTime)
+    }
+    @IBAction private func onConversationOrderMessage(_ sender: UICommand) {
+        Current.conversationManager.changeListOrder(by: .lastTime)
     }
 
     @IBOutlet private weak var sendbyKeyLabel: UILabel!

@@ -107,10 +107,10 @@ class SceneDelegate: B9WindowSceneDelegate {
                 size.minimumSize = floatModeState.isFloat ? .zero : CGSize(width: 200, height: 180)
             }
             switch floatModeState {
-            case .normal:
-                break
-            case .floatExpand:
-                window?.rootViewController = rootViewController
+            case .normal, .floatExpand:
+                if window?.rootViewController !== rootViewController {
+                    window?.rootViewController = rootViewController
+                }
             case .floatCollapse:
                 let vc = UIViewController()
                 vc.view.backgroundColor = nil

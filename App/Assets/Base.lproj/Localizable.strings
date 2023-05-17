@@ -126,4 +126,6 @@
 "link.huggingChat.privacy" = "https://huggingface.co/chat/privacy";
 "link.openai.privacy" = "https://openai.com/policies/privacy-policy";
 "link.openai.tos" = "https://openai.com/policies/terms-of-use";
+"link.openai.api-keys" = "https://platform.openai.com/account/api-keys";
+"link.openai.known-proxy" = "";
 "link.feedback" = "https://github.com/b9software/B9ChatAI/discussions";

@@ -278,6 +278,7 @@ extension CDMessage: ModelValidate {
         let newEntity = Self.newTextEntity(parent: parentEntity, context: context)
         newEntity.conversation = conversation
         parentEntity.updateTime = .current
+        conversation?.lastTime = parentEntity.updateTime
 
         if let oldNext = next {
             newEntity.next = oldNext

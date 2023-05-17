@@ -169,6 +169,7 @@ extension Message {
             let myEntity = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID).0
             myEntity.mType = .text
             myEntity.text = sendText
+            chatItem.entity.lastTime = .current
         }
     }
 
@@ -179,6 +180,7 @@ extension Message {
             let (myEntity, newEntity) = try CDMessage.createEntities(ctx, conversation: chatID, reply: replyID)
             myEntity.mType = .text
             myEntity.text = sendText
+            chatItem.entity.lastTime = .current
             let item = Message.from(entity: newEntity)
             if noSteam {
                 item.setNoSteamSending()

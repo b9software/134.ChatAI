@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ConversationSortBy: Int, Equatable {
+    case createTime = 0
+    case lastTime = 1
+}
+
 enum Sendby: Int, Equatable {
     // followApp = nil
     case command = 0

@@ -12,6 +12,7 @@ public extension CDConversation {
         super.awakeFromInsert()
         id = UUID().uuidString
         createTime = .current
+        lastTime = createTime
     }
 
     override func awakeFromFetch() {
@@ -48,9 +49,13 @@ extension CDConversation {
 
     static var chatListRequest: NSFetchRequest<CDConversation> {
         let request = fetchRequest()
-        request.sortDescriptors = [
+        var sortDescriptors = [
             NSSortDescriptor(key: createTimeKey, ascending: false),
         ]
+        if Current.defualts.conversationSortBy == .lastTime {
+            sortDescriptors.insert(NSSortDescriptor(key: lastTimeKey, ascending: false), at: 0)
+        }
+        request.sortDescriptors = sortDescriptors
         request.predicate = NSPredicate(
             format: "%K == nil AND %K == nil",
             archiveTimeKey, deleteTimeKey

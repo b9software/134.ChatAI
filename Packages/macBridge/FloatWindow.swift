@@ -45,7 +45,7 @@ extension NSWindow {
     }
 
     static var floatCollapseSize: NSSize {
-        NSSize(width: 200, height: 40)
+        NSSize(width: 200, height: 1)
     }
 
     static var floatExpandDefaultSize: NSSize {
@@ -110,7 +110,8 @@ extension NSWindow {
         noticeFloatWillChange(to: state)
         if state == .normal {
             isFloat = false
-            setFrame(originalFrame, display: true, animate: animated)
+            restoreFrame(guideFrame: originalFrame, animated: animated)
+            isRestorable = true
             noticeFloatDidChange(to: state)
             return
         }
@@ -138,27 +139,26 @@ extension NSWindow {
                 toggleFullScreen(self)
             }
             isFloat = true
-            var rect = frame
-            originalFrame = rect
-            rect.size = Self.floatExpandDefaultSize
-            expandFrame = rect
-            setFrame(rect, display: true, animate: animated)
+            originalFrame = frame
+            restoreFrame(guideFrame: CGRect(origin: frame.origin, size: Self.floatExpandDefaultSize), animated: animated)
+            isRestorable = false
         }
         if state == .floatExpand {
-            setFrame(expandFrame, display: true, animate: animated)
+            restoreFrame(guideFrame: expandFrame, animated: animated)
             isFloatExpand = true
         }
         if state == .floatCollapse {
             expandFrame = frame
+            let contentSize = Self.floatCollapseSize
             var rect = frame
-            rect.size = Self.floatCollapseSize
-            setFrame(rect, display: true, animate: animated)
-            minSize = rect.size
-            maxSize = rect.size
+            rect.size = frameRect(forContentRect: NSRect(origin: .zero, size: contentSize)).size
+            restoreFrame(guideFrame: rect, animated: animated)
+            contentMinSize = contentSize
+            contentMaxSize = contentSize
             isFloatExpand = false
         } else {
-            minSize = NSSize(width: 200, height: 200)
-            maxSize = NSSize(width: .max, height: .max)
+            contentMinSize = NSSize(width: 200, height: 200)
+            contentMaxSize = NSSize(width: .max, height: .max)
         }
         noticeFloatDidChange(to: state)
     }
@@ -193,6 +193,28 @@ extension NSWindow {
         if abs(alphaValue - newAlpha) > 0.05 {
             animator().alphaValue = newAlpha
         }
+    }
+
+    func restoreFrame(guideFrame: CGRect, animated: Bool) {
+        var rect = frame
+        if rect == guideFrame { return }
+        if guideFrame.contains(rect) {
+            rect = guideFrame
+        } else if let screen = screen {
+            let scrVisible = screen.visibleFrame
+            let nearTop = rect.minY - scrVisible.minY > scrVisible.maxY - rect.maxY
+            let nearLeft = scrVisible.maxX - rect.maxX > rect.minX - scrVisible.minX
+            if nearTop {
+                rect.origin.y -= guideFrame.height - rect.height
+            }
+            if !nearLeft {
+                rect.origin.x -= guideFrame.width - rect.width
+            }
+            rect.size = guideFrame.size
+        } else {
+            rect.size = guideFrame.size
+        }
+        setFrame(rect, display: true, animate: animated)
     }
 
     @objc func _b9_zoom(_ sender: Any?) {

@@ -98,7 +98,7 @@
 "chat-setting-send-tip.text" = "通过哪个按键发送输入";
 
 /* Class = "UILabel"; text = "System (Prompts)"; ObjectID = "chat-setting-system-section"; */
-"chat-setting-system-section.text" = "交聚的话题";
+"chat-setting-system-section.text" = "系统提示语（Prompts）";
 
 /* Class = "UILabel"; text = "Helps set the behavior of the assistant."; ObjectID = "chat-setting-system-tip"; */
 "chat-setting-system-tip.text" = "控制 AI 输出";

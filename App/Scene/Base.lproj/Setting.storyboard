@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,20 +18,20 @@
             <objects>
                 <viewController storyboardIdentifier="SettingViewController" title="Setting" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="setting-vc" customClass="SettingViewController" customModule="B9ChatAI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbI-O7-pWa">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="900"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5t-SF-pW8" userLabel="Layout">
-                                        <rect key="frame" x="0.0" y="0.0" width="380" height="902"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="971.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="081-Ud-VW6">
-                                                <rect key="frame" x="20" y="20" width="340" height="862"/>
+                                                <rect key="frame" x="20" y="20" width="440" height="931.33333333333337"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-engine-section">
-                                                        <rect key="frame" x="0.0" y="0.0" width="340" height="26.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="440" height="26.333333333333332"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -40,10 +40,10 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-b0-InC" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="34.333333333333329" width="340" height="145.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="34.333333333333329" width="440" height="145.66666666666669"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="setting-engine-add-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
-                                                                <rect key="frame" x="15" y="14.999999999999989" width="310" height="50.333333333333343"/>
+                                                                <rect key="frame" x="15" y="14.999999999999989" width="410" height="50.333333333333343"/>
                                                                 <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" title="Add new" imagePadding="8" buttonSize="large"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="std"/>
@@ -53,7 +53,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="setting-engine-config-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
-                                                                <rect key="frame" x="15" y="80.333333333333314" width="310" height="50.333333333333343"/>
+                                                                <rect key="frame" x="15" y="80.333333333333314" width="410" height="50.333333333333343"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <buttonConfiguration key="configuration" style="filled" title="Management" imagePadding="7" buttonSize="large">
                                                                     <imageReference key="image" image="aqi.medium" catalog="system" symbolScale="medium"/>
@@ -78,13 +78,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwp-BJ-EKR" userLabel="Space">
-                                                        <rect key="frame" x="0.0" y="188" width="340" height="10"/>
+                                                        <rect key="frame" x="0.0" y="188" width="440" height="10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="aXB-6d-fR9"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appearance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-appearance-section">
-                                                        <rect key="frame" x="0.0" y="206" width="340" height="26.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="206" width="440" height="26.333333333333343"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dyy-BG-d31" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="240.33333333333334" width="340" height="104.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="240.33333333333331" width="440" height="173.66666666666669"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-theme-title">
                                                                 <rect key="frame" x="15.000000000000004" y="17.666666666666686" width="50.333333333333343" height="19.333333333333329"/>
@@ -105,7 +105,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUZ-Yd-tR9">
-                                                                <rect key="frame" x="125" y="10" width="200" height="34.333333333333336"/>
+                                                                <rect key="frame" x="225" y="10" width="200" height="34.333333333333336"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" priority="500" constant="200" id="t9K-iH-uCW"/>
                                                                 </constraints>
@@ -131,7 +131,7 @@
                                                                 <buttonConfiguration key="configuration" style="gray"/>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-font-size-title">
-                                                                <rect key="frame" x="15" y="64.666666666666686" width="65.333333333333329" height="19.333333333333329"/>
+                                                                <rect key="frame" x="15" y="74.666666666666686" width="65.333333333333329" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <color key="textColor" name="Text/Second"/>
                                                                 <nil key="highlightedColor"/>
@@ -140,7 +140,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="rwM-zI-fgi">
-                                                                <rect key="frame" x="123" y="59.333333333333371" width="204" height="31"/>
+                                                                <rect key="frame" x="223" y="59.333333333333371" width="204" height="51"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" priority="500" constant="200" id="pbg-TY-eQi"/>
                                                                 </constraints>
@@ -150,30 +150,66 @@
                                                                     <action selector="onFontSizeSliderChange:" destination="setting-vc" eventType="valueChanged" id="GeG-Co-zOb"/>
                                                                 </connections>
                                                             </slider>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Conversation List Order" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-conversation-order-title">
+                                                                <rect key="frame" x="15" y="132" width="171.66666666666666" height="19.333333333333343"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                                <color key="textColor" name="Text/Second"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyf-sq-G2w">
+                                                                <rect key="frame" x="225" y="124.33333333333336" width="200" height="34.333333333333329"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="752" constant="100" id="Be6-e0-0ew"/>
+                                                                    <constraint firstAttribute="width" priority="500" constant="200" id="n7j-Qq-cAe"/>
+                                                                </constraints>
+                                                                <menu key="menu" id="zfX-Mx-08D">
+                                                                    <children>
+                                                                        <command title="Create Time" menuElementState="on" id="setting-conversation-order-create">
+                                                                            <connections>
+                                                                                <action selector="onConversationOrderCreate:" destination="setting-vc" id="9iB-RF-vxh"/>
+                                                                            </connections>
+                                                                        </command>
+                                                                        <command title="Last Message" id="setting-conversation-order-message">
+                                                                            <connections>
+                                                                                <action selector="onConversationOrderMessage:" destination="setting-vc" id="99e-4e-wdO"/>
+                                                                            </connections>
+                                                                        </command>
+                                                                    </children>
+                                                                </menu>
+                                                                <buttonConfiguration key="configuration" style="gray"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" name="Background/Box"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="rwM-zI-fgi" secondAttribute="bottom" constant="15" id="5Wq-IZ-aod"/>
+                                                            <constraint firstItem="xyf-sq-G2w" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="setting-conversation-order-title" secondAttribute="trailing" constant="10" id="1Pd-PP-Jb0"/>
                                                             <constraint firstItem="mUZ-Yd-tR9" firstAttribute="top" secondItem="Dyy-BG-d31" secondAttribute="top" constant="10" id="5gm-LG-0kH"/>
+                                                            <constraint firstItem="setting-conversation-order-title" firstAttribute="centerY" secondItem="xyf-sq-G2w" secondAttribute="centerY" id="6dq-7e-4h1"/>
                                                             <constraint firstItem="rwM-zI-fgi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="setting-font-size-title" secondAttribute="trailing" constant="10" id="8rL-mG-gzh"/>
+                                                            <constraint firstAttribute="trailing" secondItem="xyf-sq-G2w" secondAttribute="trailing" constant="15" id="IC6-nK-VaB"/>
                                                             <constraint firstAttribute="trailing" secondItem="mUZ-Yd-tR9" secondAttribute="trailing" constant="15" id="IaK-8r-FUY"/>
                                                             <constraint firstItem="setting-theme-title" firstAttribute="leading" secondItem="Dyy-BG-d31" secondAttribute="leading" constant="15" id="Jcf-um-u25"/>
+                                                            <constraint firstItem="setting-conversation-order-title" firstAttribute="leading" secondItem="Dyy-BG-d31" secondAttribute="leading" constant="15" id="cDn-Fy-eCd"/>
                                                             <constraint firstItem="rwM-zI-fgi" firstAttribute="top" secondItem="mUZ-Yd-tR9" secondAttribute="bottom" constant="15" id="f3X-Ih-mzO"/>
                                                             <constraint firstItem="setting-font-size-title" firstAttribute="centerY" secondItem="rwM-zI-fgi" secondAttribute="centerY" id="ke8-sd-Ofr"/>
                                                             <constraint firstItem="mUZ-Yd-tR9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="setting-theme-title" secondAttribute="trailing" constant="10" id="mdy-Gk-0iT"/>
+                                                            <constraint firstAttribute="bottom" secondItem="xyf-sq-G2w" secondAttribute="bottom" constant="15" id="oN5-Jt-vvC"/>
+                                                            <constraint firstItem="xyf-sq-G2w" firstAttribute="top" secondItem="rwM-zI-fgi" secondAttribute="bottom" constant="15" id="ras-yp-no9"/>
                                                             <constraint firstAttribute="trailing" secondItem="rwM-zI-fgi" secondAttribute="trailing" constant="15" id="tj1-Cp-8BL"/>
                                                             <constraint firstItem="setting-font-size-title" firstAttribute="leading" secondItem="Dyy-BG-d31" secondAttribute="leading" constant="15" id="wbd-Bb-ns7"/>
                                                             <constraint firstItem="setting-theme-title" firstAttribute="centerY" secondItem="mUZ-Yd-tR9" secondAttribute="centerY" id="y7Z-RV-5WJ"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJz-XI-uwR" userLabel="Space">
-                                                        <rect key="frame" x="0.0" y="352.66666666666669" width="340" height="10"/>
+                                                        <rect key="frame" x="0.0" y="422" width="440" height="10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="jvA-cS-XJS"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Behaviours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-behaviour-section">
-                                                        <rect key="frame" x="0.0" y="370.66666666666669" width="340" height="26.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="440" width="440" height="26.333333333333314"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -182,13 +218,13 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OcT-Oh-a5E" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="405" width="340" height="179.66666666666663"/>
+                                                        <rect key="frame" x="0.0" y="474.33333333333331" width="440" height="179.66666666666669"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImN-3P-ybb">
-                                                                <rect key="frame" x="15" y="10" width="310" height="40.333333333333336"/>
+                                                                <rect key="frame" x="15" y="10" width="410" height="31"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Auto-copy when selecting cell content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="setting-auto-copy-title">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="193.66666666666666" height="40.333333333333336"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="278.33333333333331" height="31"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                         <color key="textColor" name="Text/Second"/>
                                                                         <nil key="highlightedColor"/>
@@ -197,7 +233,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="Z95-0v-TrO" customClass="MBOptionSwitch" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="261" y="0.0" width="51" height="31"/>
+                                                                        <rect key="frame" x="361" y="0.0" width="51" height="31"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="optionKey" value="chatSendClipboardWhenLabelEdit"/>
                                                                         </userDefinedRuntimeAttributes>
@@ -218,7 +254,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can select cell content by double-clicking" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-key-tip-auto-copy">
-                                                                <rect key="frame" x="15" y="60.333333333333307" width="310" height="15.666666666666664"/>
+                                                                <rect key="frame" x="15" y="51.000000000000057" width="410" height="15.666666666666671"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                 <nil key="highlightedColor"/>
@@ -227,10 +263,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGf-0a-jZ2">
-                                                                <rect key="frame" x="15" y="96" width="310" height="68.666666666666686"/>
+                                                                <rect key="frame" x="15" y="86.666666666666686" width="410" height="78"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Float Window Alpha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-float-window-alpha-title">
-                                                                        <rect key="frame" x="0.0" y="5.3333333333333712" width="143.66666666666666" height="19.333333333333332"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Float window alpha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-float-window-alpha-title">
+                                                                        <rect key="frame" x="0.0" y="19" width="138.66666666666666" height="19.333333333333329"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                         <color key="textColor" name="Text/Second"/>
                                                                         <nil key="highlightedColor"/>
@@ -239,19 +275,16 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="97A-M6-56g" customClass="MBOptionSlider" customModule="B9ChatAI" customModuleProvider="target">
-                                                                        <rect key="frame" x="151.66666666666663" y="0.0" width="160.33333333333337" height="31"/>
+                                                                        <rect key="frame" x="208" y="0.0" width="204" height="58.333333333333336"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" priority="500" constant="200" id="Rbo-yX-RTB"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="optionKey" value="floatWindowAlpha"/>
                                                                         </userDefinedRuntimeAttributes>
-                                                                        <connections>
-                                                                            <action selector="onFontSizeSliderChange:" destination="setting-vc" eventType="valueChanged" id="1a9-Pk-T0r"/>
-                                                                        </connections>
                                                                     </slider>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transparency of the window in floating mode when it is not active" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-float-window-alpha-tip">
-                                                                        <rect key="frame" x="0.0" y="35" width="310" height="33.666666666666657"/>
+                                                                        <rect key="frame" x="0.0" y="62.333333333333364" width="410" height="15.666666666666664"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                         <color key="textColor" name="Text/Thrid"/>
                                                                         <nil key="highlightedColor"/>
@@ -288,13 +321,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wg-3t-RkQ" userLabel="Space">
-                                                        <rect key="frame" x="0.0" y="592.66666666666663" width="340" height="10"/>
+                                                        <rect key="frame" x="0.0" y="662" width="440" height="10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="khv-R5-vyM"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Bindings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-keys-section">
-                                                        <rect key="frame" x="0.0" y="610.66666666666663" width="340" height="26.333333333333371"/>
+                                                        <rect key="frame" x="0.0" y="680" width="440" height="26.333333333333371"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -303,10 +336,10 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nka-2x-iTk" customClass="SettingBox" customModule="B9ChatAI" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="645" width="340" height="140.66666666666663"/>
+                                                        <rect key="frame" x="0.0" y="714.33333333333337" width="440" height="140.66666666666663"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Default send key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-title">
-                                                                <rect key="frame" x="15" y="15.333333333333369" width="121" height="19.333333333333329"/>
+                                                                <rect key="frame" x="15" y="33.333333333333258" width="121" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                 <color key="textColor" name="Text/Second"/>
                                                                 <nil key="highlightedColor"/>
@@ -315,7 +348,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="&lt;KEY&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-key">
-                                                                <rect key="frame" x="144" y="18.333333333333371" width="0.0" height="15.666666666666664"/>
+                                                                <rect key="frame" x="144" y="36.333333333333258" width="31" height="15.666666666666664"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <color key="textColor" name="Text/Thrid"/>
                                                                 <nil key="highlightedColor"/>
@@ -324,7 +357,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="setting-send-by-segment">
-                                                                <rect key="frame" x="154" y="10" width="171" height="32"/>
+                                                                <rect key="frame" x="185" y="10" width="240" height="68"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" priority="750" constant="240" id="1aO-Cf-lio"/>
                                                                 </constraints>
@@ -338,7 +371,7 @@
                                                                 </connections>
                                                             </segmentedControl>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="setting-key-tip-navigation" userLabel="Tips: You can navigate UI elements by keyboard. Try it now by press tab(+shift) and arrow key.">
-                                                                <rect key="frame" x="15" y="56.000000000000007" width="310" height="69.666666666666686"/>
+                                                                <rect key="frame" x="15" y="92" width="410" height="33.666666666666657"/>
                                                                 <string key="text">Tips: You can navigate through UI elements using your keyboard.
 Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -365,13 +398,13 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imc-Xz-Pgl" userLabel="Space">
-                                                        <rect key="frame" x="0.0" y="793.66666666666663" width="340" height="10"/>
+                                                        <rect key="frame" x="0.0" y="863" width="440" height="10"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="dek-np-yt6"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="setting-about-button" customClass="Button" customModule="B9ChatAI" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="811.66666666666663" width="340" height="50.333333333333371"/>
+                                                        <rect key="frame" x="0.0" y="881" width="440" height="50.333333333333371"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="About" buttonSize="large"/>
                                                         <userDefinedRuntimeAttributes>
@@ -415,8 +448,9 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                             <constraint firstAttribute="bottom" secondItem="pbI-O7-pWa" secondAttribute="bottom" id="eZ8-bA-0XT"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="400" height="800"/>
+                    <size key="freeformSize" width="500" height="900"/>
                     <connections>
+                        <outlet property="conversationOrderButton" destination="xyf-sq-G2w" id="GKa-K0-R7U"/>
                         <outlet property="fontSizeSlider" destination="rwM-zI-fgi" id="xmU-RD-3wL"/>
                         <outlet property="sendBySegment" destination="setting-send-by-segment" id="Y8a-4U-1o3"/>
                         <outlet property="sendbyKeyLabel" destination="setting-send-by-key" id="E1f-Oe-Jb7"/>
@@ -425,7 +459,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79.389312977099237" y="42.95774647887324"/>
+            <point key="canvasLocation" x="-85.496183206106863" y="3.5211267605633805"/>
         </scene>
         <!--Engine Manage-->
         <scene sceneID="PdH-pp-C32">
@@ -507,7 +541,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-gW-ZGs">
                                                                     <rect key="frame" x="0.0" y="0.0" width="220" height="42.333333333333336"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-name">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;NAME&gt;" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-name">
                                                                             <rect key="frame" x="0.0" y="0.0" width="220" height="18.666666666666668"/>
                                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                                             <color key="textColor" name="Text/First"/>
@@ -519,7 +553,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-type">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;TYPE&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-list-cell-type">
                                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" name="Text/Second"/>
@@ -653,7 +687,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-api-detail">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-api-detail">
                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" name="Text/Second"/>
@@ -695,7 +729,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-ie-DXG">
                                                     <rect key="frame" x="20" y="14.000000000000004" width="220" height="42.333333333333343"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;NAME&gt;" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.81000000000000005" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-name">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&lt;NAME&gt;" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.81000000000000005" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-name">
                                                             <rect key="frame" x="0.0" y="0.0" width="220" height="18.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
                                                             <color key="textColor" name="Text/First"/>
@@ -707,7 +741,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="dynamicTypeEnabled" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.79000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-detail">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="&lt;DETAIL&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.79000000000000004" adjustsLetterSpacingToFitWidth="YES" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-type-cell-proxy-detail">
                                                             <rect key="frame" x="0.0" y="26.666666666666668" width="220" height="15.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" name="Text/Second"/>
@@ -771,58 +805,99 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                         <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6k-is-ius">
-                                <rect key="frame" x="20" y="89" width="260" height="46"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwV-jw-fw0">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your API key" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-key" customClass="MBTextField">
-                                        <rect key="frame" x="0.0" y="0.0" width="210.66666666666666" height="46"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-2e-FeM" userLabel="Content">
+                                        <rect key="frame" x="20" y="20" width="260" height="69.666666666666671"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6k-is-ius">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="46"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your API key" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-key" customClass="MBTextField">
+                                                        <rect key="frame" x="0.0" y="0.0" width="210.66666666666666" height="46"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="46" id="gio-6h-fGL"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="one-time-code"/>
+                                                        <connections>
+                                                            <outlet property="nextField" destination="engine-create-api-submit" id="dGc-vO-aJj"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-submit">
+                                                        <rect key="frame" x="210.66666666666666" y="0.0" width="49.333333333333343" height="46"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="arrow.right" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="onSubmit:" destination="engine-create-api-vc" eventType="touchUpInside" id="i6f-fB-hw5"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="engine-create-api-key" firstAttribute="top" secondItem="C6k-is-ius" secondAttribute="top" id="Da1-AL-XLZ"/>
+                                                    <constraint firstItem="engine-create-api-submit" firstAttribute="leading" secondItem="engine-create-api-key" secondAttribute="trailing" id="TjA-Ka-yKI"/>
+                                                    <constraint firstItem="engine-create-api-submit" firstAttribute="top" secondItem="engine-create-api-key" secondAttribute="top" id="Ymp-4h-RKG"/>
+                                                    <constraint firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fas-Ce-Wm9"/>
+                                                    <constraint firstItem="engine-create-api-submit" firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fvD-Bs-T2E"/>
+                                                    <constraint firstItem="engine-create-api-key" firstAttribute="leading" secondItem="C6k-is-ius" secondAttribute="leading" id="hFL-wM-iBN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="engine-create-api-submit" secondAttribute="trailing" id="jYy-cD-N79"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;LOG&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-log" customClass="LogLabel" customModule="B9ChatAI" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="54" width="260" height="15.666666666666671"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" name="Text/Thrid"/>
+                                                <nil key="highlightedColor"/>
+                                                <attributedString key="userComments">
+                                                    <fragment content="&lt;Pass&gt;"/>
+                                                </attributedString>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrm-dC-uBV">
+                                        <rect key="frame" x="0.0" y="530.33333333333337" width="300" height="69.666666666666629"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-bottom-link">
+                                                <rect key="frame" x="81.000000000000014" y="20" width="138.33333333333337" height="29.666666666666671"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="View your API keys">
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="openKeyURL:" destination="engine-create-api-vc" eventType="touchUpInside" id="Jd9-b1-lJe"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="gio-6h-fGL"/>
+                                            <constraint firstItem="engine-create-api-bottom-link" firstAttribute="top" secondItem="Hrm-dC-uBV" secondAttribute="top" constant="20" id="W5a-qH-MrJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="engine-create-api-bottom-link" secondAttribute="bottom" constant="20" id="WIG-x7-XiM"/>
+                                            <constraint firstItem="engine-create-api-bottom-link" firstAttribute="centerX" secondItem="Hrm-dC-uBV" secondAttribute="centerX" id="c96-m2-dqu"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="one-time-code"/>
-                                        <connections>
-                                            <outlet property="nextField" destination="engine-create-api-submit" id="dGc-vO-aJj"/>
-                                        </connections>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-submit">
-                                        <rect key="frame" x="210.66666666666666" y="0.0" width="49.333333333333343" height="46"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="arrow.right" catalog="system"/>
-                                        <connections>
-                                            <action selector="onSubmit:" destination="engine-create-api-vc" eventType="touchUpInside" id="i6f-fB-hw5"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="engine-create-api-key" firstAttribute="top" secondItem="C6k-is-ius" secondAttribute="top" id="Da1-AL-XLZ"/>
-                                    <constraint firstItem="engine-create-api-submit" firstAttribute="leading" secondItem="engine-create-api-key" secondAttribute="trailing" id="TjA-Ka-yKI"/>
-                                    <constraint firstItem="engine-create-api-submit" firstAttribute="top" secondItem="engine-create-api-key" secondAttribute="top" id="Ymp-4h-RKG"/>
-                                    <constraint firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fas-Ce-Wm9"/>
-                                    <constraint firstItem="engine-create-api-submit" firstAttribute="bottom" secondItem="engine-create-api-key" secondAttribute="bottom" id="fvD-Bs-T2E"/>
-                                    <constraint firstItem="engine-create-api-key" firstAttribute="leading" secondItem="C6k-is-ius" secondAttribute="leading" id="hFL-wM-iBN"/>
-                                    <constraint firstAttribute="trailing" secondItem="engine-create-api-submit" secondAttribute="trailing" id="jYy-cD-N79"/>
+                                    <constraint firstItem="Hrm-dC-uBV" firstAttribute="leading" secondItem="PhO-F6-ew7" secondAttribute="leading" id="44J-sI-tM5"/>
+                                    <constraint firstItem="zM4-2e-FeM" firstAttribute="width" secondItem="PhO-F6-ew7" secondAttribute="width" constant="-40" id="7Vt-XW-Szo"/>
+                                    <constraint firstItem="80H-jS-zpe" firstAttribute="bottom" secondItem="zM4-2e-FeM" secondAttribute="bottom" constant="80" id="7jX-da-rM3"/>
+                                    <constraint firstItem="zM4-2e-FeM" firstAttribute="leading" secondItem="80H-jS-zpe" secondAttribute="leading" constant="20" id="7uu-jR-OCt"/>
+                                    <constraint firstItem="PhO-F6-ew7" firstAttribute="bottom" secondItem="Hrm-dC-uBV" secondAttribute="bottom" priority="500" id="ROV-uR-zp6"/>
+                                    <constraint firstItem="Hrm-dC-uBV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zM4-2e-FeM" secondAttribute="bottom" constant="20" id="RYA-lg-lAn"/>
+                                    <constraint firstItem="PhO-F6-ew7" firstAttribute="trailing" secondItem="Hrm-dC-uBV" secondAttribute="trailing" id="aed-Da-Jpi"/>
+                                    <constraint firstItem="80H-jS-zpe" firstAttribute="trailing" secondItem="zM4-2e-FeM" secondAttribute="trailing" constant="19" id="jJc-f5-UHo"/>
+                                    <constraint firstItem="zM4-2e-FeM" firstAttribute="top" secondItem="80H-jS-zpe" secondAttribute="top" constant="20" id="suM-mz-BU0"/>
                                 </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;LOG&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-api-log" customClass="LogLabel" customModule="B9ChatAI" customModuleProvider="target">
-                                <rect key="frame" x="24" y="143" width="256" height="15.666666666666657"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <color key="textColor" name="Text/Thrid"/>
-                                <nil key="highlightedColor"/>
-                                <attributedString key="userComments">
-                                    <fragment content="&lt;Pass&gt;"/>
-                                </attributedString>
-                            </label>
+                                <viewLayoutGuide key="contentLayoutGuide" id="80H-jS-zpe"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="PhO-F6-ew7"/>
+                            </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="hgu-hv-d0o"/>
+                        <viewLayoutGuide key="safeArea" id="G7j-lA-3fD"/>
                         <color key="backgroundColor" name="Background/SettingPage"/>
                         <constraints>
-                            <constraint firstItem="engine-create-api-log" firstAttribute="top" secondItem="C6k-is-ius" secondAttribute="bottom" constant="8" id="FcG-uZ-cqg"/>
-                            <constraint firstItem="C6k-is-ius" firstAttribute="top" secondItem="hgu-hv-d0o" secondAttribute="top" constant="30" id="T8N-WF-HAz"/>
-                            <constraint firstItem="engine-create-api-log" firstAttribute="trailing" secondItem="C6k-is-ius" secondAttribute="trailing" id="WGB-xj-xX3"/>
-                            <constraint firstItem="hgu-hv-d0o" firstAttribute="trailing" secondItem="C6k-is-ius" secondAttribute="trailing" constant="20" id="r1U-lW-zDl"/>
-                            <constraint firstItem="C6k-is-ius" firstAttribute="leading" secondItem="hgu-hv-d0o" secondAttribute="leading" constant="20" id="uZs-86-hvs"/>
-                            <constraint firstItem="engine-create-api-log" firstAttribute="leading" secondItem="C6k-is-ius" secondAttribute="leading" constant="4" id="wDL-QP-edj"/>
+                            <constraint firstAttribute="bottom" secondItem="lwV-jw-fw0" secondAttribute="bottom" id="Bvx-LA-99m"/>
+                            <constraint firstItem="lwV-jw-fw0" firstAttribute="leading" secondItem="U6y-69-8tO" secondAttribute="leading" id="GUZ-3W-HyP"/>
+                            <constraint firstItem="lwV-jw-fw0" firstAttribute="top" secondItem="U6y-69-8tO" secondAttribute="top" id="U33-4Q-9gB"/>
+                            <constraint firstAttribute="trailing" secondItem="lwV-jw-fw0" secondAttribute="trailing" id="Uha-2K-KRJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PLF-qB-EPV"/>
@@ -835,7 +910,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5F-a9-foK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-72" y="1332"/>
+            <point key="canvasLocation" x="-73.282442748091597" y="1331.6901408450706"/>
         </scene>
         <!--About-->
         <scene sceneID="g5i-xF-wfw">
@@ -1209,14 +1284,40 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MKd-rx-mkb">
+                                        <rect key="frame" x="0.0" y="530.33333333333337" width="300" height="69.666666666666629"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="engine-create-proxy-known-link">
+                                                <rect key="frame" x="93.333333333333314" y="20" width="113.66666666666669" height="29.666666666666671"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Known Service">
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="onOpenKnownURL:" destination="engine-create-proxy-vc" eventType="touchUpInside" id="f53-1o-4UB"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="engine-create-proxy-known-link" firstAttribute="centerX" secondItem="MKd-rx-mkb" secondAttribute="centerX" id="03j-KG-3Qd"/>
+                                            <constraint firstAttribute="bottom" secondItem="engine-create-proxy-known-link" secondAttribute="bottom" constant="20" id="s4H-Es-nPb"/>
+                                            <constraint firstItem="engine-create-proxy-known-link" firstAttribute="top" secondItem="MKd-rx-mkb" secondAttribute="top" constant="20" id="vbH-4H-o0T"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="oX3-O6-0at" firstAttribute="leading" secondItem="vcA-AX-Ba7" secondAttribute="leading" constant="20" id="4M3-Dg-HC6"/>
-                                    <constraint firstItem="oX3-O6-0at" firstAttribute="width" secondItem="vcA-AX-Ba7" secondAttribute="width" constant="-40" id="DLa-W0-A39"/>
-                                    <constraint firstAttribute="bottom" secondItem="oX3-O6-0at" secondAttribute="bottom" constant="20" id="JTD-Cq-wxT"/>
-                                    <constraint firstAttribute="trailing" secondItem="oX3-O6-0at" secondAttribute="trailing" constant="19" id="rkX-Bh-aJL"/>
-                                    <constraint firstItem="oX3-O6-0at" firstAttribute="top" secondItem="vcA-AX-Ba7" secondAttribute="top" constant="20" id="z4X-Eo-wrx"/>
+                                    <constraint firstItem="MKd-rx-mkb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oX3-O6-0at" secondAttribute="bottom" constant="20" id="1qt-XB-COL"/>
+                                    <constraint firstItem="oX3-O6-0at" firstAttribute="leading" secondItem="5HZ-RD-B7Q" secondAttribute="leading" constant="20" id="4M3-Dg-HC6"/>
+                                    <constraint firstItem="oX3-O6-0at" firstAttribute="width" secondItem="Kc1-Zb-LZt" secondAttribute="width" constant="-40" id="DLa-W0-A39"/>
+                                    <constraint firstItem="5HZ-RD-B7Q" firstAttribute="bottom" secondItem="oX3-O6-0at" secondAttribute="bottom" constant="80" id="JTD-Cq-wxT"/>
+                                    <constraint firstItem="Kc1-Zb-LZt" firstAttribute="trailing" secondItem="MKd-rx-mkb" secondAttribute="trailing" id="NNe-MS-beN"/>
+                                    <constraint firstItem="Kc1-Zb-LZt" firstAttribute="bottom" secondItem="MKd-rx-mkb" secondAttribute="bottom" priority="500" id="ZmY-Gz-hMU"/>
+                                    <constraint firstItem="MKd-rx-mkb" firstAttribute="leading" secondItem="Kc1-Zb-LZt" secondAttribute="leading" id="bYb-8L-E1Z"/>
+                                    <constraint firstItem="5HZ-RD-B7Q" firstAttribute="trailing" secondItem="oX3-O6-0at" secondAttribute="trailing" constant="19" id="rkX-Bh-aJL"/>
+                                    <constraint firstItem="oX3-O6-0at" firstAttribute="top" secondItem="5HZ-RD-B7Q" secondAttribute="top" constant="20" id="z4X-Eo-wrx"/>
                                 </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="5HZ-RD-B7Q"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Kc1-Zb-LZt"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mBr-sU-nbE"/>
@@ -1237,6 +1338,7 @@ Try it now by pressing the Tab (+shift) key and arrow keys.</string>
                         <outlet property="completionEndpointField" destination="engine-create-proxy-completion-field" id="hya-Xv-Myz"/>
                         <outlet property="content" destination="oX3-O6-0at" id="AGW-MD-it1"/>
                         <outlet property="keyField" destination="engine-create-proxy-key" id="ZEF-2s-jt0"/>
+                        <outlet property="knownLinkContianer" destination="MKd-rx-mkb" id="XfA-EO-Tfe"/>
                         <outlet property="logLabel" destination="engine-create-proxy-log" id="fns-O0-9zJ"/>
                         <outlet property="modelEndpointField" destination="engine-create-proxy-model-field" id="pwS-pD-PmI"/>
                         <outlet property="sendKeySwitch" destination="fli-qQ-9l8" id="QDV-mt-cTE"/>

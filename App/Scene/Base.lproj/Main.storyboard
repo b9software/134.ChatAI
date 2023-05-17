@@ -21,6 +21,10 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teq-xV-5AK">
                                 <rect key="frame" x="0.0" y="0.0" width="900" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="q4W-Ce-zCX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="uLS-IP-l9R"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="jrn-Io-3ll" kind="embed" id="5bF-5o-csg"/>
                                 </connections>
@@ -30,9 +34,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="teq-xV-5AK" firstAttribute="leading" secondItem="8UQ-27-RhG" secondAttribute="leading" id="9j9-PL-p20"/>
-                            <constraint firstAttribute="bottom" secondItem="teq-xV-5AK" secondAttribute="bottom" id="VHL-YX-gLE"/>
+                            <constraint firstAttribute="bottom" secondItem="teq-xV-5AK" secondAttribute="bottom" priority="999" id="VHL-YX-gLE"/>
                             <constraint firstItem="teq-xV-5AK" firstAttribute="top" secondItem="8UQ-27-RhG" secondAttribute="top" id="k5L-iv-PqF"/>
-                            <constraint firstAttribute="trailing" secondItem="teq-xV-5AK" secondAttribute="trailing" id="wvw-Ky-y2G"/>
+                            <constraint firstAttribute="trailing" secondItem="teq-xV-5AK" secondAttribute="trailing" priority="999" id="wvw-Ky-y2G"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
