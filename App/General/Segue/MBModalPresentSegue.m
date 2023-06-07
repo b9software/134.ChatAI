@@ -1,7 +1,6 @@
 
 #import "MBModalPresentSegue.h"
 #import "ShortCuts.h"
-#import <MBAppKit/MBAPI.h>
 #import <RFKit/UIView+RFAnimate.h>
 #import <RFKit/UIView+RFKit.h>
 #import <RFKit/UIViewController+RFKit.h>
@@ -74,7 +73,7 @@
 }
 
 - (void)dismissAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    [MBAPI cancelOperationsWithViewController:self];
+//    [MBAPI cancelOperationsWithViewController:self];
     if (self.willDismiss) {
         self.willDismiss(self);
     }

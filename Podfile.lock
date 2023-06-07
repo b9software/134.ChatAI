@@ -1,18 +1,8 @@
 PODS:
-  - AFNetworking/Reachability (4.0.1)
-  - AFNetworking/Security (4.0.1)
-  - AFNetworking/Serialization (4.0.1)
-  - JSONModel (1.8.0)
-  - MBAppKit/Core (0.13.0):
+  - MBAppKit/Core (1.0.0):
     - RFAlpha/RFSwizzle
-    - RFAPI (~> 2.1.1)
     - RFKit (~> 2.0)
-    - RFKit/Category/NSDate
-    - RFKit/Category/NSDateFormatter
-    - RFKit/Category/NSJSONSerialization
-    - RFKit/Category/NSLayoutConstraint
-    - RFKit/Category/NSURL
-  - MBAppKit/Input (0.13.0):
+  - MBAppKit/Input (1.0.0):
     - MBAppKit/Core
     - RFDelegateChain/UITextFieldDelegate
     - RFInitializing
@@ -70,31 +60,9 @@ PODS:
     - RFAlpha/RFViewApperance/RFDrawView
   - RFAlpha/RFWindow (0.7.2):
     - RFInitializing (>= 1.1)
-  - RFAPI (2.1.1):
-    - RFAPI/Core (= 2.1.1)
-    - RFAPI/JSONModel (= 2.1.1)
-  - RFAPI/Core (2.1.1):
-    - AFNetworking/Reachability (>= 2.3)
-    - AFNetworking/Security (>= 2.3)
-    - AFNetworking/Serialization (>= 2.3)
-    - RFInitializing (>= 1.1)
-    - RFKit/Runtime (> 1.7)
-    - RFMessageManager/Manager (>= 0.5)
-    - RFMessageManager/RFNetworkActivityMessage
-  - RFAPI/JSONModel (2.1.1):
-    - JSONModel
-    - RFAPI/Core
   - RFDelegateChain/Chain (2.1.0):
     - RFInitializing (>= 1.1)
     - RFKit/Runtime (>= 1.7.1)
-  - RFDelegateChain/UICollectionViewDataSource (2.1.0):
-    - RFDelegateChain/Chain
-  - RFDelegateChain/UICollectionViewDelegate (2.1.0):
-    - RFDelegateChain/UIScrollViewDelegate
-  - RFDelegateChain/UICollectionViewDelegateFlowLayout (2.1.0):
-    - RFDelegateChain/UICollectionViewDelegate
-  - RFDelegateChain/UIScrollViewDelegate (2.1.0):
-    - RFDelegateChain/Chain
   - RFDelegateChain/UITextFieldDelegate (2.1.0):
     - RFDelegateChain/Chain
   - RFDelegateChain/UITextViewDelegate (2.1.0):
@@ -138,20 +106,12 @@ PODS:
   - RFKit/Category/NSFileManager (2.5.1):
     - RFKit/Foundation
     - RFKit/Runtime
-  - RFKit/Category/NSJSONSerialization (2.5.1):
-    - RFKit/Foundation
-    - RFKit/Runtime
-  - RFKit/Category/NSLayoutConstraint (2.5.1):
-    - RFKit/Category/UIView
-    - RFKit/Foundation
   - RFKit/Category/NSObject (2.5.1):
     - RFKit/Foundation
     - RFKit/Runtime
   - RFKit/Category/NSString (2.5.1):
     - RFKit/Foundation
     - RFKit/Runtime
-  - RFKit/Category/NSURL (2.5.1):
-    - RFKit/Foundation
   - RFKit/Category/UIButton (2.5.1):
     - RFKit/Foundation
   - RFKit/Category/UIColor (2.5.1):
@@ -193,26 +153,15 @@ PODS:
     - RFKit/Runtime
   - RFKit/Runtime (2.5.1):
     - RFKit/Foundation
-  - RFMessageManager/Manager (0.7.0):
-    - RFInitializing (>= 1.1)
-    - RFKit/Category/NSArray
-    - RFKit/Runtime (>= 1.7)
-  - RFMessageManager/RFNetworkActivityMessage (0.7.0):
-    - RFMessageManager/Manager
-  - RFMessageManager/SVProgressHUD (0.7.0):
-    - RFMessageManager/Manager
-    - RFMessageManager/RFNetworkActivityMessage
-    - SVProgressHUD
   - RFSegue/Async (4.1.0):
     - RFSegue/Core
   - RFSegue/Core (4.1.0):
     - RFKit/Category/UIDevice
     - RFKit/Category/UINavigationController
     - RFKit/Runtime (>= 1.7)
-  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - MBAppKit/Input (from `https://github.com/RFUI/MBAppKit.git`)
+  - MBAppKit/Input (from `Frameworks/MBAppKit`)
   - RFAlpha/RFBlockSelectorPerform
   - RFAlpha/RFButton
   - RFAlpha/RFCallbackControl
@@ -225,53 +174,37 @@ DEPENDENCIES:
   - RFAlpha/RFTimer
   - RFAlpha/RFViewApperance/RFLine
   - RFAlpha/RFWindow
-  - RFDelegateChain/UICollectionViewDataSource
-  - RFDelegateChain/UICollectionViewDelegateFlowLayout
   - RFDelegateChain/UITextFieldDelegate
   - RFDelegateChain/UITextViewDelegate
   - RFKeyboard
+  - RFKit/Category/NSDate
+  - RFKit/Category/NSDateFormatter
   - RFKit/Category/NSFileManager
   - "RFKit/Category/UIScrollView+RFScrolling"
-  - RFMessageManager/SVProgressHUD
   - RFSegue/Async
 
 SPEC REPOS:
   trunk:
-    - AFNetworking
-    - JSONModel
     - RFAlpha
-    - RFAPI
     - RFDelegateChain
     - RFInitializing
     - RFKeyboard
     - RFKit
-    - RFMessageManager
     - RFSegue
-    - SVProgressHUD
 
 EXTERNAL SOURCES:
   MBAppKit:
-    :git: https://github.com/RFUI/MBAppKit.git
-
-CHECKOUT OPTIONS:
-  MBAppKit:
-    :commit: f67ccd08ceed9ffe0194f83c55e4a68124ee47f1
-    :git: https://github.com/RFUI/MBAppKit.git
+    :path: Frameworks/MBAppKit
 
 SPEC CHECKSUMS:
-  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
-  MBAppKit: be40a93b7463347c6b12c11ccee79cfa89c18e64
+  MBAppKit: 16c86619a88d2c6fe84c3a9a3f61c03c6014700f
   RFAlpha: b903f1725ccadee2226ab34fd0b9009cffa364d2
-  RFAPI: 3cba472523c4301b4a0c44b1b3dcbe5707d21372
   RFDelegateChain: c6df4faf9932f86d9539a08d0aa8f9709025d874
   RFInitializing: 6f3d8149e68ed0a4460fbe5d89608a52f663978f
   RFKeyboard: 673a594ea5d27bb597e1501858b29007f5daeff5
   RFKit: 046ed8a61c874fbb93dce7a694cfc059e8bf5d7a
-  RFMessageManager: e261b12146e083989df83106304fbface62705b5
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 601c433933ba332b7023e475057adf7d54ee5f1b
+PODFILE CHECKSUM: a9ec546719669c9ae115a8c741388d054d621e6f
 
 COCOAPODS: 1.12.1

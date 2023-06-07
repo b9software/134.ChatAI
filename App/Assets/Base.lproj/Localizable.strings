@@ -37,7 +37,9 @@
 "menu.guide" = "Guide";
 "menu.retry" = "Retry";
 "menu.integrationHelp" = "What's this?";
-"menu.integrationBookmark" = "Copy Browser Bookmark";
+"menu.integrationBookmark" = "Browser: Copy JavaScript Bookmark";
+"menu.integrationRaycastQuery" = "Raycast: Copy Quicklinks to Send Content";
+"menu.integrationRaycastSwitch" = "Raycast: Copy Quicklinks to Switch Conversations";
 "menu.send" = "Send Input";
 
 // MARK: - Chat
@@ -107,6 +109,7 @@
 "sendIntent.textTitle" = "Text";
 "sendIntent.textDesc" = "The content send to the conversation.";
 "sendIntent.textRequest" = "Input is empty. Input some new text";
+"sendIntent.textParamDesc" = "Content to Send";
 
 "Send ${text} to ${conversation}" = "Send ${text} to ${conversation}";
 "Send text to ${applicationName}" = "Send text to ${applicationName}";

@@ -31,11 +31,6 @@ func AppActive() -> Bool {
     UIApplication.shared.applicationState == .active
 }
 
-/// 全局接口请求器
-func AppAPI() -> API {
-    MBApp.global.api
-}
-
 /// 编译环境，Debug、Alpha、Release
 func AppBuildConfiguration() -> String {
     #if DEBUG

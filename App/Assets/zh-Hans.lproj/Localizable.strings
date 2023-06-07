@@ -179,10 +179,16 @@
 "menu.homePage" = "GitHub 项目页";
 
 /* (No Comment) */
-"menu.integrationBookmark" = "拷贝浏览器书签";
+"menu.integrationBookmark" = "浏览器：拷贝书签链接";
 
 /* (No Comment) */
 "menu.integrationHelp" = "跨应用调起指南";
+
+/* (No Comment) */
+"menu.integrationRaycastQuery" = "Raycast：拷贝 Quicklinks 用于发送内容";
+
+/* (No Comment) */
+"menu.integrationRaycastSwitch" = "Raycast：拷贝 Quicklinks 链接用于切换会话";
 
 /* (No Comment) */
 "menu.navigationBack" = "返回";
@@ -249,6 +255,8 @@
 
 /* (No Comment) */
 "sendIntent.textDesc" = "发送给 AI 的内容";
+
+"sendIntent.textParamDesc" = "发送给 AI 的内容";
 
 /* (No Comment) */
 "sendIntent.textRequest" = "空文本，请输入新文本";

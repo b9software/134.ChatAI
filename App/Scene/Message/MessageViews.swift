@@ -49,3 +49,61 @@ class MessageBoxView: UIView {
         }
     }
 }
+
+/**
+ 备忘：
+
+ -
+
+ */
+class MessageTextView: UITextView {
+    @IBOutlet private weak var fontRefrenceLabel: UILabel? {
+        didSet {
+            if let label = fontRefrenceLabel {
+                font = label.font
+            }
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var size = CGSize(width: 1000, height: UIView.noIntrinsicMetric)
+//        debugPrint(        superview?.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize))
+        size = sizeThatFits(size)
+        return size
+//        if lastContentSize.equalTo(.zero) {
+//            return bounds.size
+//        }
+//        return lastContentSize
+    }
+
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        contentSizeObserver = observe(\.contentSize, changeHandler: { obj, change in
+//            obj.lastContentSize = obj.contentSize
+//        })
+//    }
+//
+//    private var contentSizeObserver: NSKeyValueObservation?
+//    private var lastContentSize: CGSize = .zero {
+//        didSet {
+//            if oldValue == lastContentSize { return }
+//            invalidateIntrinsicContentSize()
+//        }
+//    }
+
+    override var text: String! {
+        didSet {
+            if oldValue != text {
+                invalidateIntrinsicContentSize()
+            }
+        }
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            if oldValue.width != bounds.width {
+                invalidateIntrinsicContentSize()
+            }
+        }
+    }
+}

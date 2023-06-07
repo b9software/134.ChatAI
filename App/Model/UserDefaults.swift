@@ -105,19 +105,6 @@ extension UserDefaults {
 // MARK: - 存储类型支持
 
 extension UserDefaults {
-    // JSON Model 存储支持
-    private func model<T: MBModel>(forKey key: String) -> T? {
-        guard let data = data(forKey: key),
-              let model = try? T(data: data) else {
-            return nil
-        }
-        return model
-    }
-    private func set(model value: MBModel?, forKey key: String) {
-        let data = value?.toJSONData()
-        set(data, forKey: key)
-    }
-
     // Codable 对象存储支持
     private func model<T: Codable>(forKey key: String) -> T? {
         guard let data = data(forKey: key),

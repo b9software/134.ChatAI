@@ -152,7 +152,9 @@ extension ConversationDetailViewController {
     func buildIntegrationMenu() -> UIMenu {
         UIMenu(title: "Integration", children: [
             UICommand(title: L.Menu.integrationHelp, action: #selector(gotoAppIntegrationHelp)),
-            UICommand(title: L.Menu.integrationBookmark, action: #selector(onCopyJSBookmark))
+            UICommand(title: L.Menu.integrationBookmark, action: #selector(onCopyJSBookmark)),
+            UICommand(title: L.Menu.integrationRaycastSwitch, action: #selector(onCopyRaycastSwitchLink)),
+            UICommand(title: L.Menu.integrationRaycastQuery, action: #selector(onCopyRaycastQueryLink)),
         ])
     }
 
@@ -272,15 +274,15 @@ extension ConversationDetailViewController {
     }
 
     @IBAction private func onCopyJSBookmark(_ sender: Any) {
-        var comp = URLComponents()
-        comp.scheme = Bundle.main.bundleIdentifier ?? "b9chatai"
-        comp.host = "send"
-        comp.queryItems = [
-            .init(name: "id", value: item.id),
-            .init(name: "text", value: "")
-        ]
-        let urlPart = comp.url?.absoluteString ?? ""
-        UIPasteboard.general.string = "javascript:a=\"\(urlPart)\"+encodeURIComponent(window.getSelection().toString());window.location.href=a"
+        UIPasteboard.general.string = URLCommand.generateJSBookmark(id: item.id)
+    }
+
+    @IBAction private func onCopyRaycastSwitchLink(_ sender: Any) {
+        UIPasteboard.general.string = URLCommand.generateRaycastSwitch(id: item.id)
+    }
+
+    @IBAction private func onCopyRaycastQueryLink(_ sender: Any) {
+        UIPasteboard.general.string = URLCommand.generateRaycastQuery(id: item.id, paramText: L.SendIntent.textParamDesc)
     }
 
     func conversationListStateChanged(_ item: Conversation) {

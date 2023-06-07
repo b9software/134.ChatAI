@@ -53,14 +53,6 @@ class MBApp: NSObject {
 
     // MARK: - 挂载的 manager
 
-    /// 网络接口层
-    @objc lazy var api: API = {
-        let instance = API()
-        API.global = instance
-        instance.networkActivityIndicatorManager = hud
-        return instance
-    }()
-
     /// UI 提示管理器
     @objc lazy var hud = MessageManager()
 

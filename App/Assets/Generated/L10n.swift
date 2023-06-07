@@ -211,10 +211,14 @@ internal enum L10n {
       internal static let help = L10n.tr("Localizable", "menu.help", fallback: "Help")
       /// Project on GitHub
       internal static let homePage = L10n.tr("Localizable", "menu.homePage", fallback: "Project on GitHub")
-      /// Copy Browser Bookmark
-      internal static let integrationBookmark = L10n.tr("Localizable", "menu.integrationBookmark", fallback: "Copy Browser Bookmark")
+      /// Browser: Copy JavaScript Bookmark
+      internal static let integrationBookmark = L10n.tr("Localizable", "menu.integrationBookmark", fallback: "Browser: Copy JavaScript Bookmark")
       /// What's this?
       internal static let integrationHelp = L10n.tr("Localizable", "menu.integrationHelp", fallback: "What's this?")
+      /// Raycast: Copy Quicklinks to Send Content
+      internal static let integrationRaycastQuery = L10n.tr("Localizable", "menu.integrationRaycastQuery", fallback: "Raycast: Copy Quicklinks to Send Content")
+      /// Raycast: Copy Quicklinks to Switch Conversations
+      internal static let integrationRaycastSwitch = L10n.tr("Localizable", "menu.integrationRaycastSwitch", fallback: "Raycast: Copy Quicklinks to Switch Conversations")
       /// Go Back
       internal static let navigationBack = L10n.tr("Localizable", "menu.navigationBack", fallback: "Go Back")
       /// New
@@ -257,6 +261,8 @@ internal enum L10n {
       internal static let searchKeyword = L10n.tr("Localizable", "sendIntent.searchKeyword", fallback: "text,AI,chat,conversation")
       /// The content send to the conversation.
       internal static let textDesc = L10n.tr("Localizable", "sendIntent.textDesc", fallback: "The content send to the conversation.")
+      /// Content to Send
+      internal static let textParamDesc = L10n.tr("Localizable", "sendIntent.textParamDesc", fallback: "Content to Send")
       /// Input is empty. Input some new text
       internal static let textRequest = L10n.tr("Localizable", "sendIntent.textRequest", fallback: "Input is empty. Input some new text")
       /// Text

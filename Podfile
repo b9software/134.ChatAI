@@ -11,6 +11,8 @@ target 'B9ChatAI' do
     platform :ios, '15.0'
 
     pod 'RFKit', :subspecs => [
+        'Category/NSDate',
+        'Category/NSDateFormatter',
         'Category/NSFileManager',
         'Category/UIScrollView+RFScrolling',
     ]
@@ -29,15 +31,12 @@ target 'B9ChatAI' do
         'RFWindow',
     ]
     pod 'RFDelegateChain', :subspecs => [
-        'UICollectionViewDelegateFlowLayout',
-        'UICollectionViewDataSource',
         'UITextFieldDelegate',
         'UITextViewDelegate',
     ]
     pod 'RFKeyboard'
-    pod 'RFMessageManager', :subspecs => ['SVProgressHUD']
     pod 'RFSegue', :subspecs => ['Async']
-    pod 'MBAppKit', :git => 'https://github.com/RFUI/MBAppKit.git', :subspecs => [
+    pod 'MBAppKit', :path => 'Frameworks/MBAppKit', :subspecs => [
         'Input',
     ]
 end

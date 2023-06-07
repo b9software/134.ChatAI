@@ -9,14 +9,12 @@
  https://opensource.org/licenses/MIT
  */
 
-#import "MBModel.h"
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
 // @MBDependency:2
-@interface MBListDataItem<ObjectType> : NSObject <
-    MBModel
->
+@interface MBListDataItem<ObjectType> : NSObject
 
 @property (nonatomic, nullable) ObjectType item;
 @property (nonatomic) NSString *cellReuseIdentifier;

@@ -2,7 +2,7 @@
 //  ShortCuts
 //  App
 //
-#import <MBAppKit/MBModel.h>
+#import <UIKit/UIKit.h>
 
 /**
  快速访问一些全局对象，见 ShortCuts.swift
