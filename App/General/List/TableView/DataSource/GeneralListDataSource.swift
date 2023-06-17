@@ -46,7 +46,7 @@ class GeneralSingleSectionListDataSource<Item: Hashable>:
             }
         }
         set {
-            guard let tableView = tableView else { return }
+            guard tableView != nil else { return }
             if isItemSelectable {
                 fatalError("todo")
             } else {

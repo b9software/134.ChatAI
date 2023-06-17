@@ -18,6 +18,7 @@ final class DebugManager {
                 UICommand(title: "Dump DB", action: #selector(ApplicationDelegate.debugDumpDatabase)),
                 UICommand(title: "Create Engine no key", action: #selector(ApplicationDelegate.debugEngineCreateWithNoKey)),
                 UICommand(title: "Create Engine invalid key", action: #selector(ApplicationDelegate.debugEngineCreateWithInvalidKey)),
+                UICommand(title: "Create Fake Engine", action: #selector(ApplicationDelegate.debugEngineCreateFakeOne)),
                 UICommand(title: "Destroy All Conversations", action: #selector(ApplicationDelegate.debugDestroyConversation)),
             ]),
             UIMenu(title: "System UI", children: [
@@ -179,6 +180,10 @@ fileprivate extension ApplicationDelegate {
 
     @objc func debugEngineCreateWithInvalidKey() {
         CDEngine.debugCreateWithInvalidKey()
+    }
+
+    @objc func debugEngineCreateFakeOne() {
+        Engine.createFakeOne()
     }
 
     @objc func debugDestroyConversation() {

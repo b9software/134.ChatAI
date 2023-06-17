@@ -136,6 +136,7 @@ extension ApplicationDelegate {
 
     @IBAction func floatWindowCollapse(_ sender: Any) {
         assert(Current.osBridge.keyWindowFloatMode > 1)
+        // @bug: 多个 window，点击非激活窗口的按钮触发时，UIKit 的 key window 没有及时更新，导致窗口和窗口内容状态不一致
         keySceneDelegate()?.floatModeState = .floatCollapse
         Current.osBridge.keyWindowFloatMode = FloatModeState.floatCollapse.rawValue
     }

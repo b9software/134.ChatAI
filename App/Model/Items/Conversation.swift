@@ -170,9 +170,13 @@ extension Conversation {
             }
             engine = Engine.from(entity: engineData)
         }
-        guard let engine = engine,
-              engineConfig.model?.isNotEmpty == true else {
+        guard let engine = engine else {
             return .forceSetup
+        }
+        if engine.hasModels {
+            guard engineConfig.model?.isNotEmpty == true else {
+                return .forceSetup
+            }
         }
         guard engine.isValid else {
             return .engineOutdate

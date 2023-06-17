@@ -144,25 +144,16 @@ internal enum L10n {
       }
     }
     internal enum Guide {
+      /// GPT best practices
+      internal static let gptBestPractices = L10n.tr("Localizable", "guide.gptBestPractices", fallback: "GPT best practices")
+      /// https://platform.openai.com/docs/guides/gpt-best-practices
+      internal static let gptBestPracticesLink = L10n.tr("Localizable", "guide.gptBestPracticesLink", fallback: "https://platform.openai.com/docs/guides/gpt-best-practices")
       /// https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication
       internal static let interCommunicationLink = L10n.tr("Localizable", "guide.interCommunicationLink", fallback: "https://github.com/b9software/B9ChatAI/wiki/Inter-App-Communication")
-      /// Dear user,
-      /// 
-      /// Thank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.
-      /// 
-      /// Please note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.
-      /// 
-      /// For a list of known issues, please refer to the following link:
-      ///  https://github.com/b9software/B9ChatAI/issues/1
-      /// 
-      /// Thank you for your understanding and support.
-      /// 
-      /// Best regards,
-      /// 
-      /// BB9z
-      /// 
-      /// 2023-04-16
-      internal static let text1st = L10n.tr("Localizable", "guide.text1st", fallback: "Dear user,\n\nThank you for downloading my app. Currently, an OpenAI account or API key is required to use the app. However, I will be adding support for more engines in the future.\n\nPlease note that this application is still in the early stages of development. In addition to the current features, many more are still in progress. I appreciate your patience and understanding as I work to improve the app.\n\nFor a list of known issues, please refer to the following link:\n https://github.com/b9software/B9ChatAI/issues/1\n\nThank you for your understanding and support.\n\nBest regards,\n\nBB9z\n\n2023-04-16")
+      /// What Is ChatGPT Doing … and Why Does It Work?
+      internal static let stephenWolfram202302 = L10n.tr("Localizable", "guide.stephenWolfram202302", fallback: "What Is ChatGPT Doing … and Why Does It Work?")
+      /// https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work
+      internal static let stephenWolfram202302Link = L10n.tr("Localizable", "guide.stephenWolfram202302Link", fallback: "https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work")
     }
     internal enum Link {
       /// https://github.com/b9software/B9ChatAI/discussions

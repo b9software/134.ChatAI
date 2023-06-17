@@ -14,6 +14,7 @@ class Engine {
     enum EType: String {
         case openAI = "OpenAI"
         case openAIProxy = "OpenAI Proxy"
+        case fake = "<Fake>"
 
         var displayString: String {
             rawValue
@@ -38,6 +39,8 @@ class Engine {
             oaEngine = try entity.loadOAEngine()
         case .openAIProxy:
             oaEngine = try entity.loadOAEngine()
+        case .fake:
+            break
         }
     }
 
@@ -52,7 +55,7 @@ class Engine {
     static func from(entity: CDEngine) -> Engine? {
         assertDispatch(.notOnQueue(.main))
         guard let id = entity.id else {
-            assert(false)
+            assertionFailure("CDEngine no id")
             return nil
         }
         if let old = enginePool[id] { return old }
@@ -97,7 +100,7 @@ class Engine {
                 log?.x(.info, L10.stepListGpt(idDesc))
 
                 log?.x(.info, L10.stepSaveData)
-                let item = try await makeItem(key: key, models: models)
+                let item = try await makeOpenAIItem(key: key, models: models)
                 log?.x(.notice, L10.stepDone)
                 cb(.success(item))
             } catch {
@@ -107,7 +110,7 @@ class Engine {
         }
     }
 
-    private static func makeItem(key: String, models: [OAModel]) async throws -> Engine {
+    private static func makeOpenAIItem(key: String, models: [OAModel]) async throws -> Engine {
         guard let keyHash = B9Crypto.sha1(utf8: "OA-\(key)") else {
             throw AppError.message(L.Engine.Create.Fail.hashKey)
         }
@@ -115,7 +118,7 @@ class Engine {
         if await CDEngine.fetch(id: id) != nil {
             throw AppError.message(L.Engine.Create.Fail.existKey)
         }
-        try B9Keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
+        try Current.keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
         let oaEngine = OAEngine(models: models)
         oaEngine.apiKey = key
         let oaData = try oaEngine.encode()
@@ -182,7 +185,7 @@ class Engine {
             throw AppError.message(L.Engine.Create.Fail.existProxy)
         }
         if let key = proxy.apiKey {
-            try B9Keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
+            try Current.keychain.update(string: key, account: id, label: "B9ChatAI Safe Store", comment: "Your OpenAI API key")
         }
 
         let oaData = try proxy.encode()
@@ -200,7 +203,7 @@ class Engine {
         return item
     }
 
-    private var oaEngine: OAEngine
+    private(set) var oaEngine: OAEngine!
     private var _oaNetwork: OANetwork?
 }
 
@@ -211,6 +214,17 @@ extension Engine {
             return oaEngine.apiKey?.isNotEmpty == true
         case .openAIProxy:
             return oaEngine.baseURL != nil
+        case .fake:
+            return true
+        }
+    }
+
+    var hasModels: Bool {
+        switch type {
+        case .openAI, .openAIProxy:
+            return true
+        default:
+            return false
         }
     }
 
@@ -233,11 +247,13 @@ extension Engine {
             result.customListModelURL = oaEngine.customListModelURL
             _oaNetwork = result
             return result
+        case .fake:
+            fatalError("Fake engine no networking.")
         }
     }
 
     var lastSelectedModel: StringID? {
-        get { oaEngine.modelLastUsed }
+        get { oaEngine?.modelLastUsed }
         set {
             if oaEngine.modelLastUsed == newValue { return }
             oaEngine.modelLastUsed = newValue
@@ -273,8 +289,13 @@ extension Engine {
     }
 
     func send(message: Message, config: EngineConfig) throws -> Task<Void, Error> {
-        let api = try getOANetworking()
-        return api.steamChat(config: config, steam: message.senderState?.noSteam != true, handler: message)
+        switch type {
+        case .openAI, .openAIProxy:
+            let api = try getOANetworking()
+            return api.steamChat(config: config, steam: message.senderState?.noSteam != true, handler: message)
+        case .fake:
+            return Self.genaralFakeResponse(message: message)
+        }
     }
 }
 
@@ -287,3 +308,33 @@ extension Engine: Hashable {
         hasher.combine(id)
     }
 }
+
+#if DEBUG
+extension Engine {
+    static func createFakeOne() {
+        Current.database.save {
+            let entity = CDEngine(context: $0)
+            entity.id = "fake"
+            entity.name = "Fake"
+            entity.type = EType.fake.rawValue
+            entity.createTime = .current
+            entity.usedTime = nil
+            $0.trySave()
+        }
+    }
+
+    static func genaralFakeResponse(message: Message) -> Task<Void, Error> {
+        Task {
+            var choice = OAChatCompletion.Choice(delta: OAChatMessage(role: .assistant))
+            message.onSteamResponse(choice)
+            for _ in 0...100 {
+                choice = OAChatCompletion.Choice(delta: OAChatMessage(content: "."))
+                message.onSteamResponse(choice)
+                try await Task.sleep(nanoseconds: 50_000_000) // 50ms
+            }
+            choice = OAChatCompletion.Choice(delta: OAChatMessage(content: "@"), finishReason: "stop")
+            message.onSteamResponse(choice)
+        }
+    }
+}
+#endif

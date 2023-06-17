@@ -200,7 +200,7 @@ extension Message {
         if senderState?.isSending == true {
             stopResponse()
         }
-        Current.database.save { [self] ctx in
+        Current.database.save { [self] _ in
             if state == .pend {
                 state = .froze
             }

@@ -61,10 +61,10 @@ struct OAChatCompletion: Codable {
 //    }
 
     struct Choice: Codable {
-        private(set) var message: OAChatMessage?
-        private(set) var finishReason: String?
         private(set) var index: Int?
+        private(set) var message: OAChatMessage?
         private(set) var delta: OAChatMessage?
+        private(set) var finishReason: String?
     }
 }
 

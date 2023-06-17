@@ -10,7 +10,7 @@
 import CoreData
 import XCTest
 
-// swiftlint:disable force_try nesting
+// swiftlint:disable force_try
 
 extension NSManagedObjectContext {
     func createEngine(id: String) {
@@ -108,3 +108,5 @@ extension CDMessage {
         return result
     }
 }
+
+// swiftlint:enable force_try

@@ -54,6 +54,11 @@ brew install cocoapods
 * https://github.com/hwchase17/langchain-hub
 * https://github.com/bhaskatripathi/pdfGPT
 * https://chat.okisdev.com 网页端看着不错
+* https://elephas.app 客户端
+
+Prompt
+
+* https://prompts.ray.so
 
 PDFKit 读取
 

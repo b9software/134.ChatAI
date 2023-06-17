@@ -80,7 +80,7 @@ class OANetwork {
         AppLog().debug("Sending HTTP request: \(request.url!)")
         var (data, response) = try await session.data(for: request)
         data = try handleResponse(data: data, response: response)
-        return try [OAModel].decode(data)
+        return try [OAModel].decode(data).filter { $0.isChatMode }.sorted(by: { $0.id > $1.id })
     }
 
     func steamChat(config: EngineConfig, steam: Bool, handler: Message) -> Task<Void, Error> {

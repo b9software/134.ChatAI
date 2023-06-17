@@ -164,7 +164,7 @@ extension NSWindow {
     }
 
     private func noticeFloatWillChange(to state: FloatModeState) {
-        NotificationCenter.default.post(name: .floatModeDidChange, object: self, userInfo: ["state": state.rawValue])
+        NotificationCenter.default.post(name: .floatModeWillChange, object: self, userInfo: ["state": state.rawValue])
         assert(state != floatState)
     }
 

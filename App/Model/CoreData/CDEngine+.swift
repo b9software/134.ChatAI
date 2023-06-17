@@ -35,7 +35,7 @@ extension CDEngine {
             ctx.delete(this)
             if let account = idCopy {
                 Do.try {
-                    try B9Keychain.update(data: nil, account: account)
+                    try Current.keychain.update(data: nil, account: account)
                 }
             }
             AppLog().info("Engine> Delete \(idCopy ?? "?") success.")
@@ -48,7 +48,7 @@ extension CDEngine {
         }
         let oaEngine = try OAEngine.decode(raw)
         if let id = self.id {
-            oaEngine.apiKey = try B9Keychain.string(account: id)
+            oaEngine.apiKey = try Current.keychain.string(account: id)
         }
         return oaEngine
     }
@@ -79,7 +79,7 @@ extension CDEngine {
         Current.database.save { ctx in
             let engine = CDEngine(context: ctx)
             engine.id = "OA-Invalid"
-            try! B9Keychain.update(string: "Invalid", account: engine.id!)
+            try! Current.keychain.update(string: "Invalid", account: engine.id!)
             engine.name = "Invalid Key"
             engine.type = Engine.EType.openAI.rawValue
             let item = OAEngine(models: [])

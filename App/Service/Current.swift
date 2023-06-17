@@ -51,6 +51,14 @@ enum Current {
         }()
     }
 
+    static var keychain: KeychainAccess {
+        Mocked.keychain ?? {
+            let instance = B9Keychain(service: Bundle.main.bundleIdentifier ?? "b9software.chat-ai")
+            Mocked.keychain = instance
+            return instance
+        }()
+    }
+
     static var keyWindow: UIWindow? {
         Mocked.keyWindow ?? {
             (UIResponder.firstResponder as? UIView)?.window
@@ -109,6 +117,7 @@ enum Mocked {
     static var defualts: UserDefaults?
     static var focusLog: Logger?
     static var identifierForVendor: String?
+    static var keychain: KeychainAccess?
     static var keyWindow: UIWindow?
     static var messageSender: MessageSender?
     static var osBridge: MacInterface?
@@ -121,6 +130,7 @@ enum Mocked {
         defualts = nil
         focusLog = nil
         identifierForVendor = nil
+        keychain = nil
         keyWindow = nil
         messageSender = nil
         osBridge = nil

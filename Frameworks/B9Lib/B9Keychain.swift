@@ -11,25 +11,15 @@
 import Foundation
 import Security
 
-enum B9Keychain {
-    static var defaultService: String {
-        Bundle.main.bundleIdentifier ?? "app.keychain"
+class B9Keychain {
+    let defaultService: String
+
+    init(service: String) {
+        defaultService = service
     }
 
-    static func string(account: String, service: String? = nil) throws -> String? {
-        guard let data = try data(account: account, service: service) else {
-            return nil
-        }
-        if let string = String(data: data, encoding: .utf8) { return string }
-        AppLog().error("Unable covert data to UTF-8 string.")
-        return nil
-    }
-    static func update(string: String?, account: String, service: String? = nil, label: String? = nil, comment: String? = nil) throws {
-        try update(data: string?.data(using: .utf8), account: account, service: service, label: label, comment: comment)
-    }
-
-    static func data(account: String, service: String? = nil) throws -> Data? {
-        var query = query(account: account, service: service)
+    func data(account: String) throws -> Data? {
+        var query = query(account: account)
         query[kSecReturnData] = true
         query[kSecMatchLimit] = kSecMatchLimitOne
         var result: AnyObject?
@@ -37,8 +27,8 @@ enum B9Keychain {
         try check(status)
         return result as? Data
     }
-    static func update(data: Data?, account: String, service: String? = nil, label: String? = nil, comment: String? = nil) throws {
-        var query = query(account: account, service: service)
+    func update(data: Data?, account: String, label: String? = nil, comment: String? = nil) throws {
+        var query = query(account: account)
         if data == nil {
             let status = SecItemDelete(query as CFDictionary)
             if status == errSecItemNotFound { return }
@@ -63,15 +53,15 @@ enum B9Keychain {
         try check(status)
     }
 
-    private static func query(account: String, service: String?) -> [CFString: Any] {
+    private func query(account: String) -> [CFString: Any] {
         assertDispatch(.notOnQueue(.main))
         return [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: account,
-            kSecAttrService: service ?? Self.defaultService,
+            kSecAttrService: defaultService,
         ]
     }
-    private static func check(_ status: OSStatus) throws {
+    private func check(_ status: OSStatus) throws {
         if status != errSecSuccess {
             throw NSError(domain: NSOSStatusErrorDomain, code: Int(status))
         }

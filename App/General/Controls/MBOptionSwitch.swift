@@ -35,7 +35,7 @@ extension OptionControl {
         set {
             if isDefaultChangeNotificationEnable == newValue { return }
             if newValue {
-                notificationListener[self] = UserDefaults.didChangeNotification.observe(queue: .main, callback: { [weak self] notice in
+                notificationListener[self] = UserDefaults.didChangeNotification.observe(queue: .main, callback: { [weak self] _ in
                     self?.updateValue()
                 })
             } else {

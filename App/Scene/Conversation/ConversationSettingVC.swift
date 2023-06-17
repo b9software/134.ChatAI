@@ -131,9 +131,12 @@ extension ConversationSettingViewController {
             stateLabel.set(error: L.Chat.Setting.choiceEngine)
             return
         }
-        guard let model = basicInfo.selectedModel else {
-            stateLabel.set(error: L.Chat.Setting.choiceModel)
-            return
+        let model = basicInfo.selectedModel
+        if engine.hasModels {
+            if model == nil {
+                stateLabel.set(error: L.Chat.Setting.choiceModel)
+                return
+            }
         }
         var cfgChat = item.chatConfig
         cfgChat.sendbyKey = chatConfigSendbyValue()
@@ -249,7 +252,7 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
     }
 
     func updateUIForEngineSelection() {
-        if let engine = selectedEngine {
+        if let engine = selectedEngine, engine.hasModels {
             modelPickViews.views(hidden: false, animated: true)
             selectedModel = nil
             if engine.isValid {
@@ -262,6 +265,7 @@ class CSBasicInfoScene: UIView, UITableViewDelegate {
             }
         } else {
             modelPickViews.views(hidden: true)
+            selectedModel = nil
         }
     }
 

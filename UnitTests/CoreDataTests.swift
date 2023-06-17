@@ -30,14 +30,14 @@ class CoreDataTests: TestCase {
         try ctx.save()
 
         var messages = try ctx.fetch(CDMessage.fetchRequest())
-        XCTAssert(messages.count == 2)
-        XCTAssert(conv.messages?.count == 2)
+        XCTAssertEqual(messages.count, 2)
+        XCTAssertEqual(conv.messages?.count, 2)
 
         ctx.delete(conv)
 
         messages = try ctx.fetch(CDMessage.fetchRequest())
-        XCTAssert(messages.count == 0)
-        XCTAssert(conv.messages?.count == 0)
+        XCTAssertEqual(messages.count, 0)
+        XCTAssertEqual(conv.messages?.count, 0)
     }
 
     func testPredicateWithBadKey() throws {
