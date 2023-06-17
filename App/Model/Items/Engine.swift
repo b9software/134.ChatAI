@@ -294,7 +294,11 @@ extension Engine {
             let api = try getOANetworking()
             return api.steamChat(config: config, steam: message.senderState?.noSteam != true, handler: message)
         case .fake:
+            #if DEBUG
             return Self.genaralFakeResponse(message: message)
+            #else
+            throw AppError.message("Fake engine only available in debug build.")
+            #endif
         }
     }
 }
