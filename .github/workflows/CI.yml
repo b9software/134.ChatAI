@@ -42,5 +42,4 @@ jobs:
 
       - name: Build
         run: |
-          set -o pipefail
-          xcodebuild -workspace "B9ChatAI.xcworkspace" -scheme "App" -destination 'platform=macOS,arch=x86_64' | xcpretty
+          xcodebuild -workspace "B9ChatAI.xcworkspace" -scheme "App" -destination 'platform=macOS,arch=x86_64'
