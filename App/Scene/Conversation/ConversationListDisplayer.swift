@@ -23,6 +23,22 @@ class ConversationListView: UITableView {
         )
         return commands
     }
+
+    override func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        if result {
+            tintColor = nil
+        }
+        return result
+    }
+
+    override func resignFirstResponder() -> Bool {
+        let result = super.resignFirstResponder()
+        if result {
+            tintColor = .systemGray
+        }
+        return result
+    }
 }
 
 class ChatArchivedListController:
