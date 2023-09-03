@@ -39,12 +39,8 @@ internal enum Asset {
     internal enum Block {
       internal static let blank = ImageAsset(name: "blank")
       internal static let solid = ImageAsset(name: "solid")
-      internal static let underline1px = ImageAsset(name: "underline_1px")
     }
     internal enum Control {
-      internal static let buttonRect = ImageAsset(name: "button_rect")
-      internal static let buttonRound44Fill = ImageAsset(name: "button_round44_fill")
-      internal static let buttonRound44Frame = ImageAsset(name: "button_round44_frame")
       internal static let checkboxOff = ImageAsset(name: "checkbox_off")
       internal static let checkboxOn = ImageAsset(name: "checkbox_on")
       internal static let tickSliderThumb = ImageAsset(name: "tick_slider_thumb")
@@ -59,7 +55,6 @@ internal enum Asset {
       internal static let navBack = ImageAsset(name: "nav_back")
       internal static let navBackLayoutfix = ImageAsset(name: "nav_back_layoutfix")
     }
-    internal static let avatarPlaceholder = ImageAsset(name: "avatar_placeholder")
   }
   internal enum Icon {
     internal static let archivebox = ImageAsset(name: "Icon/archivebox")
@@ -75,10 +70,6 @@ internal enum Asset {
     internal static let accentColor = ColorAsset(name: "AccentColor")
     internal static let placeholder = ColorAsset(name: "placeholder")
     internal static let shadow = ColorAsset(name: "shadow")
-  }
-  internal enum List {
-    internal static let listAccessory10 = ImageAsset(name: "list_accessory10")
-    internal static let tableRefreshIndicator = ImageAsset(name: "table_refresh_indicator")
   }
   internal enum Text {
     internal static let first = ColorAsset(name: "Text/First")
