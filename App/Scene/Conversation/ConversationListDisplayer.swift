@@ -12,7 +12,7 @@ class ConversationListDisplayer: UIViewController, StoryboardCreation {
     static var storyboardID: StoryboardID { .conversation }
 }
 
-/// 只加了选中删除
+/// 只加了选中删除，主题色随焦点变化
 class ConversationListView: UITableView {
     override var canBecomeFirstResponder: Bool { true }
 
@@ -25,19 +25,22 @@ class ConversationListView: UITableView {
     }
 
     override func becomeFirstResponder() -> Bool {
-        let result = super.becomeFirstResponder()
-        if result {
-            tintColor = nil
-        }
-        return result
+        defer { updateTintColor() }
+        return super.becomeFirstResponder()
     }
 
     override func resignFirstResponder() -> Bool {
-        let result = super.resignFirstResponder()
-        if result {
-            tintColor = .systemGray
-        }
-        return result
+        defer { updateTintColor() }
+        return super.resignFirstResponder()
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        updateTintColor()
+    }
+
+    private func updateTintColor() {
+        tintColor = isFirstResponder ? nil : .systemGray
     }
 }
 
