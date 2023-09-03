@@ -55,6 +55,7 @@ brew install cocoapods
 * https://github.com/bhaskatripathi/pdfGPT
 * https://chat.okisdev.com 网页端看着不错
 * https://elephas.app 客户端
+* https://github.com/Bin-Huang/chatbox ts 跨平台
 
 Prompt
 

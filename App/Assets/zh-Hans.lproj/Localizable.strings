@@ -128,10 +128,10 @@
 "genral-error.invalid-url" = "\"%@\" 不是合法的 URL";
 
 /* (No Comment) */
-"guide.interCommunicationLink" = "https://docs.qq.com/doc/DUXNFa2NGTU51cXBP";
+"guide.gptBestPractices" = "GPT 最佳实践（英文）";
 
 /* (No Comment) */
-"guide.text1st" = "你好，\n\n感谢你下载我的应用。暂时你需要 OpenAI 账户或者有 API key 才能使用这个应用。未来会支持更多的引擎。\n\n请注意这个应用仍在开发早期阶段，还有非常多的功能待开发，目前已知的问题可查看链接：\nhttps://github.com/b9software/B9ChatAI/issues/1\n\n感谢你的支持与理解。\n\nBB9z\n\n2023-04-16";
+"guide.interCommunicationLink" = "https://docs.qq.com/doc/DUXNFa2NGTU51cXBP";
 
 /* (No Comment) */
 "link.feedback" = "https://support.qq.com/product/592777";
@@ -256,6 +256,7 @@
 /* (No Comment) */
 "sendIntent.textDesc" = "发送给 AI 的内容";
 
+/* (No Comment) */
 "sendIntent.textParamDesc" = "发送给 AI 的内容";
 
 /* (No Comment) */
