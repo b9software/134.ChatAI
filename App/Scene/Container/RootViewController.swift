@@ -102,27 +102,46 @@ class RootViewController: B9RootViewController {
         }
     }
 
-    func focusSidebar() {
-        if split.isCollapsed { return }
-        if let system = UIFocusSystem.focusSystem(for: self),
-           let element = sidebar?.preferredFocusEnvironments.first {
+    override var canBecomeFirstResponder: Bool { true }
+    override var canResignFirstResponder: Bool { true }
+
+    override var keyCommands: [UIKeyCommand]? {
+        var commands = super.keyCommands ?? []
+        commands.append(.init(action: #selector(focusSidebarDetail), input: UIKeyCommand.inputRightArrow))
+        commands.append(.init(action: #selector(focusSidebar), input: UIKeyCommand.inputLeftArrow))
+        return commands
+    }
+
+    @objc private func focusSidebar() {
+        if split.isCollapsed {
+            split.toggleSidebar(self)
+        }
+        Current.focusLog.debug("Move focus to sidebar")
+        guard let system = UIFocusSystem.focusSystem(for: self) else { return }
+        if let element = sidebar?.preferredFocusEnvironments.first as? (UIFocusEnvironment & UIResponder) {
             system.requestFocusUpdate(to: element)
-            sidebar?.becomeFirstResponder()
+            element.becomeFirstResponder()
+            assert(element.canBecomeFirstResponder)
         }
     }
 
-    func focusSidebarDetail() {
-        if let system = UIFocusSystem.focusSystem(for: self),
-           let element = navigator?.visibleViewController?.preferredFocusEnvironments.first {
-            system.requestFocusUpdate(to: element)
-            var responder = element as? UIResponder
-            while responder != nil {
-                if responder?.becomeFirstResponder() == true {
-                    AppLog().debug("In focusSidebarDetail, \(responder!) did becomeFirstResponder.")
-                    break
-                }
-                responder = responder?.next
+    @objc private func focusSidebarDetail() {
+        if split.compactMode, !split.isCollapsed {
+            split.toggleSidebar(self)
+        }
+        Current.focusLog.debug("Move focus to content detail")
+        guard let system = UIFocusSystem.focusSystem(for: self) else { return }
+        guard let element = navigator?.visibleViewController?.preferredFocusEnvironments.first else {
+            return
+        }
+        system.requestFocusUpdate(to: element)
+        var responder = element as? UIResponder
+        while responder != nil {
+            if responder?.becomeFirstResponder() == true {
+                AppLog().debug("In focusSidebarDetail, \(responder!) did becomeFirstResponder.")
+                break
             }
+            responder = responder?.next
         }
     }
 

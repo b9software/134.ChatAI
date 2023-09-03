@@ -186,17 +186,6 @@ extension ConversationDetailViewController {
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         guard let nextFocusedItem = context.nextFocusedItem else {
-            if let ip = listView.lastRowIndexPath {
-//                listView.selectRow(at: ip, animated: true, scrollPosition: .middle)
-//                lastFocusedItem = listView.cellForRow(at: ip)
-//                setNeedsFocusUpdate()
-//                Current.focusLog.debug("Detail update focus to last cell.")
-            } else {
-                dispatch_async_on_main {
-                    self.handleLeftArrow()
-                }
-                Current.focusLog.debug("Detail update focus to side bar.")
-            }
             return
         }
         Current.focusLog.debug("Detail update focus to: \(nextFocusedItem).")
@@ -216,18 +205,6 @@ extension ConversationDetailViewController {
             return isInputAllowed
         }
         return super.responds(to: aSelector)
-    }
-
-    override var keyCommands: [UIKeyCommand]? {
-        var commands = super.keyCommands ?? []
-        commands.append(
-            UIKeyCommand(action: #selector(handleLeftArrow), input: UIKeyCommand.inputLeftArrow)
-        )
-        return commands
-    }
-
-    @objc func handleLeftArrow() {
-        RootViewController.of(view)?.focusSidebar()
     }
 
     @IBAction func focusInputBox(_ sender: Any) {
@@ -464,7 +441,6 @@ extension ConversationDetailViewController: UITextViewDelegate {
         AppLog().debug("Textview change text: \(text)")
         if text == "\t" {
             textView.resignFirstResponder()
-            handleLeftArrow()
             return false
         }
         return true
