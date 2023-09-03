@@ -53,7 +53,7 @@ enum Current {
 
     static var keychain: KeychainAccess {
         Mocked.keychain ?? {
-            let instance = B9Keychain(service: Bundle.main.bundleIdentifier ?? "b9software.chat-ai")
+            let instance = B9Keychain(service: Bundle.main.bundleIdentifier ?? bundleID)
             Mocked.keychain = instance
             return instance
         }()

@@ -56,27 +56,27 @@ class SidebarViewController: UIViewController, ConversationListUpdating {
         Action(target: self, selector: #selector(releaseListControllerIfNeeded)),
         delay: 10)
 
-    override var canBecomeFirstResponder: Bool { true }
-    override var canResignFirstResponder: Bool { true }
-
-//    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-//        [newChatButton]
-//    }
-
-    override var keyCommands: [UIKeyCommand]? {
-        var commands = super.keyCommands ?? []
-        commands.append(.init(action: #selector(handleRightArrow), input: UIKeyCommand.inputRightArrow))
-        return commands
+    private weak var lastFocusedItem: UIFocusEnvironment?
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        var items = [UIFocusEnvironment]()
+        if let item = lastFocusedItem {
+            items.append(item)
+        }
+        if !items.contains(where: { $0 === listView }) {
+            items.append(listView)
+        }
+        return items
     }
-
-    @objc func handleRightArrow() {
-        RootViewController.of(view)?.focusSidebarDetail()
-        resignFirstResponder()
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        guard let nextFocusedItem = context.nextFocusedItem else {
+            return
+        }
+        if nextFocusedItem.isChildren(of: self),
+           (nextFocusedItem as? UIResponder)?.canBecomeFirstResponder == true {
+            lastFocusedItem = nextFocusedItem
+        }
     }
-
-//    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-//
-//    }
 }
 
 extension SidebarViewController {
@@ -121,8 +121,7 @@ extension SidebarViewController {
             selectedTableView = table
         }
         RootViewController.of(view)?.gotoChatDetail(item: conversation)
-        table.becomeFirstResponder()
-    }
+    }  
 
     private func setupCommandButtons() {
         archiveButton.setImage(Asset.Icon.xmark.image, for: .selected)
