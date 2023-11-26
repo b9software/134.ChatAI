@@ -12,7 +12,6 @@
 		D501844E20F865D3009481D4 /* Number+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501844C20F865D2009481D4 /* Number+App.swift */; };
 		D501844F20F865D3009481D4 /* UITableView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501844D20F865D3009481D4 /* UITableView+App.swift */; };
 		D501845820F88016009481D4 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501845720F88016009481D4 /* TextField.swift */; };
-		D501845B20F881B6009481D4 /* DissolveTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501845920F881B6009481D4 /* DissolveTransitioning.swift */; };
 		D501845C20F881B7009481D4 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501845A20F881B6009481D4 /* Shadow.swift */; };
 		D501E65528549059001B5CAA /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D501E65428549059001B5CAA /* UserDefaults.swift */; };
 		D50319D425BE518C00C2849E /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50319D325BE518C00C2849E /* CornerRadius.swift */; };
@@ -265,7 +264,6 @@
 		D501844C20F865D2009481D4 /* Number+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Number+App.swift"; sourceTree = "<group>"; };
 		D501844D20F865D3009481D4 /* UITableView+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+App.swift"; sourceTree = "<group>"; };
 		D501845720F88016009481D4 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		D501845920F881B6009481D4 /* DissolveTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DissolveTransitioning.swift; sourceTree = "<group>"; };
 		D501845A20F881B6009481D4 /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		D501E65428549059001B5CAA /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		D50319D325BE518C00C2849E /* CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
@@ -1198,7 +1196,6 @@
 				D5D932F02515EDC300E1C4B6 /* CalloutView.swift */,
 				D5031C0D25C0401C00C2849E /* Circle.swift */,
 				D50319D325BE518C00C2849E /* CornerRadius.swift */,
-				D501845920F881B6009481D4 /* DissolveTransitioning.swift */,
 				D5031C0325C03F7B00C2849E /* Gradient.swift */,
 				D501845A20F881B6009481D4 /* Shadow.swift */,
 			);
@@ -1691,7 +1688,6 @@
 				D581F07A29EEC5E5000653DE /* debug.m in Sources */,
 				D5EEE5A829C74DB0006759DE /* DebugManager.swift in Sources */,
 				D51B7FF229CFF6E400DD825C /* Dispatch+App.swift in Sources */,
-				D501845B20F881B6009481D4 /* DissolveTransitioning.swift in Sources */,
 				D527917F27B558D600522240 /* Do.swift in Sources */,
 				D51B7FF029CFE45800DD825C /* Engine.swift in Sources */,
 				D5FA7D6429D881400011DA4E /* EngineCellView.swift in Sources */,
