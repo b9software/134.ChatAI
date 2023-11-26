@@ -26,7 +26,6 @@ target 'B9ChatAI' do
         'RFNavigationController',
         'RFRefreshControl',
         'RFTableViewPullToFetchPlugin',
-        'RFTimer',
         'RFViewApperance/RFLine',
         'RFWindow',
     ]

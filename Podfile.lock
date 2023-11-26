@@ -46,7 +46,6 @@ PODS:
     - RFDelegateChain/Chain
     - RFKit/Category/UIView
     - "RFKit/Category/UIView+RFAnimate"
-  - RFAlpha/RFTimer (0.7.2)
   - RFAlpha/RFTransitioning/Core (0.7.2):
     - RFInitializing (>= 1.1)
     - RFKit/Runtime (>= 1.7.1)
@@ -171,7 +170,6 @@ DEPENDENCIES:
   - RFAlpha/RFNavigationController
   - RFAlpha/RFRefreshControl
   - RFAlpha/RFTableViewPullToFetchPlugin
-  - RFAlpha/RFTimer
   - RFAlpha/RFViewApperance/RFLine
   - RFAlpha/RFWindow
   - RFDelegateChain/UITextFieldDelegate
@@ -205,6 +203,6 @@ SPEC CHECKSUMS:
   RFKit: 046ed8a61c874fbb93dce7a694cfc059e8bf5d7a
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
 
-PODFILE CHECKSUM: a9ec546719669c9ae115a8c741388d054d621e6f
+PODFILE CHECKSUM: 704f534646d859afbd74a1d6af57e84f91acb4a2
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3
