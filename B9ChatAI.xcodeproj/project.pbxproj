@@ -126,7 +126,6 @@
 		D588308D20CACB33002030C4 /* Array+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308820CACB32002030C4 /* Array+App.swift */; };
 		D588308F20CACB33002030C4 /* MBSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308A20CACB32002030C4 /* MBSwift.swift */; };
 		D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588308C20CACB33002030C4 /* NSPointArray+App.swift */; };
-		D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */; };
 		D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C46DD29F1338200BEFAE8 /* MBButton.swift */; };
 		D58D1B00251C583300D1EF32 /* UICollectionView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */; };
 		D5998CED29EC29A400E71167 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5998CEC29EC29A400E71167 /* UserActivity.swift */; };
@@ -407,7 +406,6 @@
 		D588308820CACB32002030C4 /* Array+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+App.swift"; sourceTree = "<group>"; };
 		D588308A20CACB32002030C4 /* MBSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBSwift.swift; sourceTree = "<group>"; };
 		D588308C20CACB33002030C4 /* NSPointArray+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPointArray+App.swift"; sourceTree = "<group>"; };
-		D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleSelectionControlGroup.swift; sourceTree = "<group>"; };
 		D58C46DD29F1338200BEFAE8 /* MBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBButton.swift; sourceTree = "<group>"; };
 		D58D1AFF251C583300D1EF32 /* UICollectionView+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+App.swift"; sourceTree = "<group>"; };
 		D59066B520AD0C4500411410 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1279,7 +1277,6 @@
 				D5EE52292043F7B9009148B3 /* MBLayoutButton.h */,
 				D5EE52312043F7B9009148B3 /* MBLayoutButton.m */,
 				D50B3E6228255A5800D0974E /* MBOptionSwitch.swift */,
-				D58A987D2770CAF200537A92 /* MultipleSelectionControlGroup.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -1743,7 +1740,6 @@
 				D55959D320AB9FA20019D733 /* MessageManager.swift in Sources */,
 				D57CAD2829E2D97D00F4FF60 /* MessageSender.swift in Sources */,
 				D5A4F4DD29E81B22007319D6 /* MessageViews.swift in Sources */,
-				D58A987E2770CAF200537A92 /* MultipleSelectionControlGroup.swift in Sources */,
 				D5EEE5DB29C8A4BB006759DE /* NavigationController.swift in Sources */,
 				D56902A52A05CA8300970371 /* Notification+App.swift in Sources */,
 				D588309020CACB33002030C4 /* NSPointArray+App.swift in Sources */,
