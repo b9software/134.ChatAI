@@ -14,17 +14,12 @@ target 'B9ChatAI' do
         'Category/NSDate',
         'Category/NSDateFormatter',
         'Category/NSFileManager',
-        'Category/UIScrollView+RFScrolling',
     ]
     pod 'RFAlpha', :subspecs => [
-        'RFBlockSelectorPerform',
         'RFButton',
-        'RFCallbackControl',
         'RFContainerView',
         'RFDrawImage',
-        'RFImageCropper',
         'RFNavigationController',
-        'RFRefreshControl',
         'RFTableViewPullToFetchPlugin',
         'RFViewApperance/RFLine',
         'RFWindow',
