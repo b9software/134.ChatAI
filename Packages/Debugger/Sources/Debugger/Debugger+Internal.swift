@@ -2,7 +2,7 @@
  Debugger+Internal.swift
  Debugger
 
- Copyright © 2022 BB9z.
+ Copyright © 2022-2023 BB9z.
  https://github.com/BB9z/iOS-Project-Template
 
  The MIT License
@@ -72,7 +72,6 @@ internal extension Debugger {
     // MARK: - 便捷访问
 
     /// 尝试找应用处于活跃的窗体
-    @available(iOS 13.0, *)
     static var activatedWindowScene: UIWindowScene? {
         if let activated = trueKeyWindow?.windowScene { return activated }
         let scenes = UIApplication.shared.connectedScenes
@@ -86,13 +85,8 @@ internal extension Debugger {
     /// 尝试找应用活跃窗体的 key window
     static var mainWindow: UIWindow? {
         if let activated = trueKeyWindow { return activated }
-        if #available(iOS 13.0, *) {
-            let windows = activatedWindowScene?.windows ?? UIApplication.shared.windows
-            return windows.first(where: { $0.isKeyWindow }) ?? windows.first
-        } else {
-            let windows = UIApplication.shared.windows
-            return windows.first(where: { $0.isKeyWindow }) ?? windows.first
-        }
+        let windows = activatedWindowScene?.windows ?? UIApplication.shared.windows
+        return windows.first(where: { $0.isKeyWindow }) ?? windows.first
     }
 
     /// 主 window 的根视图
@@ -110,7 +104,13 @@ internal extension Debugger {
     }
 
     static var storyboard: UIStoryboard {
-        UIStoryboard(name: "Debugger", bundle: Bundle.module)
+        let bundle: Bundle
+        #if SWIFT_PACKAGE
+        bundle = Bundle.module
+        #else
+        bundle = Bundle(for: DebugActionItem.self)
+        #endif
+        return UIStoryboard(name: "Debugger", bundle: bundle)
     }
 
     // MARK: - 工具方法
@@ -170,12 +170,10 @@ internal extension Debugger {
             showControlCenter()
             return
         }
-        if #available(iOS 13.0, *) {
-            if let buttonWin = triggerButton?.window, floatWindow.windowScene != buttonWin.windowScene {
-                // 按钮和浮窗不在同一窗体，移动浮窗
-                showControlCenter()
-                return
-            }
+        if let buttonWin = triggerButton?.window, floatWindow.windowScene != buttonWin.windowScene {
+            // 按钮和浮窗不在同一窗体，移动浮窗
+            showControlCenter()
+            return
         }
         hideControlCenter()
     }
