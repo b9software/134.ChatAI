@@ -142,7 +142,6 @@
 		D59E6E1829EC578100B9E0BB /* Collections+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8A39A251217C900C84CB1 /* Collections+App.swift */; };
 		D5A4F4DD29E81B22007319D6 /* MessageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A4F4DC29E81B22007319D6 /* MessageViews.swift */; };
 		D5B49EC31C4111B600847925 /* MBFixWidthImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EBB1C4111B600847925 /* MBFixWidthImageView.m */; };
-		D5B49F0F1C41133A00847925 /* MBListDateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B49EE61C41133A00847925 /* MBListDateItem.m */; };
 		D5B4C7B229C9D946005D4C3E /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B129C9D946005D4C3E /* SettingVC.swift */; };
 		D5B4C7B429C9D9E3005D4C3E /* GuideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B329C9D9E3005D4C3E /* GuideVC.swift */; };
 		D5B4C7B629C9DA1A005D4C3E /* ConversationListDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B4C7B529C9DA1A005D4C3E /* ConversationListDisplayer.swift */; };
@@ -430,8 +429,6 @@
 		D5A4F4DC29E81B22007319D6 /* MessageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViews.swift; sourceTree = "<group>"; };
 		D5B49EBA1C4111B600847925 /* MBFixWidthImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFixWidthImageView.h; sourceTree = "<group>"; };
 		D5B49EBB1C4111B600847925 /* MBFixWidthImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFixWidthImageView.m; sourceTree = "<group>"; };
-		D5B49EE51C41133A00847925 /* MBListDateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBListDateItem.h; sourceTree = "<group>"; };
-		D5B49EE61C41133A00847925 /* MBListDateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBListDateItem.m; sourceTree = "<group>"; };
 		D5B4C7B129C9D946005D4C3E /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		D5B4C7B329C9D9E3005D4C3E /* GuideVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideVC.swift; sourceTree = "<group>"; };
 		D5B4C7B529C9DA1A005D4C3E /* ConversationListDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListDisplayer.swift; sourceTree = "<group>"; };
@@ -1083,8 +1080,6 @@
 				D5B49EE71C41133A00847925 /* TableView */,
 				D51E92C029DB2DE000922497 /* ListGeneral.swift */,
 				D5031C3B25C04C9200C2849E /* ListStateView.swift */,
-				D5B49EE51C41133A00847925 /* MBListDateItem.h */,
-				D5B49EE61C41133A00847925 /* MBListDateItem.m */,
 				D5B884B5250EEC53001CDBCF /* TagView.swift */,
 			);
 			path = List;
@@ -1754,7 +1749,6 @@
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
 				D5DB4C1F241E27B800832A0A /* MBKeyboardAdjustScrollView.m in Sources */,
 				D5EE523D2043F7B9009148B3 /* MBLayoutButton.m in Sources */,
-				D5B49F0F1C41133A00847925 /* MBListDateItem.m in Sources */,
 				D564D5D31970EE340032FEC3 /* MBModalPresentSegue.m in Sources */,
 				D50B3E6328255A5800D0974E /* MBOptionSwitch.swift in Sources */,
 				D531420829D7CE93004EDCCA /* MBSceneStackView.swift in Sources */,
