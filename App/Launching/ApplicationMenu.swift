@@ -106,6 +106,7 @@ final class StandardActions {
 
     // NSApp
     @IBAction func hide(_ sender: Any?) {}
+    @IBAction func toggleSidebar(_ sender: Any?) {}
     @IBAction func newWindow(_ sender: Any?) {}
     @IBAction func newWindowForTab(_ sender: Any?) {}
 }

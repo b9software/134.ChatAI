@@ -212,6 +212,8 @@ internal enum L10n {
       internal static let integrationRaycastSwitch = L10n.tr("Localizable", "menu.integrationRaycastSwitch", fallback: "Raycast: Copy Quicklinks to Switch Conversations")
       /// Go Back
       internal static let navigationBack = L10n.tr("Localizable", "menu.navigationBack", fallback: "Go Back")
+      /// Sidebar
+      internal static let navigationSidebar = L10n.tr("Localizable", "menu.navigationSidebar", fallback: "Sidebar")
       /// New
       internal static let new = L10n.tr("Localizable", "menu.new", fallback: "New")
       /// Operation
