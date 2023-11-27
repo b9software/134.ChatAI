@@ -44,9 +44,11 @@ class MBTableHeaderFooterView: UIView, ResizeObserver {
     ///
     /// Update height method. It usually updates automatically, so it is not necessary to call it.
     func updateHeight() {
-        if contentView == nil { return }
+        guard let contentView = contentView else {
+            return
+        }
         layoutIfNeeded()
-        height = contentView!.height
+        height = contentView.height
         guard let tableView = self.tableView else {
             AppLog().error("MBTableHeaderFooterView’s superview must be a tableView. Current is \(superview?.description ?? "nil")")
             return

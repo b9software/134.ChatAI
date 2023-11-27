@@ -16,8 +16,6 @@
 #import <RFKeyboard/RFKeyboard.h>
 #import <RFKit/NSDate+RFKit.h>
 #import <RFKit/NSDateFormatter+RFKit.h>
-#import <RFKit/NSFileManager+RFKit.h>
-#import <RFKit/RFRuntime.h>
 #import <RFKit/UINavigationController+RFKit.h>
 #import <RFKit/UIResponder+RFKit.h>
 #import <RFKit/UITableView+RFKit.h>
