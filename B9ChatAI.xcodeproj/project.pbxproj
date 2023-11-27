@@ -67,7 +67,6 @@
 		D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531420529D7C361004EDCCA /* MBCollapsibleView.swift */; };
 		D531420829D7CE93004EDCCA /* MBSceneStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531420729D7CE93004EDCCA /* MBSceneStackView.swift */; };
 		D533C4D625922D1100590FBA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D533C4D425922D1100590FBA /* Types.swift */; };
-		D533C4E6259235E200590FBA /* MBFlexInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D533C4E4259235E200590FBA /* MBFlexInterface.m */; };
 		D533C4F42592370800590FBA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D533C4F32592370800590FBA /* Logger.swift */; };
 		D533C506259242DC00590FBA /* Codable+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D533C505259242DC00590FBA /* Codable+App.swift */; };
 		D534461025924CE700F5FD80 /* UIApplication+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534460E25924CE700F5FD80 /* UIApplication+App.swift */; };
@@ -338,8 +337,6 @@
 		D531420529D7C361004EDCCA /* MBCollapsibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCollapsibleView.swift; sourceTree = "<group>"; };
 		D531420729D7CE93004EDCCA /* MBSceneStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSceneStackView.swift; sourceTree = "<group>"; };
 		D533C4D425922D1100590FBA /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		D533C4E4259235E200590FBA /* MBFlexInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFlexInterface.m; sourceTree = "<group>"; };
-		D533C4E5259235E200590FBA /* MBFlexInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFlexInterface.h; sourceTree = "<group>"; };
 		D533C4F32592370800590FBA /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D533C505259242DC00590FBA /* Codable+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+App.swift"; sourceTree = "<group>"; };
 		D534460E25924CE700F5FD80 /* UIApplication+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+App.swift"; sourceTree = "<group>"; };
@@ -581,20 +578,10 @@
 		D501845D20F8863E009481D4 /* MBDebug */ = {
 			isa = PBXGroup;
 			children = (
-				D501846620F8863E009481D4 /* Components */,
 				D5EEE5A729C74DB0006759DE /* DebugManager.swift */,
 				D5031A1D25BEA95200C2849E /* MBDebugLiveCountChecker.swift */,
 			);
 			path = MBDebug;
-			sourceTree = "<group>";
-		};
-		D501846620F8863E009481D4 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				D533C4E5259235E200590FBA /* MBFlexInterface.h */,
-				D533C4E4259235E200590FBA /* MBFlexInterface.m */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		D50319A025BE33BD00C2849E /* Support */ = {
@@ -1737,7 +1724,6 @@
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
 				D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */,
 				D5B49EC31C4111B600847925 /* MBFixWidthImageView.m in Sources */,
-				D533C4E6259235E200590FBA /* MBFlexInterface.m in Sources */,
 				D5FCB68E23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift in Sources */,
 				D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */,
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
