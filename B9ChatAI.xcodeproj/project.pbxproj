@@ -29,7 +29,6 @@
 		D5031C2E25C044FF00C2849E /* ResizeObservableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5031C2D25C044FF00C2849E /* ResizeObservableView.swift */; };
 		D5031C3C25C04C9200C2849E /* ListStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5031C3B25C04C9200C2849E /* ListStateView.swift */; };
 		D5031C4425C04F8800C2849E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5031C4325C04F8800C2849E /* AlertController.swift */; };
-		D50693D819495D9E0002BFCC /* MBControlGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D50693D719495D9E0002BFCC /* MBControlGroup.m */; };
 		D507BC3929CCA12A001E2298 /* B9RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D507BC3829CCA12A001E2298 /* B9RootViewController.swift */; };
 		D507BC3B29CCAA9F001E2298 /* B9DebugStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D507BC3A29CCAA9F001E2298 /* B9DebugStringConvertible.swift */; };
 		D50940C229DEE44A00D2A0FC /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50940C429DEE44A00D2A0FC /* Conversation.storyboard */; };
@@ -286,8 +285,6 @@
 		D5031C2D25C044FF00C2849E /* ResizeObservableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeObservableView.swift; sourceTree = "<group>"; };
 		D5031C3B25C04C9200C2849E /* ListStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStateView.swift; sourceTree = "<group>"; };
 		D5031C4325C04F8800C2849E /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
-		D50693D619495D9E0002BFCC /* MBControlGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBControlGroup.h; sourceTree = "<group>"; };
-		D50693D719495D9E0002BFCC /* MBControlGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBControlGroup.m; sourceTree = "<group>"; };
 		D507BC3829CCA12A001E2298 /* B9RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9RootViewController.swift; sourceTree = "<group>"; };
 		D507BC3A29CCAA9F001E2298 /* B9DebugStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9DebugStringConvertible.swift; sourceTree = "<group>"; };
 		D50940C329DEE44A00D2A0FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Conversation.storyboard; sourceTree = "<group>"; };
@@ -1305,8 +1302,6 @@
 				D52A04E420F85F2600F535ED /* Button.swift */,
 				D584C77A26EEC970004E434B /* GradientProgressViews.swift */,
 				D58C46DD29F1338200BEFAE8 /* MBButton.swift */,
-				D50693D619495D9E0002BFCC /* MBControlGroup.h */,
-				D50693D719495D9E0002BFCC /* MBControlGroup.m */,
 				D5EE52292043F7B9009148B3 /* MBLayoutButton.h */,
 				D5EE52312043F7B9009148B3 /* MBLayoutButton.m */,
 				D50B3E6228255A5800D0974E /* MBOptionSwitch.swift */,
@@ -1749,7 +1744,6 @@
 				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D53141FF29D6E28A004EDCCA /* MBCellStackView.swift in Sources */,
 				D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */,
-				D50693D819495D9E0002BFCC /* MBControlGroup.m in Sources */,
 				D5031A1E25BEA95200C2849E /* MBDebugLiveCountChecker.swift in Sources */,
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
 				D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */,
