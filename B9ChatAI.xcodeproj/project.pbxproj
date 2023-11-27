@@ -60,7 +60,6 @@
 		D52EADF02043BA3D007219E0 /* ShortCuts.m in Sources */ = {isa = PBXBuildFile; fileRef = D52EADEE2043BA3D007219E0 /* ShortCuts.m */; };
 		D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53141FA29D6DAAE004EDCCA /* MBDesignView.swift */; };
 		D53141FD29D6DB14004EDCCA /* MBStateMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53141FC29D6DB14004EDCCA /* MBStateMachineView.swift */; };
-		D53141FF29D6E28A004EDCCA /* MBCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53141FE29D6E28A004EDCCA /* MBCellStackView.swift */; };
 		D531420229D70327004EDCCA /* OAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531420129D70327004EDCCA /* OAModel.swift */; };
 		D531420429D72422004EDCCA /* OAEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531420329D72422004EDCCA /* OAEngine.swift */; };
 		D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531420529D7C361004EDCCA /* MBCollapsibleView.swift */; };
@@ -327,7 +326,6 @@
 		D52EADF42043C0EB007219E0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D53141FA29D6DAAE004EDCCA /* MBDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBDesignView.swift; sourceTree = "<group>"; };
 		D53141FC29D6DB14004EDCCA /* MBStateMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBStateMachineView.swift; sourceTree = "<group>"; };
-		D53141FE29D6E28A004EDCCA /* MBCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCellStackView.swift; sourceTree = "<group>"; };
 		D531420129D70327004EDCCA /* OAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAModel.swift; sourceTree = "<group>"; };
 		D531420329D72422004EDCCA /* OAEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAEngine.swift; sourceTree = "<group>"; };
 		D531420529D7C361004EDCCA /* MBCollapsibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCollapsibleView.swift; sourceTree = "<group>"; };
@@ -1033,7 +1031,6 @@
 				D5031C2525C0445500C2849E /* MBAdaptiveStackView.swift */,
 				D5E8057E226F403C00901C41 /* MBBottomLayoutView.h */,
 				D5E8057F226F403D00901C41 /* MBBottomLayoutView.m */,
-				D53141FE29D6E28A004EDCCA /* MBCellStackView.swift */,
 				D531420529D7C361004EDCCA /* MBCollapsibleView.swift */,
 				D53141FA29D6DAAE004EDCCA /* MBDesignView.swift */,
 				D531420729D7CE93004EDCCA /* MBSceneStackView.swift */,
@@ -1707,7 +1704,6 @@
 				D5C3CBF3217EEEA20097CCD9 /* MBBadgeLabel.m in Sources */,
 				D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */,
 				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
-				D53141FF29D6E28A004EDCCA /* MBCellStackView.swift in Sources */,
 				D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */,
 				D5031A1E25BEA95200C2849E /* MBDebugLiveCountChecker.swift in Sources */,
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
