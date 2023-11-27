@@ -8,12 +8,8 @@ PODS:
     - RFInitializing
     - RFKit/Category/UIResponder
     - RFKit/RFGeometry
-  - RFAlpha/RFBlockSelectorPerform (0.7.2)
   - RFAlpha/RFButton (0.7.2):
     - RFInitializing (>= 1.1)
-    - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFCallbackControl (0.7.2):
-    - RFKit/Category/NSArray
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFContainerView (0.7.2):
     - RFInitializing (>= 1.1)
@@ -21,13 +17,6 @@ PODS:
     - RFKit/Category/UIViewController
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFDrawImage (0.7.2):
-    - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFImageCropper (0.7.2):
-    - RFInitializing (>= 1.1)
-    - RFKit/Category/UIColor
-    - RFKit/Category/UIImage
-    - RFKit/Category/UIView
-    - "RFKit/Category/UIView+RFAnimate"
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFKVOWrapper (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
@@ -37,8 +26,6 @@ PODS:
     - RFKit/Category/UIView
     - "RFKit/Category/UIView+RFAnimate"
     - RFKit/Runtime (>= 1.7.1)
-  - RFAlpha/RFRefreshControl (0.7.2):
-    - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFSwizzle (0.7.2):
     - RFKit/Runtime (>= 1.7.1)
   - RFAlpha/RFTableViewPullToFetchPlugin (0.7.2):
@@ -46,7 +33,6 @@ PODS:
     - RFDelegateChain/Chain
     - RFKit/Category/UIView
     - "RFKit/Category/UIView+RFAnimate"
-  - RFAlpha/RFTimer (0.7.2)
   - RFAlpha/RFTransitioning/Core (0.7.2):
     - RFInitializing (>= 1.1)
     - RFKit/Runtime (>= 1.7.1)
@@ -128,8 +114,6 @@ PODS:
   - RFKit/Category/UIResponder (2.5.1):
     - RFKit/Foundation
     - RFKit/Runtime
-  - "RFKit/Category/UIScrollView+RFScrolling (2.5.1)":
-    - RFKit/Foundation
   - RFKit/Category/UIStoryboard (2.5.1):
     - RFKit/Foundation
   - RFKit/Category/UITableView (2.5.1):
@@ -162,16 +146,11 @@ PODS:
 
 DEPENDENCIES:
   - MBAppKit/Input (from `Frameworks/MBAppKit`)
-  - RFAlpha/RFBlockSelectorPerform
   - RFAlpha/RFButton
-  - RFAlpha/RFCallbackControl
   - RFAlpha/RFContainerView
   - RFAlpha/RFDrawImage
-  - RFAlpha/RFImageCropper
   - RFAlpha/RFNavigationController
-  - RFAlpha/RFRefreshControl
   - RFAlpha/RFTableViewPullToFetchPlugin
-  - RFAlpha/RFTimer
   - RFAlpha/RFViewApperance/RFLine
   - RFAlpha/RFWindow
   - RFDelegateChain/UITextFieldDelegate
@@ -180,7 +159,6 @@ DEPENDENCIES:
   - RFKit/Category/NSDate
   - RFKit/Category/NSDateFormatter
   - RFKit/Category/NSFileManager
-  - "RFKit/Category/UIScrollView+RFScrolling"
   - RFSegue/Async
 
 SPEC REPOS:
@@ -205,6 +183,6 @@ SPEC CHECKSUMS:
   RFKit: 046ed8a61c874fbb93dce7a694cfc059e8bf5d7a
   RFSegue: 32840d5876e32f192b22f41160ebfcf466a0fa3b
 
-PODFILE CHECKSUM: a9ec546719669c9ae115a8c741388d054d621e6f
+PODFILE CHECKSUM: 190320c134483c572a443efccc01b318d3ad4045
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3
