@@ -161,7 +161,6 @@
 		D5D006D229D273F50063B366 /* EngineManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D006D129D273F50063B366 /* EngineManageVC.swift */; };
 		D5D641452A0E18A200921E98 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D641442A0E18A200921E98 /* NumberTextField.swift */; };
 		D5D7BCD829D4611100AF6DF5 /* B9Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */; };
-		D5DB4C1F241E27B800832A0A /* MBKeyboardAdjustScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DB4C1D241E27B700832A0A /* MBKeyboardAdjustScrollView.m */; };
 		D5DB4C22241E39EA00832A0A /* UIKit+DynamicType.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DB4C21241E39EA00832A0A /* UIKit+DynamicType.m */; };
 		D5DC60C124CA84BC00FBB147 /* ApplicationCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55959CD20AB95640019D733 /* ApplicationCondition.swift */; };
 		D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E8057F226F403D00901C41 /* MBBottomLayoutView.m */; };
@@ -171,7 +170,6 @@
 		D5E8FA7D29CF240500C3D753 /* Date+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FA7C29CF240500C3D753 /* Date+Test.swift */; };
 		D5E8FA7F29CF3BD300C3D753 /* B9Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FA7E29CF3BD300C3D753 /* B9Crypto.swift */; };
 		D5EE51812043F5E6009148B3 /* MBTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE51692043F5E5009148B3 /* MBTextView.m */; };
-		D5EE51EC2043F613009148B3 /* MBScrollViewOffsetObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE51B12043F612009148B3 /* MBScrollViewOffsetObserver.m */; };
 		D5EE51F62043F613009148B3 /* MBVauleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE51C82043F613009148B3 /* MBVauleLabel.m */; };
 		D5EE520D2043F61D009148B3 /* UIImageView+MBRenderingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE52082043F61C009148B3 /* UIImageView+MBRenderingMode.m */; };
 		D5EE523D2043F7B9009148B3 /* MBLayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE52312043F7B9009148B3 /* MBLayoutButton.m */; };
@@ -446,8 +444,6 @@
 		D5D4CC6E2043A6ED002FE9F0 /* OCBridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCBridging-Header.h"; sourceTree = "<group>"; };
 		D5D641442A0E18A200921E98 /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9Keychain.swift; sourceTree = "<group>"; };
-		D5DB4C1D241E27B700832A0A /* MBKeyboardAdjustScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBKeyboardAdjustScrollView.m; sourceTree = "<group>"; };
-		D5DB4C1E241E27B700832A0A /* MBKeyboardAdjustScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBKeyboardAdjustScrollView.h; sourceTree = "<group>"; };
 		D5DB4C20241E39EA00832A0A /* UIKit+DynamicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+DynamicType.h"; sourceTree = "<group>"; };
 		D5DB4C21241E39EA00832A0A /* UIKit+DynamicType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIKit+DynamicType.m"; sourceTree = "<group>"; };
 		D5E8057E226F403C00901C41 /* MBBottomLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBottomLayoutView.h; sourceTree = "<group>"; };
@@ -462,8 +458,6 @@
 		D5EE51382043E0DF009148B3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		D5EE51632043F5E5009148B3 /* MBTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTextView.h; sourceTree = "<group>"; };
 		D5EE51692043F5E5009148B3 /* MBTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTextView.m; sourceTree = "<group>"; };
-		D5EE51AE2043F612009148B3 /* MBScrollViewOffsetObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBScrollViewOffsetObserver.h; sourceTree = "<group>"; };
-		D5EE51B12043F612009148B3 /* MBScrollViewOffsetObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBScrollViewOffsetObserver.m; sourceTree = "<group>"; };
 		D5EE51C82043F613009148B3 /* MBVauleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBVauleLabel.m; sourceTree = "<group>"; };
 		D5EE51CC2043F613009148B3 /* MBVauleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBVauleLabel.h; sourceTree = "<group>"; };
 		D5EE51D12043F613009148B3 /* UICollectionView+IBInspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+IBInspectable.h"; sourceTree = "<group>"; };
@@ -898,7 +892,6 @@
 				D5B49EB61C4111B600847925 /* Layout */,
 				D5B49EC71C41133900847925 /* List */,
 				D5EE519C2043F612009148B3 /* Others */,
-				D5EE51AB2043F612009148B3 /* ScrollView */,
 				D5B1906B2404AFBE0076CD61 /* Search */,
 				D564D5D01970EE2C0032FEC3 /* Segue */,
 				D5EE51C72043F613009148B3 /* Text */,
@@ -1196,17 +1189,6 @@
 				D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */,
 			);
 			path = Others;
-			sourceTree = "<group>";
-		};
-		D5EE51AB2043F612009148B3 /* ScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				D5DB4C1E241E27B700832A0A /* MBKeyboardAdjustScrollView.h */,
-				D5DB4C1D241E27B700832A0A /* MBKeyboardAdjustScrollView.m */,
-				D5EE51AE2043F612009148B3 /* MBScrollViewOffsetObserver.h */,
-				D5EE51B12043F612009148B3 /* MBScrollViewOffsetObserver.m */,
-			);
-			path = ScrollView;
 			sourceTree = "<group>";
 		};
 		D5EE51C72043F613009148B3 /* Text */ = {
@@ -1705,12 +1687,10 @@
 				D5FCB68E23FC108B001DE669 /* MBFormFieldVerifyControl+App.swift in Sources */,
 				D5F9F486208DC26600427201 /* MBFormFieldVerifyControl.m in Sources */,
 				D5BE29692509F39B00A9AA2F /* MBHightlightTintImageView.swift in Sources */,
-				D5DB4C1F241E27B800832A0A /* MBKeyboardAdjustScrollView.m in Sources */,
 				D5EE523D2043F7B9009148B3 /* MBLayoutButton.m in Sources */,
 				D564D5D31970EE340032FEC3 /* MBModalPresentSegue.m in Sources */,
 				D50B3E6328255A5800D0974E /* MBOptionSwitch.swift in Sources */,
 				D531420829D7CE93004EDCCA /* MBSceneStackView.swift in Sources */,
-				D5EE51EC2043F613009148B3 /* MBScrollViewOffsetObserver.m in Sources */,
 				D53141FD29D6DB14004EDCCA /* MBStateMachineView.swift in Sources */,
 				D588308F20CACB33002030C4 /* MBSwift.swift in Sources */,
 				D5FA7D5D29D86A9D0011DA4E /* MBTableHeaderFooterView.swift in Sources */,
