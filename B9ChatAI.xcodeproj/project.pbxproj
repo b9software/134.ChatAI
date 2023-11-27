@@ -101,7 +101,6 @@
 		D57CAD1929E146E500F4FF60 /* CDMessage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD1829E146E500F4FF60 /* CDMessage+.swift */; };
 		D57CAD1B29E1641200F4FF60 /* MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD1A29E1641200F4FF60 /* MessageDataSource.swift */; };
 		D57CAD1D29E1922000F4FF60 /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD1C29E1922000F4FF60 /* MessageListView.swift */; };
-		D57CAD1F29E28B6400F4FF60 /* BottomStickyScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD1E29E28B6400F4FF60 /* BottomStickyScrollview.swift */; };
 		D57CAD2129E2AA2600F4FF60 /* SelectableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD2029E2AA2600F4FF60 /* SelectableLabel.swift */; };
 		D57CAD2829E2D97D00F4FF60 /* MessageSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CAD2729E2D97D00F4FF60 /* MessageSender.swift */; };
 		D57D784E29C8B28C003099D6 /* B9NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D784D29C8B28C003099D6 /* B9NavigationController.swift */; };
@@ -377,7 +376,6 @@
 		D57CAD1829E146E500F4FF60 /* CDMessage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMessage+.swift"; sourceTree = "<group>"; };
 		D57CAD1A29E1641200F4FF60 /* MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataSource.swift; sourceTree = "<group>"; };
 		D57CAD1C29E1922000F4FF60 /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
-		D57CAD1E29E28B6400F4FF60 /* BottomStickyScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomStickyScrollview.swift; sourceTree = "<group>"; };
 		D57CAD2029E2AA2600F4FF60 /* SelectableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableLabel.swift; sourceTree = "<group>"; };
 		D57CAD2729E2D97D00F4FF60 /* MessageSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSender.swift; sourceTree = "<group>"; };
 		D57CAD2B29E2F5C200F4FF60 /* UIView+Focus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Focus.h"; sourceTree = "<group>"; };
@@ -1027,7 +1025,6 @@
 			isa = PBXGroup;
 			children = (
 				D5B49EB71C4111B600847925 /* Auto Layout Fix */,
-				D57CAD1E29E28B6400F4FF60 /* BottomStickyScrollview.swift */,
 				D5031C2525C0445500C2849E /* MBAdaptiveStackView.swift */,
 				D5E8057E226F403C00901C41 /* MBBottomLayoutView.h */,
 				D5E8057F226F403D00901C41 /* MBBottomLayoutView.m */,
@@ -1650,7 +1647,6 @@
 				D57D784E29C8B28C003099D6 /* B9NavigationController.swift in Sources */,
 				D507BC3929CCA12A001E2298 /* B9RootViewController.swift in Sources */,
 				D544CBDD29FA3A0A00A4F6F6 /* B9WindowSceneDelegate.swift in Sources */,
-				D57CAD1F29E28B6400F4FF60 /* BottomStickyScrollview.swift in Sources */,
 				D587D48829E967FF0085CFCE /* BoxViews.swift in Sources */,
 				D52A04E520F85F2600F535ED /* Button.swift in Sources */,
 				D5E8FA6729CEEDF900C3D753 /* CD.xcdatamodeld in Sources */,
