@@ -169,7 +169,6 @@
 		D5E8FA7929CF08B200C3D753 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FA7829CF08B200C3D753 /* CoreDataTests.swift */; };
 		D5E8FA7D29CF240500C3D753 /* Date+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FA7C29CF240500C3D753 /* Date+Test.swift */; };
 		D5E8FA7F29CF3BD300C3D753 /* B9Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8FA7E29CF3BD300C3D753 /* B9Crypto.swift */; };
-		D5EE51812043F5E6009148B3 /* MBTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE51692043F5E5009148B3 /* MBTextView.m */; };
 		D5EE51F62043F613009148B3 /* MBVauleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE51C82043F613009148B3 /* MBVauleLabel.m */; };
 		D5EE520D2043F61D009148B3 /* UIImageView+MBRenderingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE52082043F61C009148B3 /* UIImageView+MBRenderingMode.m */; };
 		D5EE523D2043F7B9009148B3 /* MBLayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EE52312043F7B9009148B3 /* MBLayoutButton.m */; };
@@ -456,8 +455,6 @@
 		D5E8FA7E29CF3BD300C3D753 /* B9Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9Crypto.swift; sourceTree = "<group>"; };
 		D5EE51172043DAA1009148B3 /* UIKit+App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+App.h"; sourceTree = "<group>"; };
 		D5EE51382043E0DF009148B3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		D5EE51632043F5E5009148B3 /* MBTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTextView.h; sourceTree = "<group>"; };
-		D5EE51692043F5E5009148B3 /* MBTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTextView.m; sourceTree = "<group>"; };
 		D5EE51C82043F613009148B3 /* MBVauleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBVauleLabel.m; sourceTree = "<group>"; };
 		D5EE51CC2043F613009148B3 /* MBVauleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBVauleLabel.h; sourceTree = "<group>"; };
 		D5EE51D12043F613009148B3 /* UICollectionView+IBInspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+IBInspectable.h"; sourceTree = "<group>"; };
@@ -1200,8 +1197,6 @@
 				D5C3CBF2217EEEA20097CCD9 /* MBBadgeLabel.m */,
 				D5C3CBF7217EF0A10097CCD9 /* MBTextCountLabel.h */,
 				D5C3CBF8217EF0A10097CCD9 /* MBTextCountLabel.m */,
-				D5EE51632043F5E5009148B3 /* MBTextView.h */,
-				D5EE51692043F5E5009148B3 /* MBTextView.m */,
 				D5EE51CC2043F613009148B3 /* MBVauleLabel.h */,
 				D5EE51C82043F613009148B3 /* MBVauleLabel.m */,
 				D57CAD2029E2AA2600F4FF60 /* SelectableLabel.swift */,
@@ -1696,7 +1691,6 @@
 				D5FA7D5D29D86A9D0011DA4E /* MBTableHeaderFooterView.swift in Sources */,
 				D5FA7D5F29D8716A0011DA4E /* MBTableViewArrayDataSource.swift in Sources */,
 				D5C3CBF9217EF0A10097CCD9 /* MBTextCountLabel.m in Sources */,
-				D5EE51812043F5E6009148B3 /* MBTextView.m in Sources */,
 				D5EE51F62043F613009148B3 /* MBVauleLabel.m in Sources */,
 				D582472B29E0FD80008D8A26 /* Message.swift in Sources */,
 				D52112AA2A32B9CC00599DDB /* MessageCells.swift in Sources */,
