@@ -47,11 +47,6 @@ platform :ios do
             )
             get_provisioning_profile(
                 development: true,
-                app_identifier: "b9software.chat-ai"
-            )
-            get_provisioning_profile(
-                development: true,
-                app_identifier: "b9software.macBridge"
             )
         end
         scan(
