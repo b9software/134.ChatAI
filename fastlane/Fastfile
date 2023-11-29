@@ -41,8 +41,10 @@ platform :ios do
     lane :test do
         if is_ci
             app_store_connect_api_key
-            spaceship_stats
 
+            get_certificates(
+                development: true,
+            )
             get_provisioning_profile(
                 development: true,
                 app_identifier: "b9software.chat-ai"
@@ -50,9 +52,6 @@ platform :ios do
             get_provisioning_profile(
                 development: true,
                 app_identifier: "b9software.macBridge"
-            )
-            get_certificates(
-                development: true,
             )
         end
         scan(
@@ -120,10 +119,12 @@ platform :ios do
         # )
     # end
 
-    # error do |lane, exception|
+    error do |lane, exception|
+        spaceship_stats
+
         # puts "如果打包 OK，编译出来的包可以在项目根目录中找到"
         # puts "后续上传步骤可以再手工执行：pilot upload"
         # notification(subtitle: "⚠️ 出错了", message: exception.message, sound: "default")
         # say "Error, error"
-    # end
+    end
 end
