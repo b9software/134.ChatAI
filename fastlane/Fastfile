@@ -45,12 +45,11 @@ platform :ios do
 
             get_provisioning_profile(
                 development: true,
-                readonly: true
+                app_identifier: "b9software.chat-ai"
             )
             get_provisioning_profile(
                 development: true,
-                app_identifier: "b9software.macBridge",
-                readonly: true
+                app_identifier: "b9software.macBridge"
             )
             get_certificates(
                 development: true,
