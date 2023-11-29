@@ -28,7 +28,7 @@ class NSToolbarController {
         func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
             if let ids = fixItems { return ids }
             var ids: [NSToolbarItem.Identifier] = [
-                .toggleSidebar, .back, .flexibleSpace
+                .sidebar, .back, .flexibleSpace
             ]
             ids.append(contentsOf: additionalItemsID)
             return ids
@@ -37,7 +37,7 @@ class NSToolbarController {
         func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
             if let ids = fixItems { return ids }
             var ids: [NSToolbarItem.Identifier] = [
-                .toggleSidebar, .back, // .test, .test2,
+                .sidebar, .back, // .test, .test2,
                 .flexibleSpace, .space
             ]
             ids.append(contentsOf: additionalItemsID)
@@ -46,11 +46,12 @@ class NSToolbarController {
 
         func toolbarImmovableItemIdentifiers(_ toolbar: NSToolbar) -> Set<NSToolbarItem.Identifier> {
             if let ids = fixItems { return Set(ids) }
-            return [.toggleSidebar, .back]
+            return [.sidebar, .back]
         }
 
         func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
             switch itemIdentifier {
+            case .sidebar: return .toggleSidebar()
             case .back: return .back()
             case .floatCollapse: return .floatCollapse()
             case .floatExpand: return .floatExpand()
@@ -119,6 +120,14 @@ class NSToolbarController {
 }
 
 extension NSToolbarItem {
+    static func toggleSidebar() -> NSToolbarItem {
+        let button = UIBarButtonItem(image: UIImage(systemName: "sidebar.leading"), style: .plain, target: nil, action: #selector(StandardActions.toggleSidebar))
+        let item = NSToolbarItem(itemIdentifier: .sidebar, barButtonItem: button)
+        item.label = L.Menu.navigationSidebar
+        item.isNavigational = true
+        return item
+    }
+
     static func back() -> NSToolbarItem {
         let button = UIBarButtonItem(image: Asset.GeneralUI.Navigation.navBack.image, style: .plain, target: nil, action: #selector(StandardActions.goBack))
         let item = NSToolbarItem(itemIdentifier: .back, barButtonItem: button)
@@ -170,6 +179,7 @@ extension NSToolbarItem {
 }
 
 extension NSToolbarItem.Identifier {
+    static let sidebar = NSToolbarItem.Identifier("app.sidebar")
     static let back = NSToolbarItem.Identifier("app.back")
     static let chatSetting = NSToolbarItem.Identifier("app.chat.setting")
     static let chatIntegration = NSToolbarItem.Identifier("app.chat.integration")

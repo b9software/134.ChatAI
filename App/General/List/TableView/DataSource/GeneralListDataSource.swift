@@ -8,7 +8,7 @@
  https://opensource.org/licenses/MIT
  */
 
-import HasItem
+import AppFramework
 import UIKit
 
 /**

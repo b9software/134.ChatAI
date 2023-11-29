@@ -9,7 +9,7 @@
  */
 
 import Foundation
-import HasItem
+import AppFramework
 
 /// 一般列表对象
 protocol ListItem {

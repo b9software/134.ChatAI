@@ -6,7 +6,7 @@
 //
 
 import CoreData
-import HasItem
+import AppFramework
 import UIKit
 
 /**

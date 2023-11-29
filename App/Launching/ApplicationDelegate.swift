@@ -69,9 +69,6 @@ class ApplicationDelegate: MBApplicationDelegate {
 
     private func setupDebugger() {
         Debugger.globalActionItems = [
-            DebugActionItem("FLEX") {
-                MBFlexInterface.showFlexExplorer()
-            }
         ]
 //        Debugger.vauleInspector = { value in
 //            if let vc = MBFlexInterface.explorerViewController(for: value) {

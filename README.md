@@ -2,20 +2,6 @@
 
 仓库地址 https://github.com/b9software/134-ChatClient
 
-## 需求
-
-iOS 13+；Xcode 14.1+；macOS 13+。
-
-依赖：
-
-```sh
-brew install cocoapods
-```
-
-## URL Scheme
-
-[打开应用](b9software.chat-ai://)
-
 ## 资料
 
 * https://github.com/mhdhejazi/Catalyst-AppKit mac 插件
@@ -42,6 +28,7 @@ brew install cocoapods
 
 引擎
 
+* https://www.volcengine.com/docs/82379 字节方舟
 * https://chat.lmsys.org
 * https://huggingface.co/chat/
 * https://open-assistant.io/chat/
@@ -55,6 +42,7 @@ brew install cocoapods
 * https://github.com/bhaskatripathi/pdfGPT
 * https://chat.okisdev.com 网页端看着不错
 * https://elephas.app 客户端
+* https://github.com/Bin-Huang/chatbox ts 跨平台
 
 Prompt
 

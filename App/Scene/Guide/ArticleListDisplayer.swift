@@ -5,7 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import HasItem
+import AppFramework
 import UIKit
 
 struct Article {

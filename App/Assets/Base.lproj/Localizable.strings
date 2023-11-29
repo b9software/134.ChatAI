@@ -11,14 +11,20 @@
 "menu.new.window" = "Window";
 "menu.settingApp" = "Application Settings";
 "menu.settingChat" = "Conversation Settings";
+
+// Operations
 "menu.operation" = "Operation";
 "menu.navigationBack" = "Go Back";
 "menu.continueLastTopic" = "Continue Last Topic";
+
+// Window
 "menu.focusInput" = "Focus on Input";
 "menu.floatMode" = "Float Mode";
 "menu.floatModeExpand" = "Expand Float Window";
 "menu.floatModeCollapse" = "Collapse Float Window";
 "menu.floatModeExit" = "Exit Float Mode";
+
+// Help
 "menu.help" = "Help";
 "menu.homePage" = "Project on GitHub";
 "menu.userManual" = "Online User Manual";
@@ -26,6 +32,7 @@
 
 // MARK: Sidebar Menu
 
+"menu.navigationSidebar" = "Sidebar";
 // Sidebar Archive
 "menu.archive" = "Archive";
 "menu.delete" = "Delete";

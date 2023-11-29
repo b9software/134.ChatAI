@@ -7,7 +7,7 @@
 //
 
 import B9Action
-import HasItem
+import AppFramework
 import UIKit
 
 class MessageCellSizeView: UIView {

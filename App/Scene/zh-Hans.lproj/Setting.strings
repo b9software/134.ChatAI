@@ -70,6 +70,15 @@
 /* Class = "UILabel"; text = "Behaviours"; ObjectID = "setting-behaviour-section"; */
 "setting-behaviour-section.text" = "行为调整";
 
+/* Class = "UICommand"; title = "Create Time"; ObjectID = "setting-conversation-order-create"; */
+"setting-conversation-order-create.title" = "按创建时间";
+
+/* Class = "UICommand"; title = "Last Message"; ObjectID = "setting-conversation-order-message"; */
+"setting-conversation-order-message.title" = "按最近消息";
+
+/* Class = "UILabel"; text = "Conversation List Order"; ObjectID = "setting-conversation-order-title"; */
+"setting-conversation-order-title.text" = "会话列表排序";
+
 /* Class = "UIButton"; configuration.title = "Add new"; ObjectID = "setting-engine-add-button"; */
 "setting-engine-add-button.configuration.title" = "添加新引擎";
 

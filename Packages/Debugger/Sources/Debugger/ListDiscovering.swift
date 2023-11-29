@@ -2,7 +2,7 @@
  ListDiscovering.swift
  Debugger
 
- Copyright © 2022 BB9z.
+ Copyright © 2022-2023 BB9z.
  https://github.com/BB9z/iOS-Project-Template
 
  The MIT License
