@@ -40,6 +40,10 @@ jobs:
             echo "Podfile unchanged, skip pod install."
           fi
 
-      - name: Build
+      - name: Test
         run: |
-          xcodebuild -workspace "B9ChatAI.xcworkspace" -scheme "App" -destination 'platform=macOS,arch=x86_64'
+          fastlane test
+        env:
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.XC_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.XC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.XC_KEY_PRIVATE }}
