@@ -47,6 +47,11 @@ platform :ios do
                 development: true,
                 readonly: true
             )
+            get_provisioning_profile(
+                development: true,
+                app_identifier: "b9software.macBridge",
+                readonly: true
+            )
             get_certificates(
                 development: true,
             )
