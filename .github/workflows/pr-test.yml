@@ -1,16 +1,14 @@
-name: CI
+name: PR
 
 on:
   pull_request:
-    branches-ignore:
-      - demo
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: macos-13
 
     steps:
@@ -40,7 +38,7 @@ jobs:
             echo "Podfile unchanged, skip pod install."
           fi
 
-      - name: Test
+      - name: Run Tests
         run: |
           fastlane test
         env:

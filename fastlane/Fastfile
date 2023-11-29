@@ -41,6 +41,7 @@ platform :ios do
     lane :test do
         if is_ci
             app_store_connect_api_key
+            sync_code_signing
         end
         scan(
             scheme: "App",
