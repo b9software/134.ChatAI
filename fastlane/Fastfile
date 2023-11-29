@@ -41,12 +41,14 @@ platform :ios do
     lane :test do
         if is_ci
             app_store_connect_api_key
-            get_certificates(
-                development: true,
-            )
+            spaceship_stats
+
             get_provisioning_profile(
                 development: true,
                 readonly: true
+            )
+            get_certificates(
+                development: true,
             )
         end
         scan(
@@ -106,18 +108,18 @@ platform :ios do
         clean_build_artifacts
     end
 
-    after_all do |lane|
+    # after_all do |lane|
         # This block is called, only if the executed lane was successful
 
         # slack(
         #   message: "Successfully deployed new App Update."
         # )
-    end
+    # end
 
-    error do |lane, exception|
-        puts "如果打包 OK，编译出来的包可以在项目根目录中找到"
-        puts "后续上传步骤可以再手工执行：pilot upload"
-        notification(subtitle: "⚠️ 出错了", message: exception.message, sound: "default")
-        say "Error, error"
-    end
+    # error do |lane, exception|
+        # puts "如果打包 OK，编译出来的包可以在项目根目录中找到"
+        # puts "后续上传步骤可以再手工执行：pilot upload"
+        # notification(subtitle: "⚠️ 出错了", message: exception.message, sound: "default")
+        # say "Error, error"
+    # end
 end
