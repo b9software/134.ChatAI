@@ -45,3 +45,5 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.XC_KEY_ID }}
           APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.XC_ISSUER_ID }}
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.XC_KEY_PRIVATE }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.FASTLANE_MATCH_GIT_AUTH }}
+          MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASS }}
