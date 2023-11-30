@@ -41,13 +41,7 @@ platform :ios do
     lane :test do
         if is_ci
             app_store_connect_api_key
-
-            get_certificates(
-                development: true,
-            )
-            get_provisioning_profile(
-                development: true,
-            )
+            match
         end
         scan(
             scheme: "App",
