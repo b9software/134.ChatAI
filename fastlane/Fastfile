@@ -41,7 +41,9 @@ platform :ios do
     lane :test do
         if is_ci
             app_store_connect_api_key
-            match
+            match(
+                platform: "catalyst",
+            )
         end
         scan(
             scheme: "App",
