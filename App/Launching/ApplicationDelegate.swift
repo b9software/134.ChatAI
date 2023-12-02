@@ -3,6 +3,7 @@
 //  App
 //
 
+import AppFramework
 import B9Action
 import B9Condition
 import Debugger
@@ -40,6 +41,11 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        #if DEBUG
+        MBAssertSetHandler { message, file, line in
+            assertionFailure(message, file: file, line: line)
+        }
+        #endif
         Current.defualts.applicationLastLaunchTime = Date()
         _ = MBApp.status()
         _ = Current.database

@@ -1,16 +1,14 @@
-name: CI
+name: PR
 
 on:
   pull_request:
-    branches-ignore:
-      - demo
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: macos-13
 
     steps:
@@ -40,6 +38,13 @@ jobs:
             echo "Podfile unchanged, skip pod install."
           fi
 
-      - name: Build
+      - name: Run Tests
         run: |
-          xcodebuild -workspace "B9ChatAI.xcworkspace" -scheme "App" -destination 'platform=macOS,arch=x86_64'
+          fastlane test
+        env:
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.XC_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.XC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.XC_KEY_PRIVATE }}
+          APP_STORE_CONNECT_API_KEY_IS_KEY_CONTENT_BASE64: true
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.FASTLANE_MATCH_GIT_AUTH }}
+          MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASS }}

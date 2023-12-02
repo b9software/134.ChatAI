@@ -8,7 +8,7 @@
 
 import AppIntents
 
-@available(macCatalyst 16.0, *)
+@available(macCatalyst 16.0, iOS 16.0, *)
 struct ITConversation: AppEntity, Identifiable {
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Conversation"
 
@@ -27,7 +27,7 @@ struct ITConversation: AppEntity, Identifiable {
     }
 }
 
-@available(macCatalyst 16.0, *)
+@available(macCatalyst 16.0, iOS 16.0, *)
 // 添加 EntityStringQuery 支持
 struct ITConversationQuery: EntityQuery {
     func entities(for identifiers: [StringID]) async throws -> [ITConversation] {

@@ -89,7 +89,6 @@
 		D56B65B42B138EDD0023C82A /* B9Action in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65B32B138EDD0023C82A /* B9Action */; };
 		D56B65B62B138EDD0023C82A /* B9AssociatedObject in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65B52B138EDD0023C82A /* B9AssociatedObject */; };
 		D56B65B82B138EDD0023C82A /* B9Condition in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65B72B138EDD0023C82A /* B9Condition */; };
-		D56B65BA2B138EDD0023C82A /* B9Debug in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65B92B138EDD0023C82A /* B9Debug */; };
 		D56B65BC2B138EDD0023C82A /* B9Foundation in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65BB2B138EDD0023C82A /* B9Foundation */; };
 		D56B65BE2B138EDD0023C82A /* B9MulticastDelegate in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65BD2B138EDD0023C82A /* B9MulticastDelegate */; };
 		D56B65C02B138EDD0023C82A /* Debugger in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65BF2B138EDD0023C82A /* Debugger */; };
@@ -361,7 +360,6 @@
 		D56B65AD2B138EBB0023C82A /* MulticastDelegate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MulticastDelegate; sourceTree = "<group>"; };
 		D56B65AE2B138EBB0023C82A /* BuildSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildSystem; sourceTree = "<group>"; };
 		D56B65AF2B138EBB0023C82A /* Condition */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Condition; sourceTree = "<group>"; };
-		D56B65B02B138EBB0023C82A /* Debug */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Debug; sourceTree = "<group>"; };
 		D5740B4924985E92001CBCB2 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5740B4C2498869D001CBCB2 /* UIAnyGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnyGestureRecognizer.h; sourceTree = "<group>"; };
 		D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnyGestureRecognizer.m; sourceTree = "<group>"; };
@@ -496,7 +494,6 @@
 				D56B65B42B138EDD0023C82A /* B9Action in Frameworks */,
 				D56B65B62B138EDD0023C82A /* B9AssociatedObject in Frameworks */,
 				D56B65B82B138EDD0023C82A /* B9Condition in Frameworks */,
-				D56B65BA2B138EDD0023C82A /* B9Debug in Frameworks */,
 				D56B65BC2B138EDD0023C82A /* B9Foundation in Frameworks */,
 				D56B65BE2B138EDD0023C82A /* B9MulticastDelegate in Frameworks */,
 				D56B65C02B138EDD0023C82A /* Debugger in Frameworks */,
@@ -1266,7 +1263,6 @@
 				D56B65A12B138EBB0023C82A /* B9Foundation */,
 				D56B65AE2B138EBB0023C82A /* BuildSystem */,
 				D56B65AF2B138EBB0023C82A /* Condition */,
-				D56B65B02B138EBB0023C82A /* Debug */,
 				D56B65AC2B138EBB0023C82A /* Debugger */,
 				D56B659F2B138EBB0023C82A /* InterfaceApp */,
 				D5EEF2CB29DC563400F3CF52 /* macBridge */,
@@ -1315,7 +1311,6 @@
 				D56B65B32B138EDD0023C82A /* B9Action */,
 				D56B65B52B138EDD0023C82A /* B9AssociatedObject */,
 				D56B65B72B138EDD0023C82A /* B9Condition */,
-				D56B65B92B138EDD0023C82A /* B9Debug */,
 				D56B65BB2B138EDD0023C82A /* B9Foundation */,
 				D56B65BD2B138EDD0023C82A /* B9MulticastDelegate */,
 				D56B65BF2B138EDD0023C82A /* Debugger */,
@@ -2456,10 +2451,6 @@
 		D56B65B72B138EDD0023C82A /* B9Condition */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = B9Condition;
-		};
-		D56B65B92B138EDD0023C82A /* B9Debug */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = B9Debug;
 		};
 		D56B65BB2B138EDD0023C82A /* B9Foundation */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,7 +8,7 @@
 
 import AppIntents
 
-@available(macCatalyst 16.0, *)
+@available(macCatalyst 16.0, iOS 16.0, *)
 struct ShortcutsProvider: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(intent: TextIntent(), phrases: [
@@ -18,7 +18,7 @@ struct ShortcutsProvider: AppShortcutsProvider {
     }
 }
 
-@available(macCatalyst 16.0, *)
+@available(macCatalyst 16.0, iOS 16.0, *)
 struct TextIntent: AppIntent {
     static var title = LocalizedStringResource("sendIntent.title", defaultValue: "Send Text to AI")
 
