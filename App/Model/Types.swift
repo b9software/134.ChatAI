@@ -18,3 +18,5 @@ typealias L = L10n.Localizable
 protocol ModelValidate {
     func validate() throws
 }
+
+// swiftlint:enable type_name

@@ -126,11 +126,11 @@ analyzer_rules:
   - unused_import
 
 excluded:
+  - "App/Assets/Generated/XCAssets+.swift"
   - "App/Development Content/*.playground"
   - "**/.build"
   - "**/Build"
   - B9Doc
-  - Carthage
   - Frameworks
   - Packages
   - Pods

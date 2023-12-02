@@ -8,8 +8,8 @@
  https://opensource.org/licenses/MIT
  */
 
-import Foundation
 import AppFramework
+import Foundation
 
 /// 一般列表对象
 protocol ListItem {
