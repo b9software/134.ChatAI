@@ -35,10 +35,6 @@ extension RootViewController {
 }
 
 class TestViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     @IBOutlet private weak var segment: UISegmentedControl!
 
     @IBAction private func onSegmentChanged(_ sender: Any) {

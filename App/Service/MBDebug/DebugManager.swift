@@ -114,13 +114,10 @@ fileprivate extension ApplicationDelegate {
     }
 
     @objc func debugWindow() {
-        print("Windows: \(UIApplication.shared.windows)")
-        print("Key win: \(UIApplication.shared.keyWindow)")
+//        print("Windows: \(UIApplication.shared.windows)")
+//        print("Key win: \(UIApplication.shared.keyWindow)")
         print("Scenes: \(UIApplication.shared.connectedScenes)")
         print("Scenes(open): \(UIApplication.shared.openSessions)")
-//        var activity = NSUserActivity(activityType: "panel")
-//        UIApplication.shared.requestSceneSessionActivation(nil, userActivity: activity, options: nil) { (error) in
-//        }
     }
 
     @objc func debugMessageSkipSending() {

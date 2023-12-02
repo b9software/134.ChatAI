@@ -2,12 +2,11 @@
 //  MessageCells.swift
 //  B9ChatAI
 //
-//  Created by BB9z on 2023/6/9.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import B9Action
 import AppFramework
+import B9Action
 import UIKit
 
 class MessageCellSizeView: UIView {
@@ -222,7 +221,7 @@ class MessageTextCell: MessageBaseCell {
             // Fix indicator may not shown after cell recycling
             stopButton.configuration?.showsActivityIndicator = true
         }
-        if let error = item.senderState?.error {
+        if let _ = item.senderState?.error {
             updateUI(item: item)
         }
     }

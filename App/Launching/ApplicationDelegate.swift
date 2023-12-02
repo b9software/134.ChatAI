@@ -62,8 +62,6 @@ class ApplicationDelegate: MBApplicationDelegate {
             debugUpdateFlags()
 #endif
         }
-//        MBEnvironment.registerWorkers()
-//        RFKeyboard.autoDisimssKeyboardWhenTouch = true
         setupUIAppearance()
         if isTesting { return true }
         Current.messageSender.startIfNeeded()
@@ -76,11 +74,6 @@ class ApplicationDelegate: MBApplicationDelegate {
     private func setupDebugger() {
         Debugger.globalActionItems = [
         ]
-//        Debugger.vauleInspector = { value in
-//            if let vc = MBFlexInterface.explorerViewController(for: value) {
-//                AppNavigationController()?.pushViewController(vc, animated: true)
-//            }
-//        }
     }
 
     private func setupUIAppearance() {

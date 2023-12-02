@@ -5,8 +5,8 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import B9Action
 import AppFramework
+import B9Action
 import UIKit
 
 class SidebarViewController: UIViewController, ConversationListUpdating {
@@ -121,7 +121,7 @@ extension SidebarViewController {
             selectedTableView = table
         }
         RootViewController.of(view)?.gotoChatDetail(item: conversation)
-    }  
+    }
 
     private func setupCommandButtons() {
         archiveButton.setImage(Asset.Icon.xmark.image, for: .selected)
