@@ -94,6 +94,7 @@
 		D56B65C02B138EDD0023C82A /* Debugger in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65BF2B138EDD0023C82A /* Debugger */; };
 		D56B65C22B138EDD0023C82A /* InterfaceApp in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65C12B138EDD0023C82A /* InterfaceApp */; };
 		D56B65C42B138F270023C82A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65C32B138F270023C82A /* Logging */; };
+		D56B65E62B1B27620023C82A /* MBCollectionViewColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */; };
 		D5740B4A24985E93001CBCB2 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4924985E92001CBCB2 /* AppError.swift */; };
 		D5740B4E2498869E001CBCB2 /* UIAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */; };
 		D579495F21788D67002E1C4A /* UIDevice+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D579495E21788D67002E1C4A /* UIDevice+App.swift */; };
@@ -360,6 +361,7 @@
 		D56B65AD2B138EBB0023C82A /* MulticastDelegate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MulticastDelegate; sourceTree = "<group>"; };
 		D56B65AE2B138EBB0023C82A /* BuildSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildSystem; sourceTree = "<group>"; };
 		D56B65AF2B138EBB0023C82A /* Condition */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Condition; sourceTree = "<group>"; };
+		D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCollectionViewColumnLayout.swift; sourceTree = "<group>"; };
 		D5740B4924985E92001CBCB2 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5740B4C2498869D001CBCB2 /* UIAnyGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnyGestureRecognizer.h; sourceTree = "<group>"; };
 		D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnyGestureRecognizer.m; sourceTree = "<group>"; };
@@ -1027,6 +1029,7 @@
 				D5B49EE71C41133A00847925 /* TableView */,
 				D51E92C029DB2DE000922497 /* ListGeneral.swift */,
 				D5031C3B25C04C9200C2849E /* ListStateView.swift */,
+				D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1652,6 +1655,7 @@
 				D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */,
 				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */,
+				D56B65E62B1B27620023C82A /* MBCollectionViewColumnLayout.swift in Sources */,
 				D5031A1E25BEA95200C2849E /* MBDebugLiveCountChecker.swift in Sources */,
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
 				D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */,
