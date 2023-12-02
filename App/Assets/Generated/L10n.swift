@@ -168,7 +168,7 @@ internal enum L10n {
       }
       internal enum Openai {
         /// https://platform.openai.com/account/api-keys
-        internal static let apiKeys = L10n.tr("Localizable", "link.openai.api-keys", fallback: "https://platform.openai.com/account/api-keys")
+        internal static let apiKeys = L10n.tr("Localizable", "link.openai.api-keys", fallback: "https://platform.openai.com/api-keys")
         /// 
         internal static let knownProxy = L10n.tr("Localizable", "link.openai.known-proxy", fallback: "")
         /// https://openai.com/policies/privacy-policy
