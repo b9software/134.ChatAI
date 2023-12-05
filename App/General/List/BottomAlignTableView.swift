@@ -26,10 +26,7 @@ class BottomAlignTableView: UITableView {
             }
             debug("will adjust offset: \(offset)")
             contentOffset = offset
-//            if yDiff < 0 {
             ignoralNextOffsetUpdate = CFAbsoluteTimeGetCurrent()
-            debug("set ignoralNextOffsetUpdate")
-//            }
         }
     }
 
