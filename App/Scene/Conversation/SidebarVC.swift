@@ -262,12 +262,12 @@ extension SidebarViewController: UITableViewDelegate {
 
     @objc private func releaseListControllerIfNeeded() {
         if let vc = deleteListController,
-            (deleteButton.isHidden || !deleteButton.isSelected) {
+            deleteButton.isHidden || !deleteButton.isSelected {
             vc.removeFromParentViewControllerAndView()
             deleteListController = nil
         }
         if let vc = archiveListController,
-           (archiveButton.isHidden || !archiveButton.isSelected) {
+           archiveButton.isHidden || !archiveButton.isSelected {
             vc.removeFromParentViewControllerAndView()
             archiveListController = nil
         }

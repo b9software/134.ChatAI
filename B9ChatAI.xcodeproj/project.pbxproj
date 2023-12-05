@@ -94,6 +94,7 @@
 		D56B65C02B138EDD0023C82A /* Debugger in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65BF2B138EDD0023C82A /* Debugger */; };
 		D56B65C22B138EDD0023C82A /* InterfaceApp in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65C12B138EDD0023C82A /* InterfaceApp */; };
 		D56B65C42B138F270023C82A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = D56B65C32B138F270023C82A /* Logging */; };
+		D56B65E62B1B27620023C82A /* MBCollectionViewColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */; };
 		D5740B4A24985E93001CBCB2 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4924985E92001CBCB2 /* AppError.swift */; };
 		D5740B4E2498869E001CBCB2 /* UIAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */; };
 		D579495F21788D67002E1C4A /* UIDevice+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D579495E21788D67002E1C4A /* UIDevice+App.swift */; };
@@ -363,6 +364,7 @@
 		D56B65AD2B138EBB0023C82A /* MulticastDelegate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MulticastDelegate; sourceTree = "<group>"; };
 		D56B65AE2B138EBB0023C82A /* BuildSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildSystem; sourceTree = "<group>"; };
 		D56B65AF2B138EBB0023C82A /* Condition */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Condition; sourceTree = "<group>"; };
+		D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCollectionViewColumnLayout.swift; sourceTree = "<group>"; };
 		D5740B4924985E92001CBCB2 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5740B4C2498869D001CBCB2 /* UIAnyGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnyGestureRecognizer.h; sourceTree = "<group>"; };
 		D5740B4D2498869E001CBCB2 /* UIAnyGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnyGestureRecognizer.m; sourceTree = "<group>"; };
@@ -391,7 +393,6 @@
 		D584C77A26EEC970004E434B /* GradientProgressViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientProgressViews.swift; sourceTree = "<group>"; };
 		D584C78426F03768004E434B /* CoreAnimation+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreAnimation+App.swift"; sourceTree = "<group>"; };
 		D587D48729E967FF0085CFCE /* BoxViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViews.swift; sourceTree = "<group>"; };
-		D588307F20CA67A7002030C4 /* UICollectionViewFlowLayout+IBInspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewFlowLayout+IBInspectable.h"; sourceTree = "<group>"; };
 		D588308820CACB32002030C4 /* Array+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+App.swift"; sourceTree = "<group>"; };
 		D588308A20CACB32002030C4 /* MBSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBSwift.swift; sourceTree = "<group>"; };
 		D588308C20CACB33002030C4 /* NSPointArray+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPointArray+App.swift"; sourceTree = "<group>"; };
@@ -1210,7 +1211,6 @@
 			children = (
 				D5031BFB25C03EA800C2849E /* UIButton+FontShrink.swift */,
 				D5EE51D12043F613009148B3 /* UICollectionView+IBInspectable.h */,
-				D588307F20CA67A7002030C4 /* UICollectionViewFlowLayout+IBInspectable.h */,
 				D5DB4C20241E39EA00832A0A /* UIKit+DynamicType.h */,
 				D5DB4C21241E39EA00832A0A /* UIKit+DynamicType.m */,
 				D55959C720AB924D0019D733 /* UIKit+IBInspectable.h */,
@@ -1674,6 +1674,7 @@
 				D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */,
 				D58C46DE29F1338200BEFAE8 /* MBButton.swift in Sources */,
 				D531420629D7C361004EDCCA /* MBCollapsibleView.swift in Sources */,
+				D56B65E62B1B27620023C82A /* MBCollectionViewColumnLayout.swift in Sources */,
 				D5031A1E25BEA95200C2849E /* MBDebugLiveCountChecker.swift in Sources */,
 				D53141FB29D6DAAE004EDCCA /* MBDesignView.swift in Sources */,
 				D569C9F021AE908200211E36 /* MBErrorCode.m in Sources */,

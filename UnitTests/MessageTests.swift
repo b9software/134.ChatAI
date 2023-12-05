@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import AppFramework
 @testable import B9ChatAI
 import AppFramework
 import XCTest
