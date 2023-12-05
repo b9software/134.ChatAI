@@ -6,6 +6,7 @@
 //
 
 @testable import B9ChatAI
+import AppFramework
 import XCTest
 
 // swiftlint:disable blanket_disable_command
