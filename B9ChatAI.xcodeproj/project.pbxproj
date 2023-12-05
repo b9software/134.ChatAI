@@ -159,6 +159,9 @@
 		D5D006D229D273F50063B366 /* EngineManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D006D129D273F50063B366 /* EngineManageVC.swift */; };
 		D5D641452A0E18A200921E98 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D641442A0E18A200921E98 /* NumberTextField.swift */; };
 		D5D7BCD829D4611100AF6DF5 /* B9Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */; };
+		D5D7E15F2B1C90CD005D4E0A /* TableHeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5D7E15D2B1C90CD005D4E0A /* TableHeightCell.xib */; };
+		D5D7E1602B1C90CD005D4E0A /* BottomAlignTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7E15E2B1C90CD005D4E0A /* BottomAlignTableViewTests.swift */; };
+		D5D7E1652B1CDA30005D4E0A /* BottomAlignTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7E1642B1CDA30005D4E0A /* BottomAlignTableView.swift */; };
 		D5DB4C22241E39EA00832A0A /* UIKit+DynamicType.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DB4C21241E39EA00832A0A /* UIKit+DynamicType.m */; };
 		D5DC60C124CA84BC00FBB147 /* ApplicationCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55959CD20AB95640019D733 /* ApplicationCondition.swift */; };
 		D5E80580226F403D00901C41 /* MBBottomLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E8057F226F403D00901C41 /* MBBottomLayoutView.m */; };
@@ -435,6 +438,9 @@
 		D5D4CC6E2043A6ED002FE9F0 /* OCBridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCBridging-Header.h"; sourceTree = "<group>"; };
 		D5D641442A0E18A200921E98 /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		D5D7BCD729D4611100AF6DF5 /* B9Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B9Keychain.swift; sourceTree = "<group>"; };
+		D5D7E15D2B1C90CD005D4E0A /* TableHeightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeightCell.xib; sourceTree = "<group>"; };
+		D5D7E15E2B1C90CD005D4E0A /* BottomAlignTableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomAlignTableViewTests.swift; sourceTree = "<group>"; };
+		D5D7E1642B1CDA30005D4E0A /* BottomAlignTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlignTableView.swift; sourceTree = "<group>"; };
 		D5DB4C20241E39EA00832A0A /* UIKit+DynamicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+DynamicType.h"; sourceTree = "<group>"; };
 		D5DB4C21241E39EA00832A0A /* UIKit+DynamicType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIKit+DynamicType.m"; sourceTree = "<group>"; };
 		D5E8057E226F403C00901C41 /* MBBottomLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBottomLayoutView.h; sourceTree = "<group>"; };
@@ -1027,6 +1033,7 @@
 			isa = PBXGroup;
 			children = (
 				D5B49EE71C41133A00847925 /* TableView */,
+				D5D7E1642B1CDA30005D4E0A /* BottomAlignTableView.swift */,
 				D51E92C029DB2DE000922497 /* ListGeneral.swift */,
 				D5031C3B25C04C9200C2849E /* ListStateView.swift */,
 				D56B65E52B1B27620023C82A /* MBCollectionViewColumnLayout.swift */,
@@ -1106,11 +1113,21 @@
 			path = AppIntents;
 			sourceTree = "<group>";
 		};
+		D5D7E1582B1C90A1005D4E0A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D5D7E15E2B1C90CD005D4E0A /* BottomAlignTableViewTests.swift */,
+				D5D7E15D2B1C90CD005D4E0A /* TableHeightCell.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		D5E8FA6F29CF088C00C3D753 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
 				D57EF74529E427B300CD101E /* Networking */,
 				D5E8FA7B29CF23F800C3D753 /* Support */,
+				D5D7E1582B1C90A1005D4E0A /* UI */,
 				D5810C7829D9AFE00073F8C8 /* CDEntityFetchTests.swift */,
 				D5810C8029D9C2410073F8C8 /* ConversationManagerTests.swift */,
 				D52112AB2A33612100599DDB /* ConversationTests.swift */,
@@ -1457,6 +1474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D7E15F2B1C90CD005D4E0A /* TableHeightCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1602,6 +1620,7 @@
 				D57D784E29C8B28C003099D6 /* B9NavigationController.swift in Sources */,
 				D507BC3929CCA12A001E2298 /* B9RootViewController.swift in Sources */,
 				D544CBDD29FA3A0A00A4F6F6 /* B9WindowSceneDelegate.swift in Sources */,
+				D5D7E1652B1CDA30005D4E0A /* BottomAlignTableView.swift in Sources */,
 				D587D48829E967FF0085CFCE /* BoxViews.swift in Sources */,
 				D52A04E520F85F2600F535ED /* Button.swift in Sources */,
 				D5E8FA6729CEEDF900C3D753 /* CD.xcdatamodeld in Sources */,
@@ -1750,6 +1769,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D7E1602B1C90CD005D4E0A /* BottomAlignTableViewTests.swift in Sources */,
 				D5810C7F29D9B8150073F8C8 /* CDEntity+Test.swift in Sources */,
 				D5810C7929D9AFE10073F8C8 /* CDEntityFetchTests.swift in Sources */,
 				D5810C8129D9C2410073F8C8 /* ConversationManagerTests.swift in Sources */,

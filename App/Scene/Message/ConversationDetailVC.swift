@@ -509,3 +509,20 @@ extension ConversationDetailViewController: UITextViewDelegate {
         }
     }
 }
+
+#if DEBUG
+import Debugger
+extension ConversationDetailViewController: DebugActionSource {
+    func debugActionItems() -> [DebugActionItem] {
+        [
+            DebugActionItem("列表布局") {
+                let view = self.listView!
+                debugPrint(view.safeAreaInsets)
+                debugPrint(view.safeAreaLayoutGuide.layoutFrame)
+                debugPrint(view.contentSize)
+                debugPrint(view.contentOffset)
+            }
+        ]
+    }
+}
+#endif
