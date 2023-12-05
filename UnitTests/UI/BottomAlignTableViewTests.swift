@@ -29,14 +29,13 @@ class BottomAlignTableViewTests: XCTestCase {
         sut.reloadData()
 
         sut.setNeedsLayout()
-        sut.layoutIfNeeded()
+        noBlockingWait(0)
         attachment(sut, name: "empty")
 
         listDataSource.items = ["1"]
         sut.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-        noBlockingWait(0)
         sut.setNeedsLayout()
-        sut.layoutIfNeeded()
+        noBlockingWait(0)
         attachment(sut, name: "add row")
         XCTAssertGreaterThan(sut.contentInset.top, 100)
     }
@@ -48,7 +47,7 @@ class BottomAlignTableViewTests: XCTestCase {
         sut.reloadData()
 
         sut.setNeedsLayout()
-        sut.layoutIfNeeded()
+        noBlockingWait(0)
         attachment(sut, name: "init")
 
         print("Will cell extent...")
@@ -58,9 +57,8 @@ class BottomAlignTableViewTests: XCTestCase {
         firstCell.label.text = "1\n2\n3"
         sut.beginUpdates()
         sut.endUpdates()
-        noBlockingWait(0)
         sut.setNeedsLayout()
-        sut.layoutIfNeeded()
+        noBlockingWait(0)
         attachment(sut, name: "first extented")
     }
 

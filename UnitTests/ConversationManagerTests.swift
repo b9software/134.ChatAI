@@ -27,44 +27,50 @@ class ConversationManagerTests:
 
         let archived1 = ctx.createConversation()
         let deleted1 = ctx.createConversation()
-        ctx.perform {
-            archived1.archiveTime = .current
-            deleted1.deleteTime = .current
-            ctx.trySave()
+        exceptDeletedChanged {
+            ctx.perform {
+                XCTAssertFalse(archived1.isDeleted)
+                XCTAssertFalse(deleted1.isDeleted)
+                archived1.archiveTime = .current
+                deleted1.deleteTime = .current
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
-
         assertEqual(manager.hasArchived, true)
         assertEqual(manager.hasDeleted, true)
 
-        ctx.perform {
-            ctx.delete(archived1)
-            ctx.trySave()
+        exceptArchivedChanged {
+            ctx.perform {
+                ctx.delete(archived1)
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForHasArchivedChanged()], timeout: 0.1)
         assertEqual(manager.hasArchived, false)
 
-        ctx.perform {
-            let archived2 = ctx.createConversation()
-            archived2.archiveTime = .current
-            ctx.trySave()
+        exceptArchivedChanged {
+            ctx.perform {
+                let archived2 = ctx.createConversation()
+                archived2.archiveTime = .current
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForHasArchivedChanged()], timeout: 0.1)
         assertEqual(manager.hasArchived, true)
 
-        ctx.perform {
-            ctx.delete(deleted1)
-            ctx.trySave()
+        exceptDeletedChanged {
+            ctx.perform {
+                ctx.delete(deleted1)
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
         assertEqual(manager.hasDeleted, false)
 
-        ctx.perform {
-            let deleted2 = ctx.createConversation()
-            deleted2.deleteTime = .current
-            ctx.trySave()
+        exceptDeletedChanged {
+            ctx.perform {
+                let deleted2 = ctx.createConversation()
+                deleted2.deleteTime = .current
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForHasDeletedChanged()], timeout: 0.1)
         assertEqual(manager.hasDeleted, true)
     }
 
@@ -74,22 +80,27 @@ class ConversationManagerTests:
         let ctx = manager.context
         ctx.assertIsFresh()
         defer { ctx.destroy() }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
+        exceptListUpdate {
+            // init
+        }
 
-        let entity1 = ctx.createConversation()
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
+        let entity1 = exceptListUpdate {
+            ctx.createConversation()
+        }
         assertEqual(manager.listItems.count, 1)
 
-        let entity2 = ctx.createConversation()
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
+        let entity2 = exceptListUpdate {
+            return ctx.createConversation()
+        }
         assertEqual(manager.listItems.count, 2)
 
-        ctx.perform {
-            ctx.delete(entity1)
-            ctx.delete(entity2)
-            ctx.trySave()
+        exceptListUpdate {
+            ctx.performAndWait {
+                ctx.delete(entity1)
+                ctx.delete(entity2)
+                ctx.trySave()
+            }
         }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 0)
     }
 
@@ -99,46 +110,55 @@ class ConversationManagerTests:
         let ctx = manager.context
         ctx.assertIsFresh()
         defer { ctx.destroy() }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
+        exceptListUpdate {
+            // init
+        }
 
         let bgContext = Current.database.container.newBackgroundContext()
-        bgContext.perform {
-            _ = bgContext.createConversation()
+        exceptListUpdate {
+            bgContext.perform {
+                _ = bgContext.createConversation()
+            }
         }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 1)
 
-        bgContext.perform {
-            _ = bgContext.createConversation()
+        exceptListUpdate {
+            bgContext.perform {
+                _ = bgContext.createConversation()
+            }
         }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 2)
 
-        bgContext.perform {
-            bgContext.destroy()
+        exceptListUpdate {
+            bgContext.performAndWait {
+                bgContext.destroy()
+            }
         }
-        wait(for: [prepareWaitForListUpdate()], timeout: 0.1)
         assertEqual(manager.listItems.count, 0)
     }
 
     // MARK: -
 
-    func prepareWaitForListUpdate() -> XCTestExpectation {
+    func exceptListUpdate<T>(_ operation: () -> T) -> T {
         let exp = expectation(description: "list update")
         waitListUpdateExp = exp
-        return exp
+        let result = operation()
+        wait(for: [exp], timeout: 0.1)
+        return result
     }
 
-    func prepareWaitForHasArchivedChanged() -> XCTestExpectation {
+    func exceptArchivedChanged(_ operation: () -> Void) {
         let exp = expectation(description: "hasArchived change")
         waitArchivedUpdateExp = exp
-        return exp
+        operation()
+        wait(for: [exp], timeout: 0.1)
     }
 
-    func prepareWaitForHasDeletedChanged() -> XCTestExpectation {
+    func exceptDeletedChanged(_ operation: () -> Void) {
         let exp = expectation(description: "hasDeleted change")
         waitDeletedUpdateExp = exp
-        return exp
+        operation()
+        wait(for: [exp], timeout: 0.1)
     }
 
     var waitListUpdateExp: XCTestExpectation?
