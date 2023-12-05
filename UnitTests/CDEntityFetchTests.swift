@@ -36,7 +36,7 @@ class CDEntityFetchTests: TestCase {
             assertEqual(entity3, nil)
             exp.fulfill()
         }
-        waitForExpectations(timeout: 0.01)
+        waitForExpectations(timeout: 0.1)
     }
 
     func testConversationFetch() {

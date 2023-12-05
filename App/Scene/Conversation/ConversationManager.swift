@@ -94,7 +94,7 @@ class ConversationManager: NSObject {
         sf.delegates.invoke {
             $0.conversations(sf, listUpdated: sf.listItems)
         }
-        if #available(macCatalyst 16.0, *) {
+        if #available(macCatalyst 16.0, iOS 16.0, *) {
             ShortcutsProvider.updateAppShortcutParameters()
         }
         AppLog().debug("CM> Did notice list change")

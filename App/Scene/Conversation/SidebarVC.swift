@@ -5,8 +5,8 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
-import B9Action
 import AppFramework
+import B9Action
 import UIKit
 
 class SidebarViewController: UIViewController, ConversationListUpdating {
@@ -121,7 +121,7 @@ extension SidebarViewController {
             selectedTableView = table
         }
         RootViewController.of(view)?.gotoChatDetail(item: conversation)
-    }  
+    }
 
     private func setupCommandButtons() {
         archiveButton.setImage(Asset.Icon.xmark.image, for: .selected)
@@ -262,12 +262,12 @@ extension SidebarViewController: UITableViewDelegate {
 
     @objc private func releaseListControllerIfNeeded() {
         if let vc = deleteListController,
-            (deleteButton.isHidden || !deleteButton.isSelected) {
+            deleteButton.isHidden || !deleteButton.isSelected {
             vc.removeFromParentViewControllerAndView()
             deleteListController = nil
         }
         if let vc = archiveListController,
-           (archiveButton.isHidden || !archiveButton.isSelected) {
+           archiveButton.isHidden || !archiveButton.isSelected {
             vc.removeFromParentViewControllerAndView()
             archiveListController = nil
         }

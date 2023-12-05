@@ -3,6 +3,7 @@
 //  App
 //
 
+import AppFramework
 import B9Action
 import B9Condition
 import Debugger
@@ -40,6 +41,11 @@ class ApplicationDelegate: MBApplicationDelegate {
     }
 
     override func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        #if DEBUG
+        MBAssertSetHandler { message, file, line in
+            assertionFailure(message, file: file, line: line)
+        }
+        #endif
         Current.defualts.applicationLastLaunchTime = Date()
         _ = MBApp.status()
         _ = Current.database
@@ -56,8 +62,6 @@ class ApplicationDelegate: MBApplicationDelegate {
             debugUpdateFlags()
 #endif
         }
-//        MBEnvironment.registerWorkers()
-//        RFKeyboard.autoDisimssKeyboardWhenTouch = true
         setupUIAppearance()
         if isTesting { return true }
         Current.messageSender.startIfNeeded()
@@ -70,11 +74,6 @@ class ApplicationDelegate: MBApplicationDelegate {
     private func setupDebugger() {
         Debugger.globalActionItems = [
         ]
-//        Debugger.vauleInspector = { value in
-//            if let vc = MBFlexInterface.explorerViewController(for: value) {
-//                AppNavigationController()?.pushViewController(vc, animated: true)
-//            }
-//        }
     }
 
     private func setupUIAppearance() {

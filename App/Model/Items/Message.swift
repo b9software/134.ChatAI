@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import AppFramework
 import B9Action
 import B9MulticastDelegate
 import CoreData
@@ -124,7 +125,7 @@ class Message {
         }
     }
     func setNoSteamSending() {
-        var state = senderState ?? SenderState(isSending: false, noSteam: true)
+        let state = senderState ?? SenderState(isSending: false, noSteam: true)
         senderState = state
     }
     func waitSendFinshed() async throws {
@@ -132,8 +133,7 @@ class Message {
         let task = Task {
             let start = Date()
             while true {
-                AppLog().debug("waitSendFinshed")
-                debugPrint(senderState)
+                AppLog().debug("waitSendFinshed \(senderState as Any)")
                 if let err = senderState?.error {
                     throw err
                 }

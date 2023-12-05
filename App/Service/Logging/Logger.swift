@@ -3,7 +3,7 @@
 //  App
 //
 
-import B9Debug
+import AppFramework
 
 #if canImport(Logging)
 // https://github.com/apple/swift-log
@@ -43,7 +43,7 @@ private struct AppLogHandler: LogHandler {
             NSLog("❌ %@", message.description)
         case .critical:
             NSLog("❌ %@", message.description)
-            ThrowExceptionToPause()
+            MBAssert(false)
         }
         #else
         switch level {
@@ -59,7 +59,7 @@ private struct AppLogHandler: LogHandler {
 
     subscript(metadataKey metadataKey: String) -> Logger.Metadata.Value? {
         get {
-            return metadata[metadataKey]
+            metadata[metadataKey]
         }
         set(newValue) {
             metadata[metadataKey] = newValue
