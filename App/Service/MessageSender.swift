@@ -5,6 +5,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import AppFramework
 import CoreData
 
 struct SenderState: Equatable {
@@ -181,7 +182,7 @@ class MessageOperation: Operation {
     }
 
     func checkCancel() throws {
-        if isCancelled { throw AppError.cancel }
+        if isCancelled { throw CancellationError() }
     }
 
     override func cancel() {

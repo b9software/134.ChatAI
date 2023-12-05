@@ -6,6 +6,7 @@
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 
+import Debugger
 import UIKit
 
 class SceneDelegate: B9WindowSceneDelegate {
@@ -58,6 +59,9 @@ class SceneDelegate: B9WindowSceneDelegate {
 //            activity.becomeCurrent()
 //        }
         rootViewController.hasBecomeActive = true
+        #if DEBUG
+        Debugger.installTriggerButton()
+        #endif
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
