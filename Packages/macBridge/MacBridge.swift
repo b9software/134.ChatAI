@@ -2,7 +2,6 @@
 //  MacBridge.swift
 //  macBridge
 //
-//  Created by Joseph Zhao on 2023/4/4.
 //  Copyright © 2023 B9Software. All rights reserved.
 //
 

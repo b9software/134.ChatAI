@@ -8,5 +8,6 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-MARKETING_VERSION = 0.5.2;
-CURRENT_PROJECT_VERSION = 62;
+MARKETING_VERSION = 0.5.3;
+CURRENT_PROJECT_VERSION = 63;
+INFOPLIST_KEY_NSHumanReadableCopyright = Copyright © 2023-2024 B9Software. All rights reserved.
